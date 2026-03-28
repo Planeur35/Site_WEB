@@ -131,7 +131,7 @@ function HomeContent({
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         ctaText={tCommon("discoveryFlightCTA")}
-        ctaHref="/contact"
+        ctaHref="/decouvrir/vols-decouverte"
       />
 
       {/* Highlight Cards */}
