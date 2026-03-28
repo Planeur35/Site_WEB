@@ -17,7 +17,7 @@ const singletonListItem = (
 
 export default defineConfig({
   name: 'piv-studio',
-  title: 'PIV - Planeur en Ile de France',
+  title: "PIV - Planeurs d'Ille-et-Vilaine",
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
