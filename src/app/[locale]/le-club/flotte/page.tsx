@@ -5,9 +5,6 @@ import { buildMetadata } from '@/lib/metadata';
 import Image from 'next/image';
 import Hero from '@/components/ui/Hero';
 import SectionContainer from '@/components/ui/SectionContainer';
-import { client } from '@/lib/sanity/client';
-import { allAircraftQuery } from '@/lib/sanity/queries';
-import type { Aircraft } from '@/lib/sanity/types';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -297,29 +294,17 @@ export default async function FleetPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  let sanityAircraft: Aircraft[] = [];
-  try {
-    sanityAircraft = await client.fetch<Aircraft[]>(allAircraftQuery);
-  } catch {
-    sanityAircraft = [];
-  }
-
-  return <FleetContent locale={locale} sanityAircraft={sanityAircraft} />;
+  return <FleetContent locale={locale} />;
 }
 
 function FleetContent({
   locale,
-  sanityAircraft,
 }: {
   locale: string;
-  sanityAircraft: Aircraft[];
 }) {
   const tNav = useTranslations('nav');
   const tFleet = useTranslations('fleet');
   const lang = locale as 'fr' | 'en';
-
-  // Use Sanity data if available, otherwise use hardcoded fleet
-  const useSanity = sanityAircraft.length > 0;
 
   return (
     <>
@@ -328,23 +313,7 @@ function FleetContent({
         subtitle={tFleet('heroSubtitle')}
       />
 
-      {useSanity ? (
-        <section className="py-16">
-          <SectionContainer>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sanityAircraft.map((a) => (
-                <div key={a._id} className="bg-white rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                  <div className="p-5">
-                    <h3 className="font-semibold text-primary text-lg">{a.name}</h3>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </SectionContainer>
-        </section>
-      ) : (
-        <>
-          {categoryOrder.map((cat) => {
+      {categoryOrder.map((cat) => {
             const items = fleet.filter((a) => a.category === cat);
             if (items.length === 0) return null;
             return (
@@ -462,8 +431,6 @@ function FleetContent({
               </div>
             </SectionContainer>
           </section>
-        </>
-      )}
     </>
   );
 }
