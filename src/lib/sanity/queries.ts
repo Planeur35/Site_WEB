@@ -12,7 +12,7 @@ export const articleBySlugQuery = `*[_type == "article" && slug.current == $slug
   category->
 }`;
 
-export const allAircraftQuery = `*[_type == "aircraft"] | order(name asc)`;
+export const allAircraftQuery = `*[_type == "aircraft"] | order(category asc, sortOrder asc, name asc)`;
 
 export const allGalleryImagesQuery = `*[_type == "galleryImage"] | order(date desc)`;
 

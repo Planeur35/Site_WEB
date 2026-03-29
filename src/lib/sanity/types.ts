@@ -98,16 +98,24 @@ export interface AircraftSpecs {
   glideRatio?: string;
   seats?: number;
   year?: number;
+  maxWeight?: string;
 }
+
+export type AircraftCategory = 'biplace-ecole' | 'biplace-perf' | 'handiplaneur' | 'monoplace-debut' | 'monoplace-perf' | 'remorqueur';
 
 export interface Aircraft {
   _id: string;
   _type: 'aircraft';
   name: string;
-  type?: 'training' | 'performance' | 'tandem';
+  registration?: string;
+  callsign?: string;
+  category?: AircraftCategory;
+  manufacturer?: string;
   photo?: SanityImage;
   specs?: AircraftSpecs;
-  description?: LocalizedRichText;
+  instrumentation?: string;
+  description?: LocalizedText;
+  sortOrder?: number;
 }
 
 export interface GalleryImage {
