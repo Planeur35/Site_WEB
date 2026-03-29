@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Menu, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -21,26 +21,64 @@ function DesktopDropdown({
   items: DropdownItem[];
 }) {
   const [open, setOpen] = useState(false);
+  const closeTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const openMenu = useCallback(() => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setOpen(true);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    closeTimeout.current = setTimeout(() => setOpen(false), 150);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    };
+  }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setOpen(false);
+    } else if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setOpen((prev) => !prev);
+    }
+  };
 
   return (
     <div
+      ref={containerRef}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={openMenu}
+      onMouseLeave={closeMenu}
+      onFocus={openMenu}
+      onBlur={closeMenu}
     >
-      <button className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors">
+      <button
+        className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors rounded-md"
+        aria-expanded={open}
+        aria-haspopup="true"
+        onKeyDown={handleKeyDown}
+      >
         {label}
         <ChevronDown
-          className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-0 w-56 rounded-lg bg-white shadow-lg border border-border py-2">
+        <div
+          className="absolute top-full left-0 mt-0 w-56 rounded-lg bg-white shadow-lg border border-border py-2"
+          role="menu"
+        >
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href as never}
               className="block px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-light-bg transition-colors"
+              role="menuitem"
             >
               {item.label}
             </Link>
@@ -50,6 +88,9 @@ function DesktopDropdown({
     </div>
   );
 }
+
+const navLinkClasses =
+  "px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors rounded-md";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -73,54 +114,39 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left: Logo / Club name */}
           <Link
             href="/"
-            className="text-xl font-bold text-primary shrink-0"
+            className="text-xl font-bold text-primary shrink-0 rounded-md"
           >
             PIV
           </Link>
 
-          {/* Center: Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
             <DesktopDropdown label={t("discover")} items={discoverItems} />
             <DesktopDropdown label={t("theClub")} items={clubItems} />
-            <Link
-              href="/galerie"
-              className="px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors"
-            >
+            <Link href="/galerie" className={navLinkClasses}>
               {t("gallery")}
             </Link>
-            <Link
-              href="/actualites"
-              className="px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors"
-            >
+            <Link href="/actualites" className={navLinkClasses}>
               {t("news")}
             </Link>
-            <Link
-              href="/en-direct"
-              className="px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors"
-            >
+            <Link href="/en-direct" className={navLinkClasses}>
               {t("live")}
             </Link>
-            <Link
-              href="/contact"
-              className="px-3 py-2 text-sm font-medium text-dark-text hover:text-accent transition-colors"
-            >
+            <Link href="/contact" className={navLinkClasses}>
               {t("contact")}
             </Link>
           </nav>
 
-          {/* Right: Language toggle + CTA + Mobile hamburger */}
           <div className="flex items-center gap-3">
             <LanguageToggle />
             <div className="hidden lg:block">
-              <Button variant="primary" size="sm" href="/contact">
+              <Button variant="cta" size="sm" href="/decouvrir/vols-decouverte">
                 {tc("discoveryFlightCTA")}
               </Button>
             </div>
             <button
-              className="lg:hidden p-2 text-muted hover:text-primary transition-colors"
+              className="lg:hidden p-2 text-muted hover:text-primary transition-colors rounded-md"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
@@ -130,7 +156,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
   );

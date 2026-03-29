@@ -28,7 +28,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("home")}
                 </Link>
@@ -36,7 +36,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/decouvrir"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("discover")}
                 </Link>
@@ -44,7 +44,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/galerie"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("gallery")}
                 </Link>
@@ -52,7 +52,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/actualites"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("news")}
                 </Link>
@@ -60,7 +60,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("contact")}
                 </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/le-club"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("aboutUs")}
                 </Link>
@@ -83,7 +83,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/le-club/flotte"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("fleet")}
                 </Link>
@@ -91,7 +91,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/le-club/aerodrome"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("aerodrome")}
                 </Link>
@@ -99,7 +99,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/le-club/tarifs"
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-white/70 hover:text-white hover:underline text-sm transition-colors rounded-sm"
                 >
                   {tn("pricing")}
                 </Link>

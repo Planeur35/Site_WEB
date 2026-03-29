@@ -5,16 +5,42 @@
   --color-primary-light: #2a4f7f;
   --color-accent: #3b82f6;
   --color-accent-hover: #2563eb;
+  --color-cta: #ea580c;
+  --color-cta-hover: #c2410c;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-warning: #d97706;
   --color-light-bg: #f0f9ff;
   --color-dark-text: #0f172a;
-  --color-muted: #64748b;
+  --color-muted: #475569;
   --color-border: #e2e8f0;
   --color-background: #ffffff;
   --color-foreground: #0f172a;
+  --color-ring: #3b82f6;
   --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
+}
+
+/* Global focus-visible ring for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

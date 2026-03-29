@@ -24,7 +24,7 @@ export default function Card({
   const content = (
     <>
       {image && (
-        <div className="relative aspect-video">
+        <div className="relative aspect-video bg-gray-100">
           <Image
             src={image}
             alt={imageAlt || title}
@@ -44,13 +44,15 @@ export default function Card({
   );
 
   const wrapperClasses = clsx(
-    "rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow border border-border",
+    "rounded-xl overflow-hidden bg-white shadow-sm border border-border",
+    "transition-all duration-200 hover:shadow-md hover:-translate-y-1",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
     className
   );
 
   if (href) {
     return (
-      <Link href={href as never} className={clsx(wrapperClasses, "block")}>
+      <Link href={href as never} className={clsx(wrapperClasses, "block cursor-pointer")}>
         {content}
       </Link>
     );

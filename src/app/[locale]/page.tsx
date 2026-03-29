@@ -132,6 +132,7 @@ function HomeContent({
         subtitle={t("heroSubtitle")}
         ctaText={tCommon("discoveryFlightCTA")}
         ctaHref="/decouvrir/vols-decouverte"
+        ctaVariant="cta"
       />
 
       {/* Highlight Cards */}
@@ -142,7 +143,7 @@ function HomeContent({
               <Link
                 key={item.href}
                 href={item.href}
-                className="group block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:-translate-y-1"
+                className="group block cursor-pointer rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-border hover:-translate-y-1"
               >
                 <div className={`${item.color} flex items-center justify-center py-10`}>
                   <div className="transform group-hover:scale-110 transition-transform duration-300">
@@ -159,6 +160,25 @@ function HomeContent({
                   </span>
                 </div>
               </Link>
+            ))}
+          </div>
+        </SectionContainer>
+      </section>
+
+      {/* Stats */}
+      <section className="py-14 bg-primary">
+        <SectionContainer>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { value: "150+", label: locale === "fr" ? "Membres" : "Members" },
+              { value: "13", label: locale === "fr" ? "Planeurs" : "Gliders" },
+              { value: "1952", label: locale === "fr" ? "Depuis" : "Since" },
+              { value: "35", label: locale === "fr" ? "Département" : "Department" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div className="text-4xl md:text-5xl font-bold text-white">{stat.value}</div>
+                <div className="text-white/70 text-sm mt-1 uppercase tracking-wider">{stat.label}</div>
+              </div>
             ))}
           </div>
         </SectionContainer>
