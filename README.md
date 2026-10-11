@@ -1,3 +1,9 @@
+# Site des Planeurs d'Ille-et-Vilaine (PIV)
+
+🧭 **Nouveau sur le projet ? Guide contributeur (modifier le contenu, Git, première Pull Request) : [docs/GUIDE-CONTRIBUTEUR.md](docs/GUIDE-CONTRIBUTEUR.md)**
+
+📘 **Manuel technique (stack, mises à jour, déploiement) : [docs/MANUEL-TECHNIQUE.md](docs/MANUEL-TECHNIQUE.md)**
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
