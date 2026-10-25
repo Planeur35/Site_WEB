@@ -1,0 +1,18 @@
+{
+  "name": "planeur35-site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@portabletext/to-html": "^2.0.14",
+    "@sanity/client": "^6.24.0",
+    "@sanity/image-url": "^1.1.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.1.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

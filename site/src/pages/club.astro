@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro'
+import PageHero from '../components/PageHero.astro'
+import Section from '../components/Section.astro'
+import Photo from '../components/Photo.astro'
+import Kicker from '../components/Kicker.astro'
+import {getClubPages, getClubHistory, imageUrl} from '../lib/sanity'
+import {CLUB_SECTIONS} from '../lib/labels'
+import {renderText} from '../lib/text'
+
+const [pages, history] = await Promise.all([getClubPages(), getClubHistory()])
+const ordered = CLUB_SECTIONS.flatMap((s) => {
+  const page = pages.find((p) => p.section === s.value)
+  return page ? [{...s, page}] : []
+})
+---
+
+<Layout title="Le club – PIV">
+  <PageHero kicker="Le club" title="Planeurs d’Ille-et-Vilaine" variant={0} />
+
+  {ordered.length === 0 && !history && <Section title="Bientôt ici"><p>Les pages du club arrivent.</p></Section>}
+
+  {
+    ordered.map(({anchor, label, page}) => (
+      <Section id={anchor} kicker={label} title={page.title}>
+        <div class="grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
+          <div>
+            {page.intro && <p class="mb-6 font-serif text-xl leading-relaxed text-slate-800">{page.intro}</p>}
+            <div class="prose-piv" set:html={renderText(page.body)} />
+          </div>
+          <Photo image={page.mainImage} label={page.title} class="h-64 md:h-80" width={900} sizes="(max-width: 768px) 100vw, 420px" />
+        </div>
+        {page.diagram && (
+          <figure class="mt-10 border border-sky-900/10 bg-white p-4 md:p-8">
+            <img src={imageUrl(page.diagram, 1400)} alt={page.diagram.alt ?? ''} loading="lazy" class="w-full" />
+          </figure>
+        )}
+      </Section>
+    ))
+  }
+
+  {
+    history && (
+      <Section id="histoire" kicker="Histoire" title={history.title ?? 'Histoire du club'}>
+        <div class="max-w-3xl">
+          {history.intro && (
+            <p class="font-serif text-xl leading-relaxed text-slate-800 first-letter:float-left first-letter:mr-3 first-letter:text-6xl first-letter:font-bold first-letter:text-sky-950">
+              {history.intro}
+            </p>
+          )}
+          <div class="prose-piv mt-8" set:html={renderText(history.body)} />
+          {history.anecdotes?.map((a) => (
+            <div class="mt-8 border-l-2 border-sky-500 py-1 pl-6">
+              <Kicker>Anecdote · {a.title}</Kicker>
+              <p class="font-serif text-lg leading-relaxed text-slate-700">{a.text}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+    )
+  }
+</Layout>

@@ -1,0 +1,10 @@
+---
+interface Props {
+  light?: boolean
+}
+const {light = false} = Astro.props
+---
+
+<p class:list={['mb-3 text-xs font-medium uppercase tracking-[0.3em]', light ? 'text-white/85' : 'text-sky-800']}>
+  <slot />
+</p>

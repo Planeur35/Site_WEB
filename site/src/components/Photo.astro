@@ -1,0 +1,41 @@
+---
+import {imageUrl, imageSrcset, type Photo} from '../lib/sanity'
+import GliderSilhouette from './GliderSilhouette.astro'
+
+/**
+ * Affiche une photo Sanity qui remplit son cadre (la hauteur est donnée par `class`).
+ * Sans photo, affiche un cadre provisoire.
+ */
+interface Props {
+  image?: Photo
+  label?: string
+  class?: string
+  width?: number
+  ratio?: number
+  sizes?: string
+  priority?: boolean
+}
+const {image, label = 'Photo', class: cls = '', width = 800, ratio, sizes = '100vw', priority = false} = Astro.props
+---
+
+{
+  image ? (
+    <div class:list={['relative overflow-hidden bg-sky-100', cls]}>
+      <img
+        src={imageUrl(image, width, ratio ? Math.round(width * ratio) : undefined)}
+        srcset={imageSrcset(image, [Math.round(width / 2), width, width * 2], ratio)}
+        sizes={sizes}
+        alt={image.alt ?? ''}
+        loading={priority ? 'eager' : 'lazy'}
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </div>
+  ) : (
+    <div class:list={['relative overflow-hidden bg-linear-to-br from-sky-100 via-white to-sky-200', cls]}>
+      <GliderSilhouette class="absolute bottom-3 right-3 w-1/2 text-azur/20" />
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="border border-azur/15 bg-white/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-azur/70 backdrop-blur">{label}</span>
+      </div>
+    </div>
+  )
+}

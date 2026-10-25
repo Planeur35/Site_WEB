@@ -1,0 +1,107 @@
+---
+import {HEADER_NAV, NAV} from '../lib/labels'
+
+const path = Astro.url.pathname
+const isActive = (to: string) => path === to || path.startsWith(`${to}/`)
+---
+
+<header class="sticky top-0 z-40 border-b border-sky-900/15 bg-ciel/90 backdrop-blur">
+  <div class="mx-auto flex h-20 max-w-5xl items-center justify-between gap-6 px-6 md:px-8">
+    <a href="/" class="flex items-center gap-3">
+      <img src="/logo-icon.png" alt="" width="50" height="44" class="h-11 w-auto" />
+      <span class="leading-tight">
+        <span class="block font-serif text-xl tracking-tight text-sky-950">PIV</span>
+        <span class="block text-[11px] uppercase tracking-[0.2em] text-sky-800">Planeurs d’Ille-et-Vilaine</span>
+      </span>
+    </a>
+
+    <nav class="ml-auto hidden items-center gap-7 lg:flex" aria-label="Navigation principale">
+      {
+        HEADER_NAV.map((n) => (
+          <div class="group relative">
+            <a
+              href={n.to}
+              class:list={[
+                'inline-flex items-center gap-1 border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.18em] transition',
+                isActive(n.to)
+                  ? 'border-sky-800 text-sky-950'
+                  : 'border-transparent text-slate-600 hover:border-sky-400 hover:text-sky-950',
+              ]}
+            >
+              {n.label}
+              {n.children && (
+                <span class="text-[8px] text-sky-700 transition-transform group-hover:rotate-180" aria-hidden="true">▾</span>
+              )}
+            </a>
+            {n.children && (
+              <div class="invisible absolute left-0 top-full z-50 translate-y-1 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                <div class="min-w-52 border border-sky-900/15 bg-white py-2 shadow-[0_16px_40px_-16px_rgba(14,28,43,0.35)]">
+                  {n.children.map((c) => (
+                    <a
+                      href={c.to}
+                      class="block whitespace-nowrap px-4 py-2 text-xs uppercase tracking-[0.15em] text-slate-600 transition-colors hover:bg-sky-50 hover:text-sky-950"
+                    >
+                      {c.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </nav>
+
+    <button
+      id="burger"
+      type="button"
+      class="shrink-0 cursor-pointer p-2 text-sky-950"
+      aria-expanded="false"
+      aria-controls="menu"
+      aria-label="Menu"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path id="burger-open" d="M4 7h16M4 12h16M4 17h16"></path>
+        <path id="burger-close" class="hidden" d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="menu" hidden class="border-t border-sky-900/15 bg-ciel" aria-label="Menu complet">
+    <div class="mx-auto flex max-w-5xl flex-col px-6 py-4 md:px-8">
+      {
+        NAV.map((n) => (
+          <a
+            href={n.to}
+            class:list={[
+              'border-b border-sky-900/10 py-3 text-xs font-medium uppercase tracking-[0.2em] last:border-0',
+              isActive(n.to) ? 'text-sky-950' : 'text-slate-600 hover:text-sky-950',
+            ]}
+          >
+            {n.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
+
+<script>
+  const burger = document.getElementById('burger')!
+  const menu = document.getElementById('menu')!
+  const iconOpen = document.getElementById('burger-open')!
+  const iconClose = document.getElementById('burger-close')!
+  const setOpen = (open: boolean) => {
+    burger.setAttribute('aria-expanded', String(open))
+    menu.hidden = !open
+    iconOpen.classList.toggle('hidden', open)
+    iconClose.classList.toggle('hidden', !open)
+  }
+  burger.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'))
+  menu.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false)
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false)
+  })
+</script>

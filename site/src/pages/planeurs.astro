@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro'
+import PageHero from '../components/PageHero.astro'
+import Section from '../components/Section.astro'
+import Photo from '../components/Photo.astro'
+import {getGliders} from '../lib/sanity'
+
+const gliders = await getGliders()
+---
+
+<Layout title="Nos planeurs – PIV">
+  <PageHero kicker="La flotte" title="Nos planeurs" variant={1} />
+  <Section kicker="Flotte du club" title="Chaque planeur, présenté un par un">
+    {gliders.length === 0 && <p>La flotte sera bientôt présentée ici.</p>}
+    <div class="border-t border-sky-900/15">
+      {
+        gliders.map((g) => (
+          <article class="grid gap-8 border-b border-sky-900/15 px-2 py-8 transition-colors hover:bg-white/70 md:grid-cols-[240px_1fr]">
+            <Photo image={g.mainImage} label={`Photo ${g.name}`} class="h-44" width={480} sizes="(max-width: 768px) 100vw, 240px" />
+            <div class="flex flex-col justify-center">
+              <div class="flex flex-wrap items-baseline gap-4">
+                <h3 class="font-serif text-2xl text-sky-950">{g.name}</h3>
+                <span class="border border-sky-500/40 px-2 py-0.5 text-xs uppercase tracking-[0.15em] text-sky-900">
+                  {[g.category, g.role].filter(Boolean).join(' · ')}
+                </span>
+              </div>
+              <p class="mt-1 text-sm tracking-wide text-slate-600">
+                {g.category === 'Biplace' ? '2 places' : '1 place'}{g.year ? ` · en service depuis ${g.year}` : ''}
+              </p>
+              <p class="mt-3 max-w-xl text-sm leading-relaxed text-slate-700">{g.shortDescription}</p>
+              {g.specs && g.specs.length > 0 && (
+                <dl class="mt-4 grid max-w-md gap-1 text-sm">
+                  {g.specs.map((s) => (
+                    <div class="flex justify-between gap-4 border-b border-sky-900/10 pb-1">
+                      <dt class="text-slate-600">{s.label}</dt>
+                      <dd class="font-medium text-sky-950">{s.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>

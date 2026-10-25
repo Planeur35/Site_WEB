@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PageHero from '../../components/PageHero.astro'
+import Section from '../../components/Section.astro'
+import Photo from '../../components/Photo.astro'
+import ShareButtons from '../../components/ShareButtons.astro'
+import {getNews, getUpcomingEvents} from '../../lib/sanity'
+import {
+  excerpt,
+  formatDate,
+  formatDayNumber,
+  formatMonthShort,
+  formatTime,
+  formatWeekday,
+  newsSlug,
+  renderText,
+} from '../../lib/text'
+
+const [news, events] = await Promise.all([getNews(), getUpcomingEvents()])
+const site = import.meta.env.PUBLIC_SITE_URL ?? 'https://planeur35.org'
+const permalink = (n: {publishedAt: string; title: string}) => new URL(`/actualites/${newsSlug(n)}`, site).href
+---
+
+<Layout title="Actualités et agenda – PIV">
+  <PageHero kicker="Actualités" title="Les nouvelles du club" variant={0} />
+
+  <Section id="news" kicker="Journal" title="Dernières nouvelles">
+    {news.length === 0 && <p>Aucune actualité pour le moment.</p>}
+    <div class="border-t border-sky-900/15">
+      {
+        news.map((n, i) => (
+          <details class="group border-b border-sky-900/15" open={i === 0}>
+            <summary class="flex cursor-pointer items-start gap-6 px-2 py-8 transition-colors hover:bg-white/70 md:gap-8">
+              <Photo image={n.image} class="hidden h-24 w-24 shrink-0 sm:block" width={192} sizes="96px" />
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-3">
+                  <time datetime={n.publishedAt} class="text-xs font-medium uppercase tracking-[0.25em] text-sky-800">{formatDate(n.publishedAt)}</time>
+                  {n.tag && <span class="border border-sky-500/40 px-2 py-0.5 text-xs uppercase tracking-[0.15em] text-sky-900">{n.tag}</span>}
+                </div>
+                <h3 class="mt-2 font-serif text-xl leading-snug text-sky-950">{n.title}</h3>
+                <p class="mt-1 line-clamp-1 text-sm leading-relaxed text-slate-600 group-open:hidden">{excerpt(n.body, 160)}</p>
+              </div>
+              <span class="mt-1 text-sm text-sky-700 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
+            </summary>
+            <div class="px-2 pb-8 sm:pl-[7.5rem]">
+              <div class="prose-piv text-sm" set:html={renderText(n.body)} />
+              <ShareButtons url={permalink(n)} title={n.title} class="mt-6" />
+              <p class="mt-4">
+                <a href={`/actualites/${newsSlug(n)}`} class="text-xs uppercase tracking-[0.25em] text-sky-800 underline decoration-sky-300 underline-offset-4 hover:decoration-sky-800">Ouvrir la page de cette actualité</a>
+              </p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section id="agenda" kicker="Agenda" title="Événements à venir">
+    {events.length === 0 && <p>Aucun événement à venir.</p>}
+    <div class="border-t border-sky-900/15">
+      {
+        events.map((e) => (
+          <div class="flex items-start gap-8 border-b border-sky-900/15 px-2 py-6 transition-colors hover:bg-white/70" data-end={e.endDate ?? e.startDate}>
+            <div class="w-14 shrink-0 text-center">
+              <div class="font-serif text-2xl leading-none text-sky-950">{formatDayNumber(e.startDate)}</div>
+              <div class="mt-1 text-xs uppercase tracking-[0.18em] text-sky-800">{formatMonthShort(e.startDate)}</div>
+            </div>
+            <div>
+              <h3 class="font-serif text-lg leading-snug text-sky-950">{e.title}</h3>
+              <p class="mt-1 text-xs tracking-wide text-slate-600">
+                {formatWeekday(e.startDate)}{formatTime(e.startDate) && ` à ${formatTime(e.startDate)}`}{e.location && ` · ${e.location}`}
+              </p>
+              {e.description && <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{e.description}</p>}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>
+
+<script>
+  // Le site est reconstruit à chaque publication : on masque ici les événements passés depuis.
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  document.querySelectorAll<HTMLElement>('[data-end]').forEach((el) => {
+    if (new Date(el.dataset.end!) < today) el.hidden = true
+  })
+</script>

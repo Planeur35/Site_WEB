@@ -1,0 +1,29 @@
+---
+import GliderSilhouette from './GliderSilhouette.astro'
+
+interface Props {
+  from: string
+  mid: string
+  to: string
+  class?: string
+}
+const {from, mid, to, class: cls = ''} = Astro.props
+---
+
+<div
+  class:list={['absolute inset-0 overflow-hidden', cls]}
+  style={`background: linear-gradient(180deg, ${from} 0%, ${mid} 55%, ${to} 100%)`}
+>
+  <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
+    <ellipse cx="180" cy="110" rx="130" ry="32" fill="white" opacity="0.35"></ellipse>
+    <ellipse cx="480" cy="70" rx="90" ry="20" fill="white" opacity="0.25"></ellipse>
+    <ellipse cx="700" cy="150" rx="150" ry="34" fill="white" opacity="0.3"></ellipse>
+    <ellipse cx="380" cy="300" rx="180" ry="36" fill="white" opacity="0.18"></ellipse>
+    <ellipse cx="850" cy="360" rx="200" ry="42" fill="white" opacity="0.22"></ellipse>
+    <line x1="0" y1="430" x2="1000" y2="430" stroke="white" stroke-width="0.6" opacity="0.35" stroke-dasharray="1 14"></line>
+    <line x1="0" y1="470" x2="1000" y2="470" stroke="white" stroke-width="0.6" opacity="0.22" stroke-dasharray="1 18"></line>
+  </svg>
+  <GliderSilhouette class="absolute left-[10%] top-[22%] w-[26%] rotate-[-4deg] text-white/60" />
+  <GliderSilhouette class="absolute bottom-[30%] right-[8%] w-[14%] rotate-[3deg] text-white/35" />
+  <slot />
+</div>

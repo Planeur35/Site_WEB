@@ -1,0 +1,31 @@
+---
+interface Props {
+  url: string
+  title: string
+  class?: string
+}
+const {url, title, class: cls = ''} = Astro.props
+const u = encodeURIComponent(url)
+const t = encodeURIComponent(title)
+const btn =
+  'cursor-pointer border border-sky-500/40 px-3 py-1.5 text-xs uppercase tracking-[0.15em] text-sky-900 transition-colors hover:border-sky-800 hover:text-sky-950'
+---
+
+<div class:list={['flex flex-wrap items-center gap-3', cls]}>
+  <span class="text-xs uppercase tracking-[0.2em] text-slate-600">Partager</span>
+  <a class={btn} href={`https://www.facebook.com/sharer/sharer.php?u=${u}`} target="_blank" rel="noopener">Facebook ↗</a>
+  <a class={btn} href={`https://wa.me/?text=${t}%20${u}`} target="_blank" rel="noopener">WhatsApp ↗</a>
+  <a class={btn} href={`https://www.linkedin.com/sharing/share-offsite/?url=${u}`} target="_blank" rel="noopener">LinkedIn ↗</a>
+  <button type="button" class={btn} data-copy={url}>Copier le lien</button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(button.dataset.copy ?? '')
+      const label = button.textContent
+      button.textContent = 'Lien copié'
+      setTimeout(() => (button.textContent = label), 2000)
+    })
+  })
+</script>

@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Kicker from '../components/Kicker.astro'
+import Photo from '../components/Photo.astro'
+import SkyVisual from '../components/SkyVisual.astro'
+import Section from '../components/Section.astro'
+import NewsRow from '../components/NewsRow.astro'
+import {getSettings, getNews, imageUrl} from '../lib/sanity'
+import {HERO_TONES} from '../lib/labels'
+
+const [settings, news] = await Promise.all([getSettings(), getNews(3)])
+
+const slides = settings?.heroSlides?.length
+  ? settings.heroSlides
+  : [{image: undefined, title: 'Planeurs d’Ille-et-Vilaine', subtitle: settings?.tagline}]
+
+const stats = [
+  {n: settings?.membersCount, l: 'Membres'},
+  {n: settings?.flightHours, l: settings?.statsYear ? `Heures de vol en ${settings.statsYear}` : 'Heures de vol dans l’année'},
+  {n: settings?.glidersCount, l: 'Planeurs au club'},
+  {n: settings?.foundedYear, l: 'Année de fondation'},
+].filter((s) => s.n != null)
+
+const cards = [
+  {to: '/decouvrir', k: 'Premier contact', t: 'Venez essayer', d: 'Vols d’initiation ouverts à tous, sur réservation.'},
+  {to: '/club#formation', k: 'École du club', t: 'Apprendre à voler', d: 'Le cursus de formation, du premier vol jusqu’aux badges.'},
+  {to: '/adherer', k: 'Rejoindre PIV', t: 'S’inscrire', d: 'Les tarifs et les modalités d’inscription.'},
+]
+
+const first = slides[0]
+const ogImage = first?.image ? imageUrl(first.image, 1200, 630) : undefined
+---
+
+<Layout title="PIV – Planeurs d’Ille-et-Vilaine, club de vol à voile" image={ogImage}>
+  <section class="relative h-[82vh] min-h-[500px] overflow-hidden" data-hero>
+    {
+      slides.map((s, i) => {
+        const tone = HERO_TONES[i % HERO_TONES.length]
+        const Title = i === 0 ? 'h1' : 'p'
+        return (
+          <div
+            class:list={['absolute inset-0 transition-opacity duration-1000', i === 0 ? 'opacity-100' : 'opacity-0']}
+            data-slide
+            aria-hidden={i === 0 ? 'false' : 'true'}
+          >
+            {s.image ? (
+              <Photo image={s.image} class="absolute inset-0" width={1600} priority={i === 0} />
+            ) : (
+              <SkyVisual from={tone.from} mid={tone.mid} to={tone.to} />
+            )}
+            <div class="absolute inset-0 bg-linear-to-t from-sky-950/60 via-sky-950/10 to-transparent"></div>
+            <div class="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-center px-6 md:px-8">
+              <div class="max-w-2xl">
+                <Kicker light>PIV · Planeurs d’Ille-et-Vilaine</Kicker>
+                <Title class="font-serif text-4xl leading-[1.05] tracking-tight text-white md:text-6xl">{s.title}</Title>
+                {s.subtitle && <p class="mt-5 max-w-md text-lg leading-relaxed text-white/90">{s.subtitle}</p>}
+              </div>
+            </div>
+          </div>
+        )
+      })
+    }
+    {
+      slides.length > 1 && (
+        <div class="absolute inset-x-0 bottom-6 z-20">
+          <div class="mx-auto flex max-w-5xl gap-1 px-6 md:px-8">
+            {slides.map((_, i) => (
+              <button type="button" class="group cursor-pointer py-4" data-dot aria-label={`Photo ${i + 1}`}>
+                <span class:list={['block h-px bg-white transition-all duration-500', i === 0 ? 'w-14' : 'w-7 opacity-50']}></span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </section>
+
+  {
+    stats.length > 0 && (
+      <div class="border-y border-sky-900/10 bg-linear-to-b from-horizon to-ciel">
+        <div class="mx-auto grid max-w-5xl grid-cols-2 gap-8 px-6 py-16 md:grid-cols-4 md:px-8">
+          {stats.map((s) => (
+            <div class="md:border-l md:border-sky-900/10 md:pl-6 md:first:border-0 md:first:pl-0">
+              <div class="font-serif text-4xl text-sky-950">{s.n}</div>
+              <div class="mt-2 text-xs uppercase tracking-[0.18em] text-sky-800">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  <div class="mx-auto max-w-5xl px-6 py-16 md:px-8 md:py-24">
+    <div class="grid gap-px border border-sky-900/10 bg-sky-900/10 md:grid-cols-3">
+      {
+        cards.map((c) => (
+          <a href={c.to} class="group bg-ciel p-8 transition-all hover:bg-white hover:shadow-[0_12px_40px_-20px_rgba(18,48,79,0.35)]">
+            <Kicker>{c.k}</Kicker>
+            <h3 class="font-serif text-2xl leading-snug text-sky-950 group-hover:underline group-hover:decoration-sky-400 group-hover:underline-offset-4">{c.t}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">{c.d}</p>
+            <span class="mt-6 inline-block text-xs uppercase tracking-[0.25em] text-sky-800">Découvrir</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  {
+    news.length > 0 && (
+      <Section kicker="Journal" title="Dernières nouvelles">
+        <div class="border-t border-sky-900/15">
+          {news.map((item) => <NewsRow item={item} />)}
+        </div>
+        <p class="mt-8">
+          <a href="/actualites" class="text-xs uppercase tracking-[0.25em] text-sky-800 underline decoration-sky-300 underline-offset-4 hover:decoration-sky-800">Toutes les actualités et l’agenda</a>
+        </p>
+      </Section>
+    )
+  }
+</Layout>
+
+<script>
+  const hero = document.querySelector('[data-hero]')
+  if (hero) {
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>('[data-slide]'))
+    const dots = Array.from(hero.querySelectorAll<HTMLButtonElement>('[data-dot]'))
+    let current = 0
+    let timer: number | undefined
+
+    const show = (index: number) => {
+      current = index
+      slides.forEach((slide, k) => {
+        slide.classList.toggle('opacity-100', k === index)
+        slide.classList.toggle('opacity-0', k !== index)
+        slide.setAttribute('aria-hidden', String(k !== index))
+      })
+      dots.forEach((dot, k) => {
+        const line = dot.firstElementChild as HTMLElement
+        line.classList.toggle('w-14', k === index)
+        line.classList.toggle('w-7', k !== index)
+        line.classList.toggle('opacity-50', k !== index)
+      })
+    }
+    const start = () => {
+      if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        timer = window.setInterval(() => show((current + 1) % slides.length), 6000)
+      }
+    }
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        window.clearInterval(timer)
+        show(i)
+        start()
+      }),
+    )
+    start()
+  }
+</script>

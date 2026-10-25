@@ -1,0 +1,22 @@
+---
+import Kicker from './Kicker.astro'
+
+interface Props {
+  id?: string
+  kicker?: string
+  title: string
+  sub?: string
+}
+const {id, kicker, title, sub} = Astro.props
+---
+
+<section id={id} class="mx-auto max-w-5xl scroll-mt-24 px-6 py-16 md:px-8 md:py-24">
+  <div>
+    {kicker && <Kicker>{kicker}</Kicker>}
+    <h2 class="font-serif text-3xl leading-[1.1] tracking-tight text-sky-950 md:text-[2.6rem]">{title}</h2>
+    {sub && <p class="mt-4 max-w-xl leading-relaxed text-slate-600">{sub}</p>}
+  </div>
+  <div class="mt-10">
+    <slot />
+  </div>
+</section>
