@@ -1,0 +1,272 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "club": "Le club",
+    "gliders": "Nos planeurs",
+    "join": "S’inscrire",
+    "discover": "Venez essayer",
+    "news": "Actualités",
+    "newsList": "Les news",
+    "agenda": "Agenda",
+    "stories": "Récits de vols",
+    "gallery": "Galerie",
+    "webcam": "Webcam",
+    "links": "Liens pratiques",
+    "contact": "Contact",
+    "presentation": "Présentation",
+    "platform": "La plateforme",
+    "activities": "Activité des membres",
+    "training": "Formation initiale",
+    "campaign": "École de campagne",
+    "competition": "Compétition",
+    "history": "Histoire du club",
+    "menu": "Menu",
+    "mainNav": "Navigation principale",
+    "fullNav": "Menu complet"
+  },
+  "common": {
+    "clubName": "Planeurs d’Ille-et-Vilaine",
+    "brandKicker": "PIV · Planeurs d’Ille-et-Vilaine",
+    "discover": "Découvrir",
+    "backToHome": "Retour à l’accueil",
+    "loadingMap": "Chargement de la carte…",
+    "switchLanguageLabel": "Switch to English"
+  },
+  "meta": {
+    "home": {
+      "title": "PIV – Planeurs d’Ille-et-Vilaine, club de vol à voile",
+      "description": "PIV, Planeurs d’Ille-et-Vilaine : club de vol à voile. Planeurs, formation, vols d’initiation et actualités du club."
+    },
+    "club": {
+      "title": "Le club",
+      "description": "Le club PIV : présentation, la plateforme et sa zone de vol, la formation, l’école de campagne, la compétition et l’histoire du club."
+    },
+    "gliders": {
+      "title": "Nos planeurs",
+      "description": "Les planeurs du club PIV, présentés un par un : biplaces de formation, monoplaces de performance."
+    },
+    "join": {
+      "title": "S’inscrire au club",
+      "description": "Tarifs et modalités d’inscription au club de vol à voile PIV."
+    },
+    "discover": {
+      "title": "Venez essayer",
+      "description": "Le vol d’initiation en planeur avec un instructeur du club PIV : déroulement, tarif et réservation."
+    },
+    "news": {
+      "title": "Actualités et agenda",
+      "description": "Les nouvelles du club PIV et les prochains événements."
+    },
+    "stories": {
+      "title": "Récits de vols",
+      "description": "Les beaux vols au départ et à l’arrivée de PIV, avec leurs traces WeGlide."
+    },
+    "gallery": {
+      "title": "Galerie photos",
+      "description": "Les photos du club PIV : planeurs, paysages et vie du club."
+    },
+    "webcam": {
+      "title": "Webcam",
+      "description": "L’image de la webcam du club PIV, actualisée toutes les minutes."
+    },
+    "links": {
+      "title": "Liens pratiques",
+      "description": "Liens utiles aux pilotes : institutions, préparation des vols, météo, communauté."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Écrire au club de vol à voile PIV, Planeurs d’Ille-et-Vilaine."
+    }
+  },
+  "home": {
+    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "heroSubtitle": "Le vol à voile en Bretagne, pour tous.",
+    "slideLabel": "Photo {n}",
+    "statsMembers": "Membres",
+    "statsHours": "Heures de vol dans l’année",
+    "statsHoursYear": "Heures de vol en {year}",
+    "statsGliders": "Planeurs au club",
+    "statsFounded": "Année de fondation",
+    "cardTryKicker": "Premier contact",
+    "cardTryTitle": "Venez essayer",
+    "cardTryText": "Vols d’initiation ouverts à tous, sur réservation.",
+    "cardLearnKicker": "École du club",
+    "cardLearnTitle": "Apprendre à voler",
+    "cardLearnText": "Le cursus de formation, du premier vol jusqu’aux badges.",
+    "cardJoinKicker": "Rejoindre PIV",
+    "cardJoinTitle": "S’inscrire",
+    "cardJoinText": "Les tarifs et les modalités d’inscription.",
+    "latestKicker": "Journal",
+    "latestTitle": "Dernières nouvelles",
+    "allNews": "Toutes les actualités et l’agenda"
+  },
+  "club": {
+    "heroKicker": "Le club",
+    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "emptyTitle": "Bientôt ici",
+    "empty": "Les pages du club arrivent.",
+    "anecdote": "Anecdote",
+    "mapPopup": "Le terrain du club"
+  },
+  "gliders": {
+    "heroKicker": "La flotte",
+    "heroTitle": "Nos planeurs",
+    "sectionKicker": "Flotte du club",
+    "sectionTitle": "Chaque planeur, présenté un par un",
+    "empty": "La flotte sera bientôt présentée ici.",
+    "wingspan": "Envergure",
+    "glideRatio": "Finesse",
+    "manufacturer": "Constructeur",
+    "seats": "{count, plural, one {# place} other {# places}}",
+    "since": "en service depuis {year}",
+    "categories": {
+      "biplace-ecole": "Biplace école",
+      "biplace-perf": "Biplace performance",
+      "handiplaneur": "Handiplaneur",
+      "monoplace-debut": "Monoplace débutant",
+      "monoplace-perf": "Monoplace performance",
+      "remorqueur": "Remorqueur"
+    }
+  },
+  "pricing": {
+    "amount": "{amount} €",
+    "offers": {
+      "forfait-20h": "Forfait 20 h",
+      "forfait-illimite": "Forfait illimité",
+      "pack-formation": "Pack formation",
+      "pack-complement-formation": "Pack complément de formation",
+      "vol-initiation": "Vol d’initiation"
+    },
+    "ages": {
+      "under25": "Moins de 25 ans",
+      "over25": "Plus de 25 ans",
+      "under18": "Moins de 18 ans",
+      "adult": "Adulte"
+    }
+  },
+  "join": {
+    "heroKicker": "Adhésion",
+    "heroTitle": "S’inscrire au club",
+    "packagesKicker": "Tarifs",
+    "packagesTitle": "Les forfaits",
+    "trainingKicker": "Formation",
+    "trainingTitle": "Se former au pilotage",
+    "howKicker": "Modalités",
+    "howTitle": "Comment s’inscrire",
+    "howEmpty": "Les modalités d’inscription seront publiées prochainement. En attendant, écrivez-nous.",
+    "contactCta": "Nous écrire",
+    "tryCta": "Essayer d’abord"
+  },
+  "discover": {
+    "heroKicker": "Premier vol",
+    "heroTitle": "Venez essayer",
+    "kicker": "Vol d’initiation",
+    "title": "Offrez-vous le ciel",
+    "descriptionKicker": "Le vol",
+    "defaultDescription": "Le vol d’initiation est le meilleur moyen de découvrir le vol en planeur : vous volez en biplace, accompagné d’un instructeur du club.",
+    "priceKicker": "Tarif",
+    "bookingKicker": "Réservation et paiement",
+    "bookingTitle": "Réservez votre vol",
+    "bookingText": "La réservation et le paiement se font en ligne. Des bons de vol sont disponibles pour les particuliers comme pour les entreprises.",
+    "bookingCta": "Réserver et payer en ligne",
+    "contactCta": "Nous écrire pour réserver",
+    "questionCta": "Poser une question"
+  },
+  "news": {
+    "heroKicker": "Actualités",
+    "heroTitle": "Les nouvelles du club",
+    "listKicker": "Journal",
+    "listTitle": "Dernières nouvelles",
+    "empty": "Aucune actualité pour le moment.",
+    "allNews": "Toutes les actualités",
+    "agendaKicker": "Agenda",
+    "agendaTitle": "Événements à venir",
+    "agendaEmpty": "Aucun événement à venir.",
+    "at": "à {time}"
+  },
+  "share": {
+    "label": "Partager",
+    "copy": "Copier le lien",
+    "copied": "Lien copié"
+  },
+  "stories": {
+    "heroKicker": "Récits",
+    "heroTitle": "Les vols qui ont marqué PIV",
+    "kicker": "Archives du ciel",
+    "title": "Beaux vols au départ et à l’arrivée de PIV",
+    "empty": "Les récits arrivent bientôt.",
+    "read": "Lire le récit",
+    "close": "Refermer le récit",
+    "weglide": "Voir le tracé sur WeGlide",
+    "clubOnWeglide": "Tous les vols du club sur WeGlide"
+  },
+  "gallery": {
+    "heroKicker": "En images",
+    "heroTitle": "Galerie",
+    "kicker": "La vie du club",
+    "title": "Photos du club",
+    "empty": "Les photos seront bientôt disponibles."
+  },
+  "webcam": {
+    "heroKicker": "Vue de la plateforme",
+    "heroTitle": "Webcam",
+    "kicker": "Sur le terrain",
+    "title": "L’image de la webcam du club",
+    "alt": "Vue de la plateforme du club",
+    "refresh": "Image actualisée toutes les minutes",
+    "lastUpdate": "dernière mise à jour à {time}",
+    "justNow": "dernière mise à jour à l’instant",
+    "open": "Ouvrir l’image",
+    "empty": "La webcam sera bientôt disponible.",
+    "unavailable": "L’image de la webcam est momentanément indisponible."
+  },
+  "links": {
+    "heroKicker": "Ressources",
+    "heroTitle": "Liens pratiques",
+    "kicker": "Le pilote connecté",
+    "title": "Tous les liens utiles",
+    "empty": "Les liens seront bientôt disponibles.",
+    "groups": {
+      "institutions": "Institutions",
+      "flight-prep": "Préparation de vol",
+      "weather": "Météo et conditions",
+      "community": "Communauté",
+      "other": "Autres"
+    }
+  },
+  "contact": {
+    "heroKicker": "Contact",
+    "title": "Contactez-nous",
+    "formKicker": "Nous écrire",
+    "formTitle": "Une question ?",
+    "subtitle": "Envie de voler, de rejoindre le club ou simplement une question : écrivez-nous.",
+    "name": "Nom",
+    "email": "E-mail",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer",
+    "sending": "Envoi en cours…",
+    "success": "Message envoyé, merci ! Nous vous répondons rapidement.",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "required": "Ce champ est requis",
+    "invalidEmail": "Adresse e-mail invalide",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "findUsKicker": "Accès",
+    "findUs": "Nous trouver",
+    "mapPopup": "Le terrain du club"
+  },
+  "error": {
+    "kicker": "Erreur",
+    "title": "Une erreur est survenue",
+    "description": "Désolé, une erreur inattendue s’est produite.",
+    "tryAgain": "Réessayer",
+    "notFound": "Page introuvable",
+    "notFoundDescription": "La page que vous cherchez n’existe pas ou a été déplacée."
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "writeToUs": "Nous écrire"
+  }
+}

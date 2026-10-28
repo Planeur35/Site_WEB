@@ -1,0 +1,272 @@
+{
+  "nav": {
+    "home": "Home",
+    "club": "The club",
+    "gliders": "Our gliders",
+    "join": "Join",
+    "discover": "Try gliding",
+    "news": "News",
+    "newsList": "Latest news",
+    "agenda": "Events",
+    "stories": "Flight stories",
+    "gallery": "Gallery",
+    "webcam": "Webcam",
+    "links": "Useful links",
+    "contact": "Contact",
+    "presentation": "About us",
+    "platform": "The airfield",
+    "activities": "Members’ life",
+    "training": "Pilot training",
+    "campaign": "Cross-country school",
+    "competition": "Competition",
+    "history": "Club history",
+    "menu": "Menu",
+    "mainNav": "Main navigation",
+    "fullNav": "Full menu"
+  },
+  "common": {
+    "clubName": "Planeurs d’Ille-et-Vilaine",
+    "brandKicker": "PIV · Planeurs d’Ille-et-Vilaine",
+    "discover": "Discover",
+    "backToHome": "Back to home",
+    "loadingMap": "Loading map…",
+    "switchLanguageLabel": "Passer en français"
+  },
+  "meta": {
+    "home": {
+      "title": "PIV – Planeurs d’Ille-et-Vilaine, gliding club",
+      "description": "PIV, Planeurs d’Ille-et-Vilaine: a gliding club in Brittany. Gliders, pilot training, trial flights and club news."
+    },
+    "club": {
+      "title": "The club",
+      "description": "The PIV club: who we are, the airfield and its flying area, training, cross-country school, competition and club history."
+    },
+    "gliders": {
+      "title": "Our gliders",
+      "description": "The PIV club gliders, one by one: training two-seaters and performance single-seaters."
+    },
+    "join": {
+      "title": "Join the club",
+      "description": "Prices and how to join the PIV gliding club."
+    },
+    "discover": {
+      "title": "Try gliding",
+      "description": "A trial glider flight with a PIV instructor: how it works, price and booking."
+    },
+    "news": {
+      "title": "News and events",
+      "description": "News from the PIV club and upcoming events."
+    },
+    "stories": {
+      "title": "Flight stories",
+      "description": "Memorable flights from and to PIV, with their WeGlide tracks."
+    },
+    "gallery": {
+      "title": "Photo gallery",
+      "description": "Photos of the PIV club: gliders, landscapes and club life."
+    },
+    "webcam": {
+      "title": "Webcam",
+      "description": "The PIV club webcam, refreshed every minute."
+    },
+    "links": {
+      "title": "Useful links",
+      "description": "Useful links for pilots: institutions, flight planning, weather, community."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Write to the PIV gliding club, Planeurs d’Ille-et-Vilaine."
+    }
+  },
+  "home": {
+    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "heroSubtitle": "Gliding in Brittany, open to everyone.",
+    "slideLabel": "Photo {n}",
+    "statsMembers": "Members",
+    "statsHours": "Flight hours this year",
+    "statsHoursYear": "Flight hours in {year}",
+    "statsGliders": "Club gliders",
+    "statsFounded": "Founded",
+    "cardTryKicker": "First contact",
+    "cardTryTitle": "Try gliding",
+    "cardTryText": "Trial flights open to everyone, by booking.",
+    "cardLearnKicker": "Club school",
+    "cardLearnTitle": "Learn to fly",
+    "cardLearnText": "The training path, from your first flight to your badges.",
+    "cardJoinKicker": "Join PIV",
+    "cardJoinTitle": "Join",
+    "cardJoinText": "Prices and how to join.",
+    "latestKicker": "Journal",
+    "latestTitle": "Latest news",
+    "allNews": "All news and events"
+  },
+  "club": {
+    "heroKicker": "The club",
+    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "emptyTitle": "Coming soon",
+    "empty": "The club pages are on their way.",
+    "anecdote": "Anecdote",
+    "mapPopup": "The club airfield"
+  },
+  "gliders": {
+    "heroKicker": "The fleet",
+    "heroTitle": "Our gliders",
+    "sectionKicker": "Club fleet",
+    "sectionTitle": "Every glider, one by one",
+    "empty": "The fleet will be presented here soon.",
+    "wingspan": "Wingspan",
+    "glideRatio": "Glide ratio",
+    "manufacturer": "Manufacturer",
+    "seats": "{count, plural, one {# seat} other {# seats}}",
+    "since": "in service since {year}",
+    "categories": {
+      "biplace-ecole": "Training two-seater",
+      "biplace-perf": "Performance two-seater",
+      "handiplaneur": "Adapted glider",
+      "monoplace-debut": "Beginner single-seater",
+      "monoplace-perf": "Performance single-seater",
+      "remorqueur": "Tow plane"
+    }
+  },
+  "pricing": {
+    "amount": "€{amount}",
+    "offers": {
+      "forfait-20h": "20-hour package",
+      "forfait-illimite": "Unlimited package",
+      "pack-formation": "Training pack",
+      "pack-complement-formation": "Additional training pack",
+      "vol-initiation": "Trial flight"
+    },
+    "ages": {
+      "under25": "Under 25",
+      "over25": "25 and over",
+      "under18": "Under 18",
+      "adult": "Adult"
+    }
+  },
+  "join": {
+    "heroKicker": "Membership",
+    "heroTitle": "Join the club",
+    "packagesKicker": "Prices",
+    "packagesTitle": "Packages",
+    "trainingKicker": "Training",
+    "trainingTitle": "Learn to fly",
+    "howKicker": "How to join",
+    "howTitle": "How to join",
+    "howEmpty": "Membership details will be published soon. Meanwhile, write to us.",
+    "contactCta": "Write to us",
+    "tryCta": "Try first"
+  },
+  "discover": {
+    "heroKicker": "First flight",
+    "heroTitle": "Try gliding",
+    "kicker": "Trial flight",
+    "title": "Treat yourself to the sky",
+    "descriptionKicker": "The flight",
+    "defaultDescription": "A trial flight is the best way to discover gliding: you fly in a two-seater with one of the club’s instructors.",
+    "priceKicker": "Price",
+    "bookingKicker": "Booking and payment",
+    "bookingTitle": "Book your flight",
+    "bookingText": "Booking and payment are done online. Gift vouchers are available for individuals and companies.",
+    "bookingCta": "Book and pay online",
+    "contactCta": "Write to us to book",
+    "questionCta": "Ask a question"
+  },
+  "news": {
+    "heroKicker": "News",
+    "heroTitle": "News from the club",
+    "listKicker": "Journal",
+    "listTitle": "Latest news",
+    "empty": "No news yet.",
+    "allNews": "All news",
+    "agendaKicker": "Events",
+    "agendaTitle": "Upcoming events",
+    "agendaEmpty": "No upcoming events.",
+    "at": "at {time}"
+  },
+  "share": {
+    "label": "Share",
+    "copy": "Copy link",
+    "copied": "Link copied"
+  },
+  "stories": {
+    "heroKicker": "Stories",
+    "heroTitle": "Flights that shaped PIV",
+    "kicker": "Sky archives",
+    "title": "Memorable flights from and to PIV",
+    "empty": "Stories are coming soon.",
+    "read": "Read the story",
+    "close": "Close the story",
+    "weglide": "See the track on WeGlide",
+    "clubOnWeglide": "All club flights on WeGlide"
+  },
+  "gallery": {
+    "heroKicker": "In pictures",
+    "heroTitle": "Gallery",
+    "kicker": "Club life",
+    "title": "Club photos",
+    "empty": "Photos will be available soon."
+  },
+  "webcam": {
+    "heroKicker": "Airfield view",
+    "heroTitle": "Webcam",
+    "kicker": "On the field",
+    "title": "The club webcam",
+    "alt": "View of the club airfield",
+    "refresh": "Image refreshed every minute",
+    "lastUpdate": "last updated at {time}",
+    "justNow": "last updated just now",
+    "open": "Open the image",
+    "empty": "The webcam will be available soon.",
+    "unavailable": "The webcam image is temporarily unavailable."
+  },
+  "links": {
+    "heroKicker": "Resources",
+    "heroTitle": "Useful links",
+    "kicker": "The connected pilot",
+    "title": "All useful links",
+    "empty": "Links will be available soon.",
+    "groups": {
+      "institutions": "Institutions",
+      "flight-prep": "Flight planning",
+      "weather": "Weather and conditions",
+      "community": "Community",
+      "other": "Other"
+    }
+  },
+  "contact": {
+    "heroKicker": "Contact",
+    "title": "Contact us",
+    "formKicker": "Write to us",
+    "formTitle": "A question?",
+    "subtitle": "Want to fly, join the club or just have a question? Write to us.",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending…",
+    "success": "Message sent, thank you! We will reply soon.",
+    "error": "Something went wrong. Please try again.",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "phone": "Phone",
+    "address": "Address",
+    "findUsKicker": "Getting here",
+    "findUs": "Find us",
+    "mapPopup": "The club airfield"
+  },
+  "error": {
+    "kicker": "Error",
+    "title": "Something went wrong",
+    "description": "Sorry, an unexpected error occurred.",
+    "tryAgain": "Try again",
+    "notFound": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist or has moved."
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "writeToUs": "Write to us"
+  }
+}
