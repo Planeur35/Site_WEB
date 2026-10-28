@@ -1,9 +1,10 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { schemas } from './schemas';
 import type { StructureBuilder } from 'sanity/structure';
+import { schemas } from './schemas';
 
-const singletonTypes = new Set(['siteSettings']);
+// Documents that exist only once
+const singletonTypes = new Set(['siteSettings', 'clubHistory']);
 
 const singletonListItem = (
   S: StructureBuilder,
@@ -25,16 +26,26 @@ export default defineConfig({
   plugins: [
     structureTool({
       name: 'content',
-      title: 'Content',
+      title: 'Contenu',
       structure: (S) =>
         S.list()
-          .title('Content')
+          .title('Contenu')
           .items([
-            singletonListItem(S, 'siteSettings', 'Site Settings'),
+            // Day-to-day content, open to members
+            S.documentTypeListItem('article').title('Actualités'),
+            S.documentTypeListItem('event').title('Agenda'),
+            S.documentTypeListItem('galleryImage').title('Galerie photos'),
             S.divider(),
-            ...S.documentTypeListItems().filter(
-              (listItem) => !singletonTypes.has(listItem.getId() as string),
-            ),
+            // Pages managed by administrators
+            S.documentTypeListItem('clubPage').title('Pages du club'),
+            singletonListItem(S, 'clubHistory', 'Histoire du club'),
+            S.documentTypeListItem('aircraft').title('Nos planeurs'),
+            S.documentTypeListItem('tariff').title('Tarifs'),
+            S.documentTypeListItem('flightStory').title('Récits de vols'),
+            S.divider(),
+            singletonListItem(S, 'siteSettings', 'Réglages du site'),
+            S.documentTypeListItem('category').title('Rubriques des actualités'),
+            S.documentTypeListItem('page').title('Pages libres'),
           ]),
     }),
   ],

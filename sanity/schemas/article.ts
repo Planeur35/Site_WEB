@@ -40,6 +40,8 @@ export default defineType({
       name: 'author',
       title: 'Author',
       type: 'string',
+      // Hidden: the site must not show members' names. Existing values are kept.
+      hidden: true,
     }),
     defineField({
       name: 'category',

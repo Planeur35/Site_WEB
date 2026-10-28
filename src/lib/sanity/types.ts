@@ -1,18 +1,16 @@
 import type { PortableTextBlock } from '@portabletext/react';
 
+// English is optional in the Studio: read these with localize(), which falls back to French.
 export interface LocalizedString {
-  fr: string;
-  en: string;
+  fr?: string;
+  en?: string;
 }
 
-export interface LocalizedText {
-  fr: string;
-  en: string;
-}
+export type LocalizedText = LocalizedString;
 
 export interface LocalizedRichText {
-  fr: PortableTextBlock[];
-  en: PortableTextBlock[];
+  fr?: PortableTextBlock[];
+  en?: PortableTextBlock[];
 }
 
 export interface SanityImage {
@@ -60,6 +58,32 @@ export interface SiteSettings {
     lat: number;
     lng: number;
   };
+  heroSlides?: HeroSlide[];
+  statsYear?: number;
+  membersCount?: number;
+  flightHours?: number;
+  glidersCount?: number;
+  foundedYear?: number;
+  joinText?: LocalizedText;
+  discoveryText?: LocalizedText;
+  paymentUrl?: string;
+  usefulLinks?: UsefulLink[];
+}
+
+export interface HeroSlide {
+  _key: string;
+  image?: SanityImage;
+  title?: LocalizedString;
+  subtitle?: LocalizedString;
+}
+
+export type LinkGroup = 'institutions' | 'flight-prep' | 'weather' | 'community';
+
+export interface UsefulLink {
+  _key: string;
+  label?: LocalizedString;
+  url: string;
+  group?: LinkGroup;
 }
 
 export interface Page {
@@ -125,4 +149,73 @@ export interface GalleryImage {
   caption?: LocalizedString;
   tags?: string[];
   date?: string;
+}
+
+export interface ClubEvent {
+  _id: string;
+  _type: 'event';
+  title?: LocalizedString;
+  startDate: string;
+  endDate?: string;
+  location?: string;
+  description?: LocalizedText;
+  image?: SanityImage;
+}
+
+export type TariffOffer =
+  | 'forfait-20h'
+  | 'forfait-illimite'
+  | 'pack-formation'
+  | 'pack-complement-formation'
+  | 'vol-initiation';
+
+export type AgeCategory = 'under25' | 'over25' | 'under18' | 'adult';
+
+export interface Tariff {
+  _id: string;
+  _type: 'tariff';
+  offer: TariffOffer;
+  ageCategory?: AgeCategory;
+  amount: number;
+  details?: LocalizedString;
+}
+
+export type ClubSection = 'presentation' | 'platform' | 'activities' | 'training' | 'campaign' | 'competition';
+
+export interface ClubPage {
+  _id: string;
+  _type: 'clubPage';
+  section: ClubSection;
+  title?: LocalizedString;
+  intro?: LocalizedText;
+  mainImage?: SanityImage;
+  body?: LocalizedRichText;
+  diagram?: SanityImage;
+}
+
+export interface Anecdote {
+  _key: string;
+  title?: LocalizedString;
+  text?: LocalizedText;
+}
+
+export interface ClubHistory {
+  _id: string;
+  _type: 'clubHistory';
+  title?: LocalizedString;
+  intro?: LocalizedText;
+  body?: LocalizedRichText;
+  anecdotes?: Anecdote[];
+}
+
+export interface FlightStory {
+  _id: string;
+  _type: 'flightStory';
+  title?: LocalizedString;
+  flightDate?: string;
+  weglideUrl?: string;
+  aircraft?: string;
+  image?: SanityImage;
+  excerpt?: LocalizedText;
+  body?: LocalizedRichText;
 }
