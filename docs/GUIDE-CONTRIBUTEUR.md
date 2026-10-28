@@ -35,7 +35,7 @@ Il y a deux façons de faire évoluer le site, selon ce que vous voulez changer 
 
 *Les deux chemins :*
 
-- **Le contenu** : Invitation Sanity (demandée à Hamid) → Studio (dans le navigateur) → Publish (§ 3) → En ligne (de 1 min au déploiement suivant)
+- **Le contenu** : Invitation Sanity (demandée à Hamid) → Studio (dans le navigateur) → Publish (§ 3) → En ligne (sous 1 min)
 - **Le code** : Compte GitHub et outils (§ 5 à § 9) → Branche et commits (§ 10 et § 11) → Pull Request (relecture + aperçu) → En ligne (après fusion dans main)
 
 Articles, photos, planeurs, coordonnées : **tout ce qui est contenu se modifie dans le Studio, sans rien installer**. La partie 1 suffit pour cela. Le code n'est nécessaire que pour changer la structure du site : une nouvelle page, un nouveau champ, la mise en page. Le § 4 vous aide à faire la différence.
@@ -92,9 +92,9 @@ Deux contraintes ont guidé le projet : le contenu doit pouvoir être modifié p
 Avec Next.js, l'adresse d'une page découle de l'emplacement de son fichier :
 
 ```text
-src/app/[locale]/le-club/tarifs/page.tsx
-   → https://piv-sigma.vercel.app/fr/le-club/tarifs
-   → https://piv-sigma.vercel.app/en/the-club/pricing   # traduction déclarée dans src/i18n/routing.ts
+src/app/[locale]/adherer/page.tsx
+   → https://piv-sigma.vercel.app/fr/adherer
+   → https://piv-sigma.vercel.app/en/join   # traduction déclarée dans src/i18n/routing.ts
 ```
 
 Le site tourne pour l'instant sur `piv-sigma.vercel.app`. L'adresse planeur35.org pointe encore vers l'ancien site jusqu'à la bascule.
@@ -124,41 +124,42 @@ Un navigateur et un compte Sanity suffisent. Ni Git, ni terminal, ni Pull Reques
 | Dans WordPress | Dans le Studio | À savoir |
 |---|---|---|
 | Tableau de bord `/wp-admin` | Studio `/studio` | Même rôle : l'arrière-boutique du site. |
-| Articles | **Article** | Titre, image mise en avant (*Featured Image*), extrait (*Excerpt*), contenu (*Body*). |
-| Catégories | **Category** | Une catégorie est un document à part : créez-la avant de l'utiliser dans un article. |
-| Pages | **Page** | Beaucoup plus limité : seules trois pages lisent ce type (voir « Réécrire une page Découvrir » plus bas). |
-| Types de contenu personnalisés, champs ACF | **Aircraft**, **Gallery Image** | Des formulaires sur mesure, aux champs fixés par le code. |
-| Réglages › Général, Personnaliser | **Site Settings** | Un document unique : téléphone, email, adresse, liens. |
+| Articles | **Actualités** | Titre, image mise en avant (*Featured Image*), extrait (*Excerpt*), contenu (*Body*). |
+| Catégories | **Rubriques des actualités** | Une rubrique est un document à part : créez-la avant de l'utiliser dans une actualité. |
+| Événements (extension d'agenda) | **Agenda** | Titre, début, fin, lieu. Un événement passé disparaît seul du site. |
+| Pages | **Pages du club**, **Histoire du club**, **Récits de vols** | Chaque page du site lit son propre type de contenu : on remplit, le site met en page. |
+| Types de contenu personnalisés, champs ACF | **Nos planeurs**, **Tarifs**, **Galerie photos** | Des formulaires sur mesure, aux champs fixés par le code. |
+| Réglages › Général, Personnaliser | **Réglages du site** | Un document unique : photos d'accueil, chiffres clés, coordonnées, lien de paiement, webcam, liens pratiques. |
 | Médiathèque | Dans chaque champ image | Pas de page « Médias » séparée. Une image déjà envoyée se réutilise avec **Select** dans le champ image. |
 | Enregistrer le brouillon / Publier | Enregistrement automatique / **Publish** | Il n'y a pas de bouton « Enregistrer » : tout est sauvegardé en continu comme brouillon. |
 | Passer en brouillon | **Unpublish** | Retire le document du site sans le supprimer. |
 | Révisions | Historique (icône horloge) | Pour comparer et restaurer une version précédente. |
-| Permalien | **Slug** | La fin de l'adresse de la page. Le bouton **Generate** le crée depuis le titre. |
-| Polylang, WPML | Cases *French* et *English* | Les deux langues sont côte à côte dans le même document, pas dans deux documents liés. |
-| Utilisateurs et rôles | Membres du projet | Gérés par Hamid sur sanity.io. Le rôle *Editor* suffit pour modifier le contenu. |
+| Permalien | **Slug** | La fin de l'adresse d'une actualité. Le bouton **Generate** le crée depuis le titre. |
+| Polylang, WPML | Cases *Français* et *English* | Les deux langues sont côte à côte dans le même document, pas dans deux documents liés. |
+| Utilisateurs et rôles | Membres du projet | Gérés sur sanity.io. L'offre gratuite n'a que deux rôles : *Administrator* (peut tout modifier) et *Viewer* (lecture seule). Tout contributeur est donc administrateur. |
 
 #### Ce qui change par rapport à WordPress
 
 - **Différence** — **Pas de thème ni de constructeur de pages.** Pas de menu Apparence, pas d'Elementor, pas de blocs de mise en page. Couleurs, colonnes et disposition sont dans le code.
-- **Différence** — **Pas d'extensions à installer.** Une nouvelle fonctionnalité (formulaire, agenda, réservation) ne s'ajoute pas en un clic : c'est un développement (§ 4).
+- **Différence** — **Pas d'extensions à installer.** Une nouvelle fonctionnalité ne s'ajoute pas en un clic : c'est un développement (§ 4).
 - **Différence** — **Menus et pied de page dans le code.** L'équivalent d'Apparence › Menus n'existe pas dans le Studio. Ajouter une entrée de menu demande une modification du code.
 - **Différence** — **Pas de bouton « Prévisualiser ».** Un brouillon n'est visible nulle part sur le site. On vérifie le résultat après **Publish**, puis on corrige et on republie si besoin.
 - **Différence** — **Pas de publication programmée.** **Published At** est seulement la date affichée. Un article publié avec une date future apparaît **tout de suite**. Pour une annonce à date fixe, publiez-la le jour venu.
-- **Différence** — **L'affichage n'est pas toujours immédiat.** Les Actualités et la Galerie se mettent à jour en moins d'une minute. Les autres pages attendent la prochaine mise en ligne du code (tableau plus bas).
+- **Différence** — **Une minute de délai.** Après **Publish**, la page concernée se met à jour en moins d'une minute. Rechargez-la si besoin.
 - **Avantage** — **Rien à mettre à jour, rien à pirater.** Pas d'extensions ni de WordPress à mettre à jour chaque mois, pas d'administration exposée aux robots. Sanity et Vercel s'occupent de la sécurité.
 - **Avantage** — **Édition à plusieurs, en temps réel.** Comme dans Google Docs : si quelqu'un modifie le même document, vous voyez son avatar et ses changements en direct. Pas de document « verrouillé par un autre utilisateur ».
 
 #### Accéder au Studio
 
-1. Demandez à Hamid une invitation au projet Sanity du site, avec votre adresse email.
+1. Demandez à un administrateur du club une invitation au projet Sanity du site, avec votre adresse email.
 2. Acceptez l'invitation reçue par email et créez votre compte Sanity (avec Google ou un email et un mot de passe).
 3. Ouvrez [piv-sigma.vercel.app/studio](https://piv-sigma.vercel.app/studio) et connectez-vous. Ajoutez la page à vos favoris.
 
 #### Se repérer dans le Studio
 
-L'écran se lit de gauche à droite, en colonnes. Chaque clic ouvre une nouvelle colonne à droite. Les intitulés sont en anglais.
+L'écran se lit de gauche à droite, en colonnes. Chaque clic ouvre une nouvelle colonne à droite. Le menu est en français ; à l'intérieur de certains formulaires plus anciens (Actualités, Nos planeurs, Galerie photos), les noms de champs sont encore en anglais.
 
-- **1. Content** : Les types de contenu : *Site Settings*, puis *Aircraft*, *Article*, *Category*, *Gallery Image*, *Page*. L'équivalent du menu de gauche de `/wp-admin`.
+- **1. Contenu** : en haut, ce que l'on publie souvent (*Actualités*, *Agenda*, *Galerie photos*) ; au milieu, les pages (*Pages du club*, *Histoire du club*, *Nos planeurs*, *Tarifs*, *Récits de vols*) ; en bas, *Réglages du site*. L'équivalent du menu de gauche de `/wp-admin`.
 - **2. La liste** : Les documents du type choisi. En haut : le bouton **+** pour en créer un, et un menu pour trier.
 - **3. Le formulaire** : Les champs du document sélectionné. En bas, la barre d'actions : l'état du document, le bouton vert **Publish** et, à côté, un menu pour **Unpublish**, **Duplicate**, **Discard changes** et **Delete**.
 
@@ -180,12 +181,12 @@ En haut de l'écran, la **recherche** retrouve n'importe quel document par son t
 
 | Champ | Exemple | Comment le remplir |
 |---|---|---|
-| Texte bilingue | Title, Caption, Excerpt | Deux cases, *French* et *English*. Remplissez toujours les deux : une case anglaise vide donne un texte vide sur le site en anglais. |
+| Texte bilingue | Titre, Title, Caption | Deux cases, *Français* et *English*. Le français est obligatoire. Si l'anglais est vide, le site en anglais affiche le français : traduisez quand vous pouvez. |
 | Slug | Slug d'un article | Cliquez sur **Generate** : il est créé depuis le titre français, en minuscules, sans accents. Ne le changez plus après publication : l'ancienne adresse ne marcherait plus, comme un permalien modifié dans WordPress. |
 | Date | Published At, Date | Cliquez dans le champ, choisissez dans le calendrier. |
-| Référence | Category d'un article | Tapez quelques lettres et choisissez un document existant dans la liste. La catégorie doit déjà exister. |
+| Référence | Category d'une actualité | Tapez quelques lettres et choisissez un document existant dans la liste. La rubrique doit déjà exister. |
 | Liste de choix | Category d'un planeur | Menu déroulant aux valeurs fixées par le code. |
-| Image | Photo, Featured Image | Glissez le fichier, ou **Upload** pour le choisir, ou **Select** pour reprendre une image déjà envoyée. Remplissez ensuite **Alt Text**. |
+| Image | Photo, Featured Image | Glissez le fichier, ou **Upload** pour le choisir, ou **Select** pour reprendre une image déjà envoyée. Remplissez ensuite la description (**Description de la photo** ou **Alt Text**). |
 | Point d'intérêt | Toutes les photos | Le site recadre les photos selon la place disponible. L'icône de recadrage de l'image permet de placer le **point d'intérêt** (*hotspot*) sur le sujet, pour qu'il reste visible quel que soit le recadrage. |
 | Mots-clés | Tags d'une photo | Tapez un mot, puis Entrée. Recommencez pour le suivant. |
 | Nombre | Sort Order, Seats | Un chiffre. *Sort Order* range les planeurs : le plus petit d'abord. |
@@ -197,7 +198,7 @@ Un champ obligatoire vide est signalé en rouge, et **Publish** reste inactif ta
 
 Il ressemble à l'éditeur classique de WordPress, en plus simple. La barre d'outils propose :
 
-- **Le style du paragraphe** : *Normal* pour le texte, *Heading 2* et *Heading 3* pour les intertitres, *Quote* pour une citation. N'utilisez pas *Heading 1* : le titre de la page en est déjà un.
+- **Le style du paragraphe** : *Normal* pour le texte, *Titre de section* et *Sous-titre* (ou *Heading 2* et *Heading 3*) pour les intertitres, *Citation* pour une citation. N'utilisez pas *Heading 1* : le titre de la page en est déjà un.
 - **Gras**, *italique*, listes à puces et numérotées.
 - **Lien** : sélectionnez le texte, cliquez sur l'icône de lien et collez l'adresse.
 - **Image** : insère une photo au milieu du texte, avec son texte alternatif.
@@ -206,70 +207,96 @@ Un texte collé depuis Word ou un email garde en général le gras, les listes e
 
 #### Ce que vous pouvez modifier
 
-| Dans le Studio | Où ça apparaît | Visible en ligne |
-|---|---|---|
-| Article (et Category) | Actualités, et « Dernières actualités » sur l'accueil | **sous 1 minute** sur Actualités<br>**au déploiement suivant** sur l'accueil |
-| Gallery Image | Galerie, et l'aperçu sur l'accueil | **sous 1 minute** sur Galerie<br>**au déploiement suivant** sur l'accueil |
-| Aircraft | Notre flotte | **au déploiement suivant** |
-| Page, avec le slug `decouvrir`, `vols-decouverte` ou `devenir-pilote` | Remplace le texte principal de ces trois pages | **au déploiement suivant** |
-| Site Settings | Téléphone, email et adresse de la page Contact, lien de la webcam, lien WeGlide | **au déploiement suivant** |
+Tout s'affiche en ligne **moins d'une minute** après **Publish**.
 
-> [!WARNING]
-> **Pourquoi « au déploiement suivant » ?**
-> Il existe deux sortes de pages. La Galerie et les Actualités sont **rafraîchies** : elles relisent Sanity au plus toutes les 60 secondes. Les autres sont **fabriquées une fois**, au moment de la mise en ligne du code. Une modification du Studio n'y apparaît qu'à la prochaine mise en ligne, c'est-à-dire à la prochaine Pull Request fusionnée. Si c'est urgent, demandez à Hamid de relancer le déploiement depuis Vercel. Avec WordPress, chaque page est recalculée à chaque visite, d'où cette différence. Rendre ces pages rafraîchies est un petit développement prévu (§ 4).
+| Dans le Studio | Où ça apparaît |
+|---|---|
+| Actualités (et Rubriques) | Actualités, et « Dernières nouvelles » sur l'accueil |
+| Agenda | Actualités, partie « Événements à venir » |
+| Galerie photos | Galerie |
+| Pages du club | Le club : une section par page (présentation, plateforme, activité, formation, école de campagne, compétition) |
+| Histoire du club | Le club, partie « Histoire », au format magazine avec encarts d'anecdotes |
+| Nos planeurs | Nos planeurs |
+| Tarifs | S'inscrire (forfaits, packs formation) et Venez essayer (vol d'initiation) |
+| Récits de vols | Récits de vols |
+| Réglages du site | Photos d'accueil et accroche, chiffres clés, textes « Comment s'inscrire » et « Vol d'initiation », coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
+
+Une rubrique encore vide affiche « Bientôt ici » sur le site.
 
 #### Pas à pas : publier une actualité
 
-1. Vérifiez que la catégorie existe : **Category** dans la colonne de gauche. Sinon, créez-la d'abord : **+**, **Title** en français et en anglais, **Slug** → **Generate**, **Publish**.
-2. **Article** → bouton **+**.
+1. Vérifiez que la rubrique existe : **Rubriques des actualités** dans la colonne de gauche. Sinon, créez-la d'abord : **+**, **Title** en français (et en anglais), **Slug** → **Generate**, **Publish**.
+2. **Actualités** → bouton **+**.
 3. **Title** : le titre en français et en anglais. **Slug** : **Generate**.
-4. **Published At** : la date affichée (obligatoire). **Author** : votre nom. **Category** : tapez et choisissez.
-5. **Featured Image** : la photo de la carte et du haut de l'article. Glissez-la, placez le point d'intérêt, remplissez **Alt Text**.
+4. **Published At** : la date affichée (obligatoire). **Category** : tapez et choisissez. Ne mettez pas de nom de membre : le site n'affiche pas d'auteur.
+5. **Featured Image** : la photo de la liste et du haut de l'actualité. Glissez-la, placez le point d'intérêt, remplissez **Alt Text**.
 6. **Excerpt** : deux lignes de résumé, affichées dans la liste des actualités.
-7. **Body** : le texte complet, en français puis en anglais, avec des intertitres *Heading 2* si l'article est long.
-8. **Publish**. Vérifiez sous une minute sur [/fr/actualites](https://piv-sigma.vercel.app/fr/actualites), puis sur la version anglaise.
+7. **Body** : le texte complet, en français puis en anglais, avec des intertitres si l'actualité est longue.
+8. **Publish**. Vérifiez sous une minute sur [/fr/actualites](https://piv-sigma.vercel.app/fr/actualites), puis sur la version anglaise. Sous chaque actualité, des boutons permettent de la partager sur Facebook, WhatsApp ou LinkedIn.
 
 #### Pas à pas : modifier ou retirer une actualité
 
-- **Corriger** : ouvrez l'article, modifiez, **Publish**. Tant que vous n'avez pas publié, le site garde l'ancienne version.
+- **Corriger** : ouvrez l'actualité, modifiez, **Publish**. Tant que vous n'avez pas publié, le site garde l'ancienne version.
 - **Retirer temporairement** : menu à côté de **Publish** → **Unpublish**.
-- **Supprimer** : même menu → **Delete**. Les trois articles actuels sont fictifs : supprimez-les dès que de vrais articles sont publiés.
-- **Repartir d'un article existant** : **Duplicate**, puis changez le titre et cliquez sur **Generate** pour un nouveau slug.
+- **Supprimer** : même menu → **Delete**. Les trois actualités actuelles sont fictives : supprimez-les dès que de vraies actualités sont publiées.
+- **Repartir d'une actualité existante** : **Duplicate**, puis changez le titre et cliquez sur **Generate** pour un nouveau slug.
+
+#### Pas à pas : annoncer un événement
+
+1. **Agenda** → **+**.
+2. **Titre** (français, anglais facultatif), **Début** (date et heure ; laissez minuit si l'heure n'a pas d'importance), **Fin** si l'événement dure plusieurs jours, **Lieu**, **Description courte**.
+3. **Publish**. L'événement apparaît dans « Événements à venir » et disparaît seul une fois passé.
 
 #### Pas à pas : ajouter des photos à la galerie
 
-1. **Gallery Image** → **+**. Glissez la photo dans **Image** et placez le point d'intérêt.
+1. **Galerie photos** → **+**. Glissez la photo dans **Image** et placez le point d'intérêt.
 2. **Alt Text** : ce que montre la photo. **Caption** : la légende visible, en français et en anglais.
 3. **Tags** : quelques mots-clés (`stage`, `treuil`, `compétition`). **Date** : la date de la prise de vue. La galerie affiche les plus récentes en premier.
 4. **Publish**. Une photo par document : répétez pour chaque photo.
 
 #### Pas à pas : ajouter ou modifier un planeur
 
-1. **Aircraft** → ouvrez une fiche existante, ou **+** pour un nouveau planeur. Pour un modèle proche d'un planeur existant, **Duplicate** fait gagner du temps.
+1. **Nos planeurs** → ouvrez une fiche existante, ou **+** pour un nouveau planeur. Pour un modèle proche d'un planeur existant, **Duplicate** fait gagner du temps.
 2. **Name** (modèle, obligatoire), **Registration** (immatriculation, par exemple F-CILE), **Callsign** (indicatif court, par exemple LE).
-3. **Category** (obligatoire) : biplace école, biplace performance, handiplaneur, monoplace débutant, monoplace performance ou remorqueur. Elle décide dans quel groupe le planeur apparaît.
-4. **Manufacturer**, **Photo**, **Specifications** (envergure, finesse, places, année, masse maximale), **Instrumentation**, **Description** en français et en anglais.
-5. **Sort Order** : sa position dans son groupe, le plus petit d'abord.
-6. **Publish**. La fiche apparaît au déploiement suivant.
+3. **Category** (obligatoire) : biplace école, biplace performance, handiplaneur, monoplace débutant, monoplace performance ou remorqueur. Elle range les planeurs sur la page.
+4. **Manufacturer**, **Photo**, **Specifications** (envergure, finesse, places, année), **Description** en français et en anglais. Uniquement des données publiques : ni état de la machine, ni disponibilité.
+5. **Sort Order** : sa position dans sa catégorie, le plus petit d'abord.
+6. **Publish**.
 
-#### Pas à pas : réécrire une page « Découvrir »
+#### Pas à pas : saisir les tarifs
 
-Les pages *Qu'est-ce que le vol à voile ?*, *Vols découverte* et *Devenir pilote* ont un texte par défaut écrit dans le code. Contrairement à WordPress, créer un document **Page** ne crée pas de nouvelle page sur le site : il remplace le texte principal d'une de ces trois pages, à condition que son slug corresponde exactement.
+Une fiche **Tarifs** = une ligne de prix.
 
-1. **Page** → **+**. **Title** en français et en anglais.
-2. **Slug** : tapez à la main exactement `decouvrir`, `vols-decouverte` ou `devenir-pilote`. Ne cliquez pas sur **Generate**, qui créerait un slug à partir du titre.
-3. **Body** : le texte en français et en anglais. **Hero Image** et **SEO** sont facultatifs.
-4. **Publish**. Le nouveau texte apparaît au déploiement suivant.
+1. **Tarifs** → **+**. **Offre** : forfait 20 h, forfait illimité, pack formation, pack complément de formation ou vol d'initiation.
+2. **Catégorie d'âge** : pour les forfaits, moins ou plus de 25 ans ; pour le vol d'initiation, moins de 18 ans ou adulte. Une fiche par catégorie (par exemple deux fiches pour le vol d'initiation : 170 € adulte, 130 € moins de 18 ans).
+3. **Montant (€)**, puis **Précisions** si besoin (« par an », « 20 minutes de vol »).
+4. **Publish**. Le Studio refuse un doublon (même offre, même âge).
 
-#### Pas à pas : coordonnées et liens
+#### Pas à pas : rédiger les pages du club
 
-**Site Settings**, en haut de la colonne de gauche, est un document unique, comme la page Réglages de WordPress : on ne peut ni en créer un deuxième, ni le supprimer. Champs : **Contact Phone**, **Contact Email**, **Address**, **Webcam URL**, **WeGlide URL**, **Social Links**. Puis **Publish**. Attention : seule la page Contact utilise aujourd'hui le téléphone et l'adresse. Le pied de page les a écrits dans le code (§ 4).
+1. **Pages du club** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, école de campagne ou compétition. Une seule page par section.
+2. **Titre de la section**, **Introduction** (2 ou 3 phrases), **Photo principale**, **Texte** (avec des *Titres de section* pour les sous-parties). Pour la formation, un **Schéma du cursus** peut être ajouté en image.
+3. **Publish**. Les sections apparaissent sur la page Le club dans l'ordre du menu.
+
+L'**Histoire du club** (document unique) se remplit de la même façon, avec en plus des **encarts d'anecdotes**. Les **Récits de vols** ont un titre, la date du vol, le planeur, un résumé, le récit et le lien WeGlide. Jamais de nom de pilote ou d'élève.
+
+#### Pas à pas : réglages du site
+
+**Réglages du site**, en bas de la colonne de gauche, est un document unique, comme la page Réglages de WordPress : on ne peut ni en créer un deuxième, ni le supprimer. Ses onglets :
+
+- **Page d'accueil** : nom du club, accroche, 3 ou 4 photos d'accueil qui défilent, avec un titre chacune.
+- **Chiffres clés** : membres, heures de vol, planeurs, année de fondation (à mettre à jour une fois par an).
+- **Textes des pages** : « Comment s'inscrire » et la description du vol d'initiation.
+- **Contact et réseaux** : e-mail, téléphone et adresse du club (page Contact et pied de page), lien de paiement (réservation des vols d'initiation et bons cadeaux), réseaux sociaux, adresse de l'image de la webcam, coordonnées du terrain pour la carte.
+- **Liens pratiques** : nom, adresse et rubrique de chaque lien (institutions, préparation de vol, météo, communauté).
+
+Puis **Publish**.
 
 #### Bonnes pratiques
 
-- **Les deux langues, toujours.** Le site anglais n'affiche pas le français à la place d'une case vide.
+- **Les deux langues, si possible.** Une case anglaise vide affiche le français sur le site anglais : c'est un filet de sécurité, pas une traduction.
 - **Alt Text sur chaque image** : une phrase qui décrit la photo (« Un ASK 21 en virage au-dessus de la campagne »). Elle est lue aux personnes malvoyantes et aide Google.
-- **Photos de personnes** : uniquement avec leur accord.
+- **Photos de personnes** : uniquement avec leur accord. **Pas de noms de membres** dans les textes (règle du cahier des charges).
 - **Taille des photos** : inutile de les réduire, Sanity les redimensionne. Évitez simplement les fichiers de plus de 10 Mo.
 - **Un slug ne se change plus** après publication.
 - **Vérifiez après chaque Publish**, en français et en anglais.
@@ -281,13 +308,10 @@ Le Studio permet de **remplir les cases prévues**. Dès qu'il faut créer une c
 
 | Je veux… | Comment | Pourquoi |
 |---|---|---|
-| Publier une actualité, ajouter des photos | **Studio** | Types de contenu prévus pour ça. |
-| Ajouter un planeur ou corriger sa fiche | **Studio** | Visible au déploiement suivant. |
-| Changer le téléphone de la page Contact, le lien de la webcam | **Studio** | Site Settings. |
-| Corriger une faute dans un menu, un bouton, le titre de l'accueil | **Petite modif de code** | Ces textes sont dans `fr.json` et `en.json`. C'est l'exemple du § 11, faisable sans être développeur. |
-| Changer les tarifs | **Petite modif de code** | Aujourd'hui les prix sont dans `fr.json`. Développement prévu : les passer dans Sanity pour qu'ils deviennent modifiables dans le Studio. |
-| Changer le téléphone ou l'adresse du pied de page | **Petite modif de code** | Écrits en dur dans `Footer.tsx`, et faux pour l'instant. Développement prévu : les lire dans Site Settings. |
-| Que les changements de la flotte apparaissent tout de suite | **Développement** | Petit : rendre la page « rafraîchie » comme la Galerie (une ligne par page). |
+| Publier une actualité, un événement, ajouter des photos | **Studio** | Types de contenu prévus pour ça. |
+| Ajouter un planeur, changer un tarif, rédiger une page du club | **Studio** | Visible sous une minute. |
+| Changer le téléphone, l'adresse, le lien de la webcam ou de paiement | **Studio** | Réglages du site (page Contact et pied de page). |
+| Corriger une faute dans un menu, un bouton, un titre de rubrique | **Petite modif de code** | Ces textes sont dans `fr.json` et `en.json`. C'est l'exemple du § 11, faisable sans être développeur. |
 | Ajouter un champ, par exemple « prix de l'heure de vol » sur un planeur | **Développement** | Il faut modifier le modèle de contenu Sanity, puis la page qui l'affiche. |
 | Créer une page (Handisport, Hébergements…) ou une rubrique de menu | **Développement** | Une page est un dossier du code, avec sa traduction, son entrée de menu et sa place dans le plan du site (§ 12). |
 | Changer les couleurs, les polices, la disposition d'une page | **Développement** | Styles et composants React. |
@@ -302,11 +326,9 @@ Avec WordPress, beaucoup de ces besoins se règlent en installant une extension 
 
 Le site est en cours de finition. Ces points sont connus, inutile de les signaler. Ce sont de bons premiers sujets :
 
-- **Contenu à saisir** dans le Studio : les trois actualités sont fictives, la galerie est vide, le téléphone de Site Settings est factice (« 06 XX XX XX XX »), le lien de la webcam est vide.
-- **Tarifs** : la page Tarifs affiche des prix fictifs, alors que la page Vols découverte a les vrais (170 €, 130 € pour les moins de 18 ans).
-- **Pied de page** : téléphone, email et adresse faux (il indique l'aérodrome de Rennes Saint-Jacques).
+- **Contenu à saisir** dans le Studio : les trois actualités sont fictives ; tarifs (vol d'initiation : 170 €, 130 € pour les moins de 18 ans), pages du club, histoire, récits, agenda, chiffres clés, photos d'accueil, galerie et liens pratiques sont vides ; le téléphone des Réglages du site est factice (« 06 XX XX XX XX ») et le lien de la webcam est vide.
+- **Mentions légales** : la page n'existe pas encore.
 - **WeGlide** : le lien pointe vers le club 271, l'ancien site vers le club 1221. Le bon identifiant est à vérifier.
-- **Accents** manquants dans plusieurs textes de `fr.json` (« decouverte », « Acces »).
 - **Pages de l'ancien site pas encore reprises** : Handisport, Handi-treuil, Hébergements, Outils Sport, Grand Prix France 2024, Mon compte GiVaV.
 
 ---
@@ -523,7 +545,7 @@ Ouvrez le dossier dans VS Code (**File → Open Folder…** → `piv`) :
 ```text
 piv/
 ├── src/messages/fr.json   # textes de l'interface en français (en.json : anglais)
-├── src/app/[locale]/      # une page = un dossier (accueil, le-club, contact…)
+├── src/app/[locale]/      # une page = un dossier (accueil, club, adherer, contact…)
 ├── src/components/        # blocs réutilisables : en-tête, pied de page, cartes
 ├── sanity/schemas/        # modèle du contenu édité dans le Studio
 ├── public/                # images et fichiers statiques
@@ -706,40 +728,40 @@ Vous voyez un texte sur le site et voulez savoir où le modifier ? Dans VS Code,
 
 #### Modifier un texte d'interface *(tous niveaux)*
 
-1. Ouvrez `src/messages/fr.json`. Les textes sont rangés par rubrique : `nav` (menus), `common`, `home` (accueil), `club`, `fleet`, `aerodrome`, `pricing` (tarifs), `contact`, `gallery`, `news`, `footer`…
+1. Ouvrez `src/messages/fr.json`. Les textes sont rangés par rubrique : `nav` (menus), `common`, `meta` (titres des pages pour Google), `home` (accueil), `club`, `gliders`, `join`, `discover`, `news`, `contact`, `footer`…
 2. Modifiez la valeur à droite des deux-points. Ne changez jamais le nom à gauche (la *clé*) : le code s'en sert pour retrouver le texte.
 3. Faites la même chose dans `src/messages/en.json`, pour la même clé. Les deux fichiers doivent toujours avoir exactement les mêmes clés.
 
 ```bash
-# src/messages/fr.json, rubrique "pricing" : clé à gauche, texte à droite
-"pricing": {
-  "membershipTitle": "Cotisations annuelles",
+# src/messages/fr.json, rubrique "join" : clé à gauche, texte à droite
+"join": {
+  "howTitle": "Comment s’inscrire",
   ...
 }
 ```
 
 #### Ajouter une page *(développeur)*
 
-1. Copiez le dossier d'une page proche, par exemple `src/app/[locale]/le-club/aerodrome/`, et renommez-le avec l'adresse française voulue, en minuscules et avec des tirets.
+1. Copiez le dossier d'une page proche, par exemple `src/app/[locale]/webcam/`, et renommez-le avec l'adresse française voulue, en minuscules et avec des tirets.
 2. Déclarez l'adresse et sa traduction anglaise dans `src/i18n/routing.ts`, rubrique `pathnames`, sur le modèle des autres. Sans cette ligne, le site refuse de construire les liens vers la page.
 3. Ajoutez les textes de la page dans `fr.json` et `en.json`.
-4. Ajoutez le lien dans le menu (`src/components/layout/Header.tsx`, qui sert aussi au menu mobile) et dans `Footer.tsx`.
+4. Ajoutez le lien dans `src/components/layout/navItems.ts` : il sert au bandeau du haut, au menu complet et au pied de page.
 5. Ajoutez l'adresse au plan du site pour Google, dans `src/app/sitemap.ts`.
 
 #### Rendre un contenu modifiable dans le Studio *(développeur)*
 
-C'est ce qui a été fait pour la Flotte, et ce qu'il faudra faire pour les Tarifs ou les pages du club.
+C'est ce qui a été fait pour toutes les rubriques (flotte, tarifs, pages du club, agenda…).
 
 1. Décrivez le type de contenu et ses champs dans `sanity/schemas/<type>.ts`, sur le modèle de `aircraft.ts`. Un champ bilingue est un objet avec deux sous-champs `fr` et `en`.
 2. Ajoutez-le à `sanity/schemas/index.ts` : il apparaît alors dans le Studio.
 3. Déclarez sa forme dans `src/lib/sanity/types.ts` et la requête qui le lit dans `src/lib/sanity/queries.ts`.
-4. Dans la page, lisez-le avec `client.fetch()`, choisissez la langue avec `localize()` et produisez l'adresse des images avec `urlFor()`.
+4. Dans la page, lisez-le avec `sanityFetch()` (qui affiche un contenu de repli si Sanity est vide), choisissez la langue avec `localize()` et affichez les photos avec `SanityPhoto` ou `urlFor()`.
 5. Ajoutez `export const revalidate = 60` en haut de la page, pour que les modifications du Studio apparaissent en moins d'une minute.
 
 #### Les images
 
 - **Photos de contenu** (actualités, galerie, planeurs) : dans le Studio. Sanity les redimensionne et les sert vite.
-- **Images fixes du site** (logo, illustrations) : dans `public/images/`. Réduisez-les avant de les ajouter (moins de 500 Ko).
+- **Images fixes du site** (logo, illustrations) : dans `public/`. Réduisez-les avant de les ajouter (moins de 500 Ko).
 - Toujours un texte alternatif, dans le Studio comme dans le code.
 
 ### 13. Comment une modification arrive en ligne
@@ -750,7 +772,6 @@ C'est ce qui a été fait pour la Flotte, et ce qu'il faudra faire pour les Tari
 - **Fusion** : Merge dans main → Build de production (1 à 2 min) → Site en ligne (piv-sigma.vercel.app)
 
 - **Le build** est la fabrication du site : Vercel exécute `npm run build`, comme vous en local. S'il échoue, le site en ligne reste sur la version précédente et la PR affiche une croix rouge : cliquez sur *Details* pour lire l'erreur.
-- **Chaque fusion dans `main` reconstruit aussi les pages « fabriquées une fois »** : c'est à ce moment que les modifications du Studio sur la flotte, l'accueil ou la page Contact apparaissent.
 - **Les réglages secrets** (clé Resend, email de contact) ne sont pas dans le code mais dans Vercel, rubrique *Environment Variables*, gérée par Hamid.
 - **Pas de mise en ligne manuelle** : on ne publie jamais autrement qu'en fusionnant une Pull Request.
 

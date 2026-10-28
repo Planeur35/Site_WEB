@@ -54,21 +54,21 @@ Deux contraintes ont guidé les choix : le contenu doit pouvoir être modifié p
 
 React est la bibliothèque JavaScript qui décrit l'interface. Next.js est construit au-dessus. La version utilisée ici est React 19.
 
-- **Des composants.** L'interface est découpée en briques réutilisables : `Hero`, `Card`, `Button`, `Header`… Chaque brique est une fonction qui renvoie du balisage.
+- **Des composants.** L'interface est découpée en briques réutilisables : `PageHero`, `Section`, `Button`, `Header`… Chaque brique est une fonction qui renvoie du balisage.
 - **JSX / TSX.** Ce balisage s'écrit en syntaxe proche du HTML, directement dans le TypeScript (fichiers `.tsx`). TypeScript signale les erreurs dès l'écriture.
-- **Props et état.** Un composant reçoit des paramètres (les *props*, par exemple `<Hero title="…" />`). Il peut aussi garder un état local (`useState`), comme le menu mobile ouvert ou fermé.
-- **Composants serveur ou client.** Avec l'App Router, un composant tourne par défaut sur le serveur : il lit Sanity et n'envoie que du HTML. Ceux qui ont besoin d'interactivité commencent par `'use client'` : `Header`, `MobileMenu`, `LanguageToggle`, `ContactForm`, `Gallery`, `Lightbox`, `Map`.
+- **Props et état.** Un composant reçoit des paramètres (les *props*, par exemple `<PageHero title="…" />`). Il peut aussi garder un état local (`useState`), comme le menu mobile ouvert ou fermé.
+- **Composants serveur ou client.** Avec l'App Router, un composant tourne par défaut sur le serveur : il lit Sanity et n'envoie que du HTML. Ceux qui ont besoin d'interactivité commencent par `'use client'` : `Header`, `LanguageToggle`, `HeroSlideshow`, `ShareButtons`, `WebcamImage`, `ContactForm`, `Gallery`, `Lightbox`, `Map`.
 - **Écosystème.** Les bibliothèques de la stack (icônes lucide, lightbox, carte Leaflet, rendu du texte riche Sanity) sont des composants React prêts à l'emploi.
 
 ### Next.js en deux mots
 
 Next.js est un framework construit au-dessus de React. React sert à écrire l'interface en composants. Next.js ajoute tout ce qu'il faut pour en faire un site complet.
 
-- **Une page = un dossier.** Le fichier `src/app/[locale]/le-club/tarifs/page.tsx` devient `/fr/le-club/tarifs`. Il n'y a pas de configuration de routes à maintenir.
+- **Une page = un dossier.** Le fichier `src/app/[locale]/adherer/page.tsx` devient `/fr/adherer` (et `/en/join`). Il n'y a pas de configuration de routes à maintenir.
 - **Rendu côté serveur.** Le HTML arrive déjà rempli dans le navigateur : la page s'affiche vite, même sur un téléphone, et Google indexe tout le texte.
 - **Plusieurs modes de génération, page par page.** Une page peut être générée une fois au build (statique), régénérée en arrière-plan toutes les N secondes (`revalidate`, dit ISR) ou rendue à chaque requête.
 - **Du code serveur sans API séparée.** Les *server actions* permettent par exemple au formulaire de contact d'appeler Resend directement, sans exposer la clé au navigateur.
-- **Optimisations intégrées.** Images redimensionnées (`next/image`), polices, métadonnées SEO, `sitemap.xml` et `robots.txt` générés par du code.
+- **Optimisations intégrées.** Images redimensionnées (`next/image`, ici par le CDN de Sanity), métadonnées SEO, `sitemap.xml` et `robots.txt` générés par du code.
 - **Très répandu.** Documentation abondante, facile à reprendre par un autre bénévole développeur ou par Claude.
 
 ### Vercel en deux mots
@@ -104,8 +104,8 @@ flowchart TB
 
 - **Routage des langues :** le middleware next-intl (`src/middleware.ts`) préfixe chaque URL par la langue. Il ignore `/studio`, `/api`, `/_next` et les fichiers statiques.
 - **Lecture du contenu :** un seul client Sanity en lecture (`src/lib/sanity/client.ts`, `useCdn: true`, sans token). Les requêtes GROQ sont toutes dans `src/lib/sanity/queries.ts`.
-- **Studio :** route Next.js `src/app/studio/[[...tool]]` qui charge `sanity/sanity.config.ts`. « Site Settings » est un singleton (un seul document, pas de création ni de suppression).
-- **Résilience :** chaque page entoure ses `client.fetch` d'un `try/catch` et dispose d'un contenu de repli. Le site s'affiche donc même si Sanity est vide ou indisponible.
+- **Studio :** route Next.js `src/app/studio/[[...tool]]` qui charge `sanity/sanity.config.ts`. « Réglages du site » et « Histoire du club » sont des singletons (un seul document, pas de création ni de suppression). Le menu du Studio est en français.
+- **Résilience :** chaque page lit Sanity avec `sanityFetch(requête, repli)` (`src/lib/sanity/fetch.ts`), qui renvoie la valeur de repli si Sanity est vide ou indisponible. Une rubrique sans contenu affiche « Bientôt ici ».
 
 ## 4. Arborescence
 
@@ -113,28 +113,30 @@ flowchart TB
 src/
   app/
     [locale]/                 # toutes les pages publiques, /fr et /en
-      page.tsx                # accueil
-      decouvrir/              # qu'est-ce que le vol à voile, vols-decouverte, devenir-pilote
-      le-club/                # à propos, flotte, aerodrome, tarifs
-      galerie/  actualites/  actualites/[slug]/
-      en-direct/              # webcam, weglide
+      page.tsx                # accueil : photos qui défilent, chiffres clés, dernières actualités
+      club/                   # sections du club (#presentation, #plateforme, #formation…) et histoire
+      planeurs/  adherer/  decouvrir/
+      actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
+      recits/  galerie/  webcam/  liens/
       contact/                # page + actions.ts (server action → Resend)
       layout.tsx              # Header, Footer, fournisseur next-intl
     studio/[[...tool]]/       # Sanity Studio embarqué
     sitemap.ts  robots.ts  globals.css
   components/
-    layout/                   # Header (menus desktop + mobile), MobileMenu, Footer, LanguageToggle
-    ui/                       # Hero, Card, Button, SectionContainer, Gallery, Lightbox, Map, ContactForm
-    sanity/PortableText.tsx   # rendu du texte riche
+    layout/                   # Header (bandeau + menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
+    ui/                       # PageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button…
+    sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv)
   lib/
-    sanity/                   # client, queries (GROQ), types, image (urlFor), localize
+    sanity/                   # client, fetch (sanityFetch), queries (GROQ), types, image (urlFor), imageLoader, localize
     email.ts  metadata.ts     # Resend, buildMetadata (OG, hreflang, canonical)
+    format.ts                 # dates à l'heure de Paris
   i18n/                       # routing.ts (slugs traduits), navigation.ts, request.ts
   messages/fr.json en.json    # libellés d'interface
   middleware.ts
 sanity/
-  sanity.config.ts            # structure du Studio, singleton siteSettings
-  schemas/                    # aircraft, article, category, galleryImage, page, siteSettings
+  sanity.config.ts            # menu du Studio en français, singletons
+  schemas/                    # article, event, galleryImage, siteSettings, clubPage, clubHistory,
+                              # aircraft, tariff, flightStory, category, page ; fields.ts (champs bilingues)
 scripts/                      # seed.ts, seed-fleet.ts, upload-fleet-images.ts
 docs/superpowers/specs/       # spécification initiale du projet
 ```
@@ -171,52 +173,53 @@ CONTACT_EMAIL=...                # destinataire du formulaire (repli : contact@p
 
 ## 6. Où vit le contenu
 
-Aujourd'hui, seule une partie du site est éditable dans Sanity. Ce tableau indique où modifier chaque page et quand la modification devient visible en ligne.
+Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vient de Sanity. Toutes les pages déclarent `export const revalidate = 60` : une publication dans le Studio apparaît en ligne en moins d'une minute, sans redéploiement.
 
-| Page | Source du contenu | Visible en ligne |
+| Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
-| Accueil `/` | Libellés `home` dans les messages, articles et galerie depuis Sanity, titres d'actualités de repli codés dans la page | 🟠 au prochain déploiement |
-| Découvrir, Vols découverte, Devenir pilote | Textes FR/EN codés dans la page (objet `content`, repris du site actuel). Si un document Sanity `page` existe avec le slug `decouvrir`, `vols-decouverte` ou `devenir-pilote`, son `body` *remplace* le bloc principal. | 🟠 au prochain déploiement |
-| Le club, Aérodrome, Tarifs | Messages i18n (`club`, `aerodrome`, `pricing`) | 🟠 au prochain déploiement |
-| Flotte | Sanity `aircraft`, groupés par `category` et triés par `sortOrder` | 🔴 au prochain déploiement |
-| Galerie | Sanity `galleryImage` (vide pour l'instant, tuiles de couleur à la place) | 🟢 sous 60 s |
-| Actualités et article | Sanity `article` + `category`, avec 3 articles fictifs de repli codés | 🟢 sous 60 s |
-| Webcam, WeGlide | URLs dans Sanity `siteSettings`. `weglideUrl` est renseigné (club 271), `webcamUrl` est vide, d'où « bientôt disponible » | 🟠 au prochain déploiement |
-| Contact | Messages i18n, envoi via Resend | sans objet |
-| Menus, footer, libellés | `src/messages/fr.json` et `en.json`, liens dans `Header.tsx` et `Footer.tsx` | 🟠 au prochain déploiement |
+| Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
+| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, école de campagne, compétition) et Histoire du club. Carte : coordonnées des Réglages | 🟢 sous 60 s |
+| Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
+| S'inscrire `/adherer` | Tarifs (forfaits, packs formation) et texte « Comment s'inscrire » des Réglages | 🟢 sous 60 s |
+| Venez essayer `/decouvrir` | Tarif « Vol d'initiation » (adulte, moins de 18 ans), texte du vol et lien de paiement des Réglages | 🟢 sous 60 s |
+| Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
+| Récits `/recits` | Récits de vols | 🟢 sous 60 s |
+| Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
+| Contact, pied de page | Adresse, e-mail, téléphone et réseaux des Réglages ; envoi du formulaire via Resend | 🟢 sous 60 s |
+| Menus et libellés | `src/messages/fr.json` et `en.json`, entrées dans `src/components/layout/navItems.ts` | 🟠 au prochain déploiement |
 
-> **Une modification dans le Studio n'apparaît pas toujours.** Seules `galerie` et `actualites` déclarent `export const revalidate = 60`. Les autres pages qui lisent Sanity (accueil, flotte, webcam, weglide) sont générées une seule fois, au build. Un planeur ajouté dans le Studio ne s'affiche donc qu'après le déploiement suivant. Le correctif est décrit dans [Pièges connus](#9-pièges-connus).
+> **Champs bilingues.** Chaque texte a un champ Français et un champ English facultatif. Si l'anglais est vide, le site affiche le français sur `/en` (`localize()` dans `src/lib/sanity/localize.ts`).
 
 ## 7. Recettes de mise à jour
 
 ### Modifier un libellé d'interface
 
-1. Trouver la clé dans `src/messages/fr.json`. Les clés sont groupées par espace de noms : `nav`, `common`, `home`, `contact`, `club`, `fleet`, `aerodrome`, `pricing`, `live`, `webcam`, `weglide`, `gallery`, `news`, `error`, `footer`.
+1. Trouver la clé dans `src/messages/fr.json`. Les clés sont groupées par espace de noms : `nav`, `common`, `meta` (titres et descriptions des pages), `home`, `club`, `gliders`, `pricing`, `join`, `discover`, `news`, `share`, `stories`, `gallery`, `webcam`, `links`, `contact`, `error`, `footer`.
 2. Modifier la même clé dans `en.json`. Les deux fichiers doivent garder exactement les mêmes clés.
-3. Dans un composant, la clé s'utilise avec `useTranslations('pricing')` puis `t('juniorPrice')`.
+3. Dans un composant, la clé s'utilise avec `useTranslations('join')` (ou `await getTranslations('join')` côté serveur) puis `t('howTitle')`.
 
 ### Ajouter une page
 
-1. Créer `src/app/[locale]/<slug-fr>/page.tsx` sur le modèle d'une page existante : `setRequestLocale(locale)`, `generateMetadata` avec `buildMetadata()`, composants `Hero` et `SectionContainer`.
+1. Créer `src/app/[locale]/<slug-fr>/page.tsx` sur le modèle d'une page existante : `setRequestLocale(locale)`, `generateMetadata` avec `buildMetadata()` et les clés `meta.<page>`, composants `PageHero` et `Section`.
 2. Déclarer la route et son slug anglais dans `src/i18n/routing.ts` → `pathnames`. Sans cette entrée, `Link` refuse le chemin au typage.
 3. Ajouter les libellés dans `fr.json` et `en.json`.
-4. Ajouter le lien dans `src/components/layout/Header.tsx` (tableaux `discoverItems` et `clubItems`, partagés avec le menu mobile) et dans `Footer.tsx`.
-5. Ajouter le chemin et sa priorité dans `src/app/sitemap.ts`.
+4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau, `FULL_NAV` pour le menu complet et le pied de page.
+5. Ajouter le chemin et sa priorité dans `src/app/sitemap.ts`. Si la page remplace une ancienne adresse, ajouter une redirection dans `next.config.ts`.
 
 ### Rendre un contenu éditable dans Sanity
 
-C'est le modèle suivi pour la Flotte (commit `845ca77`) et celui à reprendre pour les Tarifs, les pages du club, etc.
+C'est le modèle suivi pour toutes les rubriques (tarifs, pages du club, agenda, récits…).
 
-1. Écrire le schéma dans `sanity/schemas/<type>.ts` avec `defineType` et `defineField`. Un champ bilingue se déclare comme un objet à deux sous-champs `fr` et `en`.
-2. L'exporter dans `sanity/schemas/index.ts`. Il apparaît alors dans le Studio. Pour un document unique, l'ajouter à `singletonTypes` dans `sanity.config.ts`.
+1. Écrire le schéma dans `sanity/schemas/<type>.ts` avec `defineType` et `defineField`, titres en français. Un champ bilingue se déclare avec `localizedString`, `localizedText` ou `localizedBlocks` (`sanity/schemas/fields.ts`), une photo avec `photoField`.
+2. L'exporter dans `sanity/schemas/index.ts`, puis l'ajouter au menu dans `sanity/sanity.config.ts`. Pour un document unique, l'ajouter aussi à `singletonTypes`.
 3. Ajouter l'interface TypeScript dans `src/lib/sanity/types.ts` et la requête GROQ dans `src/lib/sanity/queries.ts`.
-4. Dans la page : `client.fetch()` dans un `try/catch`, `localize(champ, locale)` pour choisir la langue, `urlFor(image).width(…).url()` pour les images.
+4. Dans la page : `sanityFetch(requête, repli)`, `localize(champ, locale)` pour choisir la langue, `SanityPhoto` ou `urlFor(image)` pour les images, `EmptyState` tant qu'il n'y a rien.
 5. Ajouter `export const revalidate = 60` pour que les modifications du Studio apparaissent sans redéploiement.
 6. Migrer le contenu existant avec un script de seed (recette suivante).
 
 ```tsx
 // Squelette d'une page lue depuis Sanity
-import { client } from '@/lib/sanity/client';
+import { sanityFetch } from '@/lib/sanity/fetch';
 import { allAircraftQuery } from '@/lib/sanity/queries';
 import { localize } from '@/lib/sanity/localize';
 import type { Aircraft } from '@/lib/sanity/types';
@@ -227,13 +230,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   setRequestLocale(locale);
 
-  let items: Aircraft[] = [];
-  try {
-    items = await client.fetch<Aircraft[]>(allAircraftQuery);
-  } catch {
-    items = [];
-  }
-  // localize(item.description, locale) renvoie la valeur fr ou en
+  const items = await sanityFetch<Aircraft[]>(allAircraftQuery, []);
+  // localize(item.description, locale) renvoie l'anglais, ou le français s'il manque
 }
 ```
 
@@ -251,8 +249,8 @@ Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-
 
 ### Images
 
-- Images éditoriales : à téléverser dans Sanity. Elles sont servies par `cdn.sanity.io`, déjà autorisé dans `next.config.ts` (`images.remotePatterns`).
-- Images statiques du code : dans `public/images/` (par exemple `public/images/fleet/ls7.jpeg`).
+- Images éditoriales : à téléverser dans Sanity. `next/image` passe par `src/lib/sanity/imageLoader.ts` : c'est le CDN de Sanity qui redimensionne, pas l'hébergeur (dont l'optimisation d'images est limitée en offre gratuite).
+- Images statiques du code : dans `public/` (logo `logo.png`, `logo-icon.png`, `favicon.png`).
 - Toujours renseigner le champ `alt`, présent sur tous les schémas d'image.
 
 ## 8. Déployer
@@ -267,12 +265,12 @@ Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-
 ## 9. Pièges connus
 
 - 🔴 **Sécurité : tokens Sanity partagés en clair.** Des tokens d'écriture ont circulé en clair pendant le développement (mars 2026). Les révoquer dans sanity.io/manage → API → Tokens et en recréer un au besoin.
-- 🔴 **Contenu : flotte, accueil, webcam et WeGlide figés au build.** Ajouter `export const revalidate = 60` dans ces pages, ou brancher un webhook Sanity sur un Deploy Hook Vercel pour reconstruire à chaque publication.
 - 🟠 **Email : le formulaire de contact envoie depuis `onboarding@resend.dev`.** Cette adresse de test de Resend ne livre qu'à l'email du compte Resend. Il faut vérifier le domaine planeur35.org dans Resend, puis changer le `from` dans `src/lib/email.ts`.
-- 🟠 **Contenu : prix incohérents.** La page Vols découverte affiche les vrais tarifs (170 €, 130 € pour les moins de 18 ans), mais la page Tarifs affiche des prix fictifs (75 € le vol découverte, cotisations à 250/450/650 €).
+- 🟠 **Contenu : rubriques vides.** Tarifs, pages du club, histoire, récits, agenda, chiffres clés et liens pratiques sont à saisir dans le Studio ; d'ici là, les pages affichent « Bientôt ici ». Vrais prix du vol d'initiation : 170 € (adulte), 130 € (moins de 18 ans).
+- 🟠 **Légal : pas de page de mentions légales.** Obligatoire pour un site d'association (éditeur, hébergeur, directeur de publication).
 - 🟠 **Domaine : URLs canoniques déjà sur www.planeur35.org.** `sitemap.ts` et `metadata.ts` utilisent `https://www.planeur35.org` alors que le site tourne sur piv-sigma.vercel.app. C'est voulu pour la bascule, mais il faut s'en souvenir en testant le SEO.
-- 🔵 **Flotte : repli silencieux.** La page Flotte n'utilise les données Sanity que si au moins un planeur a un champ `category`. Sinon, elle affiche la liste de repli codée. Un planeur sans catégorie n'apparaît dans aucun groupe.
-- 🔵 **Qualité : accents manquants et README par défaut.** Beaucoup de libellés de `fr.json` n'ont pas d'accents (« decouverte », « Acces », « annee »). Le `README.md` est encore celui de create-next-app.
+- 🔵 **Carte : coordonnées par défaut.** Sans `aerodromeCoordinates` dans les Réglages, la carte se centre sur 47.885, -1.688. À vérifier.
+- 🔵 **Qualité : README par défaut.** Le `README.md` est encore celui de create-next-app. Certains contenus saisis dans Sanity n'ont pas d'accents (accroche « Club de vol a voile en Bretagne »).
 
 ## 10. Ancien et nouveau site
 
@@ -328,7 +326,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 
 1. **Pages absentes du nouveau site :** Handisport, Handi-treuil, Hébergements, Outils Sport, Grand Prix France 2024, Mon compte GiVaV, Se connecter. Décider pour chacune : reprendre, fusionner ou abandonner.
 2. **DNS :** la zone reste chez OVH. Faire pointer `planeur35.org` et `www` vers Vercel sans toucher aux enregistrements MX, sinon les emails `@planeur35.org` sont coupés.
-3. **Redirections 301** des anciennes URLs Joomla vers les nouvelles, dans `next.config.ts` (`redirects()` avec une condition `has` sur `Itemid`). Exemple : `Itemid=118` → `/fr/decouvrir/vols-decouverte`. Sans elles, le référencement acquis est perdu.
+3. **Redirections 301** des anciennes URLs Joomla vers les nouvelles, dans `next.config.ts` (`redirects()` avec une condition `has` sur `Itemid`). Exemple : `Itemid=118` → `/fr/decouvrir`. Sans elles, le référencement acquis est perdu.
 4. **WeGlide :** l'ancien site pointe vers le club `1221`, alors que le seed Sanity contient `weglide.org/club/271`. Vérifier le bon identifiant.
 5. **Après la bascule :** passer l'ancien site en archive ou le supprimer, et ajuster l'offre OVH (garder domaine et emails).
 
@@ -346,17 +344,18 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 | 28/03 | `1b51527` | Présentation de la flotte améliorée |
 | 29/03 | `45b9ea1` | Menu mobile qui était tronqué : portal et z-index |
 | 29/03 | `e8462e2` | Passe UI/UX : accessibilité, tokens de design, finitions |
-| 29/03 | `845ca77` | Flotte gérée dans Sanity, avec les photos. **Dernière étape réalisée.** |
+| 29/03 | `845ca77` | Flotte gérée dans Sanity, avec les photos |
+| 10/2026 | branche `feat/design-site-web` | Fusion avec le dépôt Site_WEB de Georges : son design, sa structure de pages et ses types de contenu, en Next.js bilingue. Anciennes adresses redirigées. |
 
 ### Reste à faire
 
 | Chantier | Situation actuelle | Piste |
 |---|---|---|
-| Rafraîchissement | Flotte et accueil figés au build | Ajouter `revalidate` (petit correctif, à faire en premier) |
-| Tarifs | Prix fictifs dans les messages i18n | Vrais prix de planeur35.org dans un singleton Sanity `pricing` |
-| Actualités | 3 articles fictifs (seed + repli codé) | Supprimer les fictifs, publier de vrais articles depuis le Studio |
-| Galerie, photos du héros | Vide, tuiles de couleur | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
-| Le club, Aérodrome, Découvrir | Textes rédigés, pas ceux du club | Reprendre les textes réels, éditables via le type `page` |
+| Tarifs | Type `tariff` prêt, aucun tarif saisi | Saisir forfaits, packs et vol d'initiation (170 € / 130 €) dans le Studio |
+| Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
+| Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
+| Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |
+| Mentions légales | Absentes | Ajouter une page |
 | Réglages du site | `webcamUrl` vide, téléphone factice « 06 XX XX XX XX » (seed) | Compléter `siteSettings` dans le Studio (webcam, téléphone, réseaux) |
 | Email de contact | Expéditeur de test Resend | Vérifier le domaine dans Resend |
 | Domaine | piv-sigma.vercel.app | Brancher planeur35.org sur Vercel, CORS Sanity, puis redirections depuis l'ancien Joomla |
