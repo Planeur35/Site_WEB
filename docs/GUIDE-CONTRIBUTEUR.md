@@ -2,7 +2,7 @@
 
 Comprendre comment le site est construit, modifier son contenu sans écrire de code, puis, si besoin, contribuer au code étape par étape. Aucune connaissance préalable du développement web n'est nécessaire.
 
-Dépôt **hamidsefati/piv** (privé) · Contenu **sans installation** · Code **≈ 1 h d'installation** · Mis à jour **octobre 2026**
+Dépôt **Planeur35/Site_WEB** (public) · Contenu **sans installation** · Code **≈ 1 h d'installation** · Mis à jour **octobre 2026**
 
 **Sommaire**
 
@@ -363,11 +363,11 @@ GitHub héberge le code et l'historique du projet. Le compte est gratuit et pers
 
 ### 6. Rejoindre le projet
 
-Le dépôt est **privé** : il est invisible tant que vous n'avez pas accepté l'invitation.
+Le dépôt appartient à l'organisation **Planeur35** du club. Il est **public** : tout le monde peut le lire, mais seuls les membres invités peuvent y créer des branches.
 
-1. Vous recevez un email de GitHub : *« hamidsefati invited you to collaborate on hamidsefati/piv »*.
-2. Cliquez sur **View invitation**, puis **Accept invitation**. Sans l'email, connectez-vous et ouvrez [github.com/hamidsefati/piv/invitations](https://github.com/hamidsefati/piv/invitations).
-3. Vérifiez : [github.com/hamidsefati/piv](https://github.com/hamidsefati/piv) affiche maintenant la liste des fichiers.
+1. Vous recevez un email de GitHub : *« … invited you to collaborate on Planeur35/Site_WEB »* (ou à rejoindre l'organisation Planeur35).
+2. Cliquez sur **View invitation**, puis **Accept invitation**. Sans l'email, connectez-vous et ouvrez [github.com/Planeur35/Site_WEB/invitations](https://github.com/Planeur35/Site_WEB/invitations).
+3. Vérifiez : sur [github.com/Planeur35/Site_WEB](https://github.com/Planeur35/Site_WEB), le bouton **Code** propose maintenant de créer une branche.
 
 > [!WARNING]
 > **Page 404 ?**
@@ -507,8 +507,8 @@ Le navigateur s'ouvre : collez le code, cliquez sur **Authorize**. Vérifiez ens
 cd ~
 mkdir dev                       # une seule fois
 cd dev
-gh repo clone hamidsefati/piv   # crée le dossier piv
-cd piv
+gh repo clone Planeur35/Site_WEB   # crée le dossier Site_WEB
+cd Site_WEB
 ```
 
 #### Installer les dépendances
@@ -986,7 +986,7 @@ Bien pour un texte, une traduction, un message d'erreur ou une question de Git. 
 
 ##### Sans rien installer : l'éditeur de GitHub
 
-Pour corriger un mot ou un prix : ouvrez le fichier sur [github.com/hamidsefati/piv](https://github.com/hamidsefati/piv), cliquez sur l'icône **crayon** (*Edit this file*), modifiez, puis **Commit changes…** → **Create a new branch for this commit and start a pull request** → **Propose changes**. Vous obtenez une branche et une Pull Request en une fois. Impossible de tester en local avant d'envoyer : à réserver aux toutes petites modifications.
+Pour corriger un mot ou un prix : ouvrez le fichier sur [github.com/Planeur35/Site_WEB](https://github.com/Planeur35/Site_WEB), cliquez sur l'icône **crayon** (*Edit this file*), modifiez, puis **Commit changes…** → **Create a new branch for this commit and start a pull request** → **Propose changes**. Vous obtenez une branche et une Pull Request en une fois. Impossible de tester en local avant d'envoyer : à réserver aux toutes petites modifications.
 
 #### Avec un abonnement : Claude Code
 
@@ -1051,8 +1051,8 @@ Sur les anciennes versions de PowerShell, `&&` n'existe pas : tapez les deux com
 
 #### Liens utiles
 
-- **Dépôt** : [github.com/hamidsefati/piv](https://github.com/hamidsefati/piv)
-- **Pull Requests** : [github.com/hamidsefati/piv/pulls](https://github.com/hamidsefati/piv/pulls)
+- **Dépôt** : [github.com/Planeur35/Site_WEB](https://github.com/Planeur35/Site_WEB)
+- **Pull Requests** : [github.com/Planeur35/Site_WEB/pulls](https://github.com/Planeur35/Site_WEB/pulls)
 - **Site en ligne** : [piv-sigma.vercel.app](https://piv-sigma.vercel.app)
 - **Studio** : [piv-sigma.vercel.app/studio](https://piv-sigma.vercel.app/studio)
 - **Site local** : `http://localhost:3000/fr` (après `npm run dev`)

@@ -30,7 +30,7 @@ Site vitrine bilingue (français par défaut, anglais) dont l'objectif principal
 |---|---|
 | **Production** | https://piv-sigma.vercel.app (le domaine planeur35.org n'est pas encore basculé) |
 | **Back-office** | https://piv-sigma.vercel.app/studio, connexion avec un compte Sanity invité sur le projet |
-| **Code** | https://github.com/hamidsefati/piv, branche `main` |
+| **Code** | https://github.com/Planeur35/Site_WEB (public, organisation du club), branche `main` |
 | **Sanity** | Projet `8mup540n`, dataset `production`, administration sur https://www.sanity.io/manage |
 | **Vercel** | Projet `piv`, déploiement automatique à chaque push sur `main` |
 | **Spécification** | [`docs/superpowers/specs/2026-03-28-planeur35-website-redesign-design.md`](superpowers/specs/2026-03-28-planeur35-website-redesign-design.md) |
@@ -98,7 +98,7 @@ flowchart TB
     E[Bénévole / admin] --> S["/studio : Studio embarqué"] -->|publie| C2[(Sanity)] --> W[Visible sur le site : sous 60 s ou au déploiement]
   end
   subgraph DEV[Développeurs]
-    D[git push main] --> G[GitHub hamidsefati/piv] --> B[Build Vercel] --> P[Production piv-sigma.vercel.app]
+    D[git push main] --> G[GitHub Planeur35/Site_WEB] --> B[Build Vercel] --> P[Production piv-sigma.vercel.app]
   end
 ```
 
@@ -146,8 +146,8 @@ docs/superpowers/specs/       # spécification initiale du projet
 Prérequis : Node 20 ou plus récent et npm.
 
 ```bash
-git clone https://github.com/hamidsefati/piv.git
-cd piv
+git clone https://github.com/Planeur35/Site_WEB.git
+cd Site_WEB
 npm install
 npm run dev          # http://localhost:3000/fr (Turbopack)
 ```
