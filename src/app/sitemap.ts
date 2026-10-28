@@ -1,27 +1,26 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { client } from '@/lib/sanity/client';
+import { sanityFetch } from '@/lib/sanity/fetch';
 import { allArticlesQuery } from '@/lib/sanity/queries';
 import type { Article } from '@/lib/sanity/types';
+
+export const revalidate = 60;
 
 const BASE_URL = 'https://www.planeur35.org';
 
 // Priority mapping based on page depth/importance
 const priorityMap: Record<string, number> = {
   '/': 1.0,
-  '/decouvrir': 0.8,
-  '/le-club': 0.8,
-  '/galerie': 0.8,
+  '/decouvrir': 0.9,
+  '/club': 0.8,
+  '/adherer': 0.8,
   '/actualites': 0.8,
-  '/en-direct': 0.8,
-  '/contact': 0.8,
-  '/decouvrir/vols-decouverte': 0.6,
-  '/decouvrir/devenir-pilote': 0.6,
-  '/le-club/flotte': 0.6,
-  '/le-club/aerodrome': 0.6,
-  '/le-club/tarifs': 0.6,
-  '/en-direct/webcam': 0.6,
-  '/en-direct/weglide': 0.6,
+  '/planeurs': 0.7,
+  '/contact': 0.7,
+  '/recits': 0.6,
+  '/galerie': 0.6,
+  '/webcam': 0.5,
+  '/liens': 0.5,
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -51,12 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Dynamic article pages
-  let articles: Article[] = [];
-  try {
-    articles = await client.fetch<Article[]>(allArticlesQuery);
-  } catch {
-    articles = [];
-  }
+  const articles = await sanityFetch<Article[]>(allArticlesQuery, []);
 
   for (const article of articles) {
     const slug = article.slug.current;

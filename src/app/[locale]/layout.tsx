@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: {
-    default: "Planeurs d'Ille-et-Vilaine",
-    template: "%s | Planeurs d'Ille-et-Vilaine",
+    default: "PIV – Planeurs d'Ille-et-Vilaine",
+    template: "%s – PIV",
   },
-  description: "Club de vol à voile en Bretagne — Soaring club in Brittany",
+  description: "Club de vol à voile en Ille-et-Vilaine — Soaring club in Brittany",
+  icons: { icon: "/favicon.png" },
 };
 
 export function generateStaticParams() {
@@ -36,7 +31,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${inter.variable} font-sans antialiased flex flex-col min-h-screen`}>
+      <body className="flex min-h-screen flex-col bg-ciel text-slate-700 antialiased">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>

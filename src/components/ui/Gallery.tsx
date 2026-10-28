@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import LightboxWrapper from '@/components/ui/Lightbox';
 
 interface GalleryImage {
@@ -23,23 +24,24 @@ export default function Gallery({ images }: GalleryProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-px border border-sky-900/10 bg-sky-900/10 sm:grid-cols-2 lg:grid-cols-3">
         {images.map((image, index) => (
           <button
             key={index}
             type="button"
-            className="rounded-lg overflow-hidden aspect-video relative group cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            className="group relative aspect-[4/3] cursor-pointer overflow-hidden bg-sky-100"
             onClick={() => setSelectedIndex(index)}
           >
-            <img
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+            <div className="absolute inset-0 bg-sky-950/0 transition-colors duration-300 group-hover:bg-sky-950/15" />
             {image.caption && (
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-sky-950/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <p className="text-white text-sm text-left">{image.caption}</p>
               </div>
             )}
