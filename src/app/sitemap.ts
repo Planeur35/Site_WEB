@@ -21,6 +21,7 @@ const priorityMap: Record<string, number> = {
   '/galerie': 0.6,
   '/webcam': 0.5,
   '/liens': 0.5,
+  '/mentions-legales': 0.3,
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

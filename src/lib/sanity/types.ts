@@ -66,9 +66,29 @@ export interface SiteSettings {
   foundedYear?: number;
   joinText?: LocalizedText;
   discoveryText?: LocalizedText;
+  bookingText?: LocalizedText;
+  pageHeroes?: Partial<Record<PageHeroKey, SanityImage>>;
   paymentUrl?: string;
   usefulLinks?: UsefulLink[];
+  legalName?: string;
+  legalAddress?: string;
+  legalId?: string;
+  publicationDirector?: string;
 }
+
+/** Pages whose header photo can be set in Studio → Réglages du site → Photos d’en-tête. */
+export type PageHeroKey =
+  | 'club'
+  | 'gliders'
+  | 'join'
+  | 'discover'
+  | 'news'
+  | 'stories'
+  | 'gallery'
+  | 'webcam'
+  | 'links'
+  | 'contact'
+  | 'legal';
 
 export interface HeroSlide {
   _key: string;

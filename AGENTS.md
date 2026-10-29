@@ -41,7 +41,7 @@ src/app/[locale]/          one folder per page (French paths: club, planeurs, ad
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
 src/components/layout/     Header (top bar + full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
-src/components/ui/         PageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
+src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
 src/lib/sanity/            client, fetch (sanityFetch), queries (all GROQ), types, image (urlFor), imageLoader, localize
 src/lib/format.ts          dates in the club's time zone
 src/lib/metadata.ts        buildMetadata(): title, Open Graph, canonical, hreflang
@@ -59,6 +59,7 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 - Components are Server Components by default. Add `'use client'` only for state, effects, event handlers or browser APIs.
 - In Next.js 15, `params` is a Promise: `const { locale } = await params;`, then call `setRequestLocale(locale)` in every page and layout.
 - Every page exports `generateMetadata` built with `buildMetadata()` from `@/lib/metadata`.
+- Page headers use `SitePageHero` with the page's `PageHeroKey`, so the header photo comes from Studio (Réglages du site → Photos d’en-tête). A new page also needs its key in `PageHeroKey` (`src/lib/sanity/types.ts`) and in `HERO_PAGES` (`sanity/schemas/siteSettings.ts`).
 - Leaflet must stay behind `next/dynamic` with `ssr: false` (`Map.tsx` loads `MapInner.tsx`).
 - Use `next/image` (or `SanityPhoto` for a Sanity photo that fills a frame). Build Sanity image URLs with `urlFor()` from `@/lib/sanity/image`. `imageLoader.ts` lets Sanity's CDN resize images instead of the host.
 - One default-exported function component per file, PascalCase file name, props typed with an `XxxProps` interface. Import with the `@/` alias.
@@ -112,8 +113,7 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 Fix these only when the task is about them; otherwise mention them if they are relevant.
 
 - Prices, club pages, history, flight stories, agenda, key figures and useful links now come from Sanity and are still empty: the pages show "Bientôt ici" until they are entered in the Studio. Real trial flight prices: 170 € (adult) and 130 € (under 18).
-- The map falls back to coordinates 47.885, -1.688 when `siteSettings.aerodromeCoordinates` is empty. Unconfirmed.
-- No legal notice page (mentions légales) yet.
+- The contact page map falls back to coordinates 47.885, -1.688 when `siteSettings.aerodromeCoordinates` is empty. Unconfirmed. The club page no longer shows a map: the club does not want to publish its exact location.
 - `src/lib/email.ts` sends from `onboarding@resend.dev`, which only delivers to the Resend account owner until planeur35.org is verified in Resend.
 - WeGlide club ID: the seed uses 271, the old site links to 1221. Unconfirmed.
 - `scripts/seed-fleet.ts` and `scripts/upload-fleet-images.ts` hardcode the project ID.

@@ -6,20 +6,16 @@ import { CLUB_ANCHORS } from '@/components/layout/navItems';
 import PortableText from '@/components/sanity/PortableText';
 import EmptyState from '@/components/ui/EmptyState';
 import Kicker from '@/components/ui/Kicker';
-import Map from '@/components/ui/Map';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { localize } from '@/lib/sanity/localize';
-import { allClubPagesQuery, clubHistoryQuery, siteSettingsQuery } from '@/lib/sanity/queries';
-import type { ClubHistory, ClubPage, ClubSection, SiteSettings } from '@/lib/sanity/types';
+import { allClubPagesQuery, clubHistoryQuery } from '@/lib/sanity/queries';
+import type { ClubHistory, ClubPage, ClubSection } from '@/lib/sanity/types';
 
 export const revalidate = 60;
-
-// Fallback map position: the club's aerodrome
-const DEFAULT_COORDINATES = { lat: 47.885, lng: -1.688 };
 
 const SECTION_ORDER: ClubSection[] = ['presentation', 'platform', 'activities', 'training', 'campaign', 'competition'];
 
@@ -35,21 +31,19 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations('club');
   const tNav = await getTranslations('nav');
 
-  const [pages, history, settings] = await Promise.all([
+  const [pages, history] = await Promise.all([
     sanityFetch<ClubPage[]>(allClubPagesQuery, []),
     sanityFetch<ClubHistory | null>(clubHistoryQuery, null),
-    sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
   ]);
 
   const sections = SECTION_ORDER.flatMap((section) => {
     const page = pages.find((p) => p.section === section);
     return page ? [{ section, page }] : [];
   });
-  const coordinates = settings?.aerodromeCoordinates ?? DEFAULT_COORDINATES;
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
+      <SitePageHero page="club" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
 
       {sections.length === 0 && !history && (
         <Section title={t('emptyTitle')}>
@@ -83,11 +77,6 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
                   className="h-auto w-full"
                 />
               </figure>
-            )}
-            {section === 'platform' && (
-              <div className="mt-10">
-                <Map lat={coordinates.lat} lng={coordinates.lng} zoom={12} popupText={t('mapPopup')} />
-              </div>
             )}
           </Section>
         );

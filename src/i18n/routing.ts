@@ -43,6 +43,10 @@ export const routing = defineRouting({
       en: "/links",
     },
     "/contact": "/contact",
+    "/mentions-legales": {
+      fr: "/mentions-legales",
+      en: "/legal-notice",
+    },
   },
 });
 

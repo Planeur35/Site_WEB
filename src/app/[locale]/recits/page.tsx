@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import PortableText from '@/components/sanity/PortableText';
 import EmptyState from '@/components/ui/EmptyState';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
 import Tag from '@/components/ui/Tag';
@@ -34,7 +34,7 @@ export default async function StoriesPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
+      <SitePageHero page="stories" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
       <Section kicker={t('kicker')} title={t('title')}>
         {stories.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
         <div className="border-t border-sky-900/15">

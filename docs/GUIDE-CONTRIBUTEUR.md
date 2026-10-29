@@ -285,8 +285,9 @@ L'**Histoire du club** (document unique) se remplit de la même façon, avec en 
 **Réglages du site**, en bas de la colonne de gauche, est un document unique, comme la page Réglages de WordPress : on ne peut ni en créer un deuxième, ni le supprimer. Ses onglets :
 
 - **Page d'accueil** : nom du club, accroche, 3 ou 4 photos d'accueil qui défilent, avec un titre chacune.
+- **Photos d'en-tête** : une grande photo par page (Le club, Nos planeurs, S'inscrire, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
 - **Chiffres clés** : membres, heures de vol, planeurs, année de fondation (à mettre à jour une fois par an).
-- **Textes des pages** : « Comment s'inscrire » et la description du vol d'initiation.
+- **Textes des pages** : modalités d'inscription (page S'inscrire), vols d'initiation et réservation et paiement en ligne (page Venez essayer).
 - **Contact et réseaux** : e-mail, téléphone et adresse du club (page Contact et pied de page), lien de paiement (réservation des vols d'initiation et bons cadeaux), réseaux sociaux, adresse de l'image de la webcam, coordonnées du terrain pour la carte.
 - **Liens pratiques** : nom, adresse et rubrique de chaque lien (institutions, préparation de vol, météo, communauté).
 

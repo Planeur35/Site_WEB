@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
 import Tag from '@/components/ui/Tag';
@@ -42,7 +42,7 @@ export default async function GlidersPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
+      <SitePageHero page="gliders" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
       <Section kicker={t('sectionKicker')} title={t('sectionTitle')}>
         {sorted.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
         <div className="border-t border-sky-900/15">

@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import Button from '@/components/ui/Button';
 import EmptyState from '@/components/ui/EmptyState';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
@@ -41,7 +41,7 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
+      <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
 
       {hasPackages && (
         <Section kicker={t('packagesKicker')} title={t('packagesTitle')}>

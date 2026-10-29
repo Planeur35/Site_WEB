@@ -81,8 +81,16 @@ export default async function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs uppercase tracking-[0.25em] text-sky-300/80">
-        © {new Date().getFullYear()} PIV · planeur35.org
+      <div className="border-t border-white/10 py-3 text-xs uppercase tracking-[0.25em] text-sky-300/80">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-6 px-4 sm:px-6 md:px-8">
+          <span>© {new Date().getFullYear()} PIV · planeur35.org</span>
+          <Link
+            href="/mentions-legales"
+            className="inline-flex min-h-11 items-center underline decoration-sky-300/50 underline-offset-4 hover:text-white"
+          >
+            {t("legal")}
+          </Link>
+        </div>
       </div>
     </footer>
   );
