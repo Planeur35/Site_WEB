@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
 import Kicker from '@/components/ui/Kicker';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
@@ -36,7 +36,7 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
+      <SitePageHero page="links" kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
       <Section kicker={t('kicker')} title={t('title')}>
         {filled.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">

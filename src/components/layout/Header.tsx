@@ -10,6 +10,8 @@ import { FULL_NAV, HEADER_NAV } from "@/components/layout/navItems";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  // The logo is large at the top of a page and shrinks once the visitor scrolls, to keep the sticky bar slim.
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const t = useTranslations("nav");
   const tc = useTranslations("common");
@@ -26,11 +28,30 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled((was) => (was ? window.scrollY > 20 : window.scrollY > 60));
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header className="sticky top-0 z-40 border-b border-sky-900/15 bg-ciel/90 backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 md:px-8">
+      <div
+        className={clsx(
+          "mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 transition-[height] duration-200 sm:px-6 md:px-8",
+          scrolled ? "h-20" : "h-24 md:h-28",
+        )}
+      >
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo-icon.png" alt="" width={50} height={44} className="h-11 w-auto" priority />
+          <Image
+            src="/logo-icon.png"
+            alt=""
+            width={200}
+            height={178}
+            className={clsx("w-auto transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
+            priority
+          />
           <span className="leading-tight">
             <span className="block font-serif text-xl tracking-tight text-sky-950">PIV</span>
             <span className="block text-[11px] uppercase tracking-[0.2em] text-sky-800 xl:whitespace-nowrap">{tc("clubName")}</span>
@@ -93,7 +114,7 @@ export default function Header() {
       </div>
 
       <nav id="full-menu" hidden={!menuOpen} className="border-t border-sky-900/15 bg-ciel" aria-label={t("fullNav")}>
-        <div className="mx-auto flex max-h-[calc(100vh-5rem)] max-w-5xl flex-col overflow-y-auto px-4 py-4 sm:px-6 md:px-8">
+        <div className="mx-auto flex max-h-[calc(100vh-7rem)] max-w-5xl flex-col overflow-y-auto px-4 py-4 sm:px-6 md:px-8">
           {FULL_NAV.map((item) => (
             <Link
               key={item.key}

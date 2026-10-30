@@ -76,6 +76,10 @@
     "contact": {
       "title": "Contact",
       "description": "Écrire au club de vol à voile PIV, Planeurs d’Ille-et-Vilaine."
+    },
+    "legal": {
+      "title": "Mentions légales",
+      "description": "Informations légales sur l’éditeur et l’hébergeur du site, et traitement des données personnelles."
     }
   },
   "home": {
@@ -105,8 +109,7 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Bientôt ici",
     "empty": "Les pages du club arrivent.",
-    "anecdote": "Anecdote",
-    "mapPopup": "Le terrain du club"
+    "anecdote": "Anecdote"
   },
   "gliders": {
     "heroKicker": "La flotte",
@@ -160,13 +163,13 @@
   "discover": {
     "heroKicker": "Premier vol",
     "heroTitle": "Venez essayer",
-    "kicker": "Vol d’initiation",
-    "title": "Offrez-vous le ciel",
+    "kicker": "Découverte",
+    "title": "Vols d’initiation",
     "descriptionKicker": "Le vol",
     "defaultDescription": "Le vol d’initiation est le meilleur moyen de découvrir le vol en planeur : vous volez en biplace, accompagné d’un instructeur du club.",
     "priceKicker": "Tarif",
-    "bookingKicker": "Réservation et paiement",
-    "bookingTitle": "Réservez votre vol",
+    "bookingKicker": "Réservation",
+    "bookingTitle": "Réservation et paiement en ligne",
     "bookingText": "La réservation et le paiement se font en ligne. Des bons de vol sont disponibles pour les particuliers comme pour les entreprises.",
     "bookingCta": "Réserver et payer en ligne",
     "contactCta": "Nous écrire pour réserver",
@@ -256,6 +259,49 @@
     "findUs": "Nous trouver",
     "mapPopup": "Le terrain du club"
   },
+  "legal": {
+    "kicker": "Informations légales",
+    "heroKicker": "Informations légales",
+    "heroTitle": "Mentions légales",
+    "title": "Qui sommes-nous, et comment sont traitées vos données",
+    "intro": "Les informations ci-dessous sont fournies conformément à la loi pour la confiance dans l’économie numérique (LCEN) et au règlement général sur la protection des données (RGPD).",
+    "editor": {
+      "title": "Éditeur du site",
+      "text": "Le site planeur35.org est édité par l’association {name}, club de vol à voile.",
+      "seat": "Siège social :",
+      "id": "Numéro RNA ou SIRET :",
+      "email": "E-mail :",
+      "phone": "Téléphone :",
+      "director": "Directeur de la publication :"
+    },
+    "hosting": {
+      "title": "Hébergement",
+      "site": "Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis.",
+      "content": "Les textes et les images du site sont stockés par Sanity, qui diffuse aussi les images."
+    },
+    "ip": {
+      "title": "Propriété intellectuelle",
+      "text": "Les textes, photographies, logos et autres contenus du site sont la propriété de l’association ou utilisés avec l’accord de leurs auteurs. Toute reproduction sans autorisation préalable est interdite."
+    },
+    "data": {
+      "title": "Données personnelles",
+      "form": "Le formulaire de contact recueille votre nom, votre adresse e-mail, le sujet et le texte de votre message. Ces informations servent uniquement à répondre à votre demande et ne sont pas utilisées à des fins commerciales.",
+      "recipient": "Le message est transmis par le service d’envoi d’e-mails Resend à la boîte de messagerie de l’association.",
+      "technical": "Comme tout site internet, l’hébergeur enregistre des données techniques de connexion (adresse IP, date et page consultée) pour assurer la sécurité et le bon fonctionnement du site.",
+      "retention": "Les messages sont conservés le temps nécessaire pour traiter votre demande.",
+      "rights": "Vous pouvez demander l’accès, la rectification ou l’effacement de vos données en écrivant à l’adresse e-mail indiquée plus haut. Vous avez aussi le droit d’introduire une réclamation auprès de la CNIL :",
+      "cnil": "cnil.fr"
+    },
+    "cookies": {
+      "title": "Cookies et services tiers",
+      "text": "Le site n’utilise ni cookie publicitaire ni outil de mesure d’audience. Un cookie technique peut mémoriser la langue choisie ; il ne sert à aucun suivi.",
+      "map": "La carte du terrain charge ses fonds de carte depuis OpenStreetMap : votre adresse IP est alors transmise à ce service."
+    },
+    "liability": {
+      "title": "Liens externes et responsabilité",
+      "text": "Le site contient des liens vers des sites tiers (fédérations, météo, WeGlide…) dont l’association n’est pas responsable. Les informations publiées (horaires, tarifs, disponibilités) peuvent évoluer : en cas de doute, contactez le club."
+    }
+  },
   "error": {
     "kicker": "Erreur",
     "title": "Une erreur est survenue",
@@ -267,6 +313,7 @@
   "footer": {
     "navigation": "Navigation",
     "contact": "Contact",
-    "writeToUs": "Nous écrire"
+    "writeToUs": "Nous écrire",
+    "legal": "Mentions légales"
   }
 }

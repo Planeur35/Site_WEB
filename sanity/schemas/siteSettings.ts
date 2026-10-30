@@ -1,6 +1,21 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { localizedString, localizedText, photoField } from './fields';
 
+// Keys of `pageHeroes` are read by the site (`PageHeroKey` in types.ts): do not rename them.
+const HERO_PAGES = [
+  { name: 'club', title: 'Le club' },
+  { name: 'gliders', title: 'Nos planeurs' },
+  { name: 'join', title: 'S’inscrire' },
+  { name: 'discover', title: 'Venez essayer' },
+  { name: 'news', title: 'Actualités' },
+  { name: 'stories', title: 'Récits de vols' },
+  { name: 'gallery', title: 'Galerie' },
+  { name: 'webcam', title: 'Webcam' },
+  { name: 'links', title: 'Liens pratiques' },
+  { name: 'contact', title: 'Contact' },
+  { name: 'legal', title: 'Mentions légales' },
+];
+
 // Values of `usefulLinks[].group` are read by the site: do not rename them.
 export const LINK_GROUPS = [
   { title: 'Institutions', value: 'institutions' },
@@ -15,10 +30,12 @@ export default defineType({
   type: 'document',
   groups: [
     { name: 'home', title: 'Page d’accueil', default: true },
+    { name: 'heroes', title: 'Photos d’en-tête' },
     { name: 'stats', title: 'Chiffres clés' },
     { name: 'texts', title: 'Textes des pages' },
     { name: 'contact', title: 'Contact et réseaux' },
     { name: 'links', title: 'Liens pratiques' },
+    { name: 'legal', title: 'Mentions légales' },
   ],
   fields: [
     defineField({
@@ -58,6 +75,16 @@ export default defineType({
       ],
     }),
 
+    defineField({
+      name: 'pageHeroes',
+      title: 'Photos d’en-tête des pages',
+      description:
+        'Une grande photo en haut de chaque page, à la place du dessin. Format paysage, de préférence 2000 pixels de large ou plus. Si une page n’a pas de photo, le dessin du ciel s’affiche.',
+      type: 'object',
+      group: 'heroes',
+      fields: HERO_PAGES.map(({ name, title }) => photoField({ name, title, required: false })),
+    }),
+
     // Key figures, updated by hand once a year
     defineField({ name: 'statsYear', title: 'Année de référence', type: 'number', group: 'stats' }),
     defineField({ name: 'membersCount', title: 'Nombre de membres', type: 'number', group: 'stats' }),
@@ -67,15 +94,23 @@ export default defineType({
 
     localizedText({
       name: 'joinText',
-      title: 'Comment s’inscrire',
-      description: 'Texte de la page « S’inscrire » : lieu, modalités d’inscription, pièces à fournir…',
+      title: 'S’inscrire : modalités d’inscription',
+      description: 'Texte de la page « S’inscrire », rubrique « Comment s’inscrire » : lieu, modalités, pièces à fournir… Un retour à la ligne crée un nouveau paragraphe.',
       rows: 6,
       group: 'texts',
     }),
     localizedText({
       name: 'discoveryText',
-      title: 'Description d’un vol d’initiation',
-      description: 'Texte de la page « Venez essayer » : déroulement, durée, conditions.',
+      title: 'Venez essayer : vols d’initiation',
+      description: 'Texte de la page « Venez essayer », rubrique « Vols d’initiation » : déroulement du vol, durée, conditions. Un retour à la ligne crée un nouveau paragraphe.',
+      rows: 6,
+      group: 'texts',
+    }),
+
+    localizedText({
+      name: 'bookingText',
+      title: 'Venez essayer : réservation et paiement en ligne',
+      description: 'Texte de la page « Venez essayer », rubrique « Réservation et paiement en ligne » : comment réserver, bons de vol, conditions d’annulation… Le bouton de paiement utilise le lien saisi dans l’onglet « Contact et réseaux ».',
       rows: 6,
       group: 'texts',
     }),
@@ -143,6 +178,34 @@ export default defineType({
         defineField({ name: 'lat', title: 'Latitude', type: 'number' }),
         defineField({ name: 'lng', title: 'Longitude', type: 'number' }),
       ],
+    }),
+
+    defineField({
+      name: 'legalName',
+      title: 'Nom officiel de l’association',
+      description: 'Tel qu’il figure dans les statuts. Affiché sur la page « Mentions légales ».',
+      type: 'string',
+      group: 'legal',
+    }),
+    defineField({
+      name: 'legalAddress',
+      title: 'Siège social',
+      type: 'text',
+      rows: 3,
+      group: 'legal',
+    }),
+    defineField({
+      name: 'legalId',
+      title: 'Numéro RNA ou SIRET',
+      type: 'string',
+      group: 'legal',
+    }),
+    defineField({
+      name: 'publicationDirector',
+      title: 'Directeur ou directrice de la publication',
+      description: 'En général le président ou la présidente de l’association. Cette mention est obligatoire.',
+      type: 'string',
+      group: 'legal',
     }),
 
     defineField({

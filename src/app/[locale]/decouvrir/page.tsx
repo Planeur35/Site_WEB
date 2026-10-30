@@ -3,8 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import Button from '@/components/ui/Button';
 import Kicker from '@/components/ui/Kicker';
-import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import SitePageHero from '@/components/ui/SitePageHero';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
 import { allTariffsQuery, siteSettingsQuery } from '@/lib/sanity/queries';
@@ -35,9 +35,10 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
+      <SitePageHero page="discover" kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
 
-      <Section kicker={t('kicker')} title={t('title')}>
+      {/* Introductory flights: text from Studio → Réglages du site → Textes des pages */}
+      <Section id="vols-initiation" kicker={t('kicker')} title={t('title')}>
         <div className="grid gap-px border border-sky-900/10 bg-sky-900/10 md:grid-cols-[1.6fr_1fr]">
           <div className="bg-ciel p-8 md:p-10">
             <Kicker>{t('descriptionKicker')}</Kicker>
@@ -67,8 +68,11 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
         </div>
       </Section>
 
-      <Section kicker={t('bookingKicker')} title={t('bookingTitle')}>
-        <p className="max-w-xl leading-relaxed text-slate-700">{t('bookingText')}</p>
+      {/* Online booking and payment: text from Studio, button from the payment link in the settings */}
+      <Section id="reservation" kicker={t('bookingKicker')} title={t('bookingTitle')}>
+        <p className="max-w-xl whitespace-pre-line leading-relaxed text-slate-700">
+          {localize(settings?.bookingText, locale) ?? t('bookingText')}
+        </p>
         <div className="mt-8 flex flex-wrap gap-4">
           {settings?.paymentUrl ? (
             <Button href={settings.paymentUrl} external>

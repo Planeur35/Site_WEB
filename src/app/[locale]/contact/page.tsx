@@ -4,7 +4,7 @@ import { buildMetadata } from '@/lib/metadata';
 import ContactForm from '@/components/ui/ContactForm';
 import Kicker from '@/components/ui/Kicker';
 import Map from '@/components/ui/Map';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { siteSettingsQuery } from '@/lib/sanity/queries';
@@ -30,7 +30,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('title')} variant={0} />
+      <SitePageHero page="contact" kicker={t('heroKicker')} title={t('title')} variant={0} />
       <Section kicker={t('formKicker')} title={t('formTitle')} sub={t('subtitle')}>
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
           <ContactForm />

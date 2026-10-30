@@ -119,12 +119,13 @@ src/
       actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
       recits/  galerie/  webcam/  liens/
       contact/                # page + actions.ts (server action → Resend)
+      mentions-legales/       # mentions légales (identité de l'association lue dans Réglages du site)
       layout.tsx              # Header, Footer, fournisseur next-intl
     studio/[[...tool]]/       # Sanity Studio embarqué
     sitemap.ts  robots.ts  globals.css
   components/
     layout/                   # Header (bandeau + menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
-    ui/                       # PageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button…
+    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button…
     sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv)
   lib/
     sanity/                   # client, fetch (sanityFetch), queries (GROQ), types, image (urlFor), imageLoader, localize
@@ -178,14 +179,16 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
-| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, école de campagne, compétition) et Histoire du club. Carte : coordonnées des Réglages | 🟢 sous 60 s |
+| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, école de campagne, compétition) et Histoire du club | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | S'inscrire `/adherer` | Tarifs (forfaits, packs formation) et texte « Comment s'inscrire » des Réglages | 🟢 sous 60 s |
-| Venez essayer `/decouvrir` | Tarif « Vol d'initiation » (adulte, moins de 18 ans), texte du vol et lien de paiement des Réglages | 🟢 sous 60 s |
+| Venez essayer `/decouvrir` | Deux rubriques : vols d'initiation (tarif « Vol d'initiation » adulte et moins de 18 ans, texte des Réglages) et réservation et paiement en ligne (texte et lien de paiement des Réglages) | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
 | Récits `/recits` | Récits de vols | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
 | Contact, pied de page | Adresse, e-mail, téléphone et réseaux des Réglages ; envoi du formulaire via Resend | 🟢 sous 60 s |
+| Mentions légales `/mentions-legales` | Réglages du site (groupe Mentions légales) pour l'identité ; textes dans `src/messages/*.json` (espace `legal`) | 🟢 sous 60 s (identité), 🟠 au prochain déploiement (textes) |
+| Photo d'en-tête de chaque page | Réglages du site → Photos d'en-tête (une photo par page ; sans photo, le dessin du ciel s'affiche) | 🟢 sous 60 s |
 | Menus et libellés | `src/messages/fr.json` et `en.json`, entrées dans `src/components/layout/navItems.ts` | 🟠 au prochain déploiement |
 
 > **Champs bilingues.** Chaque texte a un champ Français et un champ English facultatif. Si l'anglais est vide, le site affiche le français sur `/en` (`localize()` dans `src/lib/sanity/localize.ts`).
@@ -267,9 +270,9 @@ Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-
 - 🔴 **Sécurité : tokens Sanity partagés en clair.** Des tokens d'écriture ont circulé en clair pendant le développement (mars 2026). Les révoquer dans sanity.io/manage → API → Tokens et en recréer un au besoin.
 - 🟠 **Email : le formulaire de contact envoie depuis `onboarding@resend.dev`.** Cette adresse de test de Resend ne livre qu'à l'email du compte Resend. Il faut vérifier le domaine planeur35.org dans Resend, puis changer le `from` dans `src/lib/email.ts`.
 - 🟠 **Contenu : rubriques vides.** Tarifs, pages du club, histoire, récits, agenda, chiffres clés et liens pratiques sont à saisir dans le Studio ; d'ici là, les pages affichent « Bientôt ici ». Vrais prix du vol d'initiation : 170 € (adulte), 130 € (moins de 18 ans).
-- 🟠 **Légal : pas de page de mentions légales.** Obligatoire pour un site d'association (éditeur, hébergeur, directeur de publication).
+- 🟠 **Légal : mentions légales à compléter.** La page `/mentions-legales` existe. Il reste à saisir dans le Studio (Réglages du site → Mentions légales) le nom officiel de l'association, le siège, le numéro RNA ou SIRET et le directeur de la publication, puis à faire relire le texte par le bureau.
 - 🟠 **Domaine : URLs canoniques déjà sur www.planeur35.org.** `sitemap.ts` et `metadata.ts` utilisent `https://www.planeur35.org` alors que le site tourne sur piv-sigma.vercel.app. C'est voulu pour la bascule, mais il faut s'en souvenir en testant le SEO.
-- 🔵 **Carte : coordonnées par défaut.** Sans `aerodromeCoordinates` dans les Réglages, la carte se centre sur 47.885, -1.688. À vérifier.
+- 🔵 **Carte de la page Contact : coordonnées par défaut.** La carte n'est plus affichée sur la page Club (le club ne veut pas publier sa localisation précise). Sur la page Contact, sans `aerodromeCoordinates` dans les Réglages, elle se centre sur 47.885, -1.688. À vérifier, ou à retirer aussi.
 - 🔵 **Qualité : README par défaut.** Le `README.md` est encore celui de create-next-app. Certains contenus saisis dans Sanity n'ont pas d'accents (accroche « Club de vol a voile en Bretagne »).
 
 ## 10. Ancien et nouveau site
@@ -355,7 +358,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
 | Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |
-| Mentions légales | Absentes | Ajouter une page |
+| Mentions légales          | Page créée ; identité de l'association à saisir dans le Studio | Compléter Réglages du site → Mentions légales, faire relire le texte |
 | Réglages du site | `webcamUrl` vide, téléphone factice « 06 XX XX XX XX » (seed) | Compléter `siteSettings` dans le Studio (webcam, téléphone, réseaux) |
 | Email de contact | Expéditeur de test Resend | Vérifier le domaine dans Resend |
 | Domaine | piv-sigma.vercel.app | Brancher planeur35.org sur Vercel, CORS Sanity, puis redirections depuis l'ancien Joomla |

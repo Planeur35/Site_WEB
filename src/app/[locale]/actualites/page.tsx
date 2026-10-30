@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
 import NewsRow from '@/components/ui/NewsRow';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import { formatDayNumber, formatMonthShort, formatTime, formatWeekday, startOfToday } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
@@ -32,7 +32,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
+      <SitePageHero page="news" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
 
       <Section id="news" kicker={t('listKicker')} title={t('listTitle')}>
         {articles.length === 0 && <EmptyState>{t('empty')}</EmptyState>}

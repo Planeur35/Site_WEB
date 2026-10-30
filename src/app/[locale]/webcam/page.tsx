@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import WebcamImage from '@/components/ui/WebcamImage';
 import { sanityFetch } from '@/lib/sanity/fetch';
@@ -25,7 +25,7 @@ export default async function WebcamPage({ params }: { params: Promise<{ locale:
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
+      <SitePageHero page="webcam" kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
       <Section kicker={t('kicker')} title={t('title')}>
         {settings?.webcamUrl ? <WebcamImage url={settings.webcamUrl} /> : <EmptyState>{t('empty')}</EmptyState>}
       </Section>

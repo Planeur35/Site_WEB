@@ -76,6 +76,10 @@
     "contact": {
       "title": "Contact",
       "description": "Write to the PIV gliding club, Planeurs d’Ille-et-Vilaine."
+    },
+    "legal": {
+      "title": "Legal notice",
+      "description": "Legal information about the publisher and host of the website, and how personal data is handled."
     }
   },
   "home": {
@@ -105,8 +109,7 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Coming soon",
     "empty": "The club pages are on their way.",
-    "anecdote": "Anecdote",
-    "mapPopup": "The club airfield"
+    "anecdote": "Anecdote"
   },
   "gliders": {
     "heroKicker": "The fleet",
@@ -160,13 +163,13 @@
   "discover": {
     "heroKicker": "First flight",
     "heroTitle": "Try gliding",
-    "kicker": "Trial flight",
-    "title": "Treat yourself to the sky",
+    "kicker": "Discovery",
+    "title": "Introductory flights",
     "descriptionKicker": "The flight",
     "defaultDescription": "A trial flight is the best way to discover gliding: you fly in a two-seater with one of the club’s instructors.",
     "priceKicker": "Price",
-    "bookingKicker": "Booking and payment",
-    "bookingTitle": "Book your flight",
+    "bookingKicker": "Booking",
+    "bookingTitle": "Book and pay online",
     "bookingText": "Booking and payment are done online. Gift vouchers are available for individuals and companies.",
     "bookingCta": "Book and pay online",
     "contactCta": "Write to us to book",
@@ -256,6 +259,49 @@
     "findUs": "Find us",
     "mapPopup": "The club airfield"
   },
+  "legal": {
+    "kicker": "Legal information",
+    "heroKicker": "Legal information",
+    "heroTitle": "Legal notice",
+    "title": "Who we are, and how your data is handled",
+    "intro": "The information below is provided in accordance with French law on trust in the digital economy (LCEN) and the General Data Protection Regulation (GDPR).",
+    "editor": {
+      "title": "Publisher",
+      "text": "The website planeur35.org is published by the association {name}, a gliding club.",
+      "seat": "Registered office:",
+      "id": "RNA or SIRET number:",
+      "email": "Email:",
+      "phone": "Phone:",
+      "director": "Publication director:"
+    },
+    "hosting": {
+      "title": "Hosting",
+      "site": "The website is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, United States.",
+      "content": "The website’s texts and images are stored by Sanity, which also delivers the images."
+    },
+    "ip": {
+      "title": "Intellectual property",
+      "text": "The texts, photographs, logos and other content of this website belong to the association or are used with their authors’ permission. Any reproduction without prior authorisation is prohibited."
+    },
+    "data": {
+      "title": "Personal data",
+      "form": "The contact form collects your name, email address, subject and message. This information is used only to answer your request and is not used for commercial purposes.",
+      "recipient": "The message is sent by the email service Resend to the association’s mailbox.",
+      "technical": "Like any website, the host records technical connection data (IP address, date and page viewed) to keep the site secure and working properly.",
+      "retention": "Messages are kept for as long as needed to handle your request.",
+      "rights": "You can ask for access to, correction or deletion of your data by writing to the email address given above. You also have the right to lodge a complaint with the CNIL, the French data protection authority:",
+      "cnil": "cnil.fr"
+    },
+    "cookies": {
+      "title": "Cookies and third-party services",
+      "text": "The website uses no advertising cookies and no audience measurement tools. A technical cookie may remember the language you chose; it is not used for tracking.",
+      "map": "The airfield map loads its map tiles from OpenStreetMap: your IP address is then sent to that service."
+    },
+    "liability": {
+      "title": "External links and liability",
+      "text": "The website contains links to third-party sites (federations, weather, WeGlide…) for which the association is not responsible. Published information (opening times, prices, availability) may change: if in doubt, contact the club."
+    }
+  },
   "error": {
     "kicker": "Error",
     "title": "Something went wrong",
@@ -267,6 +313,7 @@
   "footer": {
     "navigation": "Navigation",
     "contact": "Contact",
-    "writeToUs": "Write to us"
+    "writeToUs": "Write to us",
+    "legal": "Legal notice"
   }
 }

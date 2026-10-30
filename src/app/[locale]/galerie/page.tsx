@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
 import Gallery from '@/components/ui/Gallery';
-import PageHero from '@/components/ui/PageHero';
+import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
@@ -37,7 +37,7 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
+      <SitePageHero page="gallery" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
       <Section kicker={t('kicker')} title={t('title')}>
         {images.length > 0 ? <Gallery images={images} /> : <EmptyState>{t('empty')}</EmptyState>}
       </Section>
