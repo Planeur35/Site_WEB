@@ -10,7 +10,7 @@ const SECTIONS = [
   { title: 'La plateforme (terrain et zone de vol)', value: 'platform' },
   { title: 'Activité des membres', value: 'activities' },
   { title: 'Formation initiale', value: 'training' },
-  { title: 'École de campagne', value: 'campaign' },
+  { title: 'Perfectionnement', value: 'campaign' },
   { title: 'Compétition', value: 'competition' },
 ];
 

@@ -189,8 +189,8 @@ const fleet: FleetItem[] = [
     wingspan: '18-20 m',
     glideRatio: '35-40',
     seats: 2,
-    descFr: "Biplace spacieux et robuste pour la formation debut, la formation campagne et le vol a deux.",
-    descEn: 'Spacious and robust two-seater for beginner training, cross-country training, and two-person flights.',
+    descFr: "Biplace spacieux et robuste pour la formation debut, le perfectionnement et le vol a deux.",
+    descEn: 'Spacious and robust two-seater for beginner training, advanced training, and two-person flights.',
   },
   {
     id: 'dg500-lg',
@@ -199,8 +199,8 @@ const fleet: FleetItem[] = [
     wingspan: '18-20 m',
     glideRatio: '35-40',
     seats: 2,
-    descFr: "Biplace spacieux et robuste pour la formation debut, la formation campagne et le vol a deux.",
-    descEn: 'Spacious and robust two-seater for beginner training, cross-country training, and two-person flights.',
+    descFr: "Biplace spacieux et robuste pour la formation debut, le perfectionnement et le vol a deux.",
+    descEn: 'Spacious and robust two-seater for beginner training, advanced training, and two-person flights.',
   },
   {
     id: 'ask21-handi',

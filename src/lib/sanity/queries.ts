@@ -26,6 +26,9 @@ export const allClubPagesQuery = `*[_type == "clubPage"]`;
 
 export const clubHistoryQuery = `*[_type == "clubHistory"][0]`;
 
-export const allFlightStoriesQuery = `*[_type == "flightStory"] | order(flightDate desc)`;
+/** The six most recent stories that have a page address. */
+export const allFlightStoriesQuery = `*[_type == "flightStory" && defined(slug.current)] | order(flightDate desc)[0...6]`;
+
+export const flightStoryBySlugQuery = `*[_type == "flightStory" && slug.current == $slug][0]`;
 
 export const allGalleryImagesQuery = `*[_type == "galleryImage"] | order(date desc)`;

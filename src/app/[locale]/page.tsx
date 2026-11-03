@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import clsx from 'clsx';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import { Link } from '@/i18n/navigation';
@@ -53,14 +54,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     : [{ key: 'default', title: t('heroTitle'), subtitle: localize(settings?.tagline, locale) ?? t('heroSubtitle') }];
 
   const stats = [
-    { value: settings?.membersCount, label: t('statsMembers') },
+    { value: settings?.licensedPilots, label: t('statsPilots') },
     {
       value: settings?.flightHours,
       label: settings?.statsYear ? t('statsHoursYear', { year: settings.statsYear }) : t('statsHours'),
     },
+    { value: settings?.kmFlown, label: t('statsKm') },
     { value: settings?.glidersCount, label: t('statsGliders') },
-    { value: settings?.foundedYear, label: t('statsFounded') },
-  ].filter((s) => s.value != null);
+    // A year: no thousands separator
+    { value: settings?.foundedYear, label: t('statsFounded'), plain: true },
+  ].flatMap((s) =>
+    s.value == null ? [] : [{ label: s.label, display: s.plain ? String(s.value) : s.value.toLocaleString(locale) }],
+  );
+  // Columns on wider screens: one row, or 3 + 2 on tablets when there are five figures
+  const statsColumns: Record<number, string> = {
+    1: 'md:grid-cols-1',
+    2: 'md:grid-cols-2',
+    3: 'md:grid-cols-3',
+    4: 'md:grid-cols-4',
+    5: 'md:grid-cols-3 lg:grid-cols-5',
+  };
 
   const cards = [
     { href: '/decouvrir' as const, kicker: t('cardTryKicker'), title: t('cardTryTitle'), text: t('cardTryText') },
@@ -74,11 +87,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {stats.length > 0 && (
         <div className="border-y border-sky-900/10 bg-linear-to-b from-horizon to-ciel">
-          <dl className="mx-auto grid max-w-5xl grid-cols-2 gap-8 px-4 py-16 sm:px-6 md:grid-cols-4 md:px-8">
+          <dl className={clsx('mx-auto grid max-w-5xl grid-cols-2 gap-8 px-4 py-16 sm:px-6 md:px-8', statsColumns[stats.length])}>
             {stats.map((s) => (
-              <div key={s.label} className="flex flex-col-reverse md:border-l md:border-sky-900/10 md:pl-6 md:first:border-0 md:first:pl-0">
+              <div key={s.label} className="flex flex-col-reverse lg:border-l lg:border-sky-900/10 lg:pl-6 lg:first:border-0 lg:first:pl-0">
                 <dt className="mt-2 text-xs uppercase tracking-[0.18em] text-sky-800">{s.label}</dt>
-                <dd className="font-serif text-4xl text-sky-950">{s.value}</dd>
+                <dd className={clsx('font-serif text-sky-950', stats.length === 5 ? 'text-3xl' : 'text-4xl')}>{s.display}</dd>
               </div>
             ))}
           </dl>

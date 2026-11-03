@@ -1,11 +1,11 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { localizedString, localizedText, photoField } from './fields';
+import { localizedBlocks, localizedString, localizedText, photoField } from './fields';
 
 // Keys of `pageHeroes` are read by the site (`PageHeroKey` in types.ts): do not rename them.
 const HERO_PAGES = [
   { name: 'club', title: 'Le club' },
   { name: 'gliders', title: 'Nos planeurs' },
-  { name: 'join', title: 'S’inscrire' },
+  { name: 'join', title: 'Apprenez à voler ! (tarifs)' },
   { name: 'discover', title: 'Venez essayer' },
   { name: 'news', title: 'Actualités' },
   { name: 'stories', title: 'Récits de vols' },
@@ -21,6 +21,8 @@ export const LINK_GROUPS = [
   { title: 'Institutions', value: 'institutions' },
   { title: 'Préparation de vol', value: 'flight-prep' },
   { title: 'Météo et conditions', value: 'weather' },
+  { title: 'Compétitions', value: 'competitions' },
+  { title: 'Hébergements', value: 'accommodation' },
   { title: 'Communauté', value: 'community' },
 ];
 
@@ -33,6 +35,7 @@ export default defineType({
     { name: 'heroes', title: 'Photos d’en-tête' },
     { name: 'stats', title: 'Chiffres clés' },
     { name: 'texts', title: 'Textes des pages' },
+    { name: 'pricing', title: 'Page Apprenez à voler (tarifs)' },
     { name: 'contact', title: 'Contact et réseaux' },
     { name: 'links', title: 'Liens pratiques' },
     { name: 'legal', title: 'Mentions légales' },
@@ -87,15 +90,30 @@ export default defineType({
 
     // Key figures, updated by hand once a year
     defineField({ name: 'statsYear', title: 'Année de référence', type: 'number', group: 'stats' }),
-    defineField({ name: 'membersCount', title: 'Nombre de membres', type: 'number', group: 'stats' }),
+    // No longer shown on the site: hidden in the Studio, the stored value is kept.
+    defineField({ name: 'membersCount', title: 'Nombre de membres (n’est plus affiché)', type: 'number', group: 'stats', hidden: true }),
     defineField({ name: 'flightHours', title: 'Heures de vol dans l’année', type: 'number', group: 'stats' }),
     defineField({ name: 'glidersCount', title: 'Nombre de planeurs', type: 'number', group: 'stats' }),
     defineField({ name: 'foundedYear', title: 'Année de fondation', type: 'number', group: 'stats' }),
+    defineField({
+      name: 'kmFlown',
+      title: 'Kilomètres parcourus depuis la création du club',
+      type: 'number',
+      group: 'stats',
+      validation: (rule) => rule.min(0),
+    }),
+    defineField({
+      name: 'licensedPilots',
+      title: 'Nombre de pilotes brevetés',
+      type: 'number',
+      group: 'stats',
+      validation: (rule) => rule.min(0).integer(),
+    }),
 
     localizedText({
       name: 'joinText',
-      title: 'S’inscrire : modalités d’inscription',
-      description: 'Texte de la page « S’inscrire », rubrique « Comment s’inscrire » : lieu, modalités, pièces à fournir… Un retour à la ligne crée un nouveau paragraphe.',
+      title: 'Apprenez à voler : modalités d’inscription',
+      description: 'Texte de la page « Apprenez à voler ! », en bas, rubrique « Comment s’inscrire » : lieu, modalités, pièces à fournir… Un retour à la ligne crée un nouveau paragraphe.',
       rows: 6,
       group: 'texts',
     }),
@@ -113,6 +131,37 @@ export default defineType({
       description: 'Texte de la page « Venez essayer », rubrique « Réservation et paiement en ligne » : comment réserver, bons de vol, conditions d’annulation… Le bouton de paiement utilise le lien saisi dans l’onglet « Contact et réseaux ».',
       rows: 6,
       group: 'texts',
+    }),
+
+    // Page « Apprenez à voler ! »: intro text, yearly recap image and three sub-parts
+    localizedBlocks({
+      name: 'pricingIntro',
+      title: 'Texte explicatif',
+      description: 'Texte d’introduction en haut de la page « Apprenez à voler ! », au-dessus du tableau des tarifs.',
+      group: 'pricing',
+    }),
+    {
+      ...photoField({ name: 'pricingTable', title: 'Tableau récapitulatif des tarifs (image)', required: false, group: 'pricing' }),
+      description:
+        'L’image du tableau de tous les tarifs de l’année, à remplacer chaque année. Elle peut être grande : le visiteur peut l’ouvrir en plein écran. De préférence nette, de 2000 pixels de large ou plus (JPG ou PNG). Dans « Description de la photo », résumez en une phrase ce que contient le tableau.',
+    },
+    localizedBlocks({
+      name: 'pricingMembership',
+      title: 'Adhésion au club (membres)',
+      description: 'Première sous-partie de la page : cotisation, forfaits, conditions d’adhésion.',
+      group: 'pricing',
+    }),
+    localizedBlocks({
+      name: 'pricingTraining',
+      title: 'Pack formation',
+      description: 'Deuxième sous-partie de la page : ce que comprend le pack formation.',
+      group: 'pricing',
+    }),
+    localizedBlocks({
+      name: 'pricingAdvanced',
+      title: 'Pack complément de formation',
+      description: 'Troisième sous-partie de la page : ce que comprend le pack complément de formation.',
+      group: 'pricing',
     }),
 
     defineField({ name: 'contactEmail', title: 'Adresse e-mail du club', type: 'string', group: 'contact' }),
@@ -204,6 +253,13 @@ export default defineType({
       name: 'publicationDirector',
       title: 'Directeur ou directrice de la publication',
       description: 'En général le président ou la présidente de l’association. Cette mention est obligatoire.',
+      type: 'string',
+      group: 'legal',
+    }),
+    defineField({
+      name: 'ffvpNumber',
+      title: 'Numéro d’affiliation FFVP (facultatif)',
+      description: 'Affiché dans l’entrée « Affiliation » des mentions légales. Si vide, seule l’affiliation à la FFVP est indiquée.',
       type: 'string',
       group: 'legal',
     }),

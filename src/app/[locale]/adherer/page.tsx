@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
+import clsx from 'clsx';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import PortableText from '@/components/sanity/PortableText';
 import Button from '@/components/ui/Button';
 import EmptyState from '@/components/ui/EmptyState';
 import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
+import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
+import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { localize } from '@/lib/sanity/localize';
-import { allTariffsQuery, siteSettingsQuery } from '@/lib/sanity/queries';
-import type { AgeCategory, SiteSettings, Tariff, TariffOffer } from '@/lib/sanity/types';
+import { siteSettingsQuery } from '@/lib/sanity/queries';
+import type { SiteSettings } from '@/lib/sanity/types';
 
 export const revalidate = 60;
-
-const PACKAGES: TariffOffer[] = ['forfait-20h', 'forfait-illimite'];
-const TRAINING: TariffOffer[] = ['pack-formation', 'pack-complement-formation'];
-const PACKAGE_AGES: AgeCategory[] = ['under25', 'over25'];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -26,69 +27,54 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('join');
-  const tp = await getTranslations('pricing');
 
-  const [tariffs, settings] = await Promise.all([
-    sanityFetch<Tariff[]>(allTariffsQuery, []),
-    sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
-  ]);
-  const find = (offer: TariffOffer, age?: AgeCategory) =>
-    tariffs.find((tariff) => tariff.offer === offer && (age ? tariff.ageCategory === age : true));
-  const euros = (tariff?: Tariff) => (tariff ? tp('amount', { amount: tariff.amount }) : '—');
+  const settings = await sanityFetch<SiteSettings | null>(siteSettingsQuery, null);
+  const intro = localize(settings?.pricingIntro, locale);
+  const hasIntro = !!intro && intro.length > 0;
+  const table = settings?.pricingTable;
   const joinText = localize(settings?.joinText, locale);
-  const hasPackages = tariffs.some((tariff) => PACKAGES.includes(tariff.offer));
-  const hasTraining = tariffs.some((tariff) => TRAINING.includes(tariff.offer));
+
+  // The three sub-parts, in this order. A sub-part without text is not shown.
+  const parts = [
+    { id: 'adhesion', title: t('membershipTitle'), body: localize(settings?.pricingMembership, locale) },
+    { id: 'pack-formation', title: t('trainingPackTitle'), body: localize(settings?.pricingTraining, locale) },
+    { id: 'pack-complement', title: t('advancedPackTitle'), body: localize(settings?.pricingAdvanced, locale) },
+  ].filter((part) => part.body && part.body.length > 0);
+
+  const isEmpty = !hasIntro && !table?.asset && parts.length === 0;
 
   return (
     <>
       <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
 
-      {hasPackages && (
-        <Section kicker={t('packagesKicker')} title={t('packagesTitle')}>
-          <div className="grid gap-px border border-sky-900/10 bg-sky-900/10 md:grid-cols-2">
-            {PACKAGES.map((offer) => (
-              <div key={offer} className="bg-ciel p-8 md:p-10">
-                <h3 className="font-serif text-xl text-sky-950">{tp(`offers.${offer}`)}</h3>
-                <dl className="mt-5 space-y-3 border-t border-sky-900/10 pt-5">
-                  {PACKAGE_AGES.map((age) => {
-                    const tariff = find(offer, age);
-                    const details = localize(tariff?.details, locale);
-                    return (
-                      <div key={age} className="flex items-baseline justify-between gap-4">
-                        <dt className="text-sm text-slate-700">
-                          {tp(`ages.${age}`)}
-                          {details && <span className="block text-xs text-slate-600">{details}</span>}
-                        </dt>
-                        <dd className="font-serif text-2xl text-sky-950">{euros(tariff)}</dd>
-                      </div>
-                    );
-                  })}
-                </dl>
-              </div>
-            ))}
-          </div>
+      {(hasIntro || table?.asset || isEmpty) && (
+        <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')}>
+          {isEmpty && <EmptyState>{t('empty')}</EmptyState>}
+          {hasIntro && <PortableText value={intro} className="max-w-3xl" />}
+          {table?.asset && (
+            <figure className={clsx('border border-sky-900/10 bg-white p-3 md:p-6', hasIntro && 'mt-10')}>
+              <Image
+                src={urlFor(table).width(2400).url()}
+                alt={table.alt ?? ''}
+                {...imageDimensions(table.asset._ref)}
+                sizes="(max-width: 1024px) 100vw, 960px"
+                className="h-auto w-full"
+              />
+              <figcaption className="mt-4">
+                <TextLink href={urlFor(table).url()} external>
+                  {t('tableOpen')}
+                </TextLink>
+              </figcaption>
+            </figure>
+          )}
         </Section>
       )}
 
-      {hasTraining && (
-        <Section kicker={t('trainingKicker')} title={t('trainingTitle')}>
-          <div className="grid gap-px border border-sky-900/10 bg-sky-900/10 md:grid-cols-2">
-            {TRAINING.map((offer) => {
-              const tariff = find(offer);
-              const details = localize(tariff?.details, locale);
-              return (
-                <div key={offer} className="bg-ciel p-8 md:p-10">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="font-serif text-xl text-sky-950">{tp(`offers.${offer}`)}</h3>
-                    <div className="font-serif text-2xl text-sky-950">{euros(tariff)}</div>
-                  </div>
-                  {details && <p className="mt-4 border-t border-sky-900/10 pt-4 text-sm text-slate-600">{details}</p>}
-                </div>
-              );
-            })}
-          </div>
+      {parts.map((part) => (
+        <Section key={part.id} id={part.id} title={part.title}>
+          <PortableText value={part.body} className="max-w-3xl" />
         </Section>
-      )}
+      ))}
 
       <Section kicker={t('howKicker')} title={t('howTitle')}>
         {joinText ? (

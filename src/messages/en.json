@@ -3,7 +3,7 @@
     "home": "Home",
     "club": "The club",
     "gliders": "Our gliders",
-    "join": "Join",
+    "join": "Learn to fly!",
     "discover": "Try gliding",
     "news": "News",
     "newsList": "Latest news",
@@ -17,7 +17,7 @@
     "platform": "The airfield",
     "activities": "Members’ life",
     "training": "Pilot training",
-    "campaign": "Cross-country school",
+    "campaign": "Advanced training",
     "competition": "Competition",
     "history": "Club history",
     "menu": "Menu",
@@ -39,15 +39,15 @@
     },
     "club": {
       "title": "The club",
-      "description": "The PIV club: who we are, the airfield and its flying area, training, cross-country school, competition and club history."
+      "description": "The PIV club: who we are, the airfield and its flying area, training, advanced training, competition and club history."
     },
     "gliders": {
       "title": "Our gliders",
       "description": "The PIV club gliders, one by one: training two-seaters and performance single-seaters."
     },
     "join": {
-      "title": "Join the club",
-      "description": "Prices and how to join the PIV gliding club."
+      "title": "Learn to fly: prices and membership",
+      "description": "Membership and training prices at the PIV gliding club."
     },
     "discover": {
       "title": "Try gliding",
@@ -86,7 +86,6 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "heroSubtitle": "Gliding in Brittany, open to everyone.",
     "slideLabel": "Photo {n}",
-    "statsMembers": "Members",
     "statsHours": "Flight hours this year",
     "statsHoursYear": "Flight hours in {year}",
     "statsGliders": "Club gliders",
@@ -102,7 +101,9 @@
     "cardJoinText": "Prices and how to join.",
     "latestKicker": "Journal",
     "latestTitle": "Latest news",
-    "allNews": "All news and events"
+    "allNews": "All news and events",
+    "statsPilots": "Licensed pilots",
+    "statsKm": "Kilometres flown since the club was founded"
   },
   "club": {
     "heroKicker": "The club",
@@ -148,12 +149,15 @@
     }
   },
   "join": {
-    "heroKicker": "Membership",
-    "heroTitle": "Join the club",
-    "packagesKicker": "Prices",
-    "packagesTitle": "Packages",
-    "trainingKicker": "Training",
-    "trainingTitle": "Learn to fly",
+    "heroKicker": "Learn to fly!",
+    "heroTitle": "Prices",
+    "introKicker": "Prices",
+    "introTitle": "This year’s prices",
+    "tableOpen": "Open the table full size",
+    "membershipTitle": "Club membership (members)",
+    "trainingPackTitle": "Training pack",
+    "advancedPackTitle": "Additional training pack",
+    "empty": "Prices will be published soon. Meanwhile, write to us.",
     "howKicker": "How to join",
     "howTitle": "How to join",
     "howEmpty": "Membership details will be published soon. Meanwhile, write to us.",
@@ -198,10 +202,9 @@
     "kicker": "Sky archives",
     "title": "Memorable flights from and to PIV",
     "empty": "Stories are coming soon.",
-    "read": "Read the story",
-    "close": "Close the story",
     "weglide": "See the track on WeGlide",
-    "clubOnWeglide": "All club flights on WeGlide"
+    "clubOnWeglide": "All club flights on WeGlide",
+    "all": "All stories"
   },
   "gallery": {
     "heroKicker": "In pictures",
@@ -233,6 +236,8 @@
       "institutions": "Institutions",
       "flight-prep": "Flight planning",
       "weather": "Weather and conditions",
+      "competitions": "Competitions",
+      "accommodation": "Accommodation",
       "community": "Community",
       "other": "Other"
     }
@@ -272,7 +277,10 @@
       "id": "RNA or SIRET number:",
       "email": "Email:",
       "phone": "Phone:",
-      "director": "Publication director:"
+      "director": "Publication director:",
+      "affiliation": "Affiliation:",
+      "ffvp": "French Gliding Federation (FFVP)",
+      "ffvpNumber": "no. {number}"
     },
     "hosting": {
       "title": "Hosting",

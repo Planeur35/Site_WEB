@@ -179,15 +179,15 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
-| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, école de campagne, compétition) et Histoire du club | 🟢 sous 60 s |
+| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire du club | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
-| S'inscrire `/adherer` | Tarifs (forfaits, packs formation) et texte « Comment s'inscrire » des Réglages | 🟢 sous 60 s |
+| Apprenez à voler ! `/adherer` | Réglages du site, onglet « Page Apprenez à voler (tarifs) » : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation ; texte « Comment s'inscrire » | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Deux rubriques : vols d'initiation (tarif « Vol d'initiation » adulte et moins de 18 ans, texte des Réglages) et réservation et paiement en ligne (texte et lien de paiement des Réglages) | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
-| Récits `/recits` | Récits de vols | 🟢 sous 60 s |
+| Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
 | Contact, pied de page | Adresse, e-mail, téléphone et réseaux des Réglages ; envoi du formulaire via Resend | 🟢 sous 60 s |
-| Mentions légales `/mentions-legales` | Réglages du site (groupe Mentions légales) pour l'identité ; textes dans `src/messages/*.json` (espace `legal`) | 🟢 sous 60 s (identité), 🟠 au prochain déploiement (textes) |
+| Mentions légales `/mentions-legales` | Réglages du site (groupe Mentions légales) pour l'identité (dont le numéro d'affiliation FFVP, facultatif) ; textes dans `src/messages/*.json` (espace `legal`) | 🟢 sous 60 s (identité), 🟠 au prochain déploiement (textes) |
 | Photo d'en-tête de chaque page | Réglages du site → Photos d'en-tête (une photo par page ; sans photo, le dessin du ciel s'affiche) | 🟢 sous 60 s |
 | Menus et libellés | `src/messages/fr.json` et `en.json`, entrées dans `src/components/layout/navItems.ts` | 🟠 au prochain déploiement |
 
@@ -354,7 +354,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 
 | Chantier | Situation actuelle | Piste |
 |---|---|---|
-| Tarifs | Type `tariff` prêt, aucun tarif saisi | Saisir forfaits, packs et vol d'initiation (170 € / 130 €) dans le Studio |
+| Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Apprenez à voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
 | Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |

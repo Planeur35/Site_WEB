@@ -64,6 +64,13 @@ export interface SiteSettings {
   flightHours?: number;
   glidersCount?: number;
   foundedYear?: number;
+  kmFlown?: number;
+  licensedPilots?: number;
+  pricingIntro?: LocalizedRichText;
+  pricingTable?: SanityImage;
+  pricingMembership?: LocalizedRichText;
+  pricingTraining?: LocalizedRichText;
+  pricingAdvanced?: LocalizedRichText;
   joinText?: LocalizedText;
   discoveryText?: LocalizedText;
   bookingText?: LocalizedText;
@@ -74,6 +81,7 @@ export interface SiteSettings {
   legalAddress?: string;
   legalId?: string;
   publicationDirector?: string;
+  ffvpNumber?: string;
 }
 
 /** Pages whose header photo can be set in Studio → Réglages du site → Photos d’en-tête. */
@@ -97,7 +105,7 @@ export interface HeroSlide {
   subtitle?: LocalizedString;
 }
 
-export type LinkGroup = 'institutions' | 'flight-prep' | 'weather' | 'community';
+export type LinkGroup = 'institutions' | 'flight-prep' | 'weather' | 'competitions' | 'accommodation' | 'community';
 
 export interface UsefulLink {
   _key: string;
@@ -232,10 +240,12 @@ export interface FlightStory {
   _id: string;
   _type: 'flightStory';
   title?: LocalizedString;
+  slug?: SanitySlug;
   flightDate?: string;
   weglideUrl?: string;
   aircraft?: string;
   image?: SanityImage;
   excerpt?: LocalizedText;
   body?: LocalizedRichText;
+  anecdotes?: Anecdote[];
 }

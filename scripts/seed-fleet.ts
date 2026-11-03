@@ -24,8 +24,8 @@ const fleet = [
     manufacturer: 'DG Flugzeugbau',
     specs: { wingspan: '18-20 m', glideRatio: '35-40', seats: 2 },
     description: {
-      fr: "Biplace spacieux et robuste pour la formation début, la formation campagne et le vol à deux.",
-      en: 'Spacious and robust two-seater for beginner training, cross-country training, and two-person flights.',
+      fr: "Biplace spacieux et robuste pour la formation début, le perfectionnement et le vol à deux.",
+      en: 'Spacious and robust two-seater for beginner training, advanced training, and two-person flights.',
     },
     sortOrder: 1,
   },
@@ -38,8 +38,8 @@ const fleet = [
     manufacturer: 'DG Flugzeugbau',
     specs: { wingspan: '18-20 m', glideRatio: '35-40', seats: 2 },
     description: {
-      fr: "Biplace spacieux et robuste pour la formation début, la formation campagne et le vol à deux.",
-      en: 'Spacious and robust two-seater for beginner training, cross-country training, and two-person flights.',
+      fr: "Biplace spacieux et robuste pour la formation début, le perfectionnement et le vol à deux.",
+      en: 'Spacious and robust two-seater for beginner training, advanced training, and two-person flights.',
     },
     sortOrder: 2,
   },

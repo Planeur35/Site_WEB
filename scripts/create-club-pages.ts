@@ -27,7 +27,7 @@ const sections = [
   { section: 'platform', fr: 'La plateforme', en: 'The airfield' },
   { section: 'activities', fr: 'Activité des membres', en: 'Members’ life' },
   { section: 'training', fr: 'Formation initiale', en: 'Pilot training' },
-  { section: 'campaign', fr: 'École de campagne', en: 'Cross-country school' },
+  { section: 'campaign', fr: 'Perfectionnement', en: 'Advanced training' },
   { section: 'competition', fr: 'Compétition', en: 'Competition' },
 ];
 

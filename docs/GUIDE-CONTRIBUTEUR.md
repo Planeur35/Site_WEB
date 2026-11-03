@@ -214,12 +214,12 @@ Tout s'affiche en ligne **moins d'une minute** après **Publish**.
 | Actualités (et Rubriques) | Actualités, et « Dernières nouvelles » sur l'accueil |
 | Agenda | Actualités, partie « Événements à venir » |
 | Galerie photos | Galerie |
-| Pages du club | Le club : une section par page (présentation, plateforme, activité, formation, école de campagne, compétition) |
+| Pages du club | Le club : une section par page (présentation, plateforme, activité, formation, perfectionnement, compétition) |
 | Histoire du club | Le club, partie « Histoire », au format magazine avec encarts d'anecdotes |
 | Nos planeurs | Nos planeurs |
-| Tarifs | S'inscrire (forfaits, packs formation) et Venez essayer (vol d'initiation) |
+| Tarifs | Venez essayer (prix du vol d'initiation). Les autres tarifs sont dans la page Apprenez à voler ! (Réglages du site) |
 | Récits de vols | Récits de vols |
-| Réglages du site | Photos d'accueil et accroche, chiffres clés, textes « Comment s'inscrire » et « Vol d'initiation », coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
+| Réglages du site | Photos d'accueil et accroche, chiffres clés, page Apprenez à voler ! (tarifs), textes « Comment s'inscrire » et « Vol d'initiation », coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
 
 Une rubrique encore vide affiche « Bientôt ici » sur le site.
 
@@ -263,33 +263,42 @@ Une rubrique encore vide affiche « Bientôt ici » sur le site.
 5. **Sort Order** : sa position dans sa catégorie, le plus petit d'abord.
 6. **Publish**.
 
-#### Pas à pas : saisir les tarifs
+#### Pas à pas : la page Apprenez à voler ! (tarifs)
 
-Une fiche **Tarifs** = une ligne de prix.
+Cette page se rédige dans **Réglages du site**, onglet **Page Apprenez à voler (tarifs)** :
 
-1. **Tarifs** → **+**. **Offre** : forfait 20 h, forfait illimité, pack formation, pack complément de formation ou vol d'initiation.
+1. **Texte explicatif** : l'introduction, en haut de la page.
+2. **Tableau récapitulatif des tarifs (image)** : l'image du tableau de tous les tarifs de l'année, à remplacer chaque année. Elle peut être grande, le visiteur l'ouvre en plein écran. Dans « Description de la photo », résumez en une phrase ce que contient le tableau.
+3. Les trois sous-parties, dans cet ordre : **Adhésion au club (membres)**, **Pack formation** et **Pack complément de formation**. Une sous-partie sans texte n'est pas affichée.
+4. **Publish**.
+
+#### Pas à pas : saisir le prix du vol d'initiation
+
+Une fiche **Tarifs** = une ligne de prix. Seule l'offre « vol d'initiation » est affichée (page Venez essayer) : les autres prix sont dans le tableau de la page Apprenez à voler !.
+
+1. **Tarifs** → **+**. **Offre** : vol d'initiation (les autres offres existent encore dans la liste, mais ne sont plus affichées).
 2. **Catégorie d'âge** : pour les forfaits, moins ou plus de 25 ans ; pour le vol d'initiation, moins de 18 ans ou adulte. Une fiche par catégorie (par exemple deux fiches pour le vol d'initiation : 170 € adulte, 130 € moins de 18 ans).
 3. **Montant (€)**, puis **Précisions** si besoin (« par an », « 20 minutes de vol »).
 4. **Publish**. Le Studio refuse un doublon (même offre, même âge).
 
 #### Pas à pas : rédiger les pages du club
 
-1. **Pages du club** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, école de campagne ou compétition. Une seule page par section.
+1. **Pages du club** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, perfectionnement ou compétition. Une seule page par section.
 2. **Titre de la section**, **Introduction** (2 ou 3 phrases), **Photo principale**, **Texte** (avec des *Titres de section* pour les sous-parties). Pour la formation, un **Schéma du cursus** peut être ajouté en image.
 3. **Publish**. Les sections apparaissent sur la page Le club dans l'ordre du menu.
 
-L'**Histoire du club** (document unique) se remplit de la même façon, avec en plus des **encarts d'anecdotes**. Les **Récits de vols** ont un titre, la date du vol, le planeur, un résumé, le récit et le lien WeGlide. Jamais de nom de pilote ou d'élève.
+L'**Histoire du club** (document unique) se remplit de la même façon, avec en plus des **encarts d'anecdotes**. Chaque **Récit de vol** est une page de type magazine : titre, **adresse de la page** (bouton *Generate*), date du vol, planeur, photo, introduction, récit (avec photos insérées dans le texte), encarts d'anecdotes et lien WeGlide. La page Récits de vols en propose **6 au maximum** (les plus récents), chacun dans une case avec sa photo et son titre ; les cases se répartissent selon leur nombre. Jamais de nom de pilote ou d'élève.
 
 #### Pas à pas : réglages du site
 
 **Réglages du site**, en bas de la colonne de gauche, est un document unique, comme la page Réglages de WordPress : on ne peut ni en créer un deuxième, ni le supprimer. Ses onglets :
 
 - **Page d'accueil** : nom du club, accroche, 3 ou 4 photos d'accueil qui défilent, avec un titre chacune.
-- **Photos d'en-tête** : une grande photo par page (Le club, Nos planeurs, S'inscrire, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
-- **Chiffres clés** : membres, heures de vol, planeurs, année de fondation (à mettre à jour une fois par an).
-- **Textes des pages** : modalités d'inscription (page S'inscrire), vols d'initiation et réservation et paiement en ligne (page Venez essayer).
+- **Photos d'en-tête** : une grande photo par page (Le club, Nos planeurs, Apprenez à voler !, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
+- **Chiffres clés** : pilotes brevetés, heures de vol, kilomètres parcourus depuis la création du club, planeurs, année de fondation (à mettre à jour une fois par an). Le nombre de membres n'est plus affiché.
+- **Textes des pages** : modalités d'inscription (page Apprenez à voler !), vols d'initiation et réservation et paiement en ligne (page Venez essayer).
 - **Contact et réseaux** : e-mail, téléphone et adresse du club (page Contact et pied de page), lien de paiement (réservation des vols d'initiation et bons cadeaux), réseaux sociaux, adresse de l'image de la webcam, coordonnées du terrain pour la carte.
-- **Liens pratiques** : nom, adresse et rubrique de chaque lien (institutions, préparation de vol, météo, communauté).
+- **Liens pratiques** : nom, adresse et rubrique de chaque lien (institutions, préparation de vol, météo, compétitions, hébergements, communauté).
 
 Puis **Publish**.
 
