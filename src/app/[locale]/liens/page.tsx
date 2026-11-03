@@ -12,7 +12,7 @@ import type { LinkGroup, SiteSettings, UsefulLink } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
-const GROUPS: LinkGroup[] = ['institutions', 'flight-prep', 'weather', 'community'];
+const GROUPS: LinkGroup[] = ['institutions', 'flight-prep', 'weather', 'competitions', 'accommodation', 'community'];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

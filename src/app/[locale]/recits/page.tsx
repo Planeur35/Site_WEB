@@ -1,20 +1,43 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
-import PortableText from '@/components/sanity/PortableText';
 import EmptyState from '@/components/ui/EmptyState';
 import SitePageHero from '@/components/ui/SitePageHero';
-import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
-import Tag from '@/components/ui/Tag';
+import StoryCard from '@/components/ui/StoryCard';
 import TextLink from '@/components/ui/TextLink';
-import { formatMonthYear } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
-import { localize } from '@/lib/sanity/localize';
 import { allFlightStoriesQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { FlightStory, SiteSettings } from '@/lib/sanity/types';
 
 export const revalidate = 60;
+
+/**
+ * Column span of each card in a 6-column grid, for 1 to 6 stories, so that every row is full:
+ * 1 wide card · 2 side by side · 3 in a row · 2×2 · 3 + 2 · 3×2.
+ * On phones every card takes the full width.
+ */
+const SPANS: Record<number, string[]> = {
+  1: ['sm:col-span-6'],
+  2: ['sm:col-span-3', 'sm:col-span-3'],
+  3: ['sm:col-span-3 md:col-span-2', 'sm:col-span-3 md:col-span-2', 'sm:col-span-6 md:col-span-2'],
+  4: ['sm:col-span-3', 'sm:col-span-3', 'sm:col-span-3', 'sm:col-span-3'],
+  5: [
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3',
+    'sm:col-span-6 md:col-span-3',
+  ],
+  6: [
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+    'sm:col-span-3 md:col-span-2',
+  ],
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -27,58 +50,25 @@ export default async function StoriesPage({ params }: { params: Promise<{ locale
   setRequestLocale(locale);
   const t = await getTranslations('stories');
 
-  const [stories, settings] = await Promise.all([
+  const [allStories, settings] = await Promise.all([
     sanityFetch<FlightStory[]>(allFlightStoriesQuery, []),
     sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
   ]);
+  const stories = allStories.slice(0, 6);
+  const spans = SPANS[stories.length] ?? [];
 
   return (
     <>
       <SitePageHero page="stories" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
       <Section kicker={t('kicker')} title={t('title')}>
         {stories.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
-        <div className="border-t border-sky-900/15">
-          {stories.map((story) => {
-            const body = localize(story.body, locale);
-            return (
-              <article key={story._id} className="grid gap-8 border-b border-sky-900/15 px-2 py-10 md:grid-cols-[1fr_240px]">
-                <div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    {story.flightDate && (
-                      <span className="text-xs font-medium uppercase tracking-[0.25em] text-sky-800">
-                        {formatMonthYear(story.flightDate, locale)}
-                      </span>
-                    )}
-                    {story.aircraft && <Tag>{story.aircraft}</Tag>}
-                  </div>
-                  <h3 className="mt-2 font-serif text-2xl leading-snug text-sky-950">{localize(story.title, locale)}</h3>
-                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700">{localize(story.excerpt, locale)}</p>
-                  {body && body.length > 0 && (
-                    <details className="group mt-4 max-w-2xl">
-                      <summary className="inline-flex min-h-11 cursor-pointer items-center text-xs uppercase tracking-[0.25em] text-sky-800 underline decoration-sky-300 underline-offset-4">
-                        <span className="group-open:hidden">{t('read')}</span>
-                        <span className="hidden group-open:inline">{t('close')}</span>
-                      </summary>
-                      <PortableText value={body} className="mt-4 text-sm" />
-                    </details>
-                  )}
-                  {story.weglideUrl && (
-                    <p className="mt-4">
-                      <TextLink href={story.weglideUrl} external>
-                        {t('weglide')}
-                      </TextLink>
-                    </p>
-                  )}
-                </div>
-                {story.image?.asset && (
-                  <SanityPhoto image={story.image} className="h-44 md:order-first md:col-start-2 md:row-start-1" ratio={0.7} sizes="(max-width: 768px) 100vw, 240px" />
-                )}
-              </article>
-            );
-          })}
+        <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">
+          {stories.map((story, index) => (
+            <StoryCard key={story._id} story={story} locale={locale} wide={stories.length === 1} className={spans[index]} />
+          ))}
         </div>
         {settings?.weglideUrl && (
-          <p className="mt-10">
+          <p className="mt-12">
             <TextLink href={settings.weglideUrl} external>
               {t('clubOnWeglide')}
             </TextLink>

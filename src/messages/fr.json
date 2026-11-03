@@ -3,7 +3,7 @@
     "home": "Accueil",
     "club": "Le club",
     "gliders": "Nos planeurs",
-    "join": "S’inscrire",
+    "join": "Apprenez à voler !",
     "discover": "Venez essayer",
     "news": "Actualités",
     "newsList": "Les news",
@@ -17,7 +17,7 @@
     "platform": "La plateforme",
     "activities": "Activité des membres",
     "training": "Formation initiale",
-    "campaign": "École de campagne",
+    "campaign": "Perfectionnement",
     "competition": "Compétition",
     "history": "Histoire du club",
     "menu": "Menu",
@@ -39,15 +39,15 @@
     },
     "club": {
       "title": "Le club",
-      "description": "Le club PIV : présentation, la plateforme et sa zone de vol, la formation, l’école de campagne, la compétition et l’histoire du club."
+      "description": "Le club PIV : présentation, la plateforme et sa zone de vol, la formation, le perfectionnement, la compétition et l’histoire du club."
     },
     "gliders": {
       "title": "Nos planeurs",
       "description": "Les planeurs du club PIV, présentés un par un : biplaces de formation, monoplaces de performance."
     },
     "join": {
-      "title": "S’inscrire au club",
-      "description": "Tarifs et modalités d’inscription au club de vol à voile PIV."
+      "title": "Apprenez à voler : tarifs et adhésion",
+      "description": "Les tarifs d’adhésion et de formation au club de vol à voile PIV."
     },
     "discover": {
       "title": "Venez essayer",
@@ -86,7 +86,6 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "heroSubtitle": "Le vol à voile en Bretagne, pour tous.",
     "slideLabel": "Photo {n}",
-    "statsMembers": "Membres",
     "statsHours": "Heures de vol dans l’année",
     "statsHoursYear": "Heures de vol en {year}",
     "statsGliders": "Planeurs au club",
@@ -102,7 +101,9 @@
     "cardJoinText": "Les tarifs et les modalités d’inscription.",
     "latestKicker": "Journal",
     "latestTitle": "Dernières nouvelles",
-    "allNews": "Toutes les actualités et l’agenda"
+    "allNews": "Toutes les actualités et l’agenda",
+    "statsPilots": "Pilotes brevetés",
+    "statsKm": "Kilomètres parcourus depuis la création du club"
   },
   "club": {
     "heroKicker": "Le club",
@@ -148,12 +149,15 @@
     }
   },
   "join": {
-    "heroKicker": "Adhésion",
-    "heroTitle": "S’inscrire au club",
-    "packagesKicker": "Tarifs",
-    "packagesTitle": "Les forfaits",
-    "trainingKicker": "Formation",
-    "trainingTitle": "Se former au pilotage",
+    "heroKicker": "Apprenez à voler !",
+    "heroTitle": "Les tarifs",
+    "introKicker": "Tarifs",
+    "introTitle": "Les tarifs de l’année",
+    "tableOpen": "Ouvrir le tableau en grand",
+    "membershipTitle": "Adhésion au club (membres)",
+    "trainingPackTitle": "Pack formation",
+    "advancedPackTitle": "Pack complément de formation",
+    "empty": "Les tarifs seront publiés prochainement. En attendant, écrivez-nous.",
     "howKicker": "Modalités",
     "howTitle": "Comment s’inscrire",
     "howEmpty": "Les modalités d’inscription seront publiées prochainement. En attendant, écrivez-nous.",
@@ -198,10 +202,9 @@
     "kicker": "Archives du ciel",
     "title": "Beaux vols au départ et à l’arrivée de PIV",
     "empty": "Les récits arrivent bientôt.",
-    "read": "Lire le récit",
-    "close": "Refermer le récit",
     "weglide": "Voir le tracé sur WeGlide",
-    "clubOnWeglide": "Tous les vols du club sur WeGlide"
+    "clubOnWeglide": "Tous les vols du club sur WeGlide",
+    "all": "Tous les récits"
   },
   "gallery": {
     "heroKicker": "En images",
@@ -233,6 +236,8 @@
       "institutions": "Institutions",
       "flight-prep": "Préparation de vol",
       "weather": "Météo et conditions",
+      "competitions": "Compétitions",
+      "accommodation": "Hébergements",
       "community": "Communauté",
       "other": "Autres"
     }
@@ -272,7 +277,10 @@
       "id": "Numéro RNA ou SIRET :",
       "email": "E-mail :",
       "phone": "Téléphone :",
-      "director": "Directeur de la publication :"
+      "director": "Directeur de la publication :",
+      "affiliation": "Affiliation :",
+      "ffvp": "Fédération Française de Vol en Planeur (FFVP)",
+      "ffvpNumber": "n° {number}"
     },
     "hosting": {
       "title": "Hébergement",

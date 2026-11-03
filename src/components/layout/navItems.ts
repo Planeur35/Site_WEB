@@ -17,7 +17,7 @@ export const CLUB_ANCHORS = {
   platform: 'plateforme',
   activities: 'activites',
   training: 'formation',
-  campaign: 'ecole-campagne',
+  campaign: 'perfectionnement',
   competition: 'competition',
   history: 'histoire',
 } as const;

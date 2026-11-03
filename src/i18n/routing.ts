@@ -33,6 +33,10 @@ export const routing = defineRouting({
       fr: "/recits",
       en: "/flight-stories",
     },
+    "/recits/[slug]": {
+      fr: "/recits/[slug]",
+      en: "/flight-stories/[slug]",
+    },
     "/galerie": {
       fr: "/galerie",
       en: "/gallery",

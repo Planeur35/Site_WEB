@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 import { sanityFetch } from '@/lib/sanity/fetch';
-import { allArticlesQuery } from '@/lib/sanity/queries';
-import type { Article } from '@/lib/sanity/types';
+import { allArticlesQuery, allFlightStoriesQuery } from '@/lib/sanity/queries';
+import type { Article, FlightStory } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Static pages for both locales
   for (const [key, value] of Object.entries(routing.pathnames)) {
-    // Skip dynamic routes like /actualites/[slug]
+    // Skip dynamic routes like /actualites/[slug] and /recits/[slug]
     if (key.includes('[')) continue;
 
     const priority = priorityMap[key] ?? 0.5;
@@ -67,6 +67,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entries.push({
         url: `${BASE_URL}/${locale}${articlePath}`,
         lastModified: article.publishedAt ? new Date(article.publishedAt) : new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+      });
+    }
+  }
+
+  // Dynamic flight story pages
+  const stories = await sanityFetch<FlightStory[]>(allFlightStoriesQuery, []);
+
+  for (const story of stories) {
+    if (!story.slug?.current) continue;
+
+    for (const locale of routing.locales) {
+      const pathConfig = routing.pathnames['/recits/[slug]'];
+      const basePath =
+        typeof pathConfig === 'string'
+          ? pathConfig
+          : (pathConfig as Record<string, string>)[locale];
+
+      entries.push({
+        url: `${BASE_URL}/${locale}${basePath.replace('[slug]', story.slug.current)}`,
+        lastModified: story.flightDate ? new Date(story.flightDate) : new Date(),
         changeFrequency: 'monthly',
         priority: 0.5,
       });

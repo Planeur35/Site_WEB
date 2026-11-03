@@ -58,6 +58,10 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
                 <strong>{t('editor.director')}</strong> {settings.publicationDirector}
               </li>
             )}
+            <li>
+              <strong>{t('editor.affiliation')}</strong> {t('editor.ffvp')}
+              {settings?.ffvpNumber && <> · {t('editor.ffvpNumber', { number: settings.ffvpNumber })}</>}
+            </li>
           </ul>
 
           <h3>{t('hosting.title')}</h3>
