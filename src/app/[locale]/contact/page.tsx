@@ -30,7 +30,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <SitePageHero page="contact" kicker={t('heroKicker')} title={t('title')} variant={0} />
+      <SitePageHero page="contact" kicker={t('heroKicker')} title={t('title')} />
       <Section kicker={t('formKicker')} title={t('formTitle')} sub={t('subtitle')}>
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
           <ContactForm />

@@ -8,12 +8,11 @@ interface SitePageHeroProps {
   page: PageHeroKey;
   kicker: string;
   title: string;
-  /** Which sky gradient to draw when the page has no photo. */
-  variant?: number;
+  lead?: string;
 }
 
-/** PageHero with the page's header photo from Sanity. Without a photo, the sky drawing is shown. */
-export default async function SitePageHero({ page, kicker, title, variant }: SitePageHeroProps) {
+/** PageHero with the page's header photo from Sanity. Without a photo, the header ends after the text. */
+export default async function SitePageHero({ page, kicker, title, lead }: SitePageHeroProps) {
   const settings = await sanityFetch<SiteSettings | null>(siteSettingsQuery, null);
-  return <PageHero kicker={kicker} title={title} variant={variant} image={settings?.pageHeroes?.[page]} />;
+  return <PageHero kicker={kicker} title={title} lead={lead} image={settings?.pageHeroes?.[page]} />;
 }

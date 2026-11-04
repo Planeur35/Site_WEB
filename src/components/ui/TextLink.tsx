@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 
 type LinkHref = React.ComponentProps<typeof Link>['href'];
@@ -12,20 +13,23 @@ interface TextLinkProps {
 }
 
 const style =
-  'inline-block text-xs uppercase tracking-[0.25em] text-sky-800 underline decoration-sky-300 underline-offset-4 hover:decoration-sky-800';
+  'group inline-flex min-h-11 items-center gap-2 text-base font-semibold text-altitude decoration-2 underline-offset-4 hover:underline';
+const arrow = 'shrink-0 transition-transform duration-150 ease-planeur group-hover:translate-x-1';
 
-/** Small capitals link ("All news", "Open on WeGlide"). */
+/** Link with an arrow ("Toutes les actualités →"). */
 export default function TextLink({ href, external = false, className, children }: TextLinkProps) {
   if (external) {
     return (
       <a href={href as string} target="_blank" rel="noopener noreferrer" className={clsx(style, className)}>
-        {children} <span aria-hidden="true">↗</span>
+        {children}
+        <ArrowUpRight size={18} strokeWidth={2} className={arrow} aria-hidden="true" />
       </a>
     );
   }
   return (
     <Link href={href as LinkHref} className={clsx(style, className)}>
       {children}
+      <ArrowRight size={18} strokeWidth={2} className={arrow} aria-hidden="true" />
     </Link>
   );
 }

@@ -27,7 +27,7 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
 
   return (
     <>
-      <SitePageHero page="legal" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
+      <SitePageHero page="legal" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('kicker')} title={t('title')} sub={t('intro')}>
         <div className="prose-piv max-w-3xl">
           <h3>{t('editor.title')}</h3>

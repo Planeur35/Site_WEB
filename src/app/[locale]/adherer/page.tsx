@@ -64,7 +64,7 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
+      <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} />
 
       {(hasIntro || table?.asset || isEmpty) && (
         <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')}>
@@ -105,7 +105,7 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
         )}
         <div className="mt-8 flex flex-wrap gap-4">
           <Button href="/contact">{t('contactCta')}</Button>
-          <Button href="/decouvrir" variant="outline">
+          <Button href="/decouvrir" variant="secondary">
             {t('tryCta')}
           </Button>
         </div>

@@ -59,7 +59,7 @@ export default async function StoriesPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <SitePageHero page="stories" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
+      <SitePageHero page="stories" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('kicker')} title={t('title')}>
         {stories.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
         <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-6">

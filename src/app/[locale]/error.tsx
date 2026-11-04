@@ -22,7 +22,7 @@ export default function ErrorPage({
       {error.digest && <p className="mt-2 font-mono text-sm text-slate-500">{error.digest}</p>}
       <div className="mt-8 flex flex-wrap gap-4">
         <Button onClick={reset}>{t("tryAgain")}</Button>
-        <Button href="/" variant="outline">
+        <Button href="/" variant="secondary">
           {tCommon("backToHome")}
         </Button>
       </div>

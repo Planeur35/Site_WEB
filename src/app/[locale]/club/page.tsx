@@ -43,7 +43,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <SitePageHero page="club" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
+      <SitePageHero page="club" kicker={t('heroKicker')} title={t('heroTitle')} />
 
       {sections.length === 0 && !history && (
         <Section title={t('emptyTitle')}>

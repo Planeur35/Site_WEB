@@ -31,6 +31,9 @@
   --text-lead: 1.3125rem;   --text-lead--line-height: 1.55;
   --text-body: 1.125rem;    --text-body--line-height: 1.65;
 
+  /* Tight tracking of the large titles, for their mobile sizes */
+  --tracking-titre: -0.035em;
+
   /* Elevation: only what floats (scrolled header, dropdowns, full menu, map label) */
   --shadow-flottant: 0 12px 32px -12px rgb(11 26 42 / 0.22), 0 0 0 1px rgb(11 26 42 / 0.05);
 

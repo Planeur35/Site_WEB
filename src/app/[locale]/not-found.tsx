@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Button from "@/components/ui/Button";
-import GliderSilhouette from "@/components/ui/GliderSilhouette";
+import Container from "@/components/ui/Container";
+import FlightTrace from "@/components/ui/FlightTrace";
 import Kicker from "@/components/ui/Kicker";
 
 export default function NotFound() {
@@ -8,14 +9,20 @@ export default function NotFound() {
   const tCommon = useTranslations("common");
 
   return (
-    <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 md:px-8">
-      <GliderSilhouette className="w-48 text-azur/20" />
-      <Kicker>404</Kicker>
-      <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-sky-950 md:text-5xl">{t("notFound")}</h1>
-      <p className="mt-4 max-w-md leading-relaxed text-slate-600">{t("notFoundDescription")}</p>
-      <div className="mt-8">
-        <Button href="/">{tCommon("backToHome")}</Button>
+    <Container className="py-16 lg:py-28">
+      <div className="relative flex min-h-[360px] items-center overflow-hidden rounded-md px-6 lg:px-12">
+        <FlightTrace seed="404" align="right" className="absolute! inset-0" />
+        <div className="relative max-w-[440px]">
+          <Kicker>404</Kicker>
+          <h1 className="font-display text-[2.75rem] leading-[1.03] font-semibold tracking-titre text-azur lg:text-h2">
+            {t("notFound")}
+          </h1>
+          <p className="mt-4 text-texte">{t("notFoundDescription")}</p>
+          <div className="mt-8">
+            <Button href="/">{tCommon("backToHome")}</Button>
+          </div>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }

@@ -49,7 +49,7 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <SitePageHero page="discover" kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
+      <SitePageHero page="discover" kicker={t('heroKicker')} title={t('heroTitle')} />
 
       {/* Introductory flights */}
       <Section id="vols-initiation" kicker={t('kicker')} title={t('title')}>
@@ -102,7 +102,7 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
             <Button href="/contact">{t('contactCta')}</Button>
           )}
           {settings?.paymentUrl && (
-            <Button href="/contact" variant="outline">
+            <Button href="/contact" variant="secondary">
               {t('questionCta')}
             </Button>
           )}

@@ -37,7 +37,7 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <SitePageHero page="gallery" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
+      <SitePageHero page="gallery" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('kicker')} title={t('title')}>
         {images.length > 0 ? <Gallery images={images} /> : <EmptyState>{t('empty')}</EmptyState>}
       </Section>

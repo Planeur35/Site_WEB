@@ -3,9 +3,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
-import Kicker from '@/components/ui/Kicker';
 import SanityPhoto from '@/components/ui/SanityPhoto';
-import SkyVisual from '@/components/ui/SkyVisual';
+import FlightTrace from '@/components/ui/FlightTrace';
 import type { SanityImage } from '@/lib/sanity/types';
 
 export interface Slide {
@@ -49,13 +48,13 @@ export default function HeroSlideshow({ slides, kicker }: HeroSlideshowProps) {
             {slide.image?.asset ? (
               <SanityPhoto image={slide.image} className="absolute! inset-0" priority={i === 0} />
             ) : (
-              <SkyVisual variant={i} />
+              <FlightTrace seed={slide.key} className="absolute! inset-0" />
             )}
-            <div className="absolute inset-0 bg-linear-to-t from-sky-950/60 via-sky-950/10 to-transparent" />
-            <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-center px-4 sm:px-6 md:px-8">
+            <div className="absolute inset-0 bg-linear-to-t from-nuit/60 via-nuit/10 to-transparent" />
+            <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 sm:px-8 lg:px-10">
               <div className="max-w-2xl">
-                <Kicker light>{kicker}</Kicker>
-                <Title className="font-serif text-4xl leading-[1.05] tracking-tight text-white md:text-6xl">{slide.title}</Title>
+                <p className="mb-3 font-display text-base font-semibold text-white">{kicker}</p>
+                <Title className="font-display text-[3rem] leading-[1.02] font-semibold tracking-titre text-white lg:text-display">{slide.title}</Title>
                 {slide.subtitle && <p className="mt-5 max-w-md text-lg leading-relaxed text-white/90">{slide.subtitle}</p>}
               </div>
             </div>
@@ -65,7 +64,7 @@ export default function HeroSlideshow({ slides, kicker }: HeroSlideshowProps) {
 
       {slides.length > 1 && (
         <div className="absolute inset-x-0 bottom-6 z-20">
-          <div className="mx-auto flex max-w-5xl gap-1 px-4 sm:px-6 md:px-8">
+          <div className="mx-auto flex max-w-7xl gap-1 px-5 sm:px-8 lg:px-10">
             {slides.map((slide, i) => (
               <button
                 key={slide.key}

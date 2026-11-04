@@ -42,7 +42,7 @@ export default async function GlidersPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <SitePageHero page="gliders" kicker={t('heroKicker')} title={t('heroTitle')} variant={1} />
+      <SitePageHero page="gliders" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('sectionKicker')} title={t('sectionTitle')}>
         {sorted.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
         <div className="border-t border-sky-900/15">

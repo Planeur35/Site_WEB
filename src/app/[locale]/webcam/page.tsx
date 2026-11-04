@@ -25,7 +25,7 @@ export default async function WebcamPage({ params }: { params: Promise<{ locale:
 
   return (
     <>
-      <SitePageHero page="webcam" kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
+      <SitePageHero page="webcam" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('kicker')} title={t('title')}>
         {settings?.webcamUrl ? <WebcamImage url={settings.webcamUrl} /> : <EmptyState>{t('empty')}</EmptyState>}
       </Section>

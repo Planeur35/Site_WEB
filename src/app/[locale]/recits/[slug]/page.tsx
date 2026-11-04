@@ -57,7 +57,7 @@ export default async function StoryPage({ params }: PageProps) {
 
   return (
     <>
-      <PageHero kicker={t('heroKicker')} title={title} variant={1} image={story.image} />
+      <PageHero kicker={t('heroKicker')} title={title} image={story.image} />
       <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:px-8 md:py-24">
         <TextLink href="/recits">{t('all')}</TextLink>
         <div className="mt-8 flex flex-wrap items-center gap-3">

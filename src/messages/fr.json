@@ -22,7 +22,8 @@
     "history": "Histoire du club",
     "menu": "Menu",
     "mainNav": "Navigation principale",
-    "fullNav": "Menu complet"
+    "fullNav": "Menu complet",
+    "breadcrumb": "Fil d’Ariane"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -191,7 +192,8 @@
     "agendaKicker": "Agenda",
     "agendaTitle": "Événements à venir",
     "agendaEmpty": "Aucun événement à venir.",
-    "at": "à {time}"
+    "at": "à {time}",
+    "readMore": "Lire la suite"
   },
   "share": {
     "label": "Partager",

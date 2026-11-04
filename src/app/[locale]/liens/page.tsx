@@ -36,7 +36,7 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <SitePageHero page="links" kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
+      <SitePageHero page="links" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('kicker')} title={t('title')}>
         {filled.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">

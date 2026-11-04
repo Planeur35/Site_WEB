@@ -24,7 +24,7 @@ export default function ContactForm() {
       {/* Success message */}
       {state?.success && (
         <div
-          className="border-l-2 border-emerald-600 bg-emerald-50 px-4 py-3 text-emerald-900"
+          className="rounded-sm border-l-2 border-emerald-600 bg-emerald-50 px-4 py-3 text-emerald-900"
           role="status"
         >
           {t('success')}
@@ -34,7 +34,7 @@ export default function ContactForm() {
       {/* General error message */}
       {state && !state.success && state.message && (
         <div
-          className="border-l-2 border-red-700 bg-red-50 px-4 py-3 text-red-900"
+          className="rounded-sm border-l-2 border-red-700 bg-red-50 px-4 py-3 text-red-900"
           role="alert"
         >
           {t('error')}
@@ -43,7 +43,7 @@ export default function ContactForm() {
 
       {/* Name */}
       <div>
-        <label htmlFor="contact-name" className="mb-1.5 block text-xs font-medium uppercase tracking-[0.2em] text-sky-900">
+        <label htmlFor="contact-name" className="mb-2 block font-semibold text-nuit">
           {t('name')} <span className="text-red-700" aria-hidden="true">*</span>
         </label>
         <input
@@ -55,7 +55,7 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.name}
           aria-describedby={state?.errors?.name ? 'name-error' : undefined}
           disabled={isPending}
-          className="w-full border border-sky-900/20 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-sky-800 focus:ring-1 focus:ring-sky-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.name && (
           <p id="name-error" className="mt-1 text-sm text-red-700">
@@ -66,7 +66,7 @@ export default function ContactForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="contact-email" className="mb-1.5 block text-xs font-medium uppercase tracking-[0.2em] text-sky-900">
+        <label htmlFor="contact-email" className="mb-2 block font-semibold text-nuit">
           {t('email')} <span className="text-red-700" aria-hidden="true">*</span>
         </label>
         <input
@@ -78,7 +78,7 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.email}
           aria-describedby={state?.errors?.email ? 'email-error' : undefined}
           disabled={isPending}
-          className="w-full border border-sky-900/20 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-sky-800 focus:ring-1 focus:ring-sky-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.email && (
           <p id="email-error" className="mt-1 text-sm text-red-700">
@@ -89,7 +89,7 @@ export default function ContactForm() {
 
       {/* Subject */}
       <div>
-        <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-medium uppercase tracking-[0.2em] text-sky-900">
+        <label htmlFor="contact-subject" className="mb-2 block font-semibold text-nuit">
           {t('subject')} <span className="text-red-700" aria-hidden="true">*</span>
         </label>
         <input
@@ -101,7 +101,7 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.subject}
           aria-describedby={state?.errors?.subject ? 'subject-error' : undefined}
           disabled={isPending}
-          className="w-full border border-sky-900/20 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-sky-800 focus:ring-1 focus:ring-sky-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.subject && (
           <p id="subject-error" className="mt-1 text-sm text-red-700">
@@ -112,7 +112,7 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="contact-message" className="mb-1.5 block text-xs font-medium uppercase tracking-[0.2em] text-sky-900">
+        <label htmlFor="contact-message" className="mb-2 block font-semibold text-nuit">
           {t('message')} <span className="text-red-700" aria-hidden="true">*</span>
         </label>
         <textarea
@@ -124,7 +124,7 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.message}
           aria-describedby={state?.errors?.message ? 'message-error' : undefined}
           disabled={isPending}
-          className="w-full border border-sky-900/20 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-sky-800 focus:ring-1 focus:ring-sky-800 resize-y disabled:opacity-50 disabled:cursor-not-allowed"
+          className="min-h-40 w-full resize-y rounded-sm border border-brume/50 bg-blanc px-4 py-3 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.message && (
           <p id="message-error" className="mt-1 text-sm text-red-700">

@@ -32,7 +32,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <SitePageHero page="news" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
+      <SitePageHero page="news" kicker={t('heroKicker')} title={t('heroTitle')} />
 
       <Section id="news" kicker={t('listKicker')} title={t('listTitle')}>
         {articles.length === 0 && <EmptyState>{t('empty')}</EmptyState>}

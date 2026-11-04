@@ -28,7 +28,7 @@ export default function MapInner({
   popupText,
 }: MapInnerProps) {
   return (
-    <div className="relative z-0 h-[400px] w-full overflow-hidden border border-sky-900/15">
+    <div className="relative z-0 h-[400px] w-full overflow-hidden rounded-md">
       <MapContainer
         center={[lat, lng]}
         zoom={zoom}

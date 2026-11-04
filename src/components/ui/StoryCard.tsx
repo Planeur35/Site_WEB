@@ -31,13 +31,13 @@ export default function StoryCard({ story, locale, wide = false, className }: St
       />
       <div className="mt-4 flex flex-wrap items-center gap-3">
         {story.flightDate && (
-          <span className="text-xs font-medium uppercase tracking-[0.25em] text-sky-800">
+          <span className="text-sm font-semibold text-nuit">
             {formatMonthYear(story.flightDate, locale)}
           </span>
         )}
         {story.aircraft && <Tag>{story.aircraft}</Tag>}
       </div>
-      <h3 className="mt-2 font-serif text-xl leading-snug text-sky-950 group-hover:underline group-hover:decoration-sky-400 group-hover:underline-offset-4">
+      <h3 className="mt-2 font-display text-[1.1875rem] leading-snug font-semibold text-azur decoration-2 underline-offset-4 group-hover:underline lg:text-h4">
         {title}
       </h3>
     </Link>
