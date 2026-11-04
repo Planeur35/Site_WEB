@@ -4,7 +4,7 @@ import type { StructureBuilder } from 'sanity/structure';
 import { schemas } from './schemas';
 
 // Documents that exist only once
-const singletonTypes = new Set(['siteSettings', 'clubHistory']);
+const singletonTypes = new Set(['siteSettings', 'clubHistory', 'joinPage', 'discoverPage']);
 
 const singletonListItem = (
   S: StructureBuilder,
@@ -39,6 +39,8 @@ export default defineConfig({
             // Pages managed by administrators
             S.documentTypeListItem('clubPage').title('Pages du club'),
             singletonListItem(S, 'clubHistory', 'Histoire du club'),
+            singletonListItem(S, 'joinPage', 'Page « Venez voler ! »'),
+            singletonListItem(S, 'discoverPage', 'Page « Venez essayer »'),
             S.documentTypeListItem('aircraft').title('Nos planeurs'),
             S.documentTypeListItem('tariff').title('Tarifs'),
             S.documentTypeListItem('flightStory').title('Récits de vols'),

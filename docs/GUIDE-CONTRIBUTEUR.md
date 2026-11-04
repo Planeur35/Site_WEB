@@ -159,7 +159,7 @@ Un navigateur et un compte Sanity suffisent. Ni Git, ni terminal, ni Pull Reques
 
 L'écran se lit de gauche à droite, en colonnes. Chaque clic ouvre une nouvelle colonne à droite. Le menu est en français ; à l'intérieur de certains formulaires plus anciens (Actualités, Nos planeurs, Galerie photos), les noms de champs sont encore en anglais.
 
-- **1. Contenu** : en haut, ce que l'on publie souvent (*Actualités*, *Agenda*, *Galerie photos*) ; au milieu, les pages (*Pages du club*, *Histoire du club*, *Nos planeurs*, *Tarifs*, *Récits de vols*) ; en bas, *Réglages du site*. L'équivalent du menu de gauche de `/wp-admin`.
+- **1. Contenu** : en haut, ce que l'on publie souvent (*Actualités*, *Agenda*, *Galerie photos*) ; au milieu, les pages (*Pages du club*, *Histoire du club*, *Page « Venez voler ! »*, *Page « Venez essayer »*, *Nos planeurs*, *Tarifs*, *Récits de vols*) ; en bas, *Réglages du site*. L'équivalent du menu de gauche de `/wp-admin`.
 - **2. La liste** : Les documents du type choisi. En haut : le bouton **+** pour en créer un, et un menu pour trier.
 - **3. Le formulaire** : Les champs du document sélectionné. En bas, la barre d'actions : l'état du document, le bouton vert **Publish** et, à côté, un menu pour **Unpublish**, **Duplicate**, **Discard changes** et **Delete**.
 
@@ -217,9 +217,11 @@ Tout s'affiche en ligne **moins d'une minute** après **Publish**.
 | Pages du club | Le club : une section par page (présentation, plateforme, activité, formation, perfectionnement, compétition) |
 | Histoire du club | Le club, partie « Histoire », au format magazine avec encarts d'anecdotes |
 | Nos planeurs | Nos planeurs |
-| Tarifs | Venez essayer (prix du vol d'initiation). Les autres tarifs sont dans la page Apprenez à voler ! (Réglages du site) |
+| Page « Venez voler ! » | Venez voler ! (texte explicatif, image du tableau des tarifs, adhésion, packs de formation, comment s'inscrire) |
+| Page « Venez essayer » | Venez essayer (vols d'initiation, réservation et paiement en ligne, questions fréquentes) |
+| Tarifs | Venez essayer (prix du vol d'initiation) ; les autres tarifs sont dans l'image de la page Venez voler ! |
 | Récits de vols | Récits de vols |
-| Réglages du site | Photos d'accueil et accroche, chiffres clés, page Apprenez à voler ! (tarifs), textes « Comment s'inscrire » et « Vol d'initiation », coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
+| Réglages du site | Photos d'accueil et accroche, chiffres clés, coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
 
 Une rubrique encore vide affiche « Bientôt ici » sur le site.
 
@@ -263,18 +265,28 @@ Une rubrique encore vide affiche « Bientôt ici » sur le site.
 5. **Sort Order** : sa position dans sa catégorie, le plus petit d'abord.
 6. **Publish**.
 
-#### Pas à pas : la page Apprenez à voler ! (tarifs)
+#### Pas à pas : la page « Venez voler ! » (tarifs)
 
-Cette page se rédige dans **Réglages du site**, onglet **Page Apprenez à voler (tarifs)** :
+Cette page a son propre document, au même niveau que les pages du club : **Page « Venez voler ! »**, dans la colonne de gauche.
 
 1. **Texte explicatif** : l'introduction, en haut de la page.
 2. **Tableau récapitulatif des tarifs (image)** : l'image du tableau de tous les tarifs de l'année, à remplacer chaque année. Elle peut être grande, le visiteur l'ouvre en plein écran. Dans « Description de la photo », résumez en une phrase ce que contient le tableau.
 3. Les trois sous-parties, dans cet ordre : **Adhésion au club (membres)**, **Pack formation** et **Pack complément de formation**. Une sous-partie sans texte n'est pas affichée.
+4. **Comment s'inscrire** : le texte en bas de la page.
+5. **Publish**.
+
+#### Pas à pas : la page « Venez essayer »
+
+Document **Page « Venez essayer »**, dans la colonne de gauche. Les textes se rédigent avec le même éditeur que les pages du club (titres, listes, gras, liens, photos) :
+
+1. **Vols d'initiation** : déroulement du vol, durée, conditions. Le prix vient de la fiche **Tarifs** (offre « vol d'initiation »).
+2. **Réservation et paiement en ligne** : comment réserver, bons de vol… Le bouton de paiement utilise le lien saisi dans Réglages du site, onglet « Contact et réseaux ».
+3. **Questions fréquentes** : **Add item**, une question et sa réponse. On peut glisser les questions pour les ordonner. La section n'apparaît que s'il y a au moins une question avec sa réponse.
 4. **Publish**.
 
 #### Pas à pas : saisir le prix du vol d'initiation
 
-Une fiche **Tarifs** = une ligne de prix. Seule l'offre « vol d'initiation » est affichée (page Venez essayer) : les autres prix sont dans le tableau de la page Apprenez à voler !.
+Une fiche **Tarifs** = une ligne de prix. Seule l'offre « vol d'initiation » est affichée (page Venez essayer) : les autres prix sont dans le tableau de la page Venez voler !.
 
 1. **Tarifs** → **+**. **Offre** : vol d'initiation (les autres offres existent encore dans la liste, mais ne sont plus affichées).
 2. **Catégorie d'âge** : pour les forfaits, moins ou plus de 25 ans ; pour le vol d'initiation, moins de 18 ans ou adulte. Une fiche par catégorie (par exemple deux fiches pour le vol d'initiation : 170 € adulte, 130 € moins de 18 ans).
@@ -294,9 +306,9 @@ L'**Histoire du club** (document unique) se remplit de la même façon, avec en 
 **Réglages du site**, en bas de la colonne de gauche, est un document unique, comme la page Réglages de WordPress : on ne peut ni en créer un deuxième, ni le supprimer. Ses onglets :
 
 - **Page d'accueil** : nom du club, accroche, 3 ou 4 photos d'accueil qui défilent, avec un titre chacune.
-- **Photos d'en-tête** : une grande photo par page (Le club, Nos planeurs, Apprenez à voler !, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
+- **Photos d'en-tête** : une grande photo par page (Le club, Nos planeurs, Venez voler !, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
 - **Chiffres clés** : pilotes brevetés, heures de vol, kilomètres parcourus depuis la création du club, planeurs, année de fondation (à mettre à jour une fois par an). Le nombre de membres n'est plus affiché.
-- **Textes des pages** : modalités d'inscription (page Apprenez à voler !), vols d'initiation et réservation et paiement en ligne (page Venez essayer).
+- **Anciens textes (à déplacer)** : les textes saisis avant la création des documents « Page « Venez voler ! » » et « Page « Venez essayer » ». Le site ne les reprend que tant que le champ correspondant de la nouvelle page est vide : recopiez-les dans la nouvelle page.
 - **Contact et réseaux** : e-mail, téléphone et adresse du club (page Contact et pied de page), lien de paiement (réservation des vols d'initiation et bons cadeaux), réseaux sociaux, adresse de l'image de la webcam, coordonnées du terrain pour la carte.
 - **Liens pratiques** : nom, adresse et rubrique de chaque lien (institutions, préparation de vol, météo, compétitions, hébergements, communauté).
 

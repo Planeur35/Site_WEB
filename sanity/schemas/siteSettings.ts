@@ -5,7 +5,7 @@ import { localizedBlocks, localizedString, localizedText, photoField } from './f
 const HERO_PAGES = [
   { name: 'club', title: 'Le club' },
   { name: 'gliders', title: 'Nos planeurs' },
-  { name: 'join', title: 'Apprenez à voler ! (tarifs)' },
+  { name: 'join', title: 'Venez voler ! (tarifs)' },
   { name: 'discover', title: 'Venez essayer' },
   { name: 'news', title: 'Actualités' },
   { name: 'stories', title: 'Récits de vols' },
@@ -15,6 +15,11 @@ const HERO_PAGES = [
   { name: 'contact', title: 'Contact' },
   { name: 'legal', title: 'Mentions légales' },
 ];
+
+const LEGACY_JOIN =
+  'Ancien emplacement : à recopier dans « Page « Venez voler ! » ». Ce texte n’est repris par le site que tant que le champ correspondant de cette page est vide.';
+const LEGACY_DISCOVER =
+  'Ancien emplacement : à recopier dans « Page « Venez essayer » ». Ce texte n’est repris par le site que tant que le champ correspondant de cette page est vide.';
 
 // Values of `usefulLinks[].group` are read by the site: do not rename them.
 export const LINK_GROUPS = [
@@ -34,8 +39,7 @@ export default defineType({
     { name: 'home', title: 'Page d’accueil', default: true },
     { name: 'heroes', title: 'Photos d’en-tête' },
     { name: 'stats', title: 'Chiffres clés' },
-    { name: 'texts', title: 'Textes des pages' },
-    { name: 'pricing', title: 'Page Apprenez à voler (tarifs)' },
+    { name: 'legacy', title: 'Anciens textes (à déplacer)' },
     { name: 'contact', title: 'Contact et réseaux' },
     { name: 'links', title: 'Liens pratiques' },
     { name: 'legal', title: 'Mentions légales' },
@@ -110,59 +114,16 @@ export default defineType({
       validation: (rule) => rule.min(0).integer(),
     }),
 
-    localizedText({
-      name: 'joinText',
-      title: 'Apprenez à voler : modalités d’inscription',
-      description: 'Texte de la page « Apprenez à voler ! », en bas, rubrique « Comment s’inscrire » : lieu, modalités, pièces à fournir… Un retour à la ligne crée un nouveau paragraphe.',
-      rows: 6,
-      group: 'texts',
-    }),
-    localizedText({
-      name: 'discoveryText',
-      title: 'Venez essayer : vols d’initiation',
-      description: 'Texte de la page « Venez essayer », rubrique « Vols d’initiation » : déroulement du vol, durée, conditions. Un retour à la ligne crée un nouveau paragraphe.',
-      rows: 6,
-      group: 'texts',
-    }),
-
-    localizedText({
-      name: 'bookingText',
-      title: 'Venez essayer : réservation et paiement en ligne',
-      description: 'Texte de la page « Venez essayer », rubrique « Réservation et paiement en ligne » : comment réserver, bons de vol, conditions d’annulation… Le bouton de paiement utilise le lien saisi dans l’onglet « Contact et réseaux ».',
-      rows: 6,
-      group: 'texts',
-    }),
-
-    // Page « Apprenez à voler ! »: intro text, yearly recap image and three sub-parts
-    localizedBlocks({
-      name: 'pricingIntro',
-      title: 'Texte explicatif',
-      description: 'Texte d’introduction en haut de la page « Apprenez à voler ! », au-dessus du tableau des tarifs.',
-      group: 'pricing',
-    }),
-    {
-      ...photoField({ name: 'pricingTable', title: 'Tableau récapitulatif des tarifs (image)', required: false, group: 'pricing' }),
-      description:
-        'L’image du tableau de tous les tarifs de l’année, à remplacer chaque année. Elle peut être grande : le visiteur peut l’ouvrir en plein écran. De préférence nette, de 2000 pixels de large ou plus (JPG ou PNG). Dans « Description de la photo », résumez en une phrase ce que contient le tableau.',
-    },
-    localizedBlocks({
-      name: 'pricingMembership',
-      title: 'Adhésion au club (membres)',
-      description: 'Première sous-partie de la page : cotisation, forfaits, conditions d’adhésion.',
-      group: 'pricing',
-    }),
-    localizedBlocks({
-      name: 'pricingTraining',
-      title: 'Pack formation',
-      description: 'Deuxième sous-partie de la page : ce que comprend le pack formation.',
-      group: 'pricing',
-    }),
-    localizedBlocks({
-      name: 'pricingAdvanced',
-      title: 'Pack complément de formation',
-      description: 'Troisième sous-partie de la page : ce que comprend le pack complément de formation.',
-      group: 'pricing',
-    }),
+    // Old place of the texts of the « Venez voler ! » and « Venez essayer » pages. They now live in the documents of
+    // those two pages: these fields are only read by the site while the matching new field is empty.
+    localizedText({ name: 'joinText', title: '(Ancien) Comment s’inscrire', description: LEGACY_JOIN, rows: 6, group: 'legacy' }),
+    localizedText({ name: 'discoveryText', title: '(Ancien) Venez essayer : vols d’initiation', description: LEGACY_DISCOVER, rows: 6, group: 'legacy' }),
+    localizedText({ name: 'bookingText', title: '(Ancien) Venez essayer : réservation et paiement en ligne', description: LEGACY_DISCOVER, rows: 6, group: 'legacy' }),
+    localizedBlocks({ name: 'pricingIntro', title: '(Ancien) Texte explicatif', description: LEGACY_JOIN, group: 'legacy' }),
+    { ...photoField({ name: 'pricingTable', title: '(Ancien) Tableau récapitulatif des tarifs (image)', required: false, group: 'legacy' }), description: LEGACY_JOIN },
+    localizedBlocks({ name: 'pricingMembership', title: '(Ancien) Adhésion au club (membres)', description: LEGACY_JOIN, group: 'legacy' }),
+    localizedBlocks({ name: 'pricingTraining', title: '(Ancien) Pack formation', description: LEGACY_JOIN, group: 'legacy' }),
+    localizedBlocks({ name: 'pricingAdvanced', title: '(Ancien) Pack complément de formation', description: LEGACY_JOIN, group: 'legacy' }),
 
     defineField({ name: 'contactEmail', title: 'Adresse e-mail du club', type: 'string', group: 'contact' }),
     defineField({ name: 'contactPhone', title: 'Téléphone du club', type: 'string', group: 'contact' }),
