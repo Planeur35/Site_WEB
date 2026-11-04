@@ -57,7 +57,7 @@ React est la bibliothèque JavaScript qui décrit l'interface. Next.js est const
 - **Des composants.** L'interface est découpée en briques réutilisables : `PageHero`, `Section`, `Button`, `Header`… Chaque brique est une fonction qui renvoie du balisage.
 - **JSX / TSX.** Ce balisage s'écrit en syntaxe proche du HTML, directement dans le TypeScript (fichiers `.tsx`). TypeScript signale les erreurs dès l'écriture.
 - **Props et état.** Un composant reçoit des paramètres (les *props*, par exemple `<PageHero title="…" />`). Il peut aussi garder un état local (`useState`), comme le menu mobile ouvert ou fermé.
-- **Composants serveur ou client.** Avec l'App Router, un composant tourne par défaut sur le serveur : il lit Sanity et n'envoie que du HTML. Ceux qui ont besoin d'interactivité commencent par `'use client'` : `Header`, `LanguageToggle`, `HeroSlideshow`, `ShareButtons`, `WebcamImage`, `ContactForm`, `Gallery`, `Lightbox`, `Map`.
+- **Composants serveur ou client.** Avec l'App Router, un composant tourne par défaut sur le serveur : il lit Sanity et n'envoie que du HTML. Ceux qui ont besoin d'interactivité commencent par `'use client'` : `Header`, `NavDropdown`, `FullMenu`, `LanguageToggle`, `HeroSlideshow`, `ShareButtons`, `WebcamImage`, `ContactForm`, `Gallery`, `Lightbox`, `Map`.
 - **Écosystème.** Les bibliothèques de la stack (icônes lucide, lightbox, carte Leaflet, rendu du texte riche Sanity) sont des composants React prêts à l'emploi.
 
 ### Next.js en deux mots
@@ -124,7 +124,7 @@ src/
     studio/[[...tool]]/       # Sanity Studio embarqué
     sitemap.ts  robots.ts  globals.css
   components/
-    layout/                   # Header (bandeau + menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
+    layout/                   # Header (bandeau), NavDropdown (menus déroulants), FullMenu (menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
     ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button…
     sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv)
   lib/
@@ -206,7 +206,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 1. Créer `src/app/[locale]/<slug-fr>/page.tsx` sur le modèle d'une page existante : `setRequestLocale(locale)`, `generateMetadata` avec `buildMetadata()` et les clés `meta.<page>`, composants `PageHero` et `Section`.
 2. Déclarer la route et son slug anglais dans `src/i18n/routing.ts` → `pathnames`. Sans cette entrée, `Link` refuse le chemin au typage.
 3. Ajouter les libellés dans `fr.json` et `en.json`.
-4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau, `FULL_NAV` pour le menu complet et le pied de page.
+4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau (quatre entrées et le bouton orange), puis dans `NAV_GROUPS` (Voler, Le club, Actualités, Pratique) pour le menu complet et le pied de page.
 5. Ajouter le chemin et sa priorité dans `src/app/sitemap.ts`. Si la page remplace une ancienne adresse, ajouter une redirection dans `next.config.ts`.
 
 ### Rendre un contenu éditable dans Sanity

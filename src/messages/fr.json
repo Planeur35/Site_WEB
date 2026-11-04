@@ -23,7 +23,21 @@
     "menu": "Menu",
     "mainNav": "Navigation principale",
     "fullNav": "Menu complet",
-    "breadcrumb": "Fil d’Ariane"
+    "breadcrumb": "Fil d’Ariane",
+    "discoverShort": "Essayer",
+    "openMenu": "Ouvrir le menu complet",
+    "close": "Fermer",
+    "closeMenu": "Fermer le menu",
+    "submenu": "Sous-menu {label}",
+    "groupFly": "Voler",
+    "groupClub": "Le club",
+    "groupNews": "Actualités",
+    "groupPractical": "Pratique",
+    "book": "Réserver",
+    "bookTrial": "Réserver un vol d’initiation",
+    "trialPrice": "{adult} € · {young} € moins de 18 ans",
+    "trialPriceSingle": "{amount} €",
+    "language": "Langue"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -31,7 +45,8 @@
     "discover": "Découvrir",
     "backToHome": "Retour à l’accueil",
     "loadingMap": "Chargement de la carte…",
-    "switchLanguageLabel": "Switch to English"
+    "languageFr": "Français",
+    "languageEn": "English"
   },
   "meta": {
     "home": {
@@ -324,8 +339,8 @@
   },
   "footer": {
     "navigation": "Navigation",
-    "contact": "Contact",
     "writeToUs": "Nous écrire",
-    "legal": "Mentions légales"
+    "legal": "Mentions légales",
+    "otherLanguage": "English version"
   }
 }

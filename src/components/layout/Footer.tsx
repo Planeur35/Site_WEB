@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { FULL_NAV } from "@/components/layout/navItems";
+import LanguageToggle from "@/components/layout/LanguageToggle";
+import { NAV_GROUPS } from "@/components/layout/navItems";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 import { sanityFetch } from "@/lib/sanity/fetch";
-import { localize } from "@/lib/sanity/localize";
 import { siteSettingsQuery } from "@/lib/sanity/queries";
 import type { SiteSettings } from "@/lib/sanity/types";
 
@@ -14,84 +16,88 @@ const SOCIAL_LABELS: Record<string, string> = {
   twitter: "Twitter",
 };
 
+const linkClass = "inline-flex min-h-9 items-center text-[0.9375rem] text-nuage transition-colors duration-150 hover:text-white";
+
 export default async function Footer() {
-  const locale = await getLocale();
   const t = await getTranslations("footer");
   const tNav = await getTranslations("nav");
   const tc = await getTranslations("common");
   const settings = await sanityFetch<SiteSettings | null>(siteSettingsQuery, null);
-  const tagline = localize(settings?.tagline, locale);
+
+  // Social networks and WeGlide close the Pratique column
+  const external = [
+    ...(settings?.socialLinks ?? []).map((link) => ({ url: link.url, label: SOCIAL_LABELS[link.platform] ?? link.platform })),
+    ...(settings?.weglideUrl ? [{ url: settings.weglideUrl, label: "WeGlide" }] : []),
+  ];
 
   return (
-    <footer className="mt-8 bg-nuit text-sky-100/80">
-      <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-3 md:px-8">
-        <div>
-          <div className="flex items-center gap-3">
-            <Image src="/logo-icon.png" alt="" width={50} height={44} className="h-11 w-auto" />
-            <span className="font-serif text-lg text-white">PIV, {tc("clubName")}</span>
-          </div>
-          {tagline && <p className="mt-4 text-sm leading-relaxed">{tagline}</p>}
-        </div>
-
-        <div>
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-sky-300">{t("navigation")}</p>
-          <ul className="mt-4 grid grid-cols-2 gap-x-6 md:grid-cols-1">
-            {FULL_NAV.map((item) => (
-              <li key={item.key}>
-                <Link href={item.href} className="inline-flex min-h-9 items-center text-sm hover:text-white">
-                  {tNav(item.key)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-sky-300">{t("contact")}</p>
-          <div className="mt-4 space-y-2 text-sm leading-relaxed">
-            {settings?.address && <p className="whitespace-pre-line">{settings.address}</p>}
-            {settings?.contactEmail && (
-              <p>
-                <a href={`mailto:${settings.contactEmail}`} className="hover:text-white">
-                  {settings.contactEmail}
-                </a>
-              </p>
-            )}
-            {settings?.contactPhone && (
-              <p>
-                <a href={`tel:${settings.contactPhone.replace(/\s/g, "")}`} className="hover:text-white">
-                  {settings.contactPhone}
-                </a>
-              </p>
-            )}
-            <p>
-              <Link href="/contact" className="text-sky-200 underline decoration-sky-300/50 underline-offset-4 hover:text-white">
-                {t("writeToUs")}
-              </Link>
-            </p>
-            {settings?.socialLinks && settings.socialLinks.length > 0 && (
-              <p className="flex flex-wrap gap-4 pt-2">
-                {settings.socialLinks.map((link) => (
-                  <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                    {SOCIAL_LABELS[link.platform] ?? link.platform}
+    <footer className="bg-nuit text-nuage">
+      <Container className="pt-20 pb-10">
+        <div className="flex flex-wrap gap-x-16 gap-y-12">
+          <div className="flex flex-[1_1_300px] flex-col items-start gap-5">
+            <Link href="/" className="flex items-center gap-3.5 rounded-sm focus-visible:outline-white">
+              <Image src="/logo-icon.png" alt="" width={195} height={174} className="h-12 w-auto" />
+              <span className="max-w-[11rem] font-display text-xl leading-tight font-semibold text-white">{tc("clubName")}</span>
+            </Link>
+            {settings?.address && <p className="leading-relaxed whitespace-pre-line">{settings.address}</p>}
+            {(settings?.contactEmail || settings?.contactPhone) && (
+              <p className="flex flex-col leading-relaxed">
+                {settings.contactEmail && (
+                  <a href={`mailto:${settings.contactEmail}`} className="text-white underline-offset-4 hover:underline">
+                    {settings.contactEmail}
                   </a>
-                ))}
+                )}
+                {settings.contactPhone && (
+                  <a href={`tel:${settings.contactPhone.replace(/\s/g, "")}`} className="hover:text-white">
+                    {settings.contactPhone}
+                  </a>
+                )}
               </p>
             )}
+            <Button href="/contact" variant="onDark" size="sm" className="mt-1">
+              {t("writeToUs")}
+            </Button>
           </div>
-        </div>
-      </div>
-      <div className="border-t border-white/10 py-3 text-xs uppercase tracking-[0.25em] text-sky-300/80">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-6 px-4 sm:px-6 md:px-8">
-          <span>© {new Date().getFullYear()} PIV · planeur35.org</span>
-          <Link
-            href="/mentions-legales"
-            className="inline-flex min-h-11 items-center underline decoration-sky-300/50 underline-offset-4 hover:text-white"
+
+          <nav
+            aria-label={t("navigation")}
+            className="grid flex-[2_1_560px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-x-6 gap-y-10"
           >
-            {t("legal")}
-          </Link>
+            {NAV_GROUPS.map((group) => (
+              <div key={group.key}>
+                <h2 className="mb-3 font-display font-semibold text-white">{tNav(group.key)}</h2>
+                <ul>
+                  {group.items.map((link) => (
+                    <li key={link.key}>
+                      <Link href={link.href} className={linkClass}>
+                        {tNav(link.key)}
+                      </Link>
+                    </li>
+                  ))}
+                  {group.key === "groupPractical" &&
+                    external.map((link) => (
+                      <li key={link.url}>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
-      </div>
+
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-nuage/18 pt-6 text-sm text-givre">
+          <span>© {tc("clubName")}</span>
+          <span className="flex flex-wrap gap-x-6">
+            <Link href="/mentions-legales" className="inline-flex min-h-11 items-center hover:text-white">
+              {t("legal")}
+            </Link>
+            <LanguageToggle variant="other" className="inline-flex min-h-11 items-center hover:text-white" />
+          </span>
+        </div>
+      </Container>
     </footer>
   );
 }

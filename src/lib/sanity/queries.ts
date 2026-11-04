@@ -26,6 +26,8 @@ export const allAircraftQuery = `*[_type == "aircraft"] | order(category asc, so
 
 export const allTariffsQuery = `*[_type == "tariff"]`;
 
+export const trialTariffsQuery = `*[_type == "tariff" && offer == "vol-initiation"]{ ageCategory, amount }`;
+
 export const allClubPagesQuery = `*[_type == "clubPage"]`;
 
 export const clubHistoryQuery = `*[_type == "clubHistory"][0]`;

@@ -40,7 +40,7 @@ Do not run anything in `scripts/` unless explicitly asked: they write to the pro
 src/app/[locale]/          one folder per page (French paths: club, planeurs, adherer, decouvrir, actualites, recits…)
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
-src/components/layout/     Header (top bar + full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
+src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
 src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
 src/lib/sanity/            client, fetch (sanityFetch), queries (all GROQ), types, image (urlFor), imageLoader, localize
 src/lib/format.ts          dates in the club's time zone

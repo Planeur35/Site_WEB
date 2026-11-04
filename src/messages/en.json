@@ -23,7 +23,21 @@
     "menu": "Menu",
     "mainNav": "Main navigation",
     "fullNav": "Full menu",
-    "breadcrumb": "Breadcrumb"
+    "breadcrumb": "Breadcrumb",
+    "discoverShort": "Try it",
+    "openMenu": "Open the full menu",
+    "close": "Close",
+    "closeMenu": "Close the menu",
+    "submenu": "{label} submenu",
+    "groupFly": "Fly",
+    "groupClub": "The club",
+    "groupNews": "News",
+    "groupPractical": "Practical",
+    "book": "Book",
+    "bookTrial": "Book a trial flight",
+    "trialPrice": "€{adult} · €{young} under 18",
+    "trialPriceSingle": "€{amount}",
+    "language": "Language"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -31,7 +45,8 @@
     "discover": "Discover",
     "backToHome": "Back to home",
     "loadingMap": "Loading map…",
-    "switchLanguageLabel": "Passer en français"
+    "languageFr": "Français",
+    "languageEn": "English"
   },
   "meta": {
     "home": {
@@ -324,8 +339,8 @@
   },
   "footer": {
     "navigation": "Navigation",
-    "contact": "Contact",
     "writeToUs": "Write to us",
-    "legal": "Legal notice"
+    "legal": "Legal notice",
+    "otherLanguage": "Version française"
   }
 }
