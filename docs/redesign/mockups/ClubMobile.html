@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Le club mobile — Planeurs d’Ille-et-Vilaine</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#1a68b0}a:hover{color:#0f3a64}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 5800px; display: flex; flex-direction: column; background: #ffffff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #0b1a2a">
+
+  <!-- Header -->
+  <header style="position: sticky; top: 0; z-index: 10; height: 64px; padding: 0 12px 0 20px; display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px)">
+    <a href="AccueilMobile.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0f3a64">
+      <img src="/logo-icon.png" alt="" style="width: 38px; height: 34px; object-fit: contain">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">PIV</span>
+    </a>
+    <a href="DecouvrirMobile.html" style="margin-left: auto; display: inline-flex; align-items: center; height: 44px; padding: 0 16px; background: #c2410c; color: #ffffff; border-radius: 4px; font-weight: 600; font-size: 15px; text-decoration: none">Essayer</a>
+    <button type="button" aria-label="Ouvrir le menu complet" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 4px; color: #0f3a64; cursor: pointer">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+  </header>
+
+  <!-- Hero -->
+  <section style="padding: 24px 20px 0; display: flex; flex-direction: column">
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">Le club</span>
+    <h1 style="margin: 12px 0 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 42px; line-height: 1.03; letter-spacing: -0.035em; color: #0f3a64">Planeurs d’Ille-et-Vilaine</h1>
+    <p style="margin: 16px 0 0; font-size: 18px; line-height: 1.55; color: #33465a">Club de vol à voile en Bretagne, sur l’aérodrome de Saint-Sulpice-des-Landes.</p>
+    <figure style="margin: 24px 0 0; height: 240px; border-radius: 6px; overflow: hidden; background: #dcebf7">
+      <img src="/images/fleet/asw28.jpg" alt="Un planeur blanc devant le hangar du club, marqué du logo PIV" style="width: 100%; height: 100%; object-fit: cover; object-position: 60% 45%; display: block">
+    </figure>
+  </section>
+
+  <!-- Sticky chips -->
+  <nav aria-label="Sections de la page" style="position: sticky; top: 64px; z-index: 9; margin-top: 24px; background: rgba(255, 255, 255, 0.96); box-shadow: inset 0 -1px 0 #dcebf7; overflow: hidden">
+    <div style="display: flex; gap: 8px; padding: 10px 20px; overflow-x: auto; white-space: nowrap">
+      <a href="#presentation" aria-current="location" style="flex-shrink: 0; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; background: #0f3a64; color: #ffffff; border-radius: 2px; font-size: 14px; font-weight: 600; text-decoration: none">Présentation</a>
+      <a href="#plateforme" style="flex-shrink: 0; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; background: #f1f6fb; color: #0f3a64; border-radius: 2px; font-size: 14px; font-weight: 500; text-decoration: none">La plateforme</a>
+      <a href="#activite" style="flex-shrink: 0; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; background: #f1f6fb; color: #0f3a64; border-radius: 2px; font-size: 14px; font-weight: 500; text-decoration: none">Activité</a>
+      <a href="#formation" style="flex-shrink: 0; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; background: #f1f6fb; color: #0f3a64; border-radius: 2px; font-size: 14px; font-weight: 500; text-decoration: none">Formation</a>
+    </div>
+  </nav>
+
+  <!-- 01 -->
+  <section id="presentation" style="padding: 56px 20px 0; display: flex; flex-direction: column; gap: 16px">
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">01</span>
+    <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">Présentation du club</h2>
+    <p style="margin: 0; font-size: 19px; line-height: 1.55; color: #33465a">[Introduction, 2 ou 3 phrases : ce qu’est le club, pour qui, et ce qu’on y fait.]</p>
+    <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33465a">[Corps de texte : fonctionnement, jours de vol, bénévolat, ambiance au terrain.]</p>
+    <div style="margin-top: 8px; padding: 20px; background: #f1f6fb; border-radius: 6px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; color: #0f3a64">13</span><span style="font-size: 14px; color: #33465a">planeurs</span></div>
+      <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; color: #0f3a64">[N]</span><span style="font-size: 14px; color: #33465a">membres</span></div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="plateforme" style="padding: 72px 20px 0; display: flex; flex-direction: column; gap: 16px">
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">02</span>
+    <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">La plateforme</h2>
+    <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33465a">[Le terrain, la piste, les hangars, la zone de vol.]</p>
+    <div style="position: relative; height: 260px; border-radius: 6px; overflow: hidden; background: #e8eef2">
+      <div style="position: absolute; inset: 0; background-image: linear-gradient(#dfe7ed 1px, transparent 1px), linear-gradient(90deg, #dfe7ed 1px, transparent 1px); background-size: 48px 48px"></div>
+      <div style="position: absolute; left: 14%; top: 60%; width: 76%; height: 12px; background: #cfdcc4; transform: rotate(-14deg)"></div>
+      <div style="position: absolute; left: 24%; top: 46%; width: 50%; height: 24px; background: #b9d3a8; border-radius: 2px; transform: rotate(-24deg)"></div>
+      <div style="position: absolute; left: 50%; top: 44%; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; gap: 6px">
+        <span style="padding: 6px 10px; background: #ffffff; border-radius: 4px; box-shadow: 0 12px 32px -12px rgba(11, 26, 42, 0.22), 0 0 0 1px rgba(11, 26, 42, 0.05); font-size: 13px; font-weight: 600; color: #0f3a64; white-space: nowrap">Le terrain du club</span>
+        <svg width="24" height="32" viewBox="0 0 28 36" aria-hidden="true"><path d="M14 35s12-12.5 12-21A12 12 0 0 0 2 14c0 8.5 12 21 12 21z" fill="#c2410c"></path><circle cx="14" cy="14" r="5" fill="#ffffff"></circle></svg>
+      </div>
+      <span style="position: absolute; right: 0; bottom: 0; padding: 3px 8px; background: rgba(255, 255, 255, 0.85); font-size: 11px; color: #33465a">© contributeurs OpenStreetMap</span>
+    </div>
+    <a href="#" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 16px; color: #1a68b0; text-decoration: none">Itinéraire
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+  </section>
+
+  <!-- 03 -->
+  <section id="activite" style="padding: 64px 20px 0; display: flex; flex-direction: column; gap: 16px">
+    <div style="height: 200px; border-radius: 6px; overflow: hidden; position: relative; background: linear-gradient(180deg, #d5e7f5 0%, #edf5fb 62%, #f7fafd 100%)">
+      <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet" style="position: absolute; inset: 0; width: 100%; height: 100%" aria-hidden="true">
+        <path d="M30 240 L120 210 L131 207 L141 203 L149 198 L154 192 L155 186 L152 180 L146 175 L138 171 L129 169 L120 168 L112 168 L106 170 L103 172 L104 175 L109 177 L117 179 L127 179 L138 178 L149 175 L159 171 L167 166 L172 160 L173 154 L170 148 L164 143 L156 139 L147 137 L138 136 L130 136 L124 138 L121 140 L122 143 L127 145 L135 147 L145 147 L156 146 L167 143 L177 139 L185 134 L190 128 L191 122 L188 116 L182 111 L174 107 L165 105 L156 104 L148 104 L142 106 L139 108 L140 111 L145 113 L153 115 L163 115 L174 114 L185 111 L195 107 L203 102 L208 96 L209 90 L206 84 L200 79 L192 75 L183 73 L570 170" fill="none" stroke="#1a68b0" stroke-opacity="0.45" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+        <circle cx="570" cy="170" r="6" fill="#f97316"></circle>
+      </svg>
+    </div>
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">03</span>
+    <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">Activité des membres</h2>
+    <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33465a">[Vols locaux, sorties, stages, entretien des planeurs, vie au terrain.]</p>
+  </section>
+
+  <!-- 04 Formation: vertical rising path -->
+  <section id="formation" style="margin-top: 72px; background: #f1f6fb; padding: 56px 20px; display: flex; flex-direction: column; gap: 16px">
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">04</span>
+    <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">Formation initiale</h2>
+    <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33465a">[Instructeurs bénévoles, double commande, théorie, rythme selon la météo.]</p>
+    <ol aria-label="Le cursus, étape par étape" style="list-style: none; margin: 12px 0 0; padding: 24px 20px; background: #ffffff; border-radius: 6px; display: flex; flex-direction: column-reverse">
+      <li style="display: grid; grid-template-columns: 28px 1fr; gap: 0 14px">
+        <span style="display: flex; flex-direction: column; align-items: center"><span style="width: 16px; height: 16px; border-radius: 50%; background: #ffffff; box-shadow: inset 0 0 0 3px #1a68b0; margin-top: 3px"></span></span>
+        <div style="display: flex; flex-direction: column; gap: 4px"><h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 18px; color: #0f3a64">Vol d’initiation</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #33465a">Un premier vol en biplace avec un instructeur.</p></div>
+      </li>
+      <li style="display: grid; grid-template-columns: 28px 1fr; gap: 0 14px">
+        <span style="display: flex; flex-direction: column; align-items: center"><span style="width: 16px; height: 16px; border-radius: 50%; background: #ffffff; box-shadow: inset 0 0 0 3px #1a68b0; margin-top: 3px"></span><span style="flex: 1; width: 2px; background: #1a68b0; min-height: 20px"></span></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 22px"><h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 18px; color: #0f3a64">Vols en double</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #33465a">Décollage, virages, approche et atterrissage.</p></div>
+      </li>
+      <li style="display: grid; grid-template-columns: 28px 1fr; gap: 0 14px">
+        <span style="display: flex; flex-direction: column; align-items: center"><span style="width: 16px; height: 16px; border-radius: 50%; background: #ffffff; box-shadow: inset 0 0 0 3px #1a68b0; margin-top: 3px"></span><span style="flex: 1; width: 2px; background: #1a68b0; min-height: 20px"></span></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 22px"><h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 18px; color: #0f3a64">Le lâcher</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #33465a">Votre premier vol seul à bord.</p></div>
+      </li>
+      <li style="display: grid; grid-template-columns: 28px 1fr; gap: 0 14px">
+        <span style="display: flex; flex-direction: column; align-items: center"><span style="width: 16px; height: 16px; border-radius: 50%; background: #ffffff; box-shadow: inset 0 0 0 3px #1a68b0; margin-top: 3px"></span><span style="flex: 1; width: 2px; background: #1a68b0; min-height: 20px"></span></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 22px"><h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 18px; color: #0f3a64">La licence</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #33465a">Théorie et examen pratique : la licence de pilote de planeur (SPL).</p></div>
+      </li>
+      <li style="display: grid; grid-template-columns: 28px 1fr; gap: 0 14px">
+        <span style="display: flex; flex-direction: column; align-items: center"><span style="width: 20px; height: 20px; border-radius: 50%; background: #c2410c; box-shadow: 0 0 0 5px rgba(194, 65, 12, 0.15); margin-top: 1px"></span><span style="flex: 1; width: 2px; background: #1a68b0; min-height: 20px"></span></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 22px"><h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 18px; color: #0f3a64">Campagne et badges</h3><p style="margin: 0; font-size: 15px; line-height: 1.5; color: #33465a">Vols de distance, badges d’argent, d’or et diamants.</p></div>
+      </li>
+    </ol>
+    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #5b6b7b">Sur mobile, le cursus se lit de bas en haut, comme une montée en thermique.</p>
+  </section>
+
+  <!-- 05 / 06 -->
+  <section style="padding: 72px 20px 0; display: flex; flex-direction: column; gap: 56px">
+    <article id="campagne" style="display: flex; flex-direction: column; gap: 14px">
+      <div style="aspect-ratio: 3 / 2; border-radius: 6px; overflow: hidden; background: #dcebf7">
+        <img src="/images/fleet/ls7.jpeg" alt="Le LS7 « AK » sur l’herbe, saumon d’aile orange au premier plan" style="width: 100%; height: 100%; object-fit: cover; display: block">
+      </div>
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">05</span>
+      <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; color: #0f3a64">École de campagne</h2>
+      <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33465a">[Partir loin du terrain : préparation, premiers circuits, accompagnement.]</p>
+    </article>
+    <article id="competition" style="display: flex; flex-direction: column; gap: 14px">
+      <div style="aspect-ratio: 3 / 2; border-radius: 6px; overflow: hidden; background: #dcebf7">
+        <img src="/images/fleet/discus-b.jpg" alt="Le Discus « D16 » sur l’herbe" style="width: 100%; height: 100%; object-fit: cover; display: block">
+      </div>
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">06</span>
+      <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; color: #0f3a64">Compétition</h2>
+      <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #33465a">[Les championnats où volent les pilotes du club.]</p>
+    </article>
+  </section>
+
+  <!-- 07 Histoire -->
+  <article id="histoire" style="padding: 96px 0 72px; display: flex; flex-direction: column">
+    <header style="padding: 0 20px; display: flex; flex-direction: column; gap: 14px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #c2410c">07 · Histoire du club</span>
+      <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 38px; line-height: 1.05; letter-spacing: -0.03em; color: #0f3a64">[Titre de l’histoire]</h2>
+      <p style="margin: 0; font-size: 19px; line-height: 1.55; color: #33465a">[Introduction : l’accroche qui donne envie de lire la suite.]</p>
+    </header>
+    <div style="padding: 32px 20px 0; display: flex; flex-direction: column; gap: 22px; font-size: 17px; line-height: 1.75; color: #33465a">
+      <p style="margin: 0">[Les débuts : fondation, terrain, premiers planeurs. Colonne pleine largeur, 17 px, interlignage généreux.]</p>
+      <h3 style="margin: 8px 0 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 23px; line-height: 1.25; color: #0f3a64">[Intertitre de chapitre]</h3>
+      <p style="margin: 0">[Suite du récit.]</p>
+    </div>
+    <figure style="margin: 32px 0 0">
+      <div style="aspect-ratio: 4 / 3; overflow: hidden; background: #dcebf7">
+        <img src="/images/fleet/dg500.png" alt="Un biplace DG 500 sur l’herbe sous un ciel bleu" style="width: 100%; height: 100%; object-fit: cover; display: block">
+      </div>
+      <figcaption style="padding: 10px 20px 0; font-size: 14px; line-height: 1.5; color: #5b6b7b">[Légende de la photo, avec l’année.] Sur mobile, les photos du récit vont d’un bord à l’autre.</figcaption>
+    </figure>
+    <div style="padding: 32px 20px 0; display: flex; flex-direction: column; gap: 22px; font-size: 17px; line-height: 1.75; color: #33465a">
+      <aside aria-label="Anecdote" style="padding: 22px; background: #f1f6fb; border-radius: 6px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 14px; color: #c2410c">Anecdote</span>
+        <h4 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.25; color: #0f3a64">[Titre de l’anecdote]</h4>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #33465a">[Un vol mémorable, une vache célèbre, une histoire de hangar.]</p>
+      </aside>
+      <blockquote style="margin: 8px 0; padding: 0"><p style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 500; font-size: 25px; line-height: 1.3; letter-spacing: -0.01em; color: #0f3a64"><span style="color: #c2410c">«</span> [Une citation forte tirée du texte.] <span style="color: #c2410c">»</span></p></blockquote>
+      <p style="margin: 0">[Le club aujourd’hui, et la suite.]</p>
+    </div>
+  </article>
+
+  <!-- Footer -->
+  <footer style="margin-top: auto; background: #0b1a2a; color: #c9d6e3; padding: 56px 20px 32px; display: flex; flex-direction: column; gap: 32px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <img src="/logo-icon.png" alt="" style="width: 48px; height: 43px; object-fit: contain">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.2; color: #ffffff">Planeurs<br>d’Ille-et-Vilaine</span>
+    </div>
+    <p style="margin: 0; font-size: 15px; line-height: 1.6">Aérodrome de Saint-Sulpice-des-Landes<br>35390 Saint-Sulpice-des-Landes<br><a href="#" style="color: #ffffff">contact@planeur35.org</a></p>
+    <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 20px; border-top: 1px solid rgba(201, 214, 227, 0.18); font-size: 14px; color: #9fb3c8">
+      <span style="display: flex; gap: 20px"><a href="#" style="color: #9fb3c8">Facebook</a><a href="#" style="color: #9fb3c8">WeGlide</a><a href="#" lang="en" style="color: #9fb3c8">English</a></span>
+      <span>© Planeurs d’Ille-et-Vilaine · <a href="#" style="color: #9fb3c8">Mentions légales</a></span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

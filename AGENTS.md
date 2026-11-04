@@ -67,7 +67,12 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 ### Styling
 
 - Tailwind utility classes only; no new CSS files. Use `clsx` for conditional classes.
-- The design comes from Georges's Site_WEB: sky palette tokens (`bg-ciel`, `bg-horizon`, `bg-nuit`, `text-azur`, `text-altitude`) plus Tailwind's `sky-*` and `slate-*`, serif titles (`font-serif`), small spaced capitals (`Kicker`), square corners. No raw hex colors.
+- The design is "Ciel & balise", specified in `docs/redesign/handoff.md` (tokens, components, pages; mockups in `docs/redesign/mockups/`). That document wins over this summary.
+- Colours are tokens in `globals.css`: `blanc` page background, `ciel` alternate band and panels, `horizon` hairlines, `azur` headings, `texte` body, `brume` secondary text, `altitude` links and focus, `nuit` footer. No raw hex colours.
+- Orange `balise` is for the one main action on a screen (Réserver, Venez essayer: at most one orange button per viewport), plus eyebrows and the active-page underline. Never for body text or large areas.
+- Titles use `font-display` (Inter Tight) with the `text-display`/`text-h1`…`text-h4` scale; text uses Inter (`font-sans`). No `font-serif`, no uppercase letter-spaced labels: sentence case everywhere.
+- Corners: `rounded-xs` (2 px) tags and chips, `rounded-sm` (4 px) buttons and fields, `rounded-md` (6 px) photos and panels. Nothing larger, no pills. Shadows (`shadow-flottant`) only on what floats.
+- A missing photo or empty block shows the `FlightTrace` placeholder (pale sky + flight trace), never clip-art.
 - Long text from Sanity is styled by `.prose-piv` in `globals.css` (through `PortableText`).
 - Mobile first. Tap targets at least 44 px, visible keyboard focus, `alt` text on every image.
 
