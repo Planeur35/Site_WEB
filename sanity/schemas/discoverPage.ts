@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { localizedBlocks, localizedString } from './fields';
+import { localizedBlocks, localizedString, localizedText } from './fields';
 
 /** Page « Venez essayer »: a single document, written like a club page. */
 export default defineType({
@@ -18,6 +18,11 @@ export default defineType({
       description:
         'Comment réserver, bons de vol, conditions d’annulation… Le bouton de paiement utilise le lien saisi dans Réglages du site, onglet « Contact et réseaux ».',
     }),
+    // « Bon à savoir »: each line shows on the page only once it is filled in
+    localizedText({ name: 'practicalAge', title: 'Bon à savoir : âge', description: 'Âge minimum, autorisation parentale pour les mineurs.', rows: 2, max: 200 }),
+    localizedText({ name: 'practicalWeight', title: 'Bon à savoir : poids', description: 'Poids accepté dans le biplace.', rows: 2, max: 200 }),
+    localizedText({ name: 'practicalDuration', title: 'Bon à savoir : durée', description: 'Durée du vol, et temps à prévoir sur place.', rows: 2, max: 200 }),
+    localizedText({ name: 'practicalWeather', title: 'Bon à savoir : météo', description: 'Ce qui se passe si le vol est annulé à cause du temps.', rows: 2, max: 200 }),
     defineField({
       name: 'faq',
       title: 'Questions fréquentes',

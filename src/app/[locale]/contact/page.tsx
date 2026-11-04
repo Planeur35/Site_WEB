@@ -68,7 +68,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </div>
         </div>
       </Section>
-      <Section kicker={t('findUsKicker')} title={t('findUs')}>
+      <Section id="plan" kicker={t('findUsKicker')} title={t('findUs')}>
         <Map lat={coordinates.lat} lng={coordinates.lng} zoom={12} popupText={t('mapPopup')} />
       </Section>
     </>

@@ -78,6 +78,7 @@ export interface SiteSettings {
   bookingText?: LocalizedText;
   pageHeroes?: Partial<Record<PageHeroKey, SanityImage>>;
   paymentUrl?: string;
+  voucherUrl?: string;
   usefulLinks?: UsefulLink[];
   legalName?: string;
   legalAddress?: string;
@@ -118,6 +119,10 @@ export interface FaqItem {
 export interface DiscoverPage {
   flights?: LocalizedRichText;
   booking?: LocalizedRichText;
+  practicalAge?: LocalizedText;
+  practicalWeight?: LocalizedText;
+  practicalDuration?: LocalizedText;
+  practicalWeather?: LocalizedText;
   faq?: FaqItem[];
 }
 

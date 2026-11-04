@@ -3,16 +3,15 @@ import { sanityFetch } from '@/lib/sanity/fetch';
 import { siteSettingsQuery } from '@/lib/sanity/queries';
 import type { PageHeroKey, SiteSettings } from '@/lib/sanity/types';
 
-interface SitePageHeroProps {
+type PageHeroProps = React.ComponentProps<typeof PageHero>;
+
+interface SitePageHeroProps extends Omit<PageHeroProps, 'image'> {
   /** Which page this is: the photo comes from Studio → Réglages du site → Photos d’en-tête. */
   page: PageHeroKey;
-  kicker: string;
-  title: string;
-  lead?: string;
 }
 
 /** PageHero with the page's header photo from Sanity. Without a photo, the header ends after the text. */
-export default async function SitePageHero({ page, kicker, title, lead }: SitePageHeroProps) {
+export default async function SitePageHero({ page, ...props }: SitePageHeroProps) {
   const settings = await sanityFetch<SiteSettings | null>(siteSettingsQuery, null);
-  return <PageHero kicker={kicker} title={title} lead={lead} image={settings?.pageHeroes?.[page]} />;
+  return <PageHero {...props} image={settings?.pageHeroes?.[page]} />;
 }

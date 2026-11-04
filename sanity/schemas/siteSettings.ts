@@ -151,6 +151,13 @@ export default defineType({
       group: 'contact',
     }),
     defineField({
+      name: 'voucherUrl',
+      title: 'Lien d’achat des bons de vol (facultatif)',
+      description: 'Si les bons cadeaux s’achètent sur une page différente. Sinon, le bouton « Acheter un bon » utilise le lien de paiement ci-dessus.',
+      type: 'url',
+      group: 'contact',
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Réseaux sociaux',
       type: 'array',
