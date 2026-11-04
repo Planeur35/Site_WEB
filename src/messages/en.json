@@ -3,7 +3,7 @@
     "home": "Home",
     "club": "The club",
     "gliders": "Our gliders",
-    "join": "Learn to fly!",
+    "join": "Come and fly!",
     "discover": "Try gliding",
     "news": "News",
     "newsList": "Latest news",
@@ -46,7 +46,7 @@
       "description": "The PIV club gliders, one by one: training two-seaters and performance single-seaters."
     },
     "join": {
-      "title": "Learn to fly: prices and membership",
+      "title": "Come and fly: prices and membership",
       "description": "Membership and training prices at the PIV gliding club."
     },
     "discover": {
@@ -149,7 +149,7 @@
     }
   },
   "join": {
-    "heroKicker": "Learn to fly!",
+    "heroKicker": "Come and fly!",
     "heroTitle": "Prices",
     "introKicker": "Prices",
     "introTitle": "This year’s prices",
@@ -177,7 +177,9 @@
     "bookingText": "Booking and payment are done online. Gift vouchers are available for individuals and companies.",
     "bookingCta": "Book and pay online",
     "contactCta": "Write to us to book",
-    "questionCta": "Ask a question"
+    "questionCta": "Ask a question",
+    "faqKicker": "FAQ",
+    "faqTitle": "Frequently asked questions"
   },
   "news": {
     "heroKicker": "News",

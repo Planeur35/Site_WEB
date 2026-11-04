@@ -14,3 +14,8 @@ export function localize<T>(
   }
   return value.fr;
 }
+
+/** The value if it holds something (text or at least one block), otherwise undefined. */
+export function nonEmpty<T extends { length: number }>(value: T | undefined | null): T | undefined {
+  return value && value.length > 0 ? value : undefined;
+}

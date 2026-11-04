@@ -3,7 +3,7 @@
     "home": "Accueil",
     "club": "Le club",
     "gliders": "Nos planeurs",
-    "join": "Apprenez à voler !",
+    "join": "Venez voler !",
     "discover": "Venez essayer",
     "news": "Actualités",
     "newsList": "Les news",
@@ -46,7 +46,7 @@
       "description": "Les planeurs du club PIV, présentés un par un : biplaces de formation, monoplaces de performance."
     },
     "join": {
-      "title": "Apprenez à voler : tarifs et adhésion",
+      "title": "Venez voler : tarifs et adhésion",
       "description": "Les tarifs d’adhésion et de formation au club de vol à voile PIV."
     },
     "discover": {
@@ -149,7 +149,7 @@
     }
   },
   "join": {
-    "heroKicker": "Apprenez à voler !",
+    "heroKicker": "Venez voler !",
     "heroTitle": "Les tarifs",
     "introKicker": "Tarifs",
     "introTitle": "Les tarifs de l’année",
@@ -177,7 +177,9 @@
     "bookingText": "La réservation et le paiement se font en ligne. Des bons de vol sont disponibles pour les particuliers comme pour les entreprises.",
     "bookingCta": "Réserver et payer en ligne",
     "contactCta": "Nous écrire pour réserver",
-    "questionCta": "Poser une question"
+    "questionCta": "Poser une question",
+    "faqKicker": "FAQ",
+    "faqTitle": "Questions fréquentes"
   },
   "news": {
     "heroKicker": "Actualités",

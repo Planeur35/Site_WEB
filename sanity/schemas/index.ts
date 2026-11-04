@@ -10,6 +10,8 @@ import tariff from './tariff';
 import clubPage from './clubPage';
 import clubHistory from './clubHistory';
 import flightStory from './flightStory';
+import joinPage from './joinPage';
+import discoverPage from './discoverPage';
 
 export const schemas = [
   // Entered by members
@@ -20,6 +22,8 @@ export const schemas = [
   siteSettings,
   clubPage,
   clubHistory,
+  joinPage,
+  discoverPage,
   aircraft,
   tariff,
   flightStory,

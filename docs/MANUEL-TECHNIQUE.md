@@ -181,8 +181,8 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
 | Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire du club | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
-| Apprenez à voler ! `/adherer` | Réglages du site, onglet « Page Apprenez à voler (tarifs) » : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation ; texte « Comment s'inscrire » | 🟢 sous 60 s |
-| Venez essayer `/decouvrir` | Deux rubriques : vols d'initiation (tarif « Vol d'initiation » adulte et moins de 18 ans, texte des Réglages) et réservation et paiement en ligne (texte et lien de paiement des Réglages) | 🟢 sous 60 s |
+| Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
+| Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; lien de paiement des Réglages | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
 | Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
@@ -354,7 +354,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 
 | Chantier | Situation actuelle | Piste |
 |---|---|---|
-| Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Apprenez à voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
+| Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Venez voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
 | Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |

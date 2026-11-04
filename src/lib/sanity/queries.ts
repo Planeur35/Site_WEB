@@ -1,5 +1,9 @@
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]`;
 
+export const joinPageQuery = `*[_type == "joinPage"][0]`;
+
+export const discoverPageQuery = `*[_type == "discoverPage"][0]`;
+
 export const allArticlesQuery = `*[_type == "article" && defined(slug.current)] | order(publishedAt desc) {
   ...,
   category->

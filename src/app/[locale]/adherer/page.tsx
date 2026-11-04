@@ -11,9 +11,9 @@ import Section from '@/components/ui/Section';
 import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { imageDimensions, urlFor } from '@/lib/sanity/image';
-import { localize } from '@/lib/sanity/localize';
-import { siteSettingsQuery } from '@/lib/sanity/queries';
-import type { SiteSettings } from '@/lib/sanity/types';
+import { localize, nonEmpty } from '@/lib/sanity/localize';
+import { joinPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
+import type { JoinPage, SiteSettings } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
@@ -28,19 +28,38 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations('join');
 
-  const settings = await sanityFetch<SiteSettings | null>(siteSettingsQuery, null);
-  const intro = localize(settings?.pricingIntro, locale);
-  const hasIntro = !!intro && intro.length > 0;
-  const table = settings?.pricingTable;
-  const joinText = localize(settings?.joinText, locale);
+  const [page, settings] = await Promise.all([
+    sanityFetch<JoinPage | null>(joinPageQuery, null),
+    sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
+  ]);
+
+  // The text comes from the page document (Studio → Page « Venez voler ! »).
+  // The old fields of the site settings are used only while the new ones are empty.
+  const intro = nonEmpty(localize(page?.intro, locale)) ?? nonEmpty(localize(settings?.pricingIntro, locale));
+  const table = page?.table?.asset ? page.table : settings?.pricingTable;
+  const how = nonEmpty(localize(page?.how, locale));
+  const howPlain = localize(settings?.joinText, locale);
 
   // The three sub-parts, in this order. A sub-part without text is not shown.
   const parts = [
-    { id: 'adhesion', title: t('membershipTitle'), body: localize(settings?.pricingMembership, locale) },
-    { id: 'pack-formation', title: t('trainingPackTitle'), body: localize(settings?.pricingTraining, locale) },
-    { id: 'pack-complement', title: t('advancedPackTitle'), body: localize(settings?.pricingAdvanced, locale) },
-  ].filter((part) => part.body && part.body.length > 0);
+    {
+      id: 'cotisation',
+      title: t('membershipTitle'),
+      body: nonEmpty(localize(page?.membership, locale)) ?? nonEmpty(localize(settings?.pricingMembership, locale)),
+    },
+    {
+      id: 'pack-formation',
+      title: t('trainingPackTitle'),
+      body: nonEmpty(localize(page?.training, locale)) ?? nonEmpty(localize(settings?.pricingTraining, locale)),
+    },
+    {
+      id: 'pack-complement',
+      title: t('advancedPackTitle'),
+      body: nonEmpty(localize(page?.advanced, locale)) ?? nonEmpty(localize(settings?.pricingAdvanced, locale)),
+    },
+  ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body }] : []));
 
+  const hasIntro = !!intro;
   const isEmpty = !hasIntro && !table?.asset && parts.length === 0;
 
   return (
@@ -77,8 +96,10 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
       ))}
 
       <Section kicker={t('howKicker')} title={t('howTitle')}>
-        {joinText ? (
-          <p className="max-w-2xl whitespace-pre-line leading-relaxed text-slate-700">{joinText}</p>
+        {how ? (
+          <PortableText value={how} className="max-w-2xl" />
+        ) : howPlain ? (
+          <p className="max-w-2xl whitespace-pre-line leading-relaxed text-slate-700">{howPlain}</p>
         ) : (
           <EmptyState>{t('howEmpty')}</EmptyState>
         )}

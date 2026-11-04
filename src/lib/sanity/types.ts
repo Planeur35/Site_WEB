@@ -98,6 +98,27 @@ export type PageHeroKey =
   | 'contact'
   | 'legal';
 
+export interface JoinPage {
+  intro?: LocalizedRichText;
+  table?: SanityImage;
+  membership?: LocalizedRichText;
+  training?: LocalizedRichText;
+  advanced?: LocalizedRichText;
+  how?: LocalizedRichText;
+}
+
+export interface FaqItem {
+  _key: string;
+  question?: LocalizedString;
+  answer?: LocalizedRichText;
+}
+
+export interface DiscoverPage {
+  flights?: LocalizedRichText;
+  booking?: LocalizedRichText;
+  faq?: FaqItem[];
+}
+
 export interface HeroSlide {
   _key: string;
   image?: SanityImage;
