@@ -59,6 +59,8 @@ export interface SiteSettings {
     lng: number;
   };
   heroSlides?: HeroSlide[];
+  homeCardImages?: { try?: SanityImage; learn?: SanityImage; join?: SanityImage };
+  giftImage?: SanityImage;
   statsYear?: number;
   membersCount?: number;
   flightHours?: number;

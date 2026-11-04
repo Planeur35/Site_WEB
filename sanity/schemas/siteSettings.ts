@@ -65,7 +65,8 @@ export default defineType({
     defineField({
       name: 'heroSlides',
       title: 'Photos d’accueil (3 ou 4)',
-      description: 'Elles défilent toutes les 6 secondes. Choisissez de belles photos de planeurs en vol.',
+      description:
+        'Elles défilent toutes les 7 secondes. Photo d’au moins 2400 px de large, de préférence un planeur en vol. Le titre (70 caractères max.) s’affiche en très grand au-dessus de la photo.',
       type: 'array',
       group: 'home',
       validation: (rule) => rule.max(4),
@@ -81,6 +82,20 @@ export default defineType({
         }),
       ],
     }),
+
+    defineField({
+      name: 'homeCardImages',
+      title: 'Photos des trois cartes « Par où commencer »',
+      description: 'Format paysage. Sans photo, la carte affiche le dessin d’une trace de vol.',
+      type: 'object',
+      group: 'home',
+      fields: [
+        photoField({ name: 'try', title: 'Venez essayer', required: false }),
+        photoField({ name: 'learn', title: 'Apprendre à voler', required: false }),
+        photoField({ name: 'join', title: 'S’inscrire', required: false }),
+      ],
+    }),
+    photoField({ name: 'giftImage', title: 'Photo du bandeau « Offrez le ciel » (bons de vol)', required: false, group: 'home' }),
 
     defineField({
       name: 'pageHeroes',

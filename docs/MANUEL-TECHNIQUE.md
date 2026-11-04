@@ -113,7 +113,7 @@ flowchart TB
 src/
   app/
     [locale]/                 # toutes les pages publiques, /fr et /en
-      page.tsx                # accueil : photos qui défilent, chiffres clés, dernières actualités
+      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, bons de vol, accès membres
       club/                   # sections du club (#presentation, #plateforme, #formation…) et histoire
       planeurs/  adherer/  decouvrir/
       actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
@@ -178,7 +178,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
-| Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
+| Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés, photos des trois cartes, photo des bons de vol ; tarifs « Vol d'initiation » ; 3 dernières Actualités | 🟢 sous 60 s |
 | Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire du club | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |

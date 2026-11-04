@@ -15,3 +15,8 @@ export async function getTrialPrices(): Promise<TrialPrices> {
     young: tariffs.find((tariff) => tariff.ageCategory === 'under18')?.amount,
   };
 }
+
+/** "170", "1 250": an amount for the price strings, which carry the € sign. */
+export function formatAmount(amount: number, locale: string): string {
+  return new Intl.NumberFormat(locale).format(amount);
+}

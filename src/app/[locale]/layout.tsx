@@ -5,7 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { getTrialPrices } from "@/lib/pricing";
+import { formatAmount, getTrialPrices } from "@/lib/pricing";
 
 const interTight = Inter_Tight({
   subsets: ["latin", "latin-ext"],
@@ -66,7 +66,7 @@ async function formatTrialPrice(locale: string): Promise<string | null> {
   const { adult, young } = await getTrialPrices();
   if (adult == null) return null;
   const t = await getTranslations({ locale, namespace: "nav" });
-  const format = (amount: number) => new Intl.NumberFormat(locale).format(amount);
+  const format = (amount: number) => formatAmount(amount, locale);
   return young == null
     ? t("trialPriceSingle", { amount: format(adult) })
     : t("trialPrice", { adult: format(adult), young: format(young) });
