@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import clsx from 'clsx';
 import { ArrowRight, CalendarDays, Link2, Route, Webcam } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import { Link } from '@/i18n/navigation';
+import { routing } from '@/i18n/routing';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import CountUp from '@/components/ui/CountUp';
@@ -50,6 +53,8 @@ const sectionTitle = 'font-display text-[1.875rem] leading-[1.12] font-semibold 
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  // Renders in parallel with the layout, so it needs its own guard (see layout.tsx)
+  if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const t = await getTranslations('home');
   const tNav = await getTranslations('nav');
