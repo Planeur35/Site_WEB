@@ -42,8 +42,8 @@ const components: PortableTextComponents = {
   },
   marks: {
     link: ({ children, value }: { children: React.ReactNode; value?: PortableTextLinkValue }) => {
-      const href = value?.href || '';
-      const isExternal = href.startsWith('http');
+      const href = sitePath(value?.href || '');
+      const isExternal = /^https?:\/\//.test(href);
       return (
         <a href={href} {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
           {children}
@@ -52,6 +52,16 @@ const components: PortableTextComponents = {
     },
   },
 };
+
+/**
+ * Links typed in the Studio to the site's own pages (planeur35.org, the Vercel address or a preview)
+ * become plain paths, so they open in the same tab and follow the site wherever it is hosted.
+ */
+const OWN_HOST = /^https?:\/\/(?:www\.)?(?:planeur35\.org|piv-sigma\.vercel\.app|piv-[a-z0-9-]+-hamidsefatis-projects\.vercel\.app)(?=[/?#]|$)/i;
+
+function sitePath(href: string): string {
+  return OWN_HOST.test(href) ? href.replace(OWN_HOST, '') || '/' : href;
+}
 
 interface PortableTextProps {
   value: Parameters<typeof SanityPortableText>[0]['value'] | undefined;
