@@ -69,7 +69,7 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 - Tailwind utility classes only; no new CSS files. Use `clsx` for conditional classes.
 - The design is "Ciel & balise", specified in `docs/redesign/handoff.md` (tokens, components, pages; mockups in `docs/redesign/mockups/`). That document wins over this summary.
 - Colours are tokens in `globals.css`: `blanc` page background, `ciel` alternate band and panels, `horizon` hairlines, `azur` headings, `texte` body, `brume` secondary text, `altitude` links and focus, `nuit` footer, `erreur` and `valide` for form messages only. No raw hex colours.
-- Orange `balise` is for the one main action on a screen (Réserver, Venez essayer: at most one orange button per viewport), plus eyebrows and the active-page underline. Never for body text or large areas.
+- Orange `balise` is for the one main action on a screen (Réserver, Venez essayer: at most one orange button per viewport), plus eyebrows and the active-page underline. Never for body text or large areas. Give a page's own orange button the `mainCta` prop: while it is on screen, the header's "Venez essayer" turns to an outline.
 - Titles use `font-display` (Inter Tight) with the `text-display`/`text-h1`…`text-h4` scale; text uses Inter (`font-sans`). No `font-serif`, no uppercase letter-spaced labels: sentence case everywhere.
 - Corners: `rounded-xs` (2 px) tags and chips, `rounded-sm` (4 px) buttons and fields, `rounded-md` (6 px) photos and panels. Nothing larger, no pills. Shadows (`shadow-flottant`) only on what floats.
 - A missing photo or empty block shows the `FlightTrace` placeholder (pale sky + flight trace), never clip-art.
@@ -81,12 +81,12 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 - Never hardcode UI text in components. Add the key to both `src/messages/fr.json` and `src/messages/en.json`; the two files must keep exactly the same keys.
 - French copy uses proper accents (é, è, à, ç). Some existing strings lack them; fix those you touch.
 - Internal links: import `Link`, `redirect`, `useRouter` from `@/i18n/navigation`, never from `next/link`. Link to the French pathname (`/adherer`, or `{ pathname: '/club', hash: 'formation' }`); next-intl translates it.
-- A new page also needs: its pathname and English slug in `src/i18n/routing.ts`, an entry in `src/components/layout/navItems.ts` (used by the header, the full menu and the footer), and a line in `src/app/sitemap.ts`. When a page moves, add a redirect from the old path in `next.config.ts`.
+- A new page also needs: its pathname and English slug in `src/i18n/routing.ts`, an entry in `src/components/layout/navItems.ts` (used by the header, the full menu and the footer); if the page can be empty, add its key to `getHiddenNavKeys()` in `src/lib/emptyPages.ts` so the menus hide it until it has content, and a line in `src/app/sitemap.ts`. When a page moves, add a redirect from the old path in `next.config.ts`.
 
 ### Sanity
 
 - Changing the content model goes in this order: `sanity/schemas/<type>.ts` (`defineType`, `defineField`) → `sanity/schemas/index.ts` → `src/lib/sanity/types.ts` → query in `src/lib/sanity/queries.ts` → page.
-- Bilingual fields are objects `{ fr, en }`; build new ones with the helpers in `sanity/schemas/fields.ts` (French required where needed, English optional). Read them with `localize(field, locale)`, which falls back to French when `en` is empty.
+- Bilingual fields are objects `{ fr, en }`; build new ones with the helpers in `sanity/schemas/fields.ts` (French required where needed, English optional). Read them with `localize(field, locale)`, which falls back to French when `en` is empty. Where a long text can fall back, mark it with `isFrenchFallback()`: `lang="fr"` on the French block and a `FrenchOnlyNote` above it.
 - Read Sanity through `sanityFetch(query, fallback, params)` from `@/lib/sanity/fetch`: it returns the fallback when Sanity is empty or unreachable, so pages still render. Show an `EmptyState` when there is nothing yet.
 - Studio labels and descriptions are in French: editors are French-speaking volunteers. Values read by the site (`section`, `offer`, `ageCategory`, link `group`) must not be renamed.
 - Any page that reads Sanity must `export const revalidate = 60`. Without it the page is frozen at build time and Studio edits only appear after the next deploy.
