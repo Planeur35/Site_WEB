@@ -37,7 +37,8 @@
     "bookTrial": "Réserver un vol d’initiation",
     "trialPrice": "{adult} € · {young} € moins de 18 ans",
     "trialPriceSingle": "{amount} €",
-    "language": "Langue"
+    "language": "Langue",
+    "partners": "Partenaires"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",

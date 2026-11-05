@@ -37,7 +37,8 @@
     "bookTrial": "Book a trial flight",
     "trialPrice": "€{adult} · €{young} under 18",
     "trialPriceSingle": "€{amount}",
-    "language": "Language"
+    "language": "Language",
+    "partners": "Partners"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",

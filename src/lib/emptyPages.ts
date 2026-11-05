@@ -7,6 +7,7 @@ const contentQuery = `{
   "gallery": count(*[_type == "galleryImage" && defined(image.asset)]) > 0,
   "stories": count(*[_type == "flightStory" && defined(slug.current)]) > 0,
   "history": count(*[_type == "clubHistory"]) > 0,
+  "partners": count(*[_type == "partner" && defined(logo.asset)]) > 0,
   "sections": *[_type == "clubPage"].section
 }`;
 
@@ -15,6 +16,7 @@ interface Content {
   gallery: boolean;
   stories: boolean;
   history: boolean;
+  partners: boolean;
   sections: string[];
 }
 
@@ -26,12 +28,13 @@ interface Content {
 export async function getHiddenNavKeys(): Promise<string[]> {
   const content = await sanityFetch<Content | null>(contentQuery, null);
   if (!content) return [];
-  const sections = Object.keys(CLUB_ANCHORS).filter((key) => key !== 'history');
+  const sections = Object.keys(CLUB_ANCHORS).filter((key) => key !== 'history' && key !== 'partners');
   return [
     ...(content.webcam ? [] : ['webcam']),
     ...(content.gallery ? [] : ['gallery']),
     ...(content.stories ? [] : ['stories']),
     ...(content.history ? [] : ['history']),
+    ...(content.partners ? [] : ['partners']),
     ...sections.filter((key) => !content.sections.includes(key)),
   ];
 }

@@ -103,7 +103,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
   const navLinks = [
     ...rendered.map((r) => ({ id: CLUB_ANCHORS[r.section], label: tNav(r.section) })),
     ...(history ? [{ id: CLUB_ANCHORS.history, label: tNav('history') }] : []),
-    ...(partners.length > 0 ? [{ id: 'partenaires', label: tPartners('sectionKicker') }] : []),
+    ...(partners.length > 0 ? [{ id: CLUB_ANCHORS.partners, label: tNav('partners') }] : []),
   ];
 
   // "Le club en bref": rows without data are left out
@@ -315,7 +315,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
 
       {/* Partners in full here: the band above the footer is left out on this page */}
       {partners.length > 0 && (
-        <Section band id="partenaires" kicker={tPartners('sectionKicker')} title={tPartners('sectionTitle')} sub={tPartners('sectionSub')}>
+        <Section band id={CLUB_ANCHORS.partners} kicker={tPartners('sectionKicker')} title={tPartners('sectionTitle')} sub={tPartners('sectionSub')}>
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
             {partners.map((partner) => {
               const role = localize(partner.role, locale);

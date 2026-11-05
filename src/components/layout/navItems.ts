@@ -26,6 +26,7 @@ export const CLUB_ANCHORS = {
   campaign: 'perfectionnement',
   competition: 'competition',
   history: 'histoire',
+  partners: 'partenaires',
 } as const;
 
 /** The top bar: four text entries, with their drop-downs, and the call to action. */
