@@ -547,8 +547,10 @@ Créez un fichier nommé `.env.local` à la racine du dossier `piv` (dans VS Cod
 
 ```text
 NEXT_PUBLIC_SANITY_PROJECT_ID=8mup540n
-NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_DATASET=dev
 ```
+
+`dev` est une copie du contenu du site : vous pouvez y faire tous les essais, rien n'apparaît sur le site en ligne.
 
 Ces deux valeurs sont publiques : elles sont déjà visibles dans le site en ligne. Le formulaire de contact a besoin de deux variables secrètes en plus (`RESEND_API_KEY`, `CONTACT_EMAIL`). Demandez-les à Hamid seulement si vous travaillez sur ce formulaire. Git ignore tous les fichiers `.env*`, ils ne partent donc jamais sur GitHub.
 

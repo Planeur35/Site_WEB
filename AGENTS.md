@@ -18,7 +18,7 @@ Read these when a task touches their topic, instead of guessing:
 - Next.js 15 App Router, React 19, TypeScript (`strict`), path alias `@/*` → `src/*`
 - Tailwind CSS 4; design tokens in `src/app/globals.css` (`@theme`)
 - next-intl 4 for routing and UI strings
-- Sanity v4, Studio embedded at `/studio`, project `8mup540n`, single dataset `production`
+- Sanity v4, Studio embedded at `/studio`, project `8mup540n`. Datasets: `production` (live site) and `dev` (local and Vercel previews), chosen by `NEXT_PUBLIC_SANITY_DATASET`
 - Hosted on Vercel: every push to `main` deploys to production; every branch gets a preview URL
 - Resend for the contact form, Leaflet + OpenStreetMap for the map
 
@@ -33,6 +33,8 @@ npm run build   # production build, the same one Vercel runs
 There is no test suite. A change is verified when `npm run lint` and `npm run build` pass and the affected pages look right in `npm run dev` at `/fr` and `/en`, on desktop and at ~375 px wide.
 
 Do not run anything in `scripts/` unless explicitly asked: they write to the production Sanity dataset and need `SANITY_WRITE_TOKEN`.
+
+Local work uses the `dev` dataset (`.env.local`). Write test or sample content to `dev` only, never to `production`; the Sanity CLI (`npx sanity`, configured by `sanity.cli.ts`) follows `.env.local`. Refreshing `dev` from production is in `docs/MANUEL-TECHNIQUE.md` ("Deux datasets").
 
 ## Where things are
 

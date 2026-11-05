@@ -31,7 +31,7 @@ Site vitrine bilingue (français par défaut, anglais) dont l'objectif principal
 | **Production** | https://piv-sigma.vercel.app (le domaine planeur35.org n'est pas encore basculé) |
 | **Back-office** | https://piv-sigma.vercel.app/studio, connexion avec un compte Sanity invité sur le projet |
 | **Code** | https://github.com/Planeur35/Site_WEB (public, organisation du club), branche `main` |
-| **Sanity** | Projet `8mup540n`, dataset `production`, administration sur https://www.sanity.io/manage |
+| **Sanity** | Projet `8mup540n`, datasets `production` (site en ligne) et `dev` (local et previews), administration sur https://www.sanity.io/manage |
 | **Vercel** | Projet `piv`, déploiement automatique à chaque push sur `main` |
 | **Spécification** | [`docs/superpowers/specs/2026-03-28-planeur35-website-redesign-design.md`](superpowers/specs/2026-03-28-planeur35-website-redesign-design.md) |
 
@@ -157,7 +157,7 @@ Créer `.env.local` à la racine. Ce fichier est ignoré par git, et les mêmes 
 
 ```bash
 NEXT_PUBLIC_SANITY_PROJECT_ID=8mup540n
-NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_DATASET=dev   # jamais production en local, voir « Deux datasets »
 RESEND_API_KEY=re_...            # clé Resend du club
 CONTACT_EMAIL=...                # destinataire du formulaire (repli : contact@planeur35.org)
 ```
@@ -250,6 +250,30 @@ SANITY_WRITE_TOKEN=sk... npx tsx scripts/upload-fleet-images.ts # photos de la f
 
 Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-fleet-images.ts`. Ne jamais coller un token dans une conversation ni dans un fichier suivi par git.
 
+### Deux datasets : `production` et `dev`
+
+| Dataset | Lu et modifié par |
+|---|---|
+| `production` | le site en ligne et son Studio (https://piv-sigma.vercel.app/studio) |
+| `dev` | `npm run dev` en local et les previews Vercel des branches, avec leur Studio |
+
+Le dataset vient d'une seule variable, `NEXT_PUBLIC_SANITY_DATASET` : `dev` dans `.env.local`. Dans Vercel, la variable vaut `production` pour Production et Development, et `dev` pour Preview. Une variable `NEXT_PUBLIC_` est figée au build : après l'avoir changée, redéployer.
+
+- **Les bénévoles saisissent toujours dans le Studio de production.** Ce qui est saisi dans `dev` ne passe jamais en ligne.
+- `dev` est une copie : elle vieillit. Pour la remettre à jour depuis la production (avec la CLI Sanity, connectée par `npx sanity login`, configurée par `sanity.cli.ts`) :
+
+  ```bash
+  npx sanity dataset export production /tmp/production.tar.gz
+  npx sanity dataset import /tmp/production.tar.gz dev --replace
+  rm /tmp/production.tar.gz
+  ```
+
+- **Studio d'une preview.** Le Studio n'accepte que les origines déclarées (CORS). Chaque branche a une adresse fixe, `https://piv-git-<branche>-hamidsefatis-projects.vercel.app` (les `/` du nom deviennent des `-`) : l'ajouter une fois par branche, sans joker.
+
+  ```bash
+  npx sanity cors add https://piv-git-feat-exemple-hamidsefatis-projects.vercel.app --credentials
+  ```
+
 ### Images
 
 - Images éditoriales : à téléverser dans Sanity. `next/image` passe par `src/lib/sanity/imageLoader.ts` : c'est le CDN de Sanity qui redimensionne, pas l'hébergeur (dont l'optimisation d'images est limitée en offre gratuite).
@@ -260,7 +284,7 @@ Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-
 
 1. Vérifier en local : `npm run dev` pour contrôler visuellement (FR, EN, largeur mobile), puis `npm run build` qui doit passer sans erreur.
 2. Committer et pousser sur `main`. Vercel lance le build et met la production à jour tout seul. **Pas de `vercel --prod` manuel.**
-3. Pour une modification à faire relire, pousser sur une branche : Vercel crée une URL de preview.
+3. Pour une modification à faire relire, pousser sur une branche : Vercel crée une URL de preview, qui lit le dataset `dev`. Les previews demandent une connexion Vercel : pour les faire relire, utiliser **Share** sur le déploiement.
 4. Contrôler le résultat sur https://piv-sigma.vercel.app.
 
 > **Variables d'environnement.** Une variable ajoutée à `.env.local` doit aussi être créée dans Vercel → Settings → Environment Variables. Elle ne s'applique qu'aux déploiements suivants.
