@@ -6,7 +6,7 @@ import type { Partner } from '@/lib/sanity/types';
 interface PartnerLogoProps {
   partner: Partner;
   /** Height of a wide logo; square and tall ones get a third more so they read at the same weight. */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'card';
   /** Accessible name of the link, e.g. "Site de la FFVP". */
   linkLabel?: string;
   className?: string;
@@ -16,6 +16,8 @@ const HEIGHTS = {
   sm: { wide: 'h-12', square: 'h-16' },
   md: { wide: 'h-16', square: 'h-20' },
   lg: { wide: 'h-20', square: 'h-28' },
+  /** Partner cards: two per row on phones, so smaller there. */
+  card: { wide: 'h-12 lg:h-20', square: 'h-16 lg:h-28' },
 };
 
 /** A partner's logo in its own colours, never cropped, linked to the partner's site when there is one. */
@@ -29,7 +31,7 @@ export default function PartnerLogo({ partner, size = 'sm', linkLabel, className
       width={width}
       height={height}
       sizes="240px"
-      className={clsx('w-auto max-w-[180px] object-contain', HEIGHTS[size][square ? 'square' : 'wide'])}
+      className={clsx('w-auto max-w-full object-contain sm:max-w-[180px]', HEIGHTS[size][square ? 'square' : 'wide'])}
     />
   );
   if (!partner.url) return <span className={clsx('inline-flex', className)}>{image}</span>;

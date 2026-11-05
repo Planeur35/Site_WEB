@@ -14,6 +14,7 @@ import HeroSlideshow, { type Slide } from '@/components/ui/HeroSlideshow';
 import Kicker from '@/components/ui/Kicker';
 import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Map from '@/components/ui/Map';
+import PartnerCards from '@/components/ui/PartnerCards';
 import PartnerLogo from '@/components/ui/PartnerLogo';
 import NewsCard from '@/components/ui/NewsCard';
 import NewsRow from '@/components/ui/NewsRow';
@@ -216,6 +217,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           ))}
         </div>
       </Section>
+
+      {/* Partners put forward, as on the association page; the logo band above the footer stays too */}
+      {partners.length > 0 && (
+        <Section kicker={tPartners('sectionKicker')} title={tPartners('sectionTitle')} sub={tPartners('sectionSub')}>
+          <PartnerCards partners={partners} locale={locale} />
+        </Section>
+      )}
 
       {articles.length > 0 && (
         <Section band kicker={t('latestKicker')} title={t('latestTitle')} action={{ href: '/actualites', label: t('allNews') }}>

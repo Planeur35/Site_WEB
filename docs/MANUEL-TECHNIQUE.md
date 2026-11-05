@@ -113,7 +113,7 @@ flowchart TB
 src/
   app/
     [locale]/                 # toutes les pages publiques, /fr et /en
-      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, bons de vol, Ouvert à tous (handiplaneur), Nous trouver (adresse, itinéraire, carte), accès membres
+      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, Nos partenaires, bons de vol, Ouvert à tous (handiplaneur), Nous trouver (adresse, itinéraire, carte), accès membres
       club/                   # sections du club (#presentation, #plateforme, #formation…) et histoire
       planeurs/  adherer/  decouvrir/
       actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
@@ -187,7 +187,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Récits `/recits` et `/recits/[slug]` | Récits de vols : 6 au plus, en cartes larges (photo ou tracé, date, planeur, titre, résumé, lien WeGlide), une lecture longue par récit (introduction, texte, photos, anecdotes, lien WeGlide), mise en page commune avec l'histoire du club et les actualités | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos (en colonnes, chaque photo garde ses proportions ; légende sous la photo) ; adresse de la webcam et liens pratiques des Réglages (rangés par groupe, le nom du site s'affiche sous chaque lien) | 🟢 sous 60 s |
 | Contact, pied de page | Adresse, e-mail, téléphone et réseaux des Réglages ; envoi du formulaire via Resend | 🟢 sous 60 s |
-| Partenaires | Type « Partenaire » (nom, logo, lien, type, rôle, ordre) : bandeau « Ils nous soutiennent » au-dessus du pied de page sur toutes les pages sauf L’association, qui les présente en cartes (section « Nos partenaires », aussi dans les menus de L’association et masquée tant qu’aucun partenaire n’est saisi) ; ceux marqués « Ouvert à tous » apparaissent aussi dans ce bandeau de l’accueil. Sans partenaire, rien ne s’affiche | 🟢 sous 60 s |
+| Partenaires | Type « Partenaire » (nom, logo, lien, type, rôle, ordre) : bandeau « Ils nous soutiennent » au-dessus du pied de page sur toutes les pages sauf L’association ; cartes « Nos partenaires » (composant `PartnerCards`) sur l’accueil, entre « Par où commencer » et « Journal », et sur L’association (section aussi dans les menus de L’association et masquée tant qu’aucun partenaire n’est saisi) ; ceux marqués « Ouvert à tous » apparaissent aussi dans ce bandeau de l’accueil. Sans partenaire, rien ne s’affiche | 🟢 sous 60 s |
 | Mentions légales `/mentions-legales` | Réglages du site (groupe Mentions légales) pour l'identité (dont le numéro d'affiliation FFVP, facultatif) ; textes dans `src/messages/*.json` (espace `legal`) | 🟢 sous 60 s (identité), 🟠 au prochain déploiement (textes) |
 | Photo d'en-tête de chaque page | Réglages du site → Photos d'en-tête (une photo par page ; sans photo, le dessin du ciel s'affiche) | 🟢 sous 60 s |
 | Menus et libellés | `src/messages/fr.json` et `en.json`, entrées dans `src/components/layout/navItems.ts` ; les liens vers une page encore vide (webcam, galerie, récits, histoire du club, section du club absente) sont masqués des menus jusqu'à ce que le contenu existe (`src/lib/emptyPages.ts`) | 🟠 au prochain déploiement (libellés), 🟢 sous 60 s (liens masqués) |

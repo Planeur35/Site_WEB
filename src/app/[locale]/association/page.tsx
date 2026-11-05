@@ -11,7 +11,7 @@ import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
 import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
-import PartnerLogo from '@/components/ui/PartnerLogo';
+import PartnerCards from '@/components/ui/PartnerCards';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
 import SectionNav from '@/components/ui/SectionNav';
@@ -316,26 +316,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
       {/* Partners in full here: the band above the footer is left out on this page */}
       {partners.length > 0 && (
         <Section band id={CLUB_ANCHORS.partners} kicker={tPartners('sectionKicker')} title={tPartners('sectionTitle')} sub={tPartners('sectionSub')}>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-            {partners.map((partner) => {
-              const role = localize(partner.role, locale);
-              return (
-                <li key={partner._id} className="flex flex-col gap-4 rounded-md bg-blanc p-5 lg:p-6">
-                  <div className="flex h-28 items-center">
-                    <PartnerLogo partner={partner} size="lg" linkLabel={tPartners('visit', { name: partner.name })} />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-azur">{partner.name}</p>
-                    {role && (
-                      <p lang={isFrenchFallback(partner.role, locale) ? 'fr' : undefined} className="mt-1 text-[0.9375rem] leading-[1.5] text-texte">
-                        {role}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <PartnerCards partners={partners} locale={locale} onBand />
         </Section>
       )}
     </>
