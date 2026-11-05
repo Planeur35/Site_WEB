@@ -321,7 +321,13 @@
     "heroTitle": "Galerie",
     "kicker": "La vie du club",
     "title": "Photos du club",
-    "empty": "Les photos seront bientôt disponibles."
+    "empty": "Les photos seront bientôt disponibles.",
+    "open": "Agrandir la photo",
+    "previous": "Photo précédente",
+    "next": "Photo suivante",
+    "close": "Fermer",
+    "viewer": "Visionneuse de photos",
+    "photo": "Photo"
   },
   "webcam": {
     "heroKicker": "Vue de la plateforme",

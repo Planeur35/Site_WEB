@@ -8,49 +8,49 @@ interface GalleryImage {
   src: string;
   alt: string;
   caption?: string;
+  width: number;
+  height: number;
 }
 
 interface GalleryProps {
   images: GalleryImage[];
+  /** Accessible label of each photo button ("Agrandir la photo"). */
+  openLabel: string;
 }
 
-export default function Gallery({ images }: GalleryProps) {
+/** Photos in masonry columns, each in its own proportions; a click opens the viewer. */
+export default function Gallery({ images, openLabel }: GalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
-
-  const slides = images.map((img) => ({
-    src: img.src,
-    alt: img.alt,
-  }));
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="columns-2 gap-3 sm:gap-4 lg:columns-3">
         {images.map((image, index) => (
-          <button
-            key={index}
-            type="button"
-            className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-md bg-ciel"
-            onClick={() => setSelectedIndex(index)}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-nuit/0 transition-colors duration-300 group-hover:bg-nuit/15" />
-            {image.caption && (
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-nuit/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-white text-sm text-left">{image.caption}</p>
-              </div>
-            )}
-          </button>
+          <li key={image.src} className="mb-3 break-inside-avoid sm:mb-4">
+            <figure>
+              <button
+                type="button"
+                className="group block w-full cursor-zoom-in overflow-hidden rounded-md bg-ciel"
+                onClick={() => setSelectedIndex(index)}
+                aria-label={image.alt ? `${openLabel} : ${image.alt}` : openLabel}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  sizes="(max-width: 1024px) 50vw, 400px"
+                  className="h-auto w-full transition-transform duration-150 ease-planeur group-hover:scale-[1.03]"
+                />
+              </button>
+              {image.caption && <figcaption className="mt-2 text-sm text-brume">{image.caption}</figcaption>}
+            </figure>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <LightboxWrapper
-        slides={slides}
+        slides={images.map(({ src, alt, width, height }) => ({ src, alt, width, height }))}
         open={selectedIndex >= 0}
         index={selectedIndex >= 0 ? selectedIndex : 0}
         onClose={() => setSelectedIndex(-1)}

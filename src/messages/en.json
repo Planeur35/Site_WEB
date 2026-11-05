@@ -321,7 +321,13 @@
     "heroTitle": "Gallery",
     "kicker": "Club life",
     "title": "Club photos",
-    "empty": "Photos will be available soon."
+    "empty": "Photos will be available soon.",
+    "open": "Enlarge the photo",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "close": "Close",
+    "viewer": "Photo viewer",
+    "photo": "Photo"
   },
   "webcam": {
     "heroKicker": "Airfield view",

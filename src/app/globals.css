@@ -21,6 +21,8 @@
   --color-balise: #c2410c;       /* the one action button */
   --color-balise-fonce: #9a3412; /* its hover/active */
   --color-balise-vif: #f97316;   /* decoration only: trace dot, accents on nuit */
+  --color-erreur: #b42318;       /* form errors only */
+  --color-valide: #1f6f43;       /* form success only */
 
   /* Type scale (desktop values) */
   --text-display: 5.5rem;   --text-display--line-height: 1;    --text-display--letter-spacing: -0.035em;

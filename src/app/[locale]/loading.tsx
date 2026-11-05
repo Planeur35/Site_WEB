@@ -1,13 +1,13 @@
+import Container from "@/components/ui/Container";
+import FlightTrace from "@/components/ui/FlightTrace";
+
+/** While a page loads: the empty-state frame, with the trace and no text. */
 export default function Loading() {
   return (
-    <div aria-busy="true">
-      <div className="h-[52vh] min-h-[300px] animate-pulse bg-horizon" />
-      <div className="mx-auto max-w-5xl space-y-4 px-4 py-16 sm:px-6 md:px-8">
-        <div className="h-3 w-32 animate-pulse bg-sky-100" />
-        <div className="h-9 w-2/3 animate-pulse bg-sky-100" />
-        <div className="h-4 w-full animate-pulse bg-sky-100" />
-        <div className="h-4 w-5/6 animate-pulse bg-sky-100" />
+    <Container className="py-16 lg:py-28">
+      <div aria-busy="true" className="relative h-60 overflow-hidden rounded-md lg:h-[300px]">
+        <FlightTrace seed="chargement" align="right" className="absolute! inset-0 animate-pulse" />
       </div>
-    </div>
+    </Container>
   );
 }

@@ -24,7 +24,7 @@ export default function ContactForm() {
       {/* Success message */}
       {state?.success && (
         <div
-          className="rounded-sm border-l-2 border-emerald-600 bg-emerald-50 px-4 py-3 text-emerald-900"
+          className="rounded-sm bg-ciel px-4 py-3 font-medium text-valide inset-ring inset-ring-valide/30"
           role="status"
         >
           {t('success')}
@@ -34,7 +34,7 @@ export default function ContactForm() {
       {/* General error message */}
       {state && !state.success && state.message && (
         <div
-          className="rounded-sm border-l-2 border-red-700 bg-red-50 px-4 py-3 text-red-900"
+          className="rounded-sm bg-blanc px-4 py-3 font-medium text-erreur inset-ring inset-ring-erreur/40"
           role="alert"
         >
           {t('error')}
@@ -44,7 +44,7 @@ export default function ContactForm() {
       {/* Name */}
       <div>
         <label htmlFor="contact-name" className="mb-2 block font-semibold text-nuit">
-          {t('name')} <span className="text-red-700" aria-hidden="true">*</span>
+          {t('name')} <span className="text-erreur" aria-hidden="true">*</span>
         </label>
         <input
           id="contact-name"
@@ -55,10 +55,10 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.name}
           aria-describedby={state?.errors?.name ? 'name-error' : undefined}
           disabled={isPending}
-          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors duration-150 focus:border-altitude aria-invalid:border-erreur disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.name && (
-          <p id="name-error" className="mt-1 text-sm text-red-700">
+          <p id="name-error" className="mt-1.5 text-sm font-medium text-erreur">
             {t(state.errors.name as 'required' | 'invalidEmail')}
           </p>
         )}
@@ -67,7 +67,7 @@ export default function ContactForm() {
       {/* Email */}
       <div>
         <label htmlFor="contact-email" className="mb-2 block font-semibold text-nuit">
-          {t('email')} <span className="text-red-700" aria-hidden="true">*</span>
+          {t('email')} <span className="text-erreur" aria-hidden="true">*</span>
         </label>
         <input
           id="contact-email"
@@ -78,10 +78,10 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.email}
           aria-describedby={state?.errors?.email ? 'email-error' : undefined}
           disabled={isPending}
-          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors duration-150 focus:border-altitude aria-invalid:border-erreur disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.email && (
-          <p id="email-error" className="mt-1 text-sm text-red-700">
+          <p id="email-error" className="mt-1.5 text-sm font-medium text-erreur">
             {t(state.errors.email as 'required' | 'invalidEmail')}
           </p>
         )}
@@ -90,7 +90,7 @@ export default function ContactForm() {
       {/* Subject */}
       <div>
         <label htmlFor="contact-subject" className="mb-2 block font-semibold text-nuit">
-          {t('subject')} <span className="text-red-700" aria-hidden="true">*</span>
+          {t('subject')} <span className="text-erreur" aria-hidden="true">*</span>
         </label>
         <input
           id="contact-subject"
@@ -101,10 +101,10 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.subject}
           aria-describedby={state?.errors?.subject ? 'subject-error' : undefined}
           disabled={isPending}
-          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-12 w-full rounded-sm border border-brume/50 bg-blanc px-4 text-nuit transition-colors duration-150 focus:border-altitude aria-invalid:border-erreur disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.subject && (
-          <p id="subject-error" className="mt-1 text-sm text-red-700">
+          <p id="subject-error" className="mt-1.5 text-sm font-medium text-erreur">
             {t(state.errors.subject as 'required' | 'invalidEmail')}
           </p>
         )}
@@ -113,7 +113,7 @@ export default function ContactForm() {
       {/* Message */}
       <div>
         <label htmlFor="contact-message" className="mb-2 block font-semibold text-nuit">
-          {t('message')} <span className="text-red-700" aria-hidden="true">*</span>
+          {t('message')} <span className="text-erreur" aria-hidden="true">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -124,10 +124,10 @@ export default function ContactForm() {
           aria-invalid={!!state?.errors?.message}
           aria-describedby={state?.errors?.message ? 'message-error' : undefined}
           disabled={isPending}
-          className="min-h-40 w-full resize-y rounded-sm border border-brume/50 bg-blanc px-4 py-3 text-nuit transition-colors focus:border-altitude disabled:cursor-not-allowed disabled:opacity-50"
+          className="min-h-40 w-full resize-y rounded-sm border border-brume/50 bg-blanc px-4 py-3 text-nuit transition-colors duration-150 focus:border-altitude aria-invalid:border-erreur disabled:cursor-not-allowed disabled:opacity-50"
         />
         {state?.errors?.message && (
-          <p id="message-error" className="mt-1 text-sm text-red-700">
+          <p id="message-error" className="mt-1.5 text-sm font-medium text-erreur">
             {t(state.errors.message as 'required' | 'invalidEmail')}
           </p>
         )}

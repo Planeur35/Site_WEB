@@ -48,7 +48,7 @@ export default async function Footer() {
                   </a>
                 )}
                 {settings.contactPhone && (
-                  <a href={`tel:${settings.contactPhone.replace(/\s/g, "")}`} className="hover:text-white">
+                  <a href={`tel:${settings.contactPhone.replace(/[^\d+]/g, "")}`} className="hover:text-white">
                     {settings.contactPhone}
                   </a>
                 )}

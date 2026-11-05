@@ -6,7 +6,7 @@ import Gallery from '@/components/ui/Gallery';
 import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
-import { urlFor } from '@/lib/sanity/image';
+import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { localize } from '@/lib/sanity/localize';
 import { allGalleryImagesQuery } from '@/lib/sanity/queries';
 import type { GalleryImage } from '@/lib/sanity/types';
@@ -28,10 +28,14 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
     .filter((img) => img.image?.asset)
     .map((img) => {
       const caption = localize(img.caption, locale);
+      const { width, height } = imageDimensions(img.image.asset?._ref);
       return {
         src: urlFor(img.image).width(1600).url(),
         alt: img.image.alt || caption || '',
         caption,
+        // Displayed at 1600 px wide: keep the photo's own proportions
+        width: 1600,
+        height: Math.round((1600 * height) / width),
       };
     });
 
@@ -39,7 +43,7 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
     <>
       <SitePageHero page="gallery" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('kicker')} title={t('title')}>
-        {images.length > 0 ? <Gallery images={images} /> : <EmptyState>{t('empty')}</EmptyState>}
+        {images.length > 0 ? <Gallery images={images} openLabel={t('open')} /> : <EmptyState seed="galerie">{t('empty')}</EmptyState>}
       </Section>
     </>
   );
