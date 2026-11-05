@@ -98,7 +98,7 @@
     }
   },
   "home": {
-    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "heroTitle": "Votre premier vol en planeur",
     "heroSubtitle": "Le vol à voile en Bretagne, pour tous.",
     "statsHours": "Heures de vol dans l’année",
     "statsHoursYear": "Heures de vol en {year}",
@@ -118,7 +118,7 @@
     "allNews": "Toutes les actualités et l’agenda",
     "statsPilots": "Pilotes brevetés",
     "statsKm": "Kilomètres parcourus depuis la création du club",
-    "heroKicker": "Vol à voile · Saint-Sulpice-des-Landes",
+    "heroKicker": "Planeurs d’Ille-et-Vilaine · Saint-Sulpice-des-Landes",
     "heroCta": "Réserver un vol d’initiation",
     "heroPrice": "<b>{adult} €</b> · {young} € moins de 18 ans",
     "heroPriceSingle": "<b>{adult} €</b> le vol",
@@ -141,8 +141,9 @@
     "giftText": "Un anniversaire, un départ, un séminaire d’équipe : des bons de vol sont disponibles pour les particuliers comme pour les entreprises.",
     "giftCta": "Offrir un vol",
     "giftCompanyCta": "Offre entreprises",
-    "membersTitle": "Sur le terrain aujourd’hui",
-    "webcamLive": "en direct"
+    "membersTitle": "La vie du club",
+    "webcamLive": "en direct",
+    "nextEvent": "Prochain rendez-vous"
   },
   "club": {
     "heroKicker": "Le club",

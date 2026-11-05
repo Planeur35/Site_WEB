@@ -8,7 +8,7 @@ import { ChevronDown, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageToggle from "@/components/layout/LanguageToggle";
-import { NAV_GROUPS, isCurrentPage, type NavGroup, type NavLink } from "@/components/layout/navItems";
+import { isCurrentPage, type NavGroup, type NavLink } from "@/components/layout/navItems";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
@@ -16,12 +16,14 @@ interface FullMenuProps {
   onClose: () => void;
   /** Trial flight price line, from the `vol-initiation` tariffs; hidden when null. */
   trialPrice: string | null;
+  /** The four groups, without the pages that have no content yet. */
+  groups: NavGroup[];
 }
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /** Full-screen menu opened by the Menu button: four groups, accordions on mobile. */
-export default function FullMenu({ onClose, trialPrice }: FullMenuProps) {
+export default function FullMenu({ onClose, trialPrice, groups }: FullMenuProps) {
   const t = useTranslations("nav");
   const tPricing = useTranslations("pricing");
   const pathname = usePathname();
@@ -105,7 +107,7 @@ export default function FullMenu({ onClose, trialPrice }: FullMenuProps) {
         {/* Desktop: four columns */}
         <Container className="hidden flex-1 flex-col pt-9 pb-10 lg:flex">
           <nav aria-label={t("fullNav")} className="grid grid-cols-4 gap-6">
-            {NAV_GROUPS.map((group) => (
+            {groups.map((group) => (
               <div key={group.key} className="flex flex-col gap-0.5">
                 <h2 className="mb-2.5 font-display text-sm font-semibold text-balise">{t(group.key)}</h2>
                 {group.items.map((link) =>
@@ -147,11 +149,11 @@ export default function FullMenu({ onClose, trialPrice }: FullMenuProps) {
         {/* Mobile and tablet: accordions */}
         <div className="flex flex-1 flex-col lg:hidden">
           <nav aria-label={t("fullNav")} className="px-5 pt-2 sm:px-8">
-            {NAV_GROUPS.map((group, i) => {
+            {groups.map((group, i) => {
               const expanded = openGroup === group.key;
               const panelId = `full-menu-${group.key}`;
               return (
-                <div key={group.key} className={clsx("border-t border-horizon", i === NAV_GROUPS.length - 1 && "border-b")}>
+                <div key={group.key} className={clsx("border-t border-horizon", i === groups.length - 1 && "border-b")}>
                   <h2>
                     <button
                       type="button"

@@ -59,9 +59,9 @@ export default function HeroSlideshow({ slides, kicker, cta, price }: HeroSlides
   const go = (step: number) => setCurrent((i) => (i + step + count) % count);
 
   return (
-    <section aria-roledescription="carrousel" aria-label={t('slidesLabel')} className="pt-10 lg:pt-14">
+    <section aria-roledescription="carrousel" aria-label={t('slidesLabel')} className="pt-6 sm:pt-10 lg:pt-14">
       <Container>
-        <div className="flex flex-wrap items-end gap-x-16 gap-y-6">
+        <div className="flex flex-wrap items-end gap-x-16 gap-y-5 sm:gap-y-6">
           <div className="min-w-0 flex-[999_1_560px]">
             <Kicker>{kicker}</Kicker>
             <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
@@ -73,7 +73,7 @@ export default function HeroSlideshow({ slides, kicker, cta, price }: HeroSlides
                     key={slide.key}
                     aria-hidden={i === 0 ? undefined : true}
                     className={clsx(
-                      'font-display text-[3rem] leading-[1.02] font-semibold tracking-titre text-balance text-azur transition-opacity duration-[1200ms] ease-planeur lg:text-display',
+                      'font-display text-[2.5rem] leading-[1.04] sm:text-[3rem] sm:leading-[1.02] font-semibold tracking-titre text-balance text-azur transition-opacity duration-[1200ms] ease-planeur lg:text-display',
                       i === current ? 'opacity-100' : 'opacity-0',
                     )}
                   >
@@ -110,7 +110,7 @@ export default function HeroSlideshow({ slides, kicker, cta, price }: HeroSlides
           </div>
         </div>
 
-        <div className="relative mt-10 h-[420px] overflow-hidden rounded-md bg-horizon sm:h-[clamp(320px,44vw,600px)] lg:mt-12">
+        <div className="relative mt-6 h-[380px] sm:mt-10 overflow-hidden rounded-md bg-horizon sm:h-[clamp(320px,44vw,600px)] lg:mt-12">
           {slides.map((slide, i) => (
             <div
               key={slide.key}

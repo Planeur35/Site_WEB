@@ -9,18 +9,21 @@ import { Link, usePathname } from "@/i18n/navigation";
 import FullMenu from "@/components/layout/FullMenu";
 import LanguageToggle from "@/components/layout/LanguageToggle";
 import NavDropdown from "@/components/layout/NavDropdown";
-import { HEADER_NAV, isCurrentPage } from "@/components/layout/navItems";
+import { HEADER_NAV, isCurrentPage, visibleNav } from "@/components/layout/navItems";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 
 interface HeaderProps {
   /** Trial flight price line for the full menu, from the `vol-initiation` tariffs. */
   trialPrice: string | null;
+  /** Menu keys of the pages with no content yet. */
+  hiddenNav: string[];
 }
 
 const CTA = HEADER_NAV.find((item) => item.cta);
 
-export default function Header({ trialPrice }: HeaderProps) {
+export default function Header({ trialPrice, hiddenNav }: HeaderProps) {
+  const { header, groups } = visibleNav(hiddenNav);
   const t = useTranslations("nav");
   const tc = useTranslations("common");
   const pathname = usePathname();
@@ -83,7 +86,7 @@ export default function Header({ trialPrice }: HeaderProps) {
         </Link>
 
         <nav aria-label={t("mainNav")} className="ml-3 hidden items-center gap-1 xl:flex">
-          {HEADER_NAV.filter((item) => !item.cta).map((item) =>
+          {header.filter((item) => !item.cta).map((item) =>
             item.children ? (
               <NavDropdown key={item.key} item={item} current={currentOf(item.pathname)} numbered={item.key === "club"} />
             ) : (
@@ -139,7 +142,7 @@ export default function Header({ trialPrice }: HeaderProps) {
         </div>
       </Container>
 
-      {menuOpen && <FullMenu onClose={closeMenu} trialPrice={trialPrice} />}
+      {menuOpen && <FullMenu onClose={closeMenu} trialPrice={trialPrice} groups={groups} />}
     </header>
   );
 }

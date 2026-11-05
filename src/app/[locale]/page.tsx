@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import clsx from 'clsx';
 import { ArrowRight, CalendarDays, Link2, Route, Webcam } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
@@ -14,12 +15,14 @@ import Reveal from '@/components/ui/Reveal';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
 import TextLink from '@/components/ui/TextLink';
+import { getHiddenNavKeys } from '@/lib/emptyPages';
+import { formatDate, startOfToday } from '@/lib/format';
 import { formatAmount, getTrialPrices } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
 import { localize } from '@/lib/sanity/localize';
-import { latestArticlesQuery, siteSettingsQuery } from '@/lib/sanity/queries';
-import type { Article, SiteSettings } from '@/lib/sanity/types';
+import { latestArticlesQuery, siteSettingsQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
+import type { Article, ClubEvent, SiteSettings } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
@@ -48,11 +51,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations('home');
   const tNav = await getTranslations('nav');
 
-  const [settings, articles, prices] = await Promise.all([
+  const [settings, articles, prices, events, hiddenNav] = await Promise.all([
     sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
     sanityFetch<Article[]>(latestArticlesQuery, [], { limit: 3 }),
     getTrialPrices(),
+    sanityFetch<ClubEvent[]>(upcomingEventsQuery, [], { since: startOfToday() }),
+    getHiddenNavKeys(),
   ]);
+  const nextEvent = events[0];
 
   // Slides without a title or subtitle fall back to the club's name and tagline
   const defaultSubtitle = localize(settings?.tagline, locale) ?? t('heroSubtitle');
@@ -120,11 +126,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
   ];
 
+  // Pages with no content yet are left out, like in the menus
   const memberTiles = [
-    // The webcam page is empty until its address is set in the Studio
     ...(settings?.webcamUrl ? [{ key: 'webcam', href: '/webcam' as const, Icon: Webcam, live: true }] : []),
-    { key: 'agenda', href: { pathname: '/actualites' as const, hash: 'agenda' }, Icon: CalendarDays },
-    { key: 'stories', href: '/recits' as const, Icon: Route },
+    // The next event has its own tile; without one, a plain link to the agenda
+    ...(nextEvent ? [] : [{ key: 'agenda', href: { pathname: '/actualites' as const, hash: 'agenda' }, Icon: CalendarDays }]),
+    ...(hiddenNav.includes('stories') ? [] : [{ key: 'stories', href: '/recits' as const, Icon: Route }]),
     { key: 'links', href: '/liens' as const, Icon: Link2 },
   ];
 
@@ -210,14 +217,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <Container className="py-16 lg:py-32">
         <div className="flex flex-wrap items-center gap-x-[72px] gap-y-6 lg:gap-y-10">
-          <SanityPhoto
-            image={settings?.giftImage}
-            label="bons-de-vol"
-            className="aspect-[3/2] min-w-0 flex-[1_1_480px]"
-            ratio={2 / 3}
-            sizes="(max-width: 1024px) 100vw, 600px"
-          />
-          <div className="flex min-w-0 flex-[1_1_380px] flex-col items-start">
+          {/* Without a photo in the Studio, the text stands alone rather than beside a placeholder */}
+          {settings?.giftImage?.asset && (
+            <SanityPhoto
+              image={settings.giftImage}
+              label="bons-de-vol"
+              className="aspect-[3/2] min-w-0 flex-[1_1_480px]"
+              ratio={2 / 3}
+              sizes="(max-width: 1024px) 100vw, 600px"
+            />
+          )}
+          <div
+            className={clsx(
+              'flex min-w-0 flex-col items-start',
+              settings?.giftImage?.asset ? 'flex-[1_1_380px]' : 'max-w-[760px]',
+            )}
+          >
             <Kicker>{t('giftKicker')}</Kicker>
             <h2 className={sectionTitle}>{t('giftTitle')}</h2>
             <p className="mt-5 text-[1.0625rem] leading-[1.6] text-texte lg:text-lg lg:leading-[1.65]">{t('giftText')}</p>
@@ -237,8 +252,29 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <section className="flex flex-col gap-4 rounded-md bg-ciel px-4 py-6 lg:gap-6 lg:p-10">
           <h2 className="font-display text-[1.3125rem] font-semibold text-azur lg:text-2xl">{t('membersTitle')}</h2>
           <ul className="grid grid-cols-2 gap-2 lg:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:gap-3">
-            {memberTiles.map(({ key, href, Icon, live }) => (
-              <li key={key}>
+            {nextEvent && (
+              <li className="col-span-2">
+                <Link
+                  href={{ pathname: '/actualites', hash: 'agenda' }}
+                  className="flex h-full items-center gap-4 rounded-sm bg-blanc p-4 text-azur transition-colors duration-150 hover:text-altitude sm:min-h-16 sm:px-[18px] sm:py-3"
+                >
+                  <CalendarDays size={22} strokeWidth={1.8} aria-hidden="true" className="shrink-0 text-altitude" />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-medium text-brume">{t('nextEvent')}</span>
+                    <span className="block font-semibold">
+                      {localize(nextEvent.title, locale)}
+                      <span className="font-medium text-texte">
+                        {' · '}
+                        {formatDate(nextEvent.startDate, locale)}
+                      </span>
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            )}
+            {memberTiles.map(({ key, href, Icon, live }, i) => (
+              // On phones (two columns), an odd last tile takes the whole row
+              <li key={key} className={clsx(i === memberTiles.length - 1 && i % 2 === 0 && 'col-span-2 lg:col-span-1')}>
                 <Link
                   href={href}
                   className="flex h-full flex-col items-start gap-2 rounded-sm bg-blanc p-4 font-semibold text-azur transition-colors duration-150 hover:text-altitude sm:min-h-16 sm:flex-row sm:items-center sm:gap-3.5 sm:px-[18px] sm:py-0"

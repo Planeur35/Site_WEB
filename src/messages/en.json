@@ -98,7 +98,7 @@
     }
   },
   "home": {
-    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "heroTitle": "Your first flight in a glider",
     "heroSubtitle": "Gliding in Brittany, open to everyone.",
     "statsHours": "Flight hours this year",
     "statsHoursYear": "Flight hours in {year}",
@@ -118,7 +118,7 @@
     "allNews": "All news and events",
     "statsPilots": "Licensed pilots",
     "statsKm": "Kilometres flown since the club was founded",
-    "heroKicker": "Gliding · Saint-Sulpice-des-Landes",
+    "heroKicker": "Planeurs d’Ille-et-Vilaine · Saint-Sulpice-des-Landes",
     "heroCta": "Book a trial flight",
     "heroPrice": "<b>€{adult}</b> · €{young} under 18",
     "heroPriceSingle": "<b>€{adult}</b> per flight",
@@ -141,8 +141,9 @@
     "giftText": "A birthday, a farewell, a team day: flight vouchers are available for individuals and companies.",
     "giftCta": "Give a flight",
     "giftCompanyCta": "For companies",
-    "membersTitle": "At the airfield today",
-    "webcamLive": "live"
+    "membersTitle": "Club life",
+    "webcamLive": "live",
+    "nextEvent": "Next event"
   },
   "club": {
     "heroKicker": "The club",

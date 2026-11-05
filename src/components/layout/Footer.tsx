@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import LanguageToggle from "@/components/layout/LanguageToggle";
-import { NAV_GROUPS } from "@/components/layout/navItems";
+import { visibleNav } from "@/components/layout/navItems";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { sanityFetch } from "@/lib/sanity/fetch";
@@ -18,7 +18,13 @@ const SOCIAL_LABELS: Record<string, string> = {
 
 const linkClass = "inline-flex min-h-9 items-center text-[0.9375rem] text-nuage transition-colors duration-150 hover:text-white";
 
-export default async function Footer() {
+interface FooterProps {
+  /** Menu keys of the pages with no content yet. */
+  hiddenNav: string[];
+}
+
+export default async function Footer({ hiddenNav }: FooterProps) {
+  const { groups } = visibleNav(hiddenNav);
   const t = await getTranslations("footer");
   const tNav = await getTranslations("nav");
   const tc = await getTranslations("common");
@@ -63,7 +69,7 @@ export default async function Footer() {
             aria-label={t("navigation")}
             className="grid flex-[2_1_560px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-x-6 gap-y-10"
           >
-            {NAV_GROUPS.map((group) => (
+            {groups.map((group) => (
               <div key={group.key}>
                 <h2 className="mb-3 font-display font-semibold text-white">{tNav(group.key)}</h2>
                 <ul>

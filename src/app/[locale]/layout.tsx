@@ -5,6 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { getHiddenNavKeys } from "@/lib/emptyPages";
 import { formatAmount, getTrialPrices } from "@/lib/pricing";
 
 const interTight = Inter_Tight({
@@ -46,15 +47,15 @@ export default async function LocaleLayout({
   const { locale } = await params;
   setRequestLocale(locale);
   const messages = await getMessages();
-  const trialPrice = await formatTrialPrice(locale);
+  const [trialPrice, hiddenNav] = await Promise.all([formatTrialPrice(locale), getHiddenNavKeys()]);
 
   return (
     <html lang={locale} className={`${interTight.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col bg-blanc font-sans text-texte antialiased">
         <NextIntlClientProvider messages={messages}>
-          <Header trialPrice={trialPrice} />
+          <Header trialPrice={trialPrice} hiddenNav={hiddenNav} />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <Footer hiddenNav={hiddenNav} />
         </NextIntlClientProvider>
       </body>
     </html>

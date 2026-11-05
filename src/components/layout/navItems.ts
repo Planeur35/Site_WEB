@@ -94,3 +94,12 @@ export function isCurrentPage(pathname: string, page: string | undefined): boole
   if (!page) return false;
   return pathname === page || pathname.startsWith(`${page}/`);
 }
+
+/** The header entries and the menu groups without the hidden keys (pages with no content yet). */
+export function visibleNav(hidden: string[]): { header: NavItem[]; groups: NavGroup[] } {
+  const keep = (link: NavLink) => !hidden.includes(link.key);
+  return {
+    header: HEADER_NAV.filter(keep).map((item) => (item.children ? { ...item, children: item.children.filter(keep) } : item)),
+    groups: NAV_GROUPS.map((group) => ({ ...group, items: group.items.filter(keep) })).filter((group) => group.items.length > 0),
+  };
+}
