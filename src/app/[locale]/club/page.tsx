@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import clsx from 'clsx';
-import { ArrowUp, Route } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import { CLUB_ANCHORS } from '@/components/layout/navItems';
 import PortableText from '@/components/sanity/PortableText';
+import Anecdote from '@/components/ui/Anecdote';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
@@ -273,18 +274,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
             />
             <div className="mx-auto mt-10 flex max-w-[680px] flex-col items-start gap-6">
               {history.anecdotes?.map((a) => (
-                <aside key={a._key} aria-label={t('anecdote')} className="w-full rounded-md bg-ciel p-[22px] lg:px-9 lg:py-8">
-                  <p className="flex items-center gap-2 font-display text-sm font-semibold text-balise lg:text-[0.9375rem]">
-                    <Route size={18} strokeWidth={2} aria-hidden="true" />
-                    {t('anecdote')}
-                  </p>
-                  {localize(a.title, locale) && (
-                    <h3 className="mt-3 font-display text-xl leading-[1.25] font-semibold text-azur lg:text-[1.375rem]">
-                      {localize(a.title, locale)}
-                    </h3>
-                  )}
-                  <p className="mt-3 text-[1.0625rem] leading-[1.65] text-texte">{localize(a.text, locale)}</p>
-                </aside>
+                <Anecdote key={a._key} title={localize(a.title, locale)} text={localize(a.text, locale)} />
               ))}
               <a
                 href="#"

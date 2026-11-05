@@ -125,7 +125,7 @@ src/
     sitemap.ts  robots.ts  globals.css
   components/
     layout/                   # Header (bandeau), NavDropdown (menus déroulants), FullMenu (menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
-    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, NewsRow, Button…
+    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, PriceTable, AgendaItem, Anecdote, Breadcrumb, NewsRow, Button…
     sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv ; ajouter .prose-piv-longread pour une lecture longue en colonne de 680 px)
   lib/
     sanity/                   # client, fetch (sanityFetch), queries (GROQ), types, image (urlFor), imageLoader, localize
@@ -183,8 +183,8 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire ; tables de prix des fiches `tariff` (forfaits 20 h et illimité par âge, packs formation), affichées dès qu'un prix est saisi, « Sur demande » pour un prix manquant | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), « Bon à savoir » (âge, poids, durée, météo : chaque ligne s'affiche une fois remplie), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; liens de paiement et d'achat des bons des Réglages ; les quatre étapes du vol sont dans `messages/*.json` | 🟢 sous 60 s |
-| Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
-| Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
+| Actualités `/actualites` | Actualités (`article`) à gauche et Agenda (`event`) à droite, l'agenda reste visible au défilement ; les événements passés disparaissent seuls ; chaque actualité s'ouvre en lecture longue | 🟢 sous 60 s |
+| Récits `/recits` et `/recits/[slug]` | Récits de vols : 6 au plus, en cartes larges (photo ou tracé, date, planeur, titre, résumé, lien WeGlide), une lecture longue par récit (introduction, texte, photos, anecdotes, lien WeGlide), mise en page commune avec l'histoire du club et les actualités | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
 | Contact, pied de page | Adresse, e-mail, téléphone et réseaux des Réglages ; envoi du formulaire via Resend | 🟢 sous 60 s |
 | Mentions légales `/mentions-legales` | Réglages du site (groupe Mentions légales) pour l'identité (dont le numéro d'affiliation FFVP, facultatif) ; textes dans `src/messages/*.json` (espace `legal`) | 🟢 sous 60 s (identité), 🟠 au prochain déploiement (textes) |

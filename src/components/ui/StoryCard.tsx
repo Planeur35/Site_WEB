@@ -1,7 +1,8 @@
-import clsx from 'clsx';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Tag from '@/components/ui/Tag';
+import TextLink from '@/components/ui/TextLink';
 import { formatMonthYear } from '@/lib/format';
 import { localize } from '@/lib/sanity/localize';
 import type { FlightStory } from '@/lib/sanity/types';
@@ -9,37 +10,54 @@ import type { FlightStory } from '@/lib/sanity/types';
 interface StoryCardProps {
   story: FlightStory;
   locale: string;
-  /** Wide 16:9 photo, used when the club has a single story. */
-  wide?: boolean;
-  className?: string;
 }
 
-/** One cell of the flight stories grid: photo, date, glider and title. */
-export default function StoryCard({ story, locale, wide = false, className }: StoryCardProps) {
+/**
+ * A wide card of the flight stories: 16:9 photo (or the trace, seeded by the title),
+ * date and glider, title, excerpt, then the story and its WeGlide trace.
+ * Only the title and the links are links, so the text stays selectable.
+ */
+export default async function StoryCard({ story, locale }: StoryCardProps) {
   const slug = story.slug?.current;
   if (!slug) return null;
+  const t = await getTranslations('stories');
   const title = localize(story.title, locale) ?? '';
+  const excerpt = localize(story.excerpt, locale);
+  const href = { pathname: '/recits/[slug]' as const, params: { slug } };
 
   return (
-    <Link href={{ pathname: '/recits/[slug]', params: { slug } }} className={clsx('group block', className)}>
+    <article className="flex flex-col">
       <SanityPhoto
         image={story.image}
         label={title}
-        className={clsx('w-full', wide ? 'aspect-[16/9]' : 'aspect-[4/3]')}
-        ratio={wide ? 0.5625 : 0.75}
-        sizes={wide ? '(max-width: 1024px) 100vw, 960px' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px'}
+        className="aspect-[16/9]"
+        ratio={0.5625}
+        sizes="(max-width: 768px) 100vw, 600px"
       />
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        {story.flightDate && (
-          <span className="text-sm font-semibold text-nuit">
-            {formatMonthYear(story.flightDate, locale)}
-          </span>
-        )}
-        {story.aircraft && <Tag>{story.aircraft}</Tag>}
-      </div>
-      <h3 className="mt-2 font-display text-[1.1875rem] leading-snug font-semibold text-azur decoration-2 underline-offset-4 group-hover:underline lg:text-h4">
-        {title}
+      {(story.flightDate || story.aircraft) && (
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          {story.flightDate && (
+            <span className="text-sm font-semibold text-nuit first-letter:uppercase">
+              {formatMonthYear(story.flightDate, locale)}
+            </span>
+          )}
+          {story.aircraft && <Tag>{story.aircraft}</Tag>}
+        </div>
+      )}
+      <h3 className="mt-2 font-display text-[1.375rem] leading-[1.2] font-semibold text-balance text-azur lg:text-[1.625rem]">
+        <Link href={href} className="decoration-2 underline-offset-4 hover:underline">
+          {title}
+        </Link>
       </h3>
-    </Link>
+      {excerpt && <p className="mt-3 line-clamp-3 text-[1.0625rem] leading-[1.6] text-texte">{excerpt}</p>}
+      <div className="mt-2 flex flex-wrap items-center gap-x-6">
+        <TextLink href={href}>{t('read')}</TextLink>
+        {story.weglideUrl && (
+          <TextLink href={story.weglideUrl} external>
+            {t('weglide')}
+          </TextLink>
+        )}
+      </div>
+    </article>
   );
 }

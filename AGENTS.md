@@ -41,7 +41,7 @@ src/app/[locale]/          one folder per page (French paths: club, planeurs, ad
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
 src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
-src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
+src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, PriceTable, AgendaItem, Anecdote, Breadcrumb, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
 src/lib/sanity/            client, fetch (sanityFetch), queries (all GROQ), types, image (urlFor), imageLoader, localize
 src/lib/format.ts          dates in the club's time zone
 src/lib/metadata.ts        buildMetadata(): title, Open Graph, canonical, hreflang

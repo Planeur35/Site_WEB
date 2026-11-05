@@ -1,5 +1,4 @@
-import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 import Container from '@/components/ui/Container';
 import Kicker from '@/components/ui/Kicker';
 import SanityPhoto from '@/components/ui/SanityPhoto';
@@ -21,21 +20,16 @@ const titleClass = 'font-display text-[2.75rem] leading-[1.03] font-semibold tra
 const leadClass = 'text-[1.1875rem] leading-[1.55] text-texte lg:text-lead';
 
 /** Page header on white: breadcrumb, title and lead, then the photo below (never text over the photo). */
-export default async function PageHero({ kicker, title, lead, image, aside, crumb }: PageHeroProps) {
-  const t = await getTranslations('nav');
+export default function PageHero({ kicker, title, lead, image, aside, crumb }: PageHeroProps) {
   const photo = image?.asset ? (
     <SanityPhoto image={image} className="h-[clamp(280px,38vw,540px)]" sizes="(max-width: 1280px) 100vw, 1200px" priority />
   ) : null;
 
   return (
     <Container className="pt-12 lg:pt-16">
-      <nav aria-label={t('breadcrumb')} className="mb-7 text-sm text-brume">
-        <Link href="/" className="hover:text-altitude hover:underline">
-          {t('home')}
-        </Link>
-        <span aria-hidden="true"> / </span>
-        <span aria-current="page">{crumb ?? title}</span>
-      </nav>
+      <div className="mb-7">
+        <Breadcrumb current={crumb ?? title} />
+      </div>
 
       {aside ? (
         // Text, photo, panel in reading order; from lg the panel moves up beside the text
