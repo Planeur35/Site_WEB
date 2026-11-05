@@ -12,7 +12,7 @@ const BASE_URL = 'https://www.planeur35.org';
 const priorityMap: Record<string, number> = {
   '/': 1.0,
   '/decouvrir': 0.9,
-  '/club': 0.8,
+  '/association': 0.8,
   '/adherer': 0.8,
   '/actualites': 0.8,
   '/planeurs': 0.7,

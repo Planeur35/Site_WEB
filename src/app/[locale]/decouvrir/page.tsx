@@ -290,7 +290,7 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
             <p className="mt-4 text-[1.0625rem] leading-[1.6] text-texte lg:text-lg">{t('nextText')}</p>
           </div>
           <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
-            <Button href={{ pathname: '/club', hash: 'formation' }} variant="secondary" className="w-full sm:w-auto">
+            <Button href={{ pathname: '/association', hash: 'formation' }} variant="secondary" className="w-full sm:w-auto">
               {t('nextLearnCta')}
             </Button>
             <TextLink href="/adherer" className="px-2">

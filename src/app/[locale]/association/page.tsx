@@ -29,7 +29,7 @@ const SECTION_ORDER: ClubSection[] = ['presentation', 'platform', 'activities', 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta.club' });
-  return buildMetadata({ title: t('title'), description: t('description'), locale, pathname: '/club' });
+  return buildMetadata({ title: t('title'), description: t('description'), locale, pathname: '/association' });
 }
 
 const pad = (n: number) => String(n).padStart(2, '0');

@@ -32,9 +32,9 @@ export const CLUB_ANCHORS = {
 export const HEADER_NAV: NavItem[] = [
   {
     key: 'club',
-    href: '/club',
-    pathname: '/club',
-    children: Object.entries(CLUB_ANCHORS).map(([key, hash]) => ({ key, href: { pathname: '/club', hash } })),
+    href: '/association',
+    pathname: '/association',
+    children: Object.entries(CLUB_ANCHORS).map(([key, hash]) => ({ key, href: { pathname: '/association', hash } })),
   },
   { key: 'gliders', href: '/planeurs', pathname: '/planeurs' },
   { key: 'join', href: '/adherer', pathname: '/adherer' },

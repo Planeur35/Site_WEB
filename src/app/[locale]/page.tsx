@@ -109,7 +109,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       cta: t('cardTryCta'),
     },
     {
-      href: { pathname: '/club' as const, hash: 'formation' },
+      href: { pathname: '/association' as const, hash: 'formation' },
       image: cardImages?.learn,
       kicker: t('cardLearnKicker'),
       title: t('cardLearnTitle'),

@@ -39,7 +39,7 @@ Local work uses the `dev` dataset (`.env.local`). Write test or sample content t
 ## Where things are
 
 ```text
-src/app/[locale]/          one folder per page (French paths: club, planeurs, adherer, decouvrir, actualites, recits…)
+src/app/[locale]/          one folder per page (French paths: association, planeurs, adherer, decouvrir, actualites, recits…)
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
 src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
@@ -81,8 +81,9 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 ### Internationalisation
 
 - Never hardcode UI text in components. Add the key to both `src/messages/fr.json` and `src/messages/en.json`; the two files must keep exactly the same keys.
+- Public copy says « association », never « club » (it sounds like a private club), « vol en planeur » rather than « vol à voile », and never the « PIV » acronym: write « Planeurs d’Ille-et-Vilaine ». Same in English (« association », « gliding »).
 - French copy uses proper accents (é, è, à, ç). Some existing strings lack them; fix those you touch.
-- Internal links: import `Link`, `redirect`, `useRouter` from `@/i18n/navigation`, never from `next/link`. Link to the French pathname (`/adherer`, or `{ pathname: '/club', hash: 'formation' }`); next-intl translates it.
+- Internal links: import `Link`, `redirect`, `useRouter` from `@/i18n/navigation`, never from `next/link`. Link to the French pathname (`/adherer`, or `{ pathname: '/association', hash: 'formation' }`); next-intl translates it.
 - A new page also needs: its pathname and English slug in `src/i18n/routing.ts`, an entry in `src/components/layout/navItems.ts` (used by the header, the full menu and the footer); if the page can be empty, add its key to `getHiddenNavKeys()` in `src/lib/emptyPages.ts` so the menus hide it until it has content, and a line in `src/app/sitemap.ts`. When a page moves, add a redirect from the old path in `next.config.ts`.
 
 ### Sanity

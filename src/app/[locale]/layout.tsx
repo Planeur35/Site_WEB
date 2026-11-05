@@ -23,10 +23,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "PIV – Planeurs d'Ille-et-Vilaine",
-    template: "%s – PIV",
+    default: "Planeurs d’Ille-et-Vilaine",
+    template: "%s – Planeurs d’Ille-et-Vilaine",
   },
-  description: "Club de vol à voile en Ille-et-Vilaine — Soaring club in Brittany",
+  description: "Association de vol en planeur en Ille-et-Vilaine — Gliding association in Brittany",
   icons: { icon: "/favicon.png" },
 };
 
