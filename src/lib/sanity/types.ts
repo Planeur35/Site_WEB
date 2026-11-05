@@ -217,6 +217,8 @@ export interface PricingSection {
   _key: string;
   title: LocalizedString;
   intro?: LocalizedText;
+  /** Age that splits the two price columns: 25 (default) or 18. */
+  ageSplit?: '25' | '18';
   items?: PricingItem[];
   conditions?: { _key: string; text: LocalizedText }[];
 }

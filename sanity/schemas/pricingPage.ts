@@ -47,7 +47,7 @@ function priceCell(name: string, title: string, hidden?: (parent: Record<string,
 }
 
 const PRICING_MODES = [
-  { title: 'Deux prix : moins de 25 ans / 25 ans et plus', value: 'ages' },
+  { title: 'Deux prix selon l’âge (âge choisi dans la section)', value: 'ages' },
   { title: 'Un seul prix pour tous', value: 'single' },
   { title: 'Plusieurs options (ex. hauteurs de remorquage)', value: 'options' },
 ];
@@ -81,8 +81,8 @@ const pricingItem = defineArrayMember({
       initialValue: 'ages',
       validation: (rule) => rule.required(),
     }),
-    priceCell('under25', 'Prix moins de 25 ans', (parent) => parent?.mode !== 'ages'),
-    priceCell('over25', 'Prix 25 ans et plus', (parent) => parent?.mode !== 'ages'),
+    priceCell('under25', 'Prix « moins de » (25 ou 18 ans selon la section)', (parent) => parent?.mode !== 'ages'),
+    priceCell('over25', 'Prix « et plus » (25 ou 18 ans selon la section)', (parent) => parent?.mode !== 'ages'),
     priceCell('price', 'Prix', (parent) => parent?.mode !== 'single'),
     defineField({
       name: 'options',
@@ -168,6 +168,20 @@ export default defineType({
           fields: [
             localizedString({ name: 'title', title: 'Titre', required: true, max: 60 }),
             localizedText({ name: 'intro', title: 'Présentation (facultatif)', rows: 2 }),
+            defineField({
+              name: 'ageSplit',
+              title: 'Âge des deux colonnes de prix',
+              description: 'Les prestations « deux prix » de cette section sont séparées à cet âge.',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Moins de 25 ans / 25 ans et plus', value: '25' },
+                  { title: 'Moins de 18 ans / 18 ans et plus', value: '18' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: '25',
+            }),
             defineField({ name: 'items', title: 'Prestations', type: 'array', of: [pricingItem] }),
             defineField({
               name: 'conditions',

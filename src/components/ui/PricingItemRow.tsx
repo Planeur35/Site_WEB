@@ -7,13 +7,15 @@ import type { LocalizedText, PricingItem } from '@/lib/sanity/types';
 interface PricingItemRowProps {
   item: PricingItem;
   locale: string;
+  /** Captions of the two age columns, from the section (« Moins de 25 ans »…). */
+  ages: [string, string];
 }
 
 /** Shared grid of the price list: the service, then the two age columns (lg: fixed widths so every row lines up). */
 export const PRICING_GRID = 'lg:grid lg:grid-cols-[minmax(0,1fr)_12rem_12rem] lg:gap-x-10';
 
 /** One service of the price list: name, description, what it includes, conditions, and its price(s). */
-export default async function PricingItemRow({ item, locale }: PricingItemRowProps) {
+export default async function PricingItemRow({ item, locale, ages }: PricingItemRowProps) {
   const t = await getTranslations('pricingPage');
   const text = (field?: LocalizedText) => localize(field, locale);
   const lang = (field?: LocalizedText) => (isFrenchFallback(field, locale) ? 'fr' : undefined);
@@ -55,8 +57,8 @@ export default async function PricingItemRow({ item, locale }: PricingItemRowPro
       {item.mode === 'ages' && (
         // Phones: the two prices side by side, each captioned with its age
         <div className="grid grid-cols-2 gap-4 lg:contents">
-          <PriceCell cell={item.under25} locale={locale} caption={t('under25')} className="lg:items-end lg:text-right" />
-          <PriceCell cell={item.over25} locale={locale} caption={t('over25')} className="lg:items-end lg:text-right" />
+          <PriceCell cell={item.under25} locale={locale} caption={ages[0]} className="lg:items-end lg:text-right" />
+          <PriceCell cell={item.over25} locale={locale} caption={ages[1]} className="lg:items-end lg:text-right" />
         </div>
       )}
       {item.mode === 'single' && (

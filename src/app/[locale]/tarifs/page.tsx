@@ -112,6 +112,7 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
           {sections.map((section, i) => {
             const sectionIntro = localize(section.intro, locale);
             const hasAges = section.items?.some((item) => item.mode === 'ages');
+            const ages: [string, string] = section.ageSplit === '18' ? [t('under18'), t('over18')] : [t('under25'), t('over25')];
             return (
               <section key={section._key} id={SECTION_ID(i)} className="scroll-mt-36 pt-14 lg:pt-20">
                 <Container>
@@ -126,15 +127,15 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
                     {hasAges && (
                       <div className={`hidden border-b border-horizon py-3.5 text-sm font-semibold text-brume ${PRICING_GRID}`}>
                         <span>{t('service')}</span>
-                        <span className="text-right">{t('under25')}</span>
-                        <span className="text-right">{t('over25')}</span>
+                        <span className="text-right">{ages[0]}</span>
+                        <span className="text-right">{ages[1]}</span>
                       </div>
                     )}
                     {groupItems(section.items ?? [], locale).map((group, g) => (
                       <div key={g} className={g > 0 ? 'border-t border-horizon' : undefined}>
                         {group.label && <p className="pt-6 font-display text-[0.9375rem] font-semibold text-balise">{group.label}</p>}
                         {group.items.map((item) => (
-                          <PricingItemRow key={item._key} item={item} locale={locale} />
+                          <PricingItemRow key={item._key} item={item} locale={locale} ages={ages} />
                         ))}
                       </div>
                     ))}

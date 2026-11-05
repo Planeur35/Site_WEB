@@ -487,6 +487,8 @@
     "contactCta": "Write to us",
     "joinCta": "Join",
     "seeAll": "All {season} prices",
-    "ageRuleLabel": "Under 25:"
+    "ageRuleLabel": "Under 25:",
+    "under18": "Under 18",
+    "over18": "18 and over"
   }
 }

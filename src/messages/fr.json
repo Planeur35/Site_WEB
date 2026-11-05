@@ -487,6 +487,8 @@
     "contactCta": "Nous écrire",
     "joinCta": "S’inscrire",
     "seeAll": "Tous les tarifs {season}",
-    "ageRuleLabel": "Moins de 25 ans :"
+    "ageRuleLabel": "Moins de 25 ans :",
+    "under18": "Moins de 18 ans",
+    "over18": "18 ans et plus"
   }
 }
