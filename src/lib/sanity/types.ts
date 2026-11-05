@@ -79,6 +79,7 @@ export interface SiteSettings {
   pageHeroes?: Partial<Record<PageHeroKey, SanityImage>>;
   paymentUrl?: string;
   voucherUrl?: string;
+  joinUrl?: string;
   usefulLinks?: UsefulLink[];
   legalName?: string;
   legalAddress?: string;

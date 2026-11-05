@@ -89,7 +89,7 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} />
+      <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} lead={t('heroLead')} />
 
       <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')}>
         {isEmpty && <EmptyState action={{ href: '/contact', label: t('contactCta') }}>{t('empty')}</EmptyState>}
@@ -166,6 +166,12 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
           <EmptyState seed="inscription">{t('howEmpty')}</EmptyState>
         )}
         <div className="mt-8 flex flex-wrap items-center gap-3">
+          {/* The sign-up page, once the club has entered it in the Studio */}
+          {settings?.joinUrl && (
+            <Button href={settings.joinUrl} external mainCta className="w-full sm:w-auto">
+              {t('joinOnline')}
+            </Button>
+          )}
           <Button href="/contact" variant="secondary" className="w-full sm:w-auto">
             {t('contactCta')}
           </Button>

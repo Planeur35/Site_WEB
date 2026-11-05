@@ -217,7 +217,7 @@
   },
   "join": {
     "heroKicker": "Come and fly!",
-    "heroTitle": "Prices",
+    "heroTitle": "Join the club",
     "introKicker": "Prices",
     "introTitle": "This year’s prices",
     "tableOpen": "Open the table full size",
@@ -234,7 +234,9 @@
     "packagesOffer": "Package",
     "packsCaption": "Learning to fly",
     "packsOffer": "Pack",
-    "packsPrice": "Price"
+    "packsPrice": "Price",
+    "heroLead": "Membership, flying packages and training: everything you need to fly at the club all season.",
+    "joinOnline": "Sign up online"
   },
   "discover": {
     "heroKicker": "Trial flight",

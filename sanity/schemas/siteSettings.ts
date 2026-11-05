@@ -158,6 +158,14 @@ export default defineType({
       group: 'contact',
     }),
     defineField({
+      name: 'joinUrl',
+      title: 'Lien d’inscription en ligne (facultatif)',
+      description:
+        'Page où l’on adhère au club en ligne (GIVAV, HelloAsso…). Dès qu’il est saisi, un bouton « S’inscrire en ligne » apparaît sur la page Venez voler !',
+      type: 'url',
+      group: 'contact',
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Réseaux sociaux',
       type: 'array',

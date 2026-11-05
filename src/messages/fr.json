@@ -217,7 +217,7 @@
   },
   "join": {
     "heroKicker": "Venez voler !",
-    "heroTitle": "Les tarifs",
+    "heroTitle": "Rejoindre le club",
     "introKicker": "Tarifs",
     "introTitle": "Les tarifs de l’année",
     "tableOpen": "Ouvrir le tableau en grand",
@@ -234,7 +234,9 @@
     "packagesOffer": "Forfait",
     "packsCaption": "Se former au pilotage",
     "packsOffer": "Pack",
-    "packsPrice": "Tarif"
+    "packsPrice": "Tarif",
+    "heroLead": "Adhésion, forfaits de vol et formation : tout ce qu’il faut pour voler au club toute la saison.",
+    "joinOnline": "S’inscrire en ligne"
   },
   "discover": {
     "heroKicker": "Vol d’initiation",
