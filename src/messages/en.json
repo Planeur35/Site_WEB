@@ -447,5 +447,12 @@
     "writeToUs": "Write to us",
     "legal": "Legal notice",
     "otherLanguage": "Version française"
+  },
+  "partners": {
+    "bandTitle": "With the support of",
+    "sectionKicker": "Partners",
+    "sectionTitle": "Our partners",
+    "sectionSub": "Federations, local authorities and labels supporting the association.",
+    "visit": "{name} website"
   }
 }

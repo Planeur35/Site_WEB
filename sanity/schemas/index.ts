@@ -12,6 +12,7 @@ import clubHistory from './clubHistory';
 import flightStory from './flightStory';
 import joinPage from './joinPage';
 import discoverPage from './discoverPage';
+import partner from './partner';
 
 export const schemas = [
   // Entered by members
@@ -27,6 +28,7 @@ export const schemas = [
   aircraft,
   tariff,
   flightStory,
+  partner,
   category,
   page,
   // Reusable text types

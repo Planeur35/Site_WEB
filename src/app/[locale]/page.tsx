@@ -14,6 +14,7 @@ import HeroSlideshow, { type Slide } from '@/components/ui/HeroSlideshow';
 import Kicker from '@/components/ui/Kicker';
 import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Map from '@/components/ui/Map';
+import PartnerLogo from '@/components/ui/PartnerLogo';
 import NewsCard from '@/components/ui/NewsCard';
 import NewsRow from '@/components/ui/NewsRow';
 import Reveal from '@/components/ui/Reveal';
@@ -27,8 +28,8 @@ import { formatAmount, getTrialPrices } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
 import { isFrenchFallback, localize } from '@/lib/sanity/localize';
-import { handiGliderPhotoQuery, latestArticlesQuery, siteSettingsQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
-import type { Article, ClubEvent, SanityImage, SiteSettings } from '@/lib/sanity/types';
+import { allPartnersQuery, handiGliderPhotoQuery, latestArticlesQuery, siteSettingsQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
+import type { Article, ClubEvent, Partner, SanityImage, SiteSettings } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
@@ -58,15 +59,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations('home');
   const tNav = await getTranslations('nav');
+  const tPartners = await getTranslations('partners');
 
-  const [settings, articles, prices, events, hiddenNav, handiPhoto] = await Promise.all([
+  const [settings, articles, prices, events, hiddenNav, handiPhoto, partners] = await Promise.all([
     sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
     sanityFetch<Article[]>(latestArticlesQuery, [], { limit: 3 }),
     getTrialPrices(),
     sanityFetch<ClubEvent[]>(upcomingEventsQuery, [], { since: startOfToday() }),
     getHiddenNavKeys(),
     sanityFetch<SanityImage | null>(handiGliderPhotoQuery, null),
+    sanityFetch<Partner[]>(allPartnersQuery, []),
   ]);
+  const openToAllLabels = partners.filter((partner) => partner.openToAll);
   const nextEvent = events[0];
   const airfield = aerodromeCoordinates(settings);
 
@@ -283,6 +287,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             >
               {openText}
             </p>
+            {/* Labels such as Sport Handicaps Bretagne: the proof behind the text */}
+            {openToAllLabels.length > 0 && (
+              <ul className="mt-6 flex flex-wrap items-center gap-6">
+                {openToAllLabels.map((partner) => (
+                  <li key={partner._id}>
+                    <PartnerLogo partner={partner} size="md" linkLabel={tPartners('visit', { name: partner.name })} />
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="mt-6 flex w-full flex-wrap items-center gap-3">
               <Button href="/contact" variant="secondary" className="w-full sm:w-auto">
                 {t('openToAllContact')}

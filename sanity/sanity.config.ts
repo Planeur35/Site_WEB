@@ -44,6 +44,7 @@ export default defineConfig({
             S.documentTypeListItem('aircraft').title('Nos planeurs'),
             S.documentTypeListItem('tariff').title('Tarifs'),
             S.documentTypeListItem('flightStory').title('Récits de vols'),
+            S.documentTypeListItem('partner').title('Partenaires'),
             S.divider(),
             singletonListItem(S, 'siteSettings', 'Réglages du site'),
             S.documentTypeListItem('category').title('Rubriques des actualités'),
