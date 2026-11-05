@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PartnersBand from "@/components/layout/PartnersBand";
+import ScrollToHash from "@/components/layout/ScrollToHash";
 import { getHiddenNavKeys } from "@/lib/emptyPages";
 import { formatAmount, getTrialPrices } from "@/lib/pricing";
 import { sanityFetch } from "@/lib/sanity/fetch";
@@ -67,6 +68,7 @@ export default async function LocaleLayout({
           <Header trialPrice={trialPrice} hiddenNav={hiddenNav} />
           <main className="flex-1">{children}</main>
           <PartnersBand partners={partners} />
+          <ScrollToHash />
           <Footer hiddenNav={hiddenNav} />
         </NextIntlClientProvider>
       </body>
