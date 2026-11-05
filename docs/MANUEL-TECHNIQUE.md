@@ -284,7 +284,7 @@ Le dataset vient d'une seule variable, `NEXT_PUBLIC_SANITY_DATASET` : `dev` dans
 
 1. Vérifier en local : `npm run dev` pour contrôler visuellement (FR, EN, largeur mobile), puis `npm run build` qui doit passer sans erreur.
 2. Committer et pousser sur `main`. Vercel lance le build et met la production à jour tout seul. **Pas de `vercel --prod` manuel.**
-3. Pour une modification à faire relire, pousser sur une branche : Vercel crée une URL de preview, qui lit le dataset `dev`. Les previews demandent une connexion Vercel : pour les faire relire, utiliser **Share** sur le déploiement.
+3. Pour une modification à faire relire, pousser sur une branche : Vercel crée une URL de preview, qui lit le dataset `dev`. Les previews sont publiques (protection Vercel désactivée) : le lien peut être envoyé tel quel pour relecture.
 4. Contrôler le résultat sur https://piv-sigma.vercel.app.
 
 > **Variables d'environnement.** Une variable ajoutée à `.env.local` doit aussi être créée dans Vercel → Settings → Environment Variables. Elle ne s'applique qu'aux déploiements suivants.
