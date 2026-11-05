@@ -1,6 +1,6 @@
+import { ChevronDown } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import PriceCell from '@/components/ui/PriceCell';
-import PriceNote from '@/components/ui/PriceNote';
 import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import type { LocalizedText, PricingItem } from '@/lib/sanity/types';
 
@@ -35,8 +35,44 @@ export default async function PricingItemRow({ item, locale, ages }: PricingItem
             {description}
           </p>
         )}
-        {(includes || excludes) && (
-          <dl className="mt-3 flex max-w-[640px] flex-col gap-1.5 text-sm leading-[1.5] text-texte">
+      </div>
+
+      {item.mode === 'ages' && (
+        // Phones: the two prices side by side, each captioned with its age
+        <div className="grid grid-cols-2 gap-4 lg:contents">
+          <PriceCell cell={item.under25} locale={locale} caption={ages[0]} className="lg:row-span-2 lg:items-end lg:text-right" />
+          <PriceCell cell={item.over25} locale={locale} caption={ages[1]} className="lg:row-span-2 lg:items-end lg:text-right" />
+        </div>
+      )}
+      {item.mode === 'single' && (
+        <PriceCell cell={item.price} locale={locale} className="lg:col-span-2 lg:row-span-2 lg:items-end lg:text-right" />
+      )}
+      {item.mode === 'options' && (
+        <ul className="flex flex-col divide-y divide-horizon rounded-sm bg-blanc px-4 lg:col-span-2 lg:row-span-2 lg:self-start">
+          {item.options?.map((option) => (
+            <li key={option._key} className="flex items-baseline justify-between gap-4 py-2.5">
+              <span lang={lang(option.label)} className="text-sm text-texte">
+                {text(option.label)}
+              </span>
+              <PriceCell cell={option.price} locale={locale} size="sm" className="items-end text-right" />
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* The small print, folded away so the name, description and price stand out.
+          Phones: after the prices; wide screens: under the description, the prices spanning both rows */}
+      {(includes || excludes || conditions) && (
+        <details className="group order-last -mt-2 max-w-[640px] lg:order-none lg:col-start-1">
+          <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 text-sm font-semibold text-altitude [&::-webkit-details-marker]:hidden">
+            {t('details')}
+            <ChevronDown
+              size={16}
+              strokeWidth={2}
+              aria-hidden="true"
+              className="shrink-0 transition-transform duration-150 ease-planeur group-open:rotate-180"
+            />
+          </summary>
+          <dl className="flex flex-col gap-1.5 border-l-2 border-horizon pb-1 pl-4 text-sm leading-[1.5] text-texte">
             {includes && (
               <div lang={lang(item.includes)}>
                 <dt className="inline font-semibold text-nuit">{t('includes')} </dt>
@@ -49,32 +85,14 @@ export default async function PricingItemRow({ item, locale, ages }: PricingItem
                 <dd className="inline">{excludes}</dd>
               </div>
             )}
+            {conditions && (
+              <div lang={lang(item.conditions)}>
+                <dt className="sr-only">{t('conditions')}</dt>
+                <dd className="text-[0.8125rem] leading-snug text-brume">{conditions}</dd>
+              </div>
+            )}
           </dl>
-        )}
-        {conditions && <PriceNote lang={lang(item.conditions)} className="max-w-[640px]">{conditions}</PriceNote>}
-      </div>
-
-      {item.mode === 'ages' && (
-        // Phones: the two prices side by side, each captioned with its age
-        <div className="grid grid-cols-2 gap-4 lg:contents">
-          <PriceCell cell={item.under25} locale={locale} caption={ages[0]} className="lg:items-end lg:text-right" />
-          <PriceCell cell={item.over25} locale={locale} caption={ages[1]} className="lg:items-end lg:text-right" />
-        </div>
-      )}
-      {item.mode === 'single' && (
-        <PriceCell cell={item.price} locale={locale} className="lg:col-span-2 lg:items-end lg:text-right" />
-      )}
-      {item.mode === 'options' && (
-        <ul className="flex flex-col divide-y divide-horizon rounded-sm bg-blanc px-4 lg:col-span-2 lg:self-start">
-          {item.options?.map((option) => (
-            <li key={option._key} className="flex items-baseline justify-between gap-4 py-2.5">
-              <span lang={lang(option.label)} className="text-sm text-texte">
-                {text(option.label)}
-              </span>
-              <PriceCell cell={option.price} locale={locale} size="sm" className="items-end text-right" />
-            </li>
-          ))}
-        </ul>
+        </details>
       )}
     </div>
   );

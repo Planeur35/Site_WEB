@@ -489,6 +489,8 @@
     "seeAll": "All {season} prices",
     "ageRuleLabel": "Under 25:",
     "under18": "Under 18",
-    "over18": "18 and over"
+    "over18": "18 and over",
+    "details": "Details",
+    "conditions": "Conditions"
   }
 }
