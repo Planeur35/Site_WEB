@@ -50,10 +50,13 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   const table = page?.table?.asset ? page.table : settings?.pricingTable;
   const how = nonEmpty(localize(page?.how, locale));
   const howPlain = localize(settings?.joinText, locale);
-  // On /en, the blocks that only exist in French are marked and announced
-  const french = (...fields: Parameters<typeof isFrenchFallback>[0][]) => fields.some((field) => isFrenchFallback(field, locale));
+  // On /en, the blocks that only exist in French are marked and announced. Only the field actually
+  // shown counts: the page's own field when it has text, else the old one from the site settings.
+  type Field = Parameters<typeof isFrenchFallback>[0];
+  const hasText = (field: Field) => [field?.fr, field?.en].some((v) => (Array.isArray(v) ? v.length > 0 : typeof v === 'string' && v.trim() !== ''));
+  const french = (own: Field, old?: Field) => isFrenchFallback(hasText(own) ? own : old, locale);
   const introFrench = french(page?.intro, settings?.pricingIntro);
-  const howFrench = how ? french(page?.how) : french(settings?.joinText);
+  const howFrench = how ? french(page?.how) : french(undefined, settings?.joinText);
 
   // The three sub-parts, in this order. A sub-part without text is not shown.
   const parts = [
