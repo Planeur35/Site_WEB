@@ -90,7 +90,7 @@ export default function FullMenu({ onClose, trialPrice, groups }: FullMenuProps)
       <div className="flex min-h-full flex-col">
         <Container className="flex h-16 shrink-0 items-center gap-3 xl:h-20">
           <Link href="/" className="flex items-center gap-3 rounded-sm">
-            <Image src="/logo-icon.png" alt="" width={195} height={174} className="h-8 w-auto lg:h-9" />
+            <Image src="/logo-icon.png" alt="" width={400} height={351} className="h-8 w-auto lg:h-9" />
             <span className="flex flex-col font-display text-[0.9375rem] leading-[1.15] font-bold text-azur">
               <span>{tc("brandLine1")}</span>
               <span>{tc("brandLine2")}</span>

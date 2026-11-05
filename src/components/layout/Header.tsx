@@ -78,7 +78,7 @@ export default function Header({ trialPrice, hiddenNav }: HeaderProps) {
     >
       <Container className="flex h-16 items-center gap-8 xl:h-20">
         <Link href="/" className="flex shrink-0 items-center gap-3 rounded-sm">
-          <Image src="/logo-icon.png" alt="" width={195} height={174} className="h-8 w-auto xl:h-[39px]" priority />
+          <Image src="/logo-icon.png" alt="" width={400} height={351} className="h-8 w-auto xl:h-[39px]" priority />
           {/* The association's name, never the "PIV" acronym: it means nothing to visitors */}
           <span className="flex flex-col font-display text-[0.9375rem] leading-[1.15] font-bold text-azur xl:text-base">
             <span>{tc("brandLine1")}</span>

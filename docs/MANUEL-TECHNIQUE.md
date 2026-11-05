@@ -277,7 +277,12 @@ Le dataset vient d'une seule variable, `NEXT_PUBLIC_SANITY_DATASET` : `dev` dans
 ### Images
 
 - Images éditoriales : à téléverser dans Sanity. `next/image` passe par `src/lib/sanity/imageLoader.ts` : c'est le CDN de Sanity qui redimensionne, pas l'hébergeur (dont l'optimisation d'images est limitée en offre gratuite).
-- Images statiques du code : dans `public/` (logo `logo.png`, `logo-icon.png`, `favicon.png`).
+- Images statiques du code : dans `public/`. Les logos viennent des fichiers officiels de l'association (dossier Drive « Logo PIV ») :
+  - `logo-icon.png` (en-tête et menu) et `favicon.png` : le carré du logo seul, découpé dans `PIV-logo-1000-fondtransparent.png` ;
+  - `logo-blanc.png` (pied de page, fond sombre) : `PIV-logo-blanc-1000-fondtransparent.png` ;
+  - `logo.png` (image de partage par défaut) : `PIV-logo-1000-fondblanc.png`.
+
+  Attention : malgré son nom, `PIV-logo-2000-fondtransparent.png` a un fond blanc opaque, et les SVG s'affichent mal (police non incluse, texte coupé).
 - Toujours renseigner le champ `alt`, présent sur tous les schémas d'image.
 
 ## 8. Déployer

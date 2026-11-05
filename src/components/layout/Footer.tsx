@@ -41,9 +41,9 @@ export default async function Footer({ hiddenNav }: FooterProps) {
       <Container className="pt-20 pb-10">
         <div className="flex flex-wrap gap-x-16 gap-y-12">
           <div className="flex flex-[1_1_300px] flex-col items-start gap-5">
-            <Link href="/" className="flex items-center gap-3.5 rounded-sm focus-visible:outline-white">
-              <Image src="/logo-icon.png" alt="" width={195} height={174} className="h-12 w-auto" />
-              <span className="max-w-[11rem] font-display text-xl leading-tight font-semibold text-white">{tc("clubName")}</span>
+            {/* The official white logo, made for dark backgrounds: it carries the association's name */}
+            <Link href="/" className="rounded-sm focus-visible:outline-white">
+              <Image src="/logo-blanc.png" alt={tc("clubName")} width={240} height={271} className="h-32 w-auto lg:h-36" />
             </Link>
             {settings?.address && <p className="leading-relaxed whitespace-pre-line">{settings.address}</p>}
             {(settings?.contactEmail || settings?.contactPhone) && (
