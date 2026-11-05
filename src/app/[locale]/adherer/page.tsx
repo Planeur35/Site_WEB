@@ -15,6 +15,7 @@ import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { isFrenchFallback, localize, nonEmpty } from '@/lib/sanity/localize';
+import { pricingAnchorFor } from '@/lib/pricing';
 import { allTariffsQuery, joinPageQuery, pricingPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { AgeCategory, JoinPage, PricingPage, SiteSettings, Tariff, TariffOffer } from '@/lib/sanity/types';
 
@@ -42,7 +43,7 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
     sanityFetch<JoinPage | null>(joinPageQuery, null),
     sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
     sanityFetch<Tariff[]>(allTariffsQuery, []),
-    sanityFetch<Pick<PricingPage, 'season' | 'sections'> | null>(pricingPageQuery, null),
+    sanityFetch<PricingPage | null>(pricingPageQuery, null),
   ]);
   const tPricingPage = await getTranslations('pricingPage');
   // The full price list, once it is in the Studio
@@ -64,27 +65,34 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   const introFrench = french(page?.intro, settings?.pricingIntro);
   const howFrench = how ? french(page?.how) : french(undefined, settings?.joinText);
 
+  // Each sub-part links to its section of the price list (/tarifs), found by the service it is about
+  const pricingAnchor = (name: string) => (pricingLink ? pricingAnchorFor(pricing?.sections, name) : undefined);
+  const pricingPartLabel = pricing?.season ? tPricingPage('seeInPricing', { season: pricing.season }) : tPricingPage('heroTitleNoSeason');
+
   // The three sub-parts, in this order. A sub-part without text is not shown.
   const parts = [
     {
       id: 'cotisation',
+      pricing: pricingAnchor('Cotisation annuelle'),
       french: french(page?.membership, settings?.pricingMembership),
       title: t('membershipTitle'),
       body: nonEmpty(localize(page?.membership, locale)) ?? nonEmpty(localize(settings?.pricingMembership, locale)),
     },
     {
       id: 'pack-formation',
+      pricing: pricingAnchor('Pack Formation'),
       french: french(page?.training, settings?.pricingTraining),
       title: t('trainingPackTitle'),
       body: nonEmpty(localize(page?.training, locale)) ?? nonEmpty(localize(settings?.pricingTraining, locale)),
     },
     {
       id: 'pack-complement',
+      pricing: pricingAnchor('Pack Complément'),
       french: french(page?.advanced, settings?.pricingAdvanced),
       title: t('advancedPackTitle'),
       body: nonEmpty(localize(page?.advanced, locale)) ?? nonEmpty(localize(settings?.pricingAdvanced, locale)),
     },
-  ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body, french: part.french }] : []));
+  ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body, french: part.french, pricing: part.pricing }] : []));
 
   // Price tables from the `tariff` documents: an offer shows once one of its prices is entered
   const tariffRow = (offer: TariffOffer, ages: (AgeCategory | undefined)[]): PriceRow[] => {
@@ -170,7 +178,14 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
                     <h2 className={partTitle}>{part.title}</h2>
                     {part.french && <FrenchOnlyNote className="mt-4" />}
                   </div>
-                  <PortableText value={part.body} className="max-w-[680px]" lang={part.french ? 'fr' : undefined} />
+                  <div className="max-w-[680px]">
+                    <PortableText value={part.body} lang={part.french ? 'fr' : undefined} />
+                    {part.pricing && (
+                      <TextLink href={{ pathname: '/tarifs', hash: part.pricing }} className="mt-5">
+                        {pricingPartLabel}
+                      </TextLink>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

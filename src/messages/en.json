@@ -491,6 +491,7 @@
     "under18": "Under 18",
     "over18": "18 and over",
     "details": "Details",
-    "conditions": "Conditions"
+    "conditions": "Conditions",
+    "seeInPricing": "See the {season} prices"
   }
 }

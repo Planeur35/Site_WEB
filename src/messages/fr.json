@@ -491,6 +491,7 @@
     "under18": "Moins de 18 ans",
     "over18": "18 ans et plus",
     "details": "Détails",
-    "conditions": "Conditions"
+    "conditions": "Conditions",
+    "seeInPricing": "Voir les tarifs {season}"
   }
 }

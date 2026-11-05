@@ -1,7 +1,7 @@
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { trialTariffsQuery } from '@/lib/sanity/queries';
 import { localize } from '@/lib/sanity/localize';
-import type { LocalizedString, Tariff } from '@/lib/sanity/types';
+import type { LocalizedString, PricingSection, Tariff } from '@/lib/sanity/types';
 
 /** Trial flight prices from the `vol-initiation` tariffs; absent when not entered in the Studio. */
 export interface TrialPrices {
@@ -36,4 +36,24 @@ export interface TrialPriceLine {
 export function formatAmount(amount: number, locale: string): string {
   const digits = Number.isInteger(amount) ? 0 : 2;
   return new Intl.NumberFormat(locale, { minimumFractionDigits: digits, maximumFractionDigits: 2 }).format(amount);
+}
+
+/** Anchor of a price list section, from its French title (« J’apprends à piloter » → j-apprends-a-piloter). */
+export function pricingSectionId(section: Pick<PricingSection, 'title'>, index: number): string {
+  const slug = (section.title?.fr ?? '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
+  return slug || `grille-${index + 1}`;
+}
+
+/** Anchor of the section that lists a service whose French name starts with `name` (« Pack Formation »…). */
+export function pricingAnchorFor(sections: PricingSection[] | undefined, name: string): string | undefined {
+  const wanted = name.toLowerCase();
+  const index = (sections ?? []).findIndex((section) =>
+    section.items?.some((item) => item.name?.fr?.toLowerCase().startsWith(wanted)),
+  );
+  return index === -1 ? undefined : pricingSectionId(sections![index], index);
 }

@@ -14,6 +14,7 @@ import SectionNav from '@/components/ui/SectionNav';
 import SitePageHero from '@/components/ui/SitePageHero';
 import TextLink from '@/components/ui/TextLink';
 import { formatDate } from '@/lib/format';
+import { pricingSectionId } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import { pricingPageQuery } from '@/lib/sanity/queries';
@@ -45,8 +46,6 @@ function groupItems(items: PricingItem[], locale: string) {
   return groups;
 }
 
-const SECTION_ID = (i: number) => `grille-${i + 1}`;
-
 export default async function PricingPageRoute({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -65,7 +64,7 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
   const frenchOnly = locale === 'en' && sections.some((s) => s.items?.some((i) => isFrenchFallback(i.name, locale) || isFrenchFallback(i.description, locale)));
 
   const navLinks = [
-    ...sections.map((section, i) => ({ id: SECTION_ID(i), label: localize(section.title, locale) ?? '' })),
+    ...sections.map((section, i) => ({ id: pricingSectionId(section, i), label: localize(section.title, locale) ?? '' })),
     ...(budgets.length > 0 ? [{ id: 'budgets', label: t('budgetsTitle') }] : []),
     ...(conditions.length > 0 ? [{ id: 'conditions', label: t('conditionsTitle') }] : []),
   ];
@@ -114,7 +113,7 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
             const hasAges = section.items?.some((item) => item.mode === 'ages');
             const ages: [string, string] = section.ageSplit === '18' ? [t('under18'), t('over18')] : [t('under25'), t('over25')];
             return (
-              <section key={section._key} id={SECTION_ID(i)} className="scroll-mt-36 pt-14 lg:pt-20">
+              <section key={section._key} id={pricingSectionId(section, i)} className="scroll-mt-36 pt-14 lg:pt-20">
                 <Container>
                   <Kicker>{String(i + 1).padStart(2, '0')}</Kicker>
                   <h2 className="font-display text-[1.875rem] leading-[1.12] font-semibold text-balance text-azur lg:text-h2">
