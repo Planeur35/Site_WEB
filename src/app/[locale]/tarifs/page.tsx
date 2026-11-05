@@ -135,7 +135,7 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
                       <div key={g} className={g > 0 ? 'border-t border-horizon' : undefined}>
                         {group.label && <p className="pt-6 font-display text-[0.9375rem] font-semibold text-balise">{group.label}</p>}
                         {group.items.map((item) => (
-                          <PricingItemRow key={item._key} item={item} locale={locale} ages={ages} />
+                          <PricingItemRow key={item._key} item={item} locale={locale} ages={ages} ageColumns={hasAges} />
                         ))}
                       </div>
                     ))}

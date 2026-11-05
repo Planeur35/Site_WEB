@@ -9,13 +9,15 @@ interface PricingItemRowProps {
   locale: string;
   /** Captions of the two age columns, from the section (« Moins de 25 ans »…). */
   ages: [string, string];
+  /** The section shows the two age columns: a single price is then centred across both, as it applies to every age. */
+  ageColumns?: boolean;
 }
 
 /** Shared grid of the price list: the service, then the two age columns (lg: fixed widths so every row lines up). */
 export const PRICING_GRID = 'lg:grid lg:grid-cols-[minmax(0,1fr)_12rem_12rem] lg:gap-x-10';
 
 /** One service of the price list: name, description, what it includes, conditions, and its price(s). */
-export default async function PricingItemRow({ item, locale, ages }: PricingItemRowProps) {
+export default async function PricingItemRow({ item, locale, ages, ageColumns = false }: PricingItemRowProps) {
   const t = await getTranslations('pricingPage');
   const text = (field?: LocalizedText) => localize(field, locale);
   const lang = (field?: LocalizedText) => (isFrenchFallback(field, locale) ? 'fr' : undefined);
@@ -45,7 +47,11 @@ export default async function PricingItemRow({ item, locale, ages }: PricingItem
         </div>
       )}
       {item.mode === 'single' && (
-        <PriceCell cell={item.price} locale={locale} className="lg:col-span-2 lg:row-span-2 lg:items-end lg:text-right" />
+        <PriceCell
+          cell={item.price}
+          locale={locale}
+          className={ageColumns ? 'lg:col-span-2 lg:row-span-2 lg:items-center lg:text-center' : 'lg:col-span-2 lg:row-span-2 lg:items-end lg:text-right'}
+        />
       )}
       {item.mode === 'options' && (
         <ul className="flex flex-col divide-y divide-horizon rounded-sm bg-blanc px-4 lg:col-span-2 lg:row-span-2 lg:self-start">
