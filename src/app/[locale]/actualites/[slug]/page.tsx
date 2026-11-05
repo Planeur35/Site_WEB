@@ -5,6 +5,7 @@ import { absoluteUrl, buildMetadata } from '@/lib/metadata';
 import PortableText from '@/components/sanity/PortableText';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Container from '@/components/ui/Container';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import ShareButtons from '@/components/ui/ShareButtons';
 import Tag from '@/components/ui/Tag';
@@ -12,7 +13,7 @@ import TextLink from '@/components/ui/TextLink';
 import { formatDate } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
-import { localize } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import { allArticlesQuery, articleBySlugQuery } from '@/lib/sanity/queries';
 import type { Article } from '@/lib/sanity/types';
 
@@ -58,6 +59,9 @@ export default async function ArticlePage({ params }: PageProps) {
   const excerpt = localize(article.excerpt, locale);
   const url = absoluteUrl({ pathname: '/actualites/[slug]', params: { slug } }, locale);
 
+  const french = [article.title, article.excerpt, article.body].some((field) => isFrenchFallback(field, locale));
+  const fr = french ? 'fr' : undefined;
+
   return (
     <article className="pt-12 pb-20 lg:pt-16 lg:pb-32">
       <Container>
@@ -70,10 +74,11 @@ export default async function ArticlePage({ params }: PageProps) {
             </time>
             {category && <Tag>{category}</Tag>}
           </div>
-          <h1 className="mt-4 font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[3.5rem] lg:leading-[1.03]">
+          <h1 lang={fr} className="mt-4 font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[3.5rem] lg:leading-[1.03]">
             {title}
           </h1>
-          {excerpt && <p className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{excerpt}</p>}
+          {excerpt && <p lang={fr} className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{excerpt}</p>}
+          {french && <FrenchOnlyNote className="mt-5" />}
         </header>
         {article.featuredImage?.asset && (
           <SanityPhoto
@@ -84,7 +89,7 @@ export default async function ArticlePage({ params }: PageProps) {
             priority
           />
         )}
-        <PortableText value={localize(article.body, locale)} className="prose-piv-longread mx-auto mt-10 max-w-[680px] lg:mt-16" />
+        <PortableText value={localize(article.body, locale)} className="prose-piv-longread mx-auto mt-10 max-w-[680px] lg:mt-16" lang={fr} />
         <div className="mx-auto mt-12 flex max-w-[680px] flex-col items-start gap-6 border-t border-horizon pt-6">
           <ShareButtons url={url} title={title} />
           <TextLink href="/actualites">{t('allNews')}</TextLink>

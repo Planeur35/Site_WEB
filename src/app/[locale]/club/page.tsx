@@ -9,6 +9,7 @@ import Anecdote from '@/components/ui/Anecdote';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
@@ -17,7 +18,7 @@ import SitePageHero from '@/components/ui/SitePageHero';
 import TextLink from '@/components/ui/TextLink';
 import TrainingPath from '@/components/ui/TrainingPath';
 import { sanityFetch } from '@/lib/sanity/fetch';
-import { localize } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import { allClubPagesQuery, clubHistoryQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { ClubHistory, ClubPage, ClubSection, SiteSettings } from '@/lib/sanity/types';
 
@@ -51,8 +52,9 @@ interface SectionTextProps {
 /** Number, title, intro and body of a club section. */
 function SectionText({ item, locale, small = false }: SectionTextProps) {
   const intro = localize(item.page.intro, locale);
+  const french = [item.page.title, item.page.intro, item.page.body].some((field) => isFrenchFallback(field, locale));
   return (
-    <>
+    <div lang={french ? 'fr' : undefined}>
       <Kicker>{item.number}</Kicker>
       <h2
         className={clsx(
@@ -62,9 +64,10 @@ function SectionText({ item, locale, small = false }: SectionTextProps) {
       >
         {item.title}
       </h2>
+      {french && <FrenchOnlyNote className="mt-4" />}
       {intro && <p className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.3125rem]">{intro}</p>}
       <PortableText value={localize(item.page.body, locale)} className="mt-5" />
-    </>
+    </div>
   );
 }
 
@@ -115,6 +118,8 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
 
   const historyTitle = localize(history?.title, locale) ?? tNav('history');
   const historyIntro = localize(history?.intro, locale);
+  const historyFrench = [history?.title, history?.intro, history?.body].some((field) => isFrenchFallback(field, locale));
+  const historyLang = historyFrench ? 'fr' : undefined;
 
   return (
     <>
@@ -261,20 +266,29 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
           <Container>
             <header className="mx-auto flex max-w-[760px] flex-col lg:items-center lg:text-center">
               <Kicker>{`${pad(rendered.length + 1)} · ${tNav('history')}`}</Kicker>
-              <h2 className="font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[4rem] lg:leading-[1.02]">
+              <h2 lang={historyLang} className="font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[4rem] lg:leading-[1.02]">
                 {historyTitle}
               </h2>
+              {historyFrench && <FrenchOnlyNote className="mt-5" />}
               {historyIntro && (
-                <p className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{historyIntro}</p>
+                <p lang={historyLang} className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">
+                  {historyIntro}
+                </p>
               )}
             </header>
             <PortableText
               value={localize(history.body, locale)}
               className="prose-piv-longread mx-auto mt-8 max-w-[680px] lg:mt-16"
+              lang={historyLang}
             />
             <div className="mx-auto mt-10 flex max-w-[680px] flex-col items-start gap-6">
               {history.anecdotes?.map((a) => (
-                <Anecdote key={a._key} title={localize(a.title, locale)} text={localize(a.text, locale)} />
+                <Anecdote
+                  key={a._key}
+                  title={localize(a.title, locale)}
+                  text={localize(a.text, locale)}
+                  lang={isFrenchFallback(a.text, locale) ? 'fr' : undefined}
+                />
               ))}
               <a
                 href="#"

@@ -6,6 +6,7 @@ import PortableText from '@/components/sanity/PortableText';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
 import PriceTable, { type PriceRow } from '@/components/ui/PriceTable';
 import SitePageHero from '@/components/ui/SitePageHero';
@@ -13,7 +14,7 @@ import Section from '@/components/ui/Section';
 import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { imageDimensions, urlFor } from '@/lib/sanity/image';
-import { localize, nonEmpty } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize, nonEmpty } from '@/lib/sanity/localize';
 import { allTariffsQuery, joinPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { AgeCategory, JoinPage, SiteSettings, Tariff, TariffOffer } from '@/lib/sanity/types';
 
@@ -49,25 +50,32 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   const table = page?.table?.asset ? page.table : settings?.pricingTable;
   const how = nonEmpty(localize(page?.how, locale));
   const howPlain = localize(settings?.joinText, locale);
+  // On /en, the blocks that only exist in French are marked and announced
+  const french = (...fields: Parameters<typeof isFrenchFallback>[0][]) => fields.some((field) => isFrenchFallback(field, locale));
+  const introFrench = french(page?.intro, settings?.pricingIntro);
+  const howFrench = how ? french(page?.how) : french(settings?.joinText);
 
   // The three sub-parts, in this order. A sub-part without text is not shown.
   const parts = [
     {
       id: 'cotisation',
+      french: french(page?.membership, settings?.pricingMembership),
       title: t('membershipTitle'),
       body: nonEmpty(localize(page?.membership, locale)) ?? nonEmpty(localize(settings?.pricingMembership, locale)),
     },
     {
       id: 'pack-formation',
+      french: french(page?.training, settings?.pricingTraining),
       title: t('trainingPackTitle'),
       body: nonEmpty(localize(page?.training, locale)) ?? nonEmpty(localize(settings?.pricingTraining, locale)),
     },
     {
       id: 'pack-complement',
+      french: french(page?.advanced, settings?.pricingAdvanced),
       title: t('advancedPackTitle'),
       body: nonEmpty(localize(page?.advanced, locale)) ?? nonEmpty(localize(settings?.pricingAdvanced, locale)),
     },
-  ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body }] : []));
+  ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body, french: part.french }] : []));
 
   // Price tables from the `tariff` documents: an offer shows once one of its prices is entered
   const tariffRow = (offer: TariffOffer, ages: (AgeCategory | undefined)[]): PriceRow[] => {
@@ -94,7 +102,12 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
       <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')}>
         {isEmpty && <EmptyState action={{ href: '/contact', label: t('contactCta') }}>{t('empty')}</EmptyState>}
         <div className="flex flex-col gap-10 lg:gap-14">
-          {intro && <PortableText value={intro} className="max-w-[680px]" />}
+          {intro && (
+            <div lang={introFrench ? 'fr' : undefined} className="max-w-[680px]">
+              {introFrench && <FrenchOnlyNote className="mb-5" />}
+              <PortableText value={intro} />
+            </div>
+          )}
           {packageRows.length > 0 && (
             <PriceTable
               caption={t('packagesCaption')}
@@ -146,8 +159,9 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
                   <div>
                     <Kicker>{String(i + 1).padStart(2, '0')}</Kicker>
                     <h2 className={partTitle}>{part.title}</h2>
+                    {part.french && <FrenchOnlyNote className="mt-4" />}
                   </div>
-                  <PortableText value={part.body} className="max-w-[680px]" />
+                  <PortableText value={part.body} className="max-w-[680px]" lang={part.french ? 'fr' : undefined} />
                 </div>
               ))}
             </div>
@@ -156,10 +170,11 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
       )}
 
       <Section kicker={t('howKicker')} title={t('howTitle')}>
+        {howFrench && <FrenchOnlyNote className="mb-5" />}
         {how ? (
-          <PortableText value={how} className="max-w-[680px]" />
+          <PortableText value={how} className="max-w-[680px]" lang={howFrench ? 'fr' : undefined} />
         ) : howPlain ? (
-          <p className="max-w-[680px] text-[1.0625rem] leading-[1.75] whitespace-pre-line text-texte lg:text-[1.1875rem]">
+          <p lang={howFrench ? 'fr' : undefined} className="max-w-[680px] text-[1.0625rem] leading-[1.75] whitespace-pre-line text-texte lg:text-[1.1875rem]">
             {howPlain}
           </p>
         ) : (

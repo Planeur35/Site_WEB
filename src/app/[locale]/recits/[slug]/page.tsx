@@ -6,6 +6,7 @@ import PortableText from '@/components/sanity/PortableText';
 import Anecdote from '@/components/ui/Anecdote';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Container from '@/components/ui/Container';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import ShareButtons from '@/components/ui/ShareButtons';
@@ -13,7 +14,7 @@ import TextLink from '@/components/ui/TextLink';
 import { formatMonthYear } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
-import { localize } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import { allFlightStoriesQuery, flightStoryBySlugQuery } from '@/lib/sanity/queries';
 import type { FlightStory } from '@/lib/sanity/types';
 
@@ -59,6 +60,9 @@ export default async function StoryPage({ params }: PageProps) {
 
   const meta = [story.flightDate && formatMonthYear(story.flightDate, locale), story.aircraft].filter(Boolean).join(' · ');
 
+  const french = [story.title, story.excerpt, story.body].some((field) => isFrenchFallback(field, locale));
+  const fr = french ? 'fr' : undefined;
+
   return (
     <article className="pt-12 pb-20 lg:pt-16 lg:pb-32">
       <Container>
@@ -66,10 +70,11 @@ export default async function StoryPage({ params }: PageProps) {
         {/* Long read, like the club history: centred header, wide photo, text in a 680 px column */}
         <header className="mx-auto mt-10 flex max-w-[760px] flex-col lg:mt-14 lg:items-center lg:text-center">
           <Kicker className="first-letter:uppercase">{meta || t('heroKicker')}</Kicker>
-          <h1 className="font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[3.5rem] lg:leading-[1.03]">
+          <h1 lang={fr} className="font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[3.5rem] lg:leading-[1.03]">
             {title}
           </h1>
-          {intro && <p className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{intro}</p>}
+          {intro && <p lang={fr} className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{intro}</p>}
+          {french && <FrenchOnlyNote className="mt-5" />}
         </header>
         <SanityPhoto
           image={story.image}
@@ -79,10 +84,15 @@ export default async function StoryPage({ params }: PageProps) {
           sizes="(max-width: 1100px) 100vw, 1040px"
           priority
         />
-        <PortableText value={localize(story.body, locale)} className="prose-piv-longread mx-auto mt-10 max-w-[680px] lg:mt-16" />
+        <PortableText value={localize(story.body, locale)} className="prose-piv-longread mx-auto mt-10 max-w-[680px] lg:mt-16" lang={fr} />
         <div className="mx-auto mt-10 flex max-w-[680px] flex-col items-start gap-6">
           {story.anecdotes?.map((anecdote) => (
-            <Anecdote key={anecdote._key} title={localize(anecdote.title, locale)} text={localize(anecdote.text, locale)} />
+            <Anecdote
+              key={anecdote._key}
+              title={localize(anecdote.title, locale)}
+              text={localize(anecdote.text, locale)}
+              lang={isFrenchFallback(anecdote.text, locale) ? 'fr' : undefined}
+            />
           ))}
           {story.weglideUrl && (
             <TextLink href={story.weglideUrl} external>

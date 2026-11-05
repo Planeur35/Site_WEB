@@ -45,7 +45,8 @@
     "loadingMap": "Loading map…",
     "languageFr": "Français",
     "languageEn": "English",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "frenchOnly": "This section is only available in French."
   },
   "meta": {
     "home": {

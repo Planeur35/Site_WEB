@@ -4,10 +4,12 @@ import { getTranslations } from 'next-intl/server';
 interface AnecdoteProps {
   title?: string;
   text?: string;
+  /** "fr" when an English page shows the French text. */
+  lang?: string;
 }
 
 /** A callout in a long read (club history, flight stories): label, title and a short text. */
-export default async function Anecdote({ title, text }: AnecdoteProps) {
+export default async function Anecdote({ title, text, lang }: AnecdoteProps) {
   const t = await getTranslations('club');
   return (
     <aside aria-label={t('anecdote')} className="w-full rounded-md bg-ciel p-[22px] lg:px-9 lg:py-8">
@@ -16,9 +18,9 @@ export default async function Anecdote({ title, text }: AnecdoteProps) {
         {t('anecdote')}
       </p>
       {title && (
-        <h3 className="mt-3 font-display text-xl leading-[1.25] font-semibold text-azur lg:text-[1.375rem]">{title}</h3>
+        <h3 lang={lang} className="mt-3 font-display text-xl leading-[1.25] font-semibold text-azur lg:text-[1.375rem]">{title}</h3>
       )}
-      {text && <p className="mt-3 text-[1.0625rem] leading-[1.65] text-texte">{text}</p>}
+      {text && <p lang={lang} className="mt-3 text-[1.0625rem] leading-[1.65] text-texte">{text}</p>}
     </aside>
   );
 }

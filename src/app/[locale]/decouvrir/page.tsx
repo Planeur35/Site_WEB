@@ -7,6 +7,7 @@ import PortableText from '@/components/sanity/PortableText';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 import FlightTrace from '@/components/ui/FlightTrace';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
 import Section from '@/components/ui/Section';
 import SitePageHero from '@/components/ui/SitePageHero';
@@ -14,7 +15,7 @@ import StickyBookingBar from '@/components/ui/StickyBookingBar';
 import TextLink from '@/components/ui/TextLink';
 import { formatAmount } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
-import { localize, nonEmpty } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize, nonEmpty } from '@/lib/sanity/localize';
 import { allTariffsQuery, discoverPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { DiscoverPage, SiteSettings, Tariff } from '@/lib/sanity/types';
 
@@ -54,6 +55,8 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
   const flightsPlain = localize(settings?.discoveryText, locale);
   const booking = nonEmpty(localize(page?.booking, locale));
   const bookingPlain = localize(settings?.bookingText, locale);
+  const textsFrench = [page?.flights, page?.booking].some((field) => isFrenchFallback(field, locale));
+  const faqFrench = (page?.faq ?? []).some((item) => isFrenchFallback(item.question, locale) || isFrenchFallback(item.answer, locale));
   const faq = (page?.faq ?? []).flatMap((item) => {
     const question = localize(item.question, locale);
     const answer = nonEmpty(localize(item.answer, locale));
@@ -180,11 +183,12 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
 
       {/* The club's own texts (Studio): the flight in detail, and how to book */}
       <Section band kicker={t('kicker')} title={t('title')}>
+        {textsFrench && <FrenchOnlyNote className="mb-8" />}
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h3 className={`${subTitle} mb-4`}>{t('descriptionKicker')}</h3>
             {flights ? (
-              <PortableText value={flights} />
+              <PortableText value={flights} lang={isFrenchFallback(page?.flights, locale) ? 'fr' : undefined} />
             ) : (
               <p className="whitespace-pre-line text-texte">{flightsPlain ?? t('defaultDescription')}</p>
             )}
@@ -192,7 +196,7 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
           <div>
             <h3 className={`${subTitle} mb-4`}>{t('bookingTitle')}</h3>
             {booking ? (
-              <PortableText value={booking} />
+              <PortableText value={booking} lang={isFrenchFallback(page?.booking, locale) ? 'fr' : undefined} />
             ) : (
               <p className="whitespace-pre-line text-texte">{bookingPlain ?? t('bookingText')}</p>
             )}
@@ -233,7 +237,8 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
       {/* Frequently asked questions (Studio): each answer opens under its question */}
       {faq.length > 0 && (
         <Section id="faq" kicker={t('faqKicker')} title={t('faqTitle')}>
-          <div className="max-w-3xl border-b border-horizon">
+          {faqFrench && <FrenchOnlyNote className="mb-6" />}
+          <div lang={faqFrench ? 'fr' : undefined} className="max-w-3xl border-b border-horizon">
             {faq.map((item) => (
               <details key={item.key} className="group border-t border-horizon">
                 <summary className="flex min-h-14 cursor-pointer items-center justify-between gap-4 py-3 font-display text-lg leading-snug font-semibold text-azur">

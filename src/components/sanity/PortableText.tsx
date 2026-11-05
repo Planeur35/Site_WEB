@@ -56,14 +56,16 @@ const components: PortableTextComponents = {
 interface PortableTextProps {
   value: Parameters<typeof SanityPortableText>[0]['value'] | undefined;
   className?: string;
+  /** "fr" when an English page shows the French text (see `isFrenchFallback`). */
+  lang?: string;
 }
 
 /** Text written in Sanity, styled by `.prose-piv` in globals.css. */
-export default function PortableText({ value, className }: PortableTextProps) {
+export default function PortableText({ value, className, lang }: PortableTextProps) {
   if (!value || (Array.isArray(value) && value.length === 0)) return null;
 
   return (
-    <div className={clsx('prose-piv', className)}>
+    <div lang={lang} className={clsx('prose-piv', className)}>
       <SanityPortableText value={value} components={components} />
     </div>
   );
