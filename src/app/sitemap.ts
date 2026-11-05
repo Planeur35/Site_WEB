@@ -13,6 +13,7 @@ const priorityMap: Record<string, number> = {
   '/': 1.0,
   '/decouvrir': 0.9,
   '/association': 0.8,
+  '/tarifs': 0.8,
   '/adherer': 0.8,
   '/actualites': 0.8,
   '/planeurs': 0.7,

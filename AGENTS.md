@@ -39,7 +39,7 @@ Local work uses the `dev` dataset (`.env.local`). Write test or sample content t
 ## Where things are
 
 ```text
-src/app/[locale]/          one folder per page (French paths: association, planeurs, adherer, decouvrir, actualites, recits…)
+src/app/[locale]/          one folder per page (French paths: association, planeurs, adherer, tarifs, decouvrir, actualites, recits…)
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
 src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), PartnersBand (partners' logos above the footer), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
@@ -49,7 +49,7 @@ src/lib/format.ts          dates in the club's time zone
 src/lib/metadata.ts        buildMetadata(): title, Open Graph, canonical, hreflang
 src/i18n/                  routing.ts (translated pathnames), navigation.ts, request.ts
 src/messages/fr.json, en.json   UI strings
-sanity/schemas/            content model: article, event, galleryImage, siteSettings, clubPage, clubHistory, aircraft, tariff, flightStory, partner…
+sanity/schemas/            content model: article, event, galleryImage, siteSettings, clubPage, clubHistory, aircraft, tariff, pricingPage (the season's full price list), flightStory, partner…
 sanity/schemas/fields.ts   localizedString/Text/Blocks and photoField helpers for new fields
 sanity/sanity.config.ts    Studio menu (French), singletons
 ```

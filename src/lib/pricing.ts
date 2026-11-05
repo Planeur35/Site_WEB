@@ -32,7 +32,8 @@ export interface TrialPriceLine {
   note?: string;
 }
 
-/** "170", "1 250": an amount for the price strings, which carry the € sign. */
+/** "170", "1 137,69", "1 667,90": an amount for the price strings, which carry the € sign. Cents always have two digits. */
 export function formatAmount(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale).format(amount);
+  const digits = Number.isInteger(amount) ? 0 : 2;
+  return new Intl.NumberFormat(locale, { minimumFractionDigits: digits, maximumFractionDigits: 2 }).format(amount);
 }

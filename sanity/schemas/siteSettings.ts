@@ -7,6 +7,7 @@ const HERO_PAGES = [
   { name: 'gliders', title: 'Nos planeurs' },
   { name: 'join', title: 'Venez voler ! (tarifs)' },
   { name: 'discover', title: 'Venez essayer' },
+  { name: 'pricing', title: 'Tarifs' },
   { name: 'news', title: 'Actualités' },
   { name: 'stories', title: 'Récits de vols' },
   { name: 'gallery', title: 'Galerie' },

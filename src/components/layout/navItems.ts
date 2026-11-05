@@ -53,6 +53,7 @@ export const HEADER_NAV: NavItem[] = [
 
 /** Pages that are only in the full menu and the footer. */
 const OTHER_PAGES: NavItem[] = [
+  { key: 'pricing', href: '/tarifs', pathname: '/tarifs' },
   { key: 'stories', href: '/recits', pathname: '/recits' },
   { key: 'gallery', href: '/galerie', pathname: '/galerie' },
   { key: 'webcam', href: '/webcam', pathname: '/webcam' },
@@ -84,7 +85,7 @@ export interface NavGroup {
 
 /** The four groups of the full menu and the footer. */
 export const NAV_GROUPS: NavGroup[] = [
-  { key: 'groupFly', items: links(['discover', 'join', 'gliders']) },
+  { key: 'groupFly', items: links(['discover', 'join', 'pricing', 'gliders']) },
   { key: 'groupClub', items: links(Object.keys(CLUB_ANCHORS)) },
   { key: 'groupNews', items: links(['newsList', 'agenda', 'stories', 'gallery']) },
   { key: 'groupPractical', items: links(['webcam', 'links', 'contact']) },

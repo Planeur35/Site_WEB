@@ -8,6 +8,7 @@ const contentQuery = `{
   "stories": count(*[_type == "flightStory" && defined(slug.current)]) > 0,
   "history": count(*[_type == "clubHistory"]) > 0,
   "partners": count(*[_type == "partner" && defined(logo.asset)]) > 0,
+  "pricing": count(*[_type == "pricingPage" && count(sections) > 0]) > 0,
   "sections": *[_type == "clubPage"].section
 }`;
 
@@ -17,6 +18,7 @@ interface Content {
   stories: boolean;
   history: boolean;
   partners: boolean;
+  pricing: boolean;
   sections: string[];
 }
 
@@ -35,6 +37,7 @@ export async function getHiddenNavKeys(): Promise<string[]> {
     ...(content.stories ? [] : ['stories']),
     ...(content.history ? [] : ['history']),
     ...(content.partners ? [] : ['partners']),
+    ...(content.pricing ? [] : ['pricing']),
     ...sections.filter((key) => !content.sections.includes(key)),
   ];
 }

@@ -15,8 +15,8 @@ import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { isFrenchFallback, localize, nonEmpty } from '@/lib/sanity/localize';
-import { allTariffsQuery, joinPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
-import type { AgeCategory, JoinPage, SiteSettings, Tariff, TariffOffer } from '@/lib/sanity/types';
+import { allTariffsQuery, joinPageQuery, pricingPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
+import type { AgeCategory, JoinPage, PricingPage, SiteSettings, Tariff, TariffOffer } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
@@ -38,11 +38,17 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations('join');
   const tPricing = await getTranslations('pricing');
 
-  const [page, settings, tariffs] = await Promise.all([
+  const [page, settings, tariffs, pricing] = await Promise.all([
     sanityFetch<JoinPage | null>(joinPageQuery, null),
     sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
     sanityFetch<Tariff[]>(allTariffsQuery, []),
+    sanityFetch<Pick<PricingPage, 'season' | 'sections'> | null>(pricingPageQuery, null),
   ]);
+  const tPricingPage = await getTranslations('pricingPage');
+  // The full price list, once it is in the Studio
+  const pricingLink = (pricing?.sections?.length ?? 0) > 0
+    ? { href: '/tarifs' as const, label: pricing?.season ? tPricingPage('seeAll', { season: pricing.season }) : tPricingPage('heroTitleNoSeason') }
+    : undefined;
 
   // The text comes from the page document (Studio → Page « Venez voler ! »).
   // The old fields of the site settings are used only while the new ones are empty.
@@ -102,7 +108,7 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
     <>
       <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} lead={t('heroLead')} />
 
-      <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')}>
+      <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')} action={pricingLink}>
         {isEmpty && <EmptyState action={{ href: '/contact', label: t('contactCta') }}>{t('empty')}</EmptyState>}
         <div className="flex flex-col gap-10 lg:gap-14">
           {intro && (

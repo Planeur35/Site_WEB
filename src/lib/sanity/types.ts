@@ -93,6 +93,7 @@ export interface SiteSettings {
 /** Pages whose header photo can be set in Studio → Réglages du site → Photos d’en-tête. */
 export type PageHeroKey =
   | 'club'
+  | 'pricing'
   | 'gliders'
   | 'join'
   | 'discover'
@@ -186,6 +187,58 @@ export interface SocialPosts {
   facebookPostId?: string;
   instagramMediaId?: string;
   error?: string;
+}
+
+/** One price of the season's price list: an amount, or a text such as « Non applicable ». */
+export interface PriceCellValue {
+  amount?: number;
+  label?: LocalizedString;
+  from?: boolean;
+  unit?: LocalizedString;
+  note?: LocalizedString;
+}
+
+export interface PricingItem {
+  _key: string;
+  name: LocalizedString;
+  group?: LocalizedString;
+  description?: LocalizedText;
+  includes?: LocalizedText;
+  excludes?: LocalizedText;
+  conditions?: LocalizedText;
+  mode: 'ages' | 'single' | 'options';
+  under25?: PriceCellValue;
+  over25?: PriceCellValue;
+  price?: PriceCellValue;
+  options?: { _key: string; label: LocalizedString; price?: PriceCellValue }[];
+}
+
+export interface PricingSection {
+  _key: string;
+  title: LocalizedString;
+  intro?: LocalizedText;
+  items?: PricingItem[];
+  conditions?: { _key: string; text: LocalizedText }[];
+}
+
+export interface PricingBudget {
+  _key: string;
+  title: LocalizedString;
+  age?: LocalizedString;
+  lines?: { _key: string; label: LocalizedString; amount: number }[];
+}
+
+/** The season's price list (Studio → Page « Tarifs »). */
+export interface PricingPage {
+  season?: string;
+  editionDate?: string;
+  intro?: LocalizedText;
+  ageRule?: LocalizedText;
+  documentUrl?: string;
+  sections?: PricingSection[];
+  budgetsIntro?: LocalizedText;
+  budgets?: PricingBudget[];
+  conditions?: { _key: string; text: LocalizedText }[];
 }
 
 export type PartnerKind = 'federation' | 'public' | 'label' | 'sponsor';

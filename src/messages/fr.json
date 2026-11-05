@@ -38,7 +38,8 @@
     "trialPrice": "{adult} € · {young} € moins de 18 ans",
     "trialPriceSingle": "{amount} €",
     "language": "Langue",
-    "partners": "Partenaires"
+    "partners": "Partenaires",
+    "pricing": "Tarifs"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -99,6 +100,10 @@
     "legal": {
       "title": "Mentions légales",
       "description": "Informations légales sur l’éditeur et l’hébergeur du site, et traitement des données personnelles."
+    },
+    "pricing": {
+      "title": "Tarifs {season}",
+      "description": "Tous les tarifs de l’association : vol d’initiation, formation au pilotage, cotisation, forfaits d’heures de vol, décollages et hébergement des planeurs."
     }
   },
   "home": {
@@ -456,5 +461,32 @@
     "sectionTitle": "Nos partenaires",
     "sectionSub": "Fédérations, collectivités et labels qui accompagnent l’association.",
     "visit": "Site de {name}"
+  },
+  "pricingPage": {
+    "heroKicker": "Tarifs",
+    "heroTitle": "Tarifs {season}",
+    "heroTitleNoSeason": "Tarifs",
+    "heroLead": "Toutes les formules de l’association, du premier vol au vol en autonomie.",
+    "edition": "Édition du {date}",
+    "download": "Télécharger la grille (PDF)",
+    "under25": "Moins de 25 ans",
+    "over25": "25 ans et plus",
+    "price": "Tarif",
+    "service": "Prestation",
+    "includes": "Comprend :",
+    "excludes": "Ne comprend pas :",
+    "from": "à partir de",
+    "sectionNav": "Sections de la page",
+    "budgetsKicker": "Exemples",
+    "budgetsTitle": "Budgets types",
+    "total": "Total",
+    "conditionsKicker": "À savoir",
+    "conditionsTitle": "Conditions générales",
+    "empty": "La grille tarifaire de la saison sera bientôt publiée. En attendant, écrivez-nous.",
+    "questions": "Une question sur les tarifs ?",
+    "contactCta": "Nous écrire",
+    "joinCta": "S’inscrire",
+    "seeAll": "Tous les tarifs {season}",
+    "ageRuleLabel": "Moins de 25 ans :"
   }
 }

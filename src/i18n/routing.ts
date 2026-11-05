@@ -13,6 +13,10 @@ export const routing = defineRouting({
       fr: "/planeurs",
       en: "/gliders",
     },
+    "/tarifs": {
+      fr: "/tarifs",
+      en: "/prices",
+    },
     "/adherer": {
       fr: "/adherer",
       en: "/join",

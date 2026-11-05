@@ -38,7 +38,8 @@
     "trialPrice": "€{adult} · €{young} under 18",
     "trialPriceSingle": "€{amount}",
     "language": "Language",
-    "partners": "Partners"
+    "partners": "Partners",
+    "pricing": "Prices"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -99,6 +100,10 @@
     "legal": {
       "title": "Legal notice",
       "description": "Legal information about the publisher and host of the website, and how personal data is handled."
+    },
+    "pricing": {
+      "title": "{season} prices",
+      "description": "All the association’s prices: trial flight, pilot training, membership, flying packages, launches and glider storage."
     }
   },
   "home": {
@@ -456,5 +461,32 @@
     "sectionTitle": "Our partners",
     "sectionSub": "Federations, local authorities and labels supporting the association.",
     "visit": "{name} website"
+  },
+  "pricingPage": {
+    "heroKicker": "Prices",
+    "heroTitle": "{season} prices",
+    "heroTitleNoSeason": "Prices",
+    "heroLead": "Every option the association offers, from your first flight to flying on your own.",
+    "edition": "Published {date}",
+    "download": "Download the price list (PDF)",
+    "under25": "Under 25",
+    "over25": "25 and over",
+    "price": "Price",
+    "service": "Service",
+    "includes": "Includes:",
+    "excludes": "Does not include:",
+    "from": "from",
+    "sectionNav": "Page sections",
+    "budgetsKicker": "Examples",
+    "budgetsTitle": "Sample budgets",
+    "total": "Total",
+    "conditionsKicker": "Good to know",
+    "conditionsTitle": "General conditions",
+    "empty": "This season’s price list will be published soon. Meanwhile, write to us.",
+    "questions": "A question about prices?",
+    "contactCta": "Write to us",
+    "joinCta": "Join",
+    "seeAll": "All {season} prices",
+    "ageRuleLabel": "Under 25:"
   }
 }
