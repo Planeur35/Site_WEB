@@ -146,7 +146,13 @@
     "giftCompanyCta": "For companies",
     "membersTitle": "Life at the airfield",
     "webcamLive": "live",
-    "nextEvent": "Next event"
+    "nextEvent": "Next event",
+    "findUsKicker": "Getting here",
+    "findUsTitle": "Find us",
+    "findUsText": "We fly from Saint-Sulpice-des-Landes airfield, in the south of Ille-et-Vilaine.",
+    "findUsDirections": "Get directions",
+    "findUsContact": "Write to us",
+    "findUsPopup": "Saint-Sulpice-des-Landes airfield"
   },
   "club": {
     "heroKicker": "The association",
@@ -376,7 +382,8 @@
     "address": "Address",
     "findUsKicker": "Getting here",
     "findUs": "Find us",
-    "mapPopup": "Saint-Sulpice-des-Landes airfield"
+    "mapPopup": "Saint-Sulpice-des-Landes airfield",
+    "directions": "Get directions"
   },
   "legal": {
     "heroKicker": "Legal information",

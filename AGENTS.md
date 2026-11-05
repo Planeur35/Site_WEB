@@ -121,7 +121,7 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 Fix these only when the task is about them; otherwise mention them if they are relevant.
 
 - Prices, club pages, history, flight stories, agenda, key figures and useful links now come from Sanity and are still empty: the pages show "Bientôt ici" until they are entered in the Studio. Real trial flight prices: 170 € (adult) and 130 € (under 18).
-- The contact page map falls back to coordinates 47.885, -1.688 when `siteSettings.aerodromeCoordinates` is empty. Unconfirmed. The club page no longer shows a map: the club does not want to publish its exact location.
+- The production Studio still holds `aerodromeCoordinates` 47.885, -1.688, about 11 km north of the airfield. OpenStreetMap puts it at 47.7914, -1.6383 (the code's fallback, in `src/lib/aerodrome.ts`, and the value in `dev`): correct it in the Studio. The airfield is shown on the home page ("Nous trouver") and the contact page; the association page has no map.
 - `src/lib/email.ts` sends from `onboarding@resend.dev`, which only delivers to the Resend account owner until planeur35.org is verified in Resend.
 - WeGlide club ID: the seed uses 271, the old site links to 1221. Unconfirmed.
 - `scripts/seed-fleet.ts` and `scripts/upload-fleet-images.ts` hardcode the project ID.

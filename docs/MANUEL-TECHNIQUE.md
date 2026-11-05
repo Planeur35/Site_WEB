@@ -113,7 +113,7 @@ flowchart TB
 src/
   app/
     [locale]/                 # toutes les pages publiques, /fr et /en
-      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, bons de vol, accès membres
+      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, bons de vol, Nous trouver (adresse, itinéraire, carte), accès membres
       club/                   # sections du club (#presentation, #plateforme, #formation…) et histoire
       planeurs/  adherer/  decouvrir/
       actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
@@ -178,7 +178,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
-| Accueil `/` | Réglages du site : photos d'accueil (titre de chaque photo, sinon « Votre premier vol en planeur »), accroche, chiffres clés, photos des trois cartes, photo des bons de vol (sans photo, le bandeau s'affiche sans image) ; tarifs « Vol d'initiation » ; 3 dernières Actualités ; prochain événement de l'Agenda dans « La vie du club » | 🟢 sous 60 s |
+| Accueil `/` | Réglages du site : photos d'accueil (titre de chaque photo, sinon « Votre premier vol en planeur »), accroche, chiffres clés, photos des trois cartes, photo des bons de vol (sans photo, le bandeau s'affiche sans image) ; adresse et coordonnées du terrain pour « Nous trouver » ; tarifs « Vol d'initiation » ; 3 dernières Actualités ; prochain événement de l'Agenda dans « La vie du club » | 🟢 sous 60 s |
 | L’association `/association` (`/club` redirige) | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition ; numérotées 01, 02… dans l'ordre des sections remplies) et Histoire du club ; photo d'en-tête des Réglages, sinon la photo de la section Présentation ; « L’association en bref » lit l'adresse, le nombre de planeurs et de pilotes brevetés des Réglages ; le cursus de formation est dans `messages/*.json`, sauf si un « Schéma du cursus » est téléversé dans la section Formation | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` (titre « Rejoindre le club ») | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire ; tables de prix des fiches `tariff` (forfaits 20 h et illimité par âge, packs formation), affichées dès qu'un prix est saisi, « Sur demande » pour un prix manquant ; bouton « S'inscrire en ligne » dès que le lien d'inscription est saisi (Réglages du site → Contact et réseaux) | 🟢 sous 60 s |
@@ -296,7 +296,7 @@ Le dataset vient d'une seule variable, `NEXT_PUBLIC_SANITY_DATASET` : `dev` dans
 - 🟠 **Contenu : rubriques vides.** Tarifs, pages du club, histoire, récits, agenda, chiffres clés et liens pratiques sont à saisir dans le Studio ; d'ici là, les pages affichent « Bientôt ici ». Vrais prix du vol d'initiation : 170 € (adulte), 130 € (moins de 18 ans).
 - 🟠 **Légal : mentions légales à compléter.** La page `/mentions-legales` existe. Il reste à saisir dans le Studio (Réglages du site → Mentions légales) le nom officiel de l'association, le siège, le numéro RNA ou SIRET et le directeur de la publication, puis à faire relire le texte par le bureau.
 - 🟠 **Domaine : URLs canoniques déjà sur www.planeur35.org.** `sitemap.ts` et `metadata.ts` utilisent `https://www.planeur35.org` alors que le site tourne sur piv-sigma.vercel.app. C'est voulu pour la bascule, mais il faut s'en souvenir en testant le SEO.
-- 🔵 **Carte de la page Contact : coordonnées par défaut.** La carte n'est plus affichée sur la page Club (le club ne veut pas publier sa localisation précise). Sur la page Contact, sans `aerodromeCoordinates` dans les Réglages, elle se centre sur 47.885, -1.688. À vérifier, ou à retirer aussi.
+- 🟠 **Coordonnées du terrain à corriger dans le Studio.** Les Réglages de production indiquent 47.885, -1.688, à environ 11 km au nord du terrain. OpenStreetMap place l'aérodrome de Saint-Sulpice-des-Landes en 47.7914, -1.6383 : c'est la valeur de secours du code (`src/lib/aerodrome.ts`) et celle du dataset `dev`. À reporter dans Réglages du site → Coordonnées du terrain. Le terrain est montré sur l'accueil (« Nous trouver », avec un lien d'itinéraire) et sur la page Contact.
 - 🔵 **Qualité : README par défaut.** Le `README.md` est encore celui de create-next-app. Certains contenus saisis dans Sanity n'ont pas d'accents (accroche « Club de vol a voile en Bretagne »).
 
 ## 10. Ancien et nouveau site

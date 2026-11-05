@@ -146,7 +146,13 @@
     "giftCompanyCta": "Offre entreprises",
     "membersTitle": "La vie de l’association",
     "webcamLive": "en direct",
-    "nextEvent": "Prochain rendez-vous"
+    "nextEvent": "Prochain rendez-vous",
+    "findUsKicker": "Accès",
+    "findUsTitle": "Nous trouver",
+    "findUsText": "Nous volons depuis l’aérodrome de Saint-Sulpice-des-Landes, au sud de l’Ille-et-Vilaine.",
+    "findUsDirections": "Calculer l’itinéraire",
+    "findUsContact": "Nous écrire",
+    "findUsPopup": "L’aérodrome de Saint-Sulpice-des-Landes"
   },
   "club": {
     "heroKicker": "L’association",
@@ -376,7 +382,8 @@
     "address": "Adresse",
     "findUsKicker": "Accès",
     "findUs": "Nous trouver",
-    "mapPopup": "L’aérodrome de Saint-Sulpice-des-Landes"
+    "mapPopup": "L’aérodrome de Saint-Sulpice-des-Landes",
+    "directions": "Calculer l’itinéraire"
   },
   "legal": {
     "heroKicker": "Informations légales",

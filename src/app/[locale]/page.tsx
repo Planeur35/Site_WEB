@@ -9,12 +9,14 @@ import Container from '@/components/ui/Container';
 import CountUp from '@/components/ui/CountUp';
 import HeroSlideshow, { type Slide } from '@/components/ui/HeroSlideshow';
 import Kicker from '@/components/ui/Kicker';
+import Map from '@/components/ui/Map';
 import NewsCard from '@/components/ui/NewsCard';
 import NewsRow from '@/components/ui/NewsRow';
 import Reveal from '@/components/ui/Reveal';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
 import TextLink from '@/components/ui/TextLink';
+import { aerodromeCoordinates, directionsUrl } from '@/lib/aerodrome';
 import { getHiddenNavKeys } from '@/lib/emptyPages';
 import { formatDate, startOfToday } from '@/lib/format';
 import { formatAmount, getTrialPrices } from '@/lib/pricing';
@@ -59,6 +61,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     getHiddenNavKeys(),
   ]);
   const nextEvent = events[0];
+  const airfield = aerodromeCoordinates(settings);
 
   // Slides without a title or subtitle fall back to the club's name and tagline
   const defaultSubtitle = localize(settings?.tagline, locale) ?? t('heroSubtitle');
@@ -247,6 +250,28 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </Container>
+
+      {/* Where the airfield is: the address, a route planner and the map */}
+      <Section id="acces" kicker={t('findUsKicker')} title={t('findUsTitle')} sub={t('findUsText')}>
+        <div className="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+          <div className="flex flex-col items-start gap-6">
+            {settings?.address && (
+              <address className="text-[1.0625rem] leading-[1.6] whitespace-pre-line text-nuit not-italic lg:text-lg">
+                {settings.address}
+              </address>
+            )}
+            <div className="flex w-full flex-wrap items-center gap-3">
+              <Button href={directionsUrl(airfield)} external variant="secondary" className="w-full sm:w-auto">
+                {t('findUsDirections')}
+              </Button>
+              <TextLink href="/contact" className="px-2">
+                {t('findUsContact')}
+              </TextLink>
+            </div>
+          </div>
+          <Map lat={airfield.lat} lng={airfield.lng} zoom={11} popupText={t('findUsPopup')} />
+        </div>
+      </Section>
 
       <Container className="pb-16 lg:pb-28">
         <section className="flex flex-col gap-4 rounded-md bg-ciel px-4 py-6 lg:gap-6 lg:p-10">

@@ -33,6 +33,8 @@ export default function MapInner({
         center={[lat, lng]}
         zoom={zoom}
         scrollWheelZoom={false}
+        // On phones, one finger scrolls the page instead of getting caught by the map; +/- still zoom
+        dragging={!L.Browser.mobile}
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
