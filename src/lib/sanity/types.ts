@@ -174,6 +174,18 @@ export interface Article {
   excerpt?: LocalizedText;
   body?: LocalizedRichText;
   seo?: SeoFields;
+  socialShare?: boolean;
+  socialText?: string;
+  socialRetry?: boolean;
+  socialPosts?: SocialPosts;
+}
+
+/** Written by /api/social/publish once the article is shared. */
+export interface SocialPosts {
+  startedAt?: string;
+  facebookPostId?: string;
+  instagramMediaId?: string;
+  error?: string;
 }
 
 export interface AircraftSpecs {

@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { getPathname } from '@/i18n/navigation';
 
 const SITE_NAME = "Planeurs d’Ille-et-Vilaine";
-const BASE_URL = 'https://www.planeur35.org';
+// SITE_URL (Vercel) gives the public address while planeur35.org still serves the old site
+export const BASE_URL = (process.env.SITE_URL ?? 'https://www.planeur35.org').replace(/\/$/, '');
 
 type Href = Parameters<typeof getPathname>[0]['href'];
 

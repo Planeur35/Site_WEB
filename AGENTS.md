@@ -98,7 +98,8 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 
 ### Security and data
 
-- Never commit, print or paste secrets. `.env.local` is gitignored. Variables: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `RESEND_API_KEY`, `CONTACT_EMAIL`; the same ones are set in Vercel.
+- Never commit, print or paste secrets. `.env.local` is gitignored. Variables: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `RESEND_API_KEY`, `CONTACT_EMAIL`; the same ones are set in Vercel. Production also has the news-sharing ones (`META_PAGE_ID`, `META_PAGE_TOKEN`, `META_IG_USER_ID`, `SANITY_WEBHOOK_SECRET`, `SANITY_WRITE_TOKEN`, `SITE_URL`, `SOCIAL_DRY_RUN`), described in `docs/MANUEL-TECHNIQUE.md` ("Publication des actualités").
+- `SANITY_WRITE_TOKEN` and the Meta tokens are read only by server code (`src/lib/sanity/writeClient.ts`, `src/lib/social.ts`, both `server-only`). Never expose them through a `NEXT_PUBLIC_` variable.
 - No personal data about club members (phone numbers, addresses, licence numbers) in the code.
 - Keep contact form validation in the server action, not only in the browser.
 

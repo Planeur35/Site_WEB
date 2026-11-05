@@ -285,6 +285,52 @@ Le dataset vient d'une seule variable, `NEXT_PUBLIC_SANITY_DATASET` : `dev` dans
   Attention : malgré son nom, `PIV-logo-2000-fondtransparent.png` a un fond blanc opaque, et les SVG s'affichent mal (police non incluse, texte coupé).
 - Toujours renseigner le champ `alt`, présent sur tous les schémas d'image.
 
+### Publication des actualités sur Facebook et Instagram
+
+**Côté rédacteur.** Dans un article, cocher « Publier sur Facebook et Instagram » avant de publier (texte du post facultatif : sinon le titre et le résumé en français). L'article part une seule fois : sur la page Facebook, avec la carte de lien vers l'article, et sur Instagram s'il a une photo (Instagram n'accepte pas les posts sans image). Le bloc « Partage sur les réseaux » de l'article indique ensuite la date, les identifiants des posts ou l'erreur.
+
+**Fonctionnement.**
+
+```mermaid
+flowchart LR
+    S[Studio : article publié, case cochée] -->|webhook signé| R[/api/social/publish]
+    R -->|1. réserve l'article, liée à sa révision| L[(Sanity)]
+    R -->|2. post + lien| F[Page Facebook]
+    R -->|2. image + légende| I[Instagram]
+    R -->|3. identifiants ou erreur| L
+```
+
+La route (`src/app/api/social/publish/route.ts`, composition et appels Meta dans `src/lib/social.ts`) vérifie la signature du webhook, ignore les brouillons et les articles non cochés, puis « réserve » l'article (`socialPosts.startedAt`) avant d'envoyer : un webhook rejoué ou en double ne peut pas publier deux fois.
+
+**Mise en place (une fois).**
+
+1. **Compte Meta de l'association** (pas un compte personnel) : créer une app de type « Business » sur developers.facebook.com, administrée par ce compte, qui doit aussi gérer la page Facebook.
+2. **Jeton de page** : avec l'Explorateur de l'API Graph, obtenir un jeton utilisateur avec `pages_manage_posts`, `pages_read_engagement` (et, quand Instagram existera, `instagram_basic`, `instagram_content_publish`), l'échanger contre un jeton longue durée, puis lire le jeton de la page (`/me/accounts`) : il n'expire pas. Il devient invalide si l'administrateur quitte la page ou change de mot de passe : refaire cette étape.
+3. **Instagram** (plus tard) : compte professionnel relié à la page Facebook ; son identifiant se lit avec `/{page-id}?fields=instagram_business_account`. Tant que `META_IG_USER_ID` est vide, seul Facebook est publié.
+4. **Variables Vercel** (Production uniquement, jamais dans le code) :
+
+   | Variable | Contenu |
+   |---|---|
+   | `META_PAGE_ID`, `META_PAGE_TOKEN` | identifiant et jeton de la page Facebook |
+   | `META_IG_USER_ID` | compte Instagram (facultatif) |
+   | `SANITY_WEBHOOK_SECRET` | secret partagé avec le webhook (chaîne aléatoire) |
+   | `SANITY_WRITE_TOKEN` | jeton Sanity « Editor », pour noter le résultat dans l'article |
+   | `SITE_URL` | adresse publique du site tant que planeur35.org pointe vers l'ancien site (ex. `https://piv-sigma.vercel.app`) ; sert aux liens des posts et aux balises canonical |
+   | `SOCIAL_DRY_RUN` | `1` pour composer les posts sans les envoyer (tests) |
+
+5. **Webhook Sanity** (sanity.io/manage → API → Webhooks) : URL `https://<site>/api/social/publish`, dataset `production`, déclencheurs création et mise à jour, brouillons non inclus, méthode POST, secret = `SANITY_WEBHOOK_SECRET`, filtre et projection :
+
+   ```text
+   _type == "article" && socialShare == true && (!defined(socialPosts.startedAt) || (socialRetry == true && defined(socialPosts.error)))
+   {_id}
+   ```
+
+   Pas de webhook sur `dev` : les essais ne publient jamais rien.
+
+**Après une erreur.** L'article reste marqué comme envoyé, pour éviter tout doublon, et une case « Réessayer le partage » apparaît. Corriger la cause (jeton expiré, image refusée…), cocher la case et publier : seuls les réseaux en échec sont relancés.
+
+**Tester en local.** Avec `SANITY_WEBHOOK_SECRET` et `SOCIAL_DRY_RUN=1` dans `.env.local`, un appel signé comme le fait Sanity renvoie le post composé sans rien envoyer.
+
 ## 8. Déployer
 
 1. Vérifier en local : `npm run dev` pour contrôler visuellement (FR, EN, largeur mobile), puis `npm run build` qui doit passer sans erreur.
