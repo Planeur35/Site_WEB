@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
@@ -59,36 +59,24 @@ export default function HeroSlideshow({ slides, kicker, cta, price }: HeroSlides
 
   const go = (step: number) => setCurrent((i) => (i + step + count) % count);
 
-  // The logo beside the title is as tall as the title, however many lines it runs to
-  const titleRef = useRef<HTMLDivElement>(null);
-  const [titleHeight, setTitleHeight] = useState<number>();
-  useEffect(() => {
-    const title = titleRef.current;
-    if (!title) return;
-    const observer = new ResizeObserver(([entry]) => setTitleHeight(Math.round(entry.contentRect.height)));
-    observer.observe(title);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section aria-roledescription="carrousel" aria-label={t('slidesLabel')} className="pt-6 sm:pt-10 lg:pt-14">
       <Container>
         <div className="flex flex-wrap items-end gap-x-16 gap-y-5 sm:gap-y-6">
-          <div className="min-w-0 flex-[999_1_560px]">
-            {/* Below xl the logo has its own line, at a fixed size that keeps its lettering legible */}
-            <Image src="/logo-couleur.png" alt="" width={420} height={451} priority className="mb-5 h-24 w-auto sm:h-28 xl:hidden" />
+          <div className="min-w-0 flex-[999_1_560px] lg:basis-[760px]">
             <Kicker>{kicker}</Kicker>
-            <div className="flex items-start gap-8">
-              {/* From xl, beside the title and as tall as it, capped at two lines so its width can never wrap the title further */}
+            <div className="flex items-start gap-4 sm:gap-6 lg:gap-8">
+              {/* The association's logo beside the title, two title lines tall at every size: it takes the
+                  title's own font size, so 2lh is two of its lines (`lh` follows the breakpoints below) */}
               <Image
                 src="/logo-couleur.png"
                 alt=""
                 width={420}
                 height={451}
-                style={titleHeight ? { height: titleHeight } : undefined}
-                className="hidden h-[2lh] max-h-[2lh] w-auto shrink-0 font-display text-display xl:block"
+                priority
+                className="h-[2lh] w-auto shrink-0 font-display text-[2.5rem] leading-[1.04] sm:text-[3rem] sm:leading-[1.02] lg:text-display"
               />
-              <div ref={titleRef} className="grid min-w-0 flex-1 [&>*]:col-start-1 [&>*]:row-start-1">
+              <div className="grid min-w-0 flex-1 [&>*]:col-start-1 [&>*]:row-start-1">
                 {slides.map((slide, i) => {
                   // Only the first title is a heading, and the one screen readers get
                   const Title = i === 0 ? 'h1' : 'p';
@@ -97,7 +85,8 @@ export default function HeroSlideshow({ slides, kicker, cta, price }: HeroSlides
                       key={slide.key}
                       aria-hidden={i === 0 ? undefined : true}
                       className={clsx(
-                        'font-display text-[2.5rem] leading-[1.04] sm:text-[3rem] sm:leading-[1.02] font-semibold tracking-titre text-balance text-azur transition-opacity duration-[1200ms] ease-planeur lg:text-display',
+                        // max-w in em: the title always breaks onto two lines, the height of the logo beside it
+                        'max-w-[9em] font-display text-[2.5rem] leading-[1.04] sm:text-[3rem] sm:leading-[1.02] font-semibold tracking-titre text-balance text-azur transition-opacity duration-[1200ms] ease-planeur lg:text-display',
                         i === current ? 'opacity-100' : 'opacity-0',
                       )}
                     >
