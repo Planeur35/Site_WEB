@@ -125,8 +125,8 @@ src/
     sitemap.ts  robots.ts  globals.css
   components/
     layout/                   # Header (bandeau), NavDropdown (menus déroulants), FullMenu (menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
-    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button…
-    sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv)
+    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, NewsRow, Button…
+    sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv ; ajouter .prose-piv-longread pour une lecture longue en colonne de 680 px)
   lib/
     sanity/                   # client, fetch (sanityFetch), queries (GROQ), types, image (urlFor), imageLoader, localize
     email.ts  metadata.ts     # Resend, buildMetadata (OG, hreflang, canonical)
@@ -179,7 +179,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés, photos des trois cartes, photo des bons de vol ; tarifs « Vol d'initiation » ; 3 dernières Actualités | 🟢 sous 60 s |
-| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire du club | 🟢 sous 60 s |
+| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition ; numérotées 01, 02… dans l'ordre des sections remplies) et Histoire du club ; photo d'en-tête des Réglages, sinon la photo de la section Présentation ; « Le club en bref » lit l'adresse, le nombre de planeurs et de pilotes brevetés des Réglages ; le cursus de formation est dans `messages/*.json`, sauf si un « Schéma du cursus » est téléversé dans la section Formation | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), « Bon à savoir » (âge, poids, durée, météo : chaque ligne s'affiche une fois remplie), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; liens de paiement et d'achat des bons des Réglages ; les quatre étapes du vol sont dans `messages/*.json` | 🟢 sous 60 s |
@@ -357,7 +357,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 | Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Venez voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
-| Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |
+| Le club, histoire, récits | Les six sections du club sont remplies ; l'histoire et les récits sont vides | Écrire l'histoire du club et les récits dans le Studio ; faire relire le cursus de formation par un instructeur |
 | Mentions légales          | Page créée ; identité de l'association à saisir dans le Studio | Compléter Réglages du site → Mentions légales, faire relire le texte |
 | Réglages du site | `webcamUrl` vide, téléphone factice « 06 XX XX XX XX » (seed) | Compléter `siteSettings` dans le Studio (webcam, téléphone, réseaux) |
 | Email de contact | Expéditeur de test Resend | Vérifier le domaine dans Resend |

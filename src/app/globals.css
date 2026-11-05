@@ -161,12 +161,6 @@ summary::-webkit-details-marker {
 .prose-piv figure {
   margin: 2rem 0;
 }
-/* Photos break out of the 680 px column on large screens */
-@media (min-width: 64rem) {
-  .prose-piv figure {
-    margin-inline: calc((680px - min(1040px, 100vw - 80px)) / 2);
-  }
-}
 .prose-piv figure img {
   width: 100%;
   height: auto;
@@ -177,4 +171,43 @@ summary::-webkit-details-marker {
   margin: 0.5rem auto 0;
   font-size: 0.9375rem;
   color: var(--color-brume);
+}
+
+/*
+ * Long read in a centred 680 px column (the club history; later articles and flight stories):
+ * photos break out of the column on large screens and run edge to edge on phones,
+ * and the first paragraph opens with a drop cap.
+ */
+@media (min-width: 64rem) {
+  .prose-piv-longread figure {
+    margin-inline: calc((680px - min(1040px, 100vw - 80px)) / 2);
+  }
+  .prose-piv-longread > p:first-of-type::first-letter {
+    float: left;
+    margin: 0.4rem 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: 4.75rem;
+    font-weight: 600;
+    line-height: 0.8;
+    color: var(--color-azur);
+  }
+}
+@media (max-width: 63.99rem) {
+  .prose-piv-longread figure {
+    margin-inline: -1.25rem;
+  }
+  .prose-piv-longread figure img {
+    border-radius: 0;
+  }
+  .prose-piv-longread figcaption {
+    padding-inline: 1.25rem;
+  }
+}
+@media (min-width: 40rem) and (max-width: 63.99rem) {
+  .prose-piv-longread figure {
+    margin-inline: -2rem;
+  }
+  .prose-piv-longread figcaption {
+    padding-inline: 2rem;
+  }
 }

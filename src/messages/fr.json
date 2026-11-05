@@ -44,7 +44,8 @@
     "backToHome": "Retour à l’accueil",
     "loadingMap": "Chargement de la carte…",
     "languageFr": "Français",
-    "languageEn": "English"
+    "languageEn": "English",
+    "backToTop": "Haut de page"
   },
   "meta": {
     "home": {
@@ -148,7 +149,30 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Bientôt ici",
     "empty": "Les pages du club arrivent.",
-    "anecdote": "Anecdote"
+    "anecdote": "Anecdote",
+    "heroLead": "Club de vol à voile en Bretagne, sur l’aérodrome de Saint-Sulpice-des-Landes.",
+    "sectionNav": "Sections de la page",
+    "factsTitle": "Le club en bref",
+    "factsField": "Terrain",
+    "factsFleet": "Flotte",
+    "factsFleetText": "{count} planeurs, des biplaces école aux monoplaces de performance",
+    "factsPilots": "Pilotes",
+    "factsPilotsText": "{count} pilotes brevetés",
+    "factsSeeFleet": "Voir la flotte",
+    "trainingCta": "Faire un premier vol",
+    "pathTitle": "Le cursus, étape par étape",
+    "pathStepLabel": "Étape {n}",
+    "pathNext": "Et ensuite",
+    "pathStep1Title": "Vol d’initiation",
+    "pathStep1Text": "Un premier vol en biplace avec un pilote du club.",
+    "pathStep2Title": "Vols en double",
+    "pathStep2Text": "Décollage, virages, approche et atterrissage, avec l’instructeur.",
+    "pathStep3Title": "Le lâcher",
+    "pathStep3Text": "Votre premier vol seul à bord.",
+    "pathStep4Title": "La licence",
+    "pathStep4Text": "Théorie et examen pratique : la licence de pilote de planeur (SPL).",
+    "pathStep5Title": "Campagne et badges",
+    "pathStep5Text": "Les vols de distance, et les badges d’argent, d’or et diamants."
   },
   "gliders": {
     "heroKicker": "La flotte",

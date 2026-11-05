@@ -44,7 +44,8 @@
     "backToHome": "Back to home",
     "loadingMap": "Loading map…",
     "languageFr": "Français",
-    "languageEn": "English"
+    "languageEn": "English",
+    "backToTop": "Back to top"
   },
   "meta": {
     "home": {
@@ -148,7 +149,30 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Coming soon",
     "empty": "The club pages are on their way.",
-    "anecdote": "Anecdote"
+    "anecdote": "Anecdote",
+    "heroLead": "Gliding club in Brittany, at Saint-Sulpice-des-Landes airfield.",
+    "sectionNav": "Page sections",
+    "factsTitle": "The club at a glance",
+    "factsField": "Airfield",
+    "factsFleet": "Fleet",
+    "factsFleetText": "{count} gliders, from two-seat trainers to performance single-seaters",
+    "factsPilots": "Pilots",
+    "factsPilotsText": "{count} licensed pilots",
+    "factsSeeFleet": "See the fleet",
+    "trainingCta": "Take a first flight",
+    "pathTitle": "The training path, step by step",
+    "pathStepLabel": "Step {n}",
+    "pathNext": "And then",
+    "pathStep1Title": "Trial flight",
+    "pathStep1Text": "A first flight in a two-seater with a club pilot.",
+    "pathStep2Title": "Dual flights",
+    "pathStep2Text": "Take-off, turns, approach and landing, with the instructor.",
+    "pathStep3Title": "First solo",
+    "pathStep3Text": "Your first flight alone on board.",
+    "pathStep4Title": "The licence",
+    "pathStep4Text": "Theory and a flight test: the sailplane pilot licence (SPL).",
+    "pathStep5Title": "Cross-country and badges",
+    "pathStep5Text": "Distance flights, and the silver, gold and diamond badges."
   },
   "gliders": {
     "heroKicker": "The fleet",
