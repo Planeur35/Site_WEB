@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { ChevronDown } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
 import FlightTrace from '@/components/ui/FlightTrace';
 import SanityPhoto from '@/components/ui/SanityPhoto';
-import Section from '@/components/ui/Section';
 import SitePageHero from '@/components/ui/SitePageHero';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
@@ -39,12 +39,16 @@ export default async function GlidersPage({ params }: { params: Promise<{ locale
     const i = a.category ? CATEGORY_ORDER.indexOf(a.category) : -1;
     return i === -1 ? CATEGORY_ORDER.length : i;
   };
+  const tClub = await getTranslations('club');
+  // "13 planeurs, des biplaces école…", counted from the fleet itself (tow planes excluded)
+  const gliderCount = aircraft.filter((a) => a.category !== 'remorqueur').length;
+  const lead = gliderCount > 0 ? tClub('factsFleetText', { count: gliderCount }) : undefined;
   const sorted = [...aircraft].sort((a, b) => rank(a) - rank(b) || (a.sortOrder ?? 100) - (b.sortOrder ?? 100));
 
   return (
     <>
-      <SitePageHero page="gliders" kicker={t('heroKicker')} title={t('heroTitle')} />
-      <Section kicker={t('sectionKicker')} title={t('sectionTitle')}>
+      <SitePageHero page="gliders" kicker={t('heroKicker')} title={t('heroTitle')} lead={lead} />
+      <Container className="pt-10 pb-16 lg:pt-14 lg:pb-28">
         {sorted.length === 0 ? (
           <EmptyState seed="flotte">{t('empty')}</EmptyState>
         ) : (
@@ -119,7 +123,7 @@ export default async function GlidersPage({ params }: { params: Promise<{ locale
             })}
           </ul>
         )}
-      </Section>
+      </Container>
     </>
   );
 }

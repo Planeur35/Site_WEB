@@ -178,8 +178,6 @@
   "gliders": {
     "heroKicker": "The fleet",
     "heroTitle": "Our gliders",
-    "sectionKicker": "Club fleet",
-    "sectionTitle": "Every glider, one by one",
     "empty": "The fleet will be presented here soon.",
     "wingspan": "Wingspan",
     "glideRatio": "Glide ratio",
@@ -309,7 +307,6 @@
   "stories": {
     "heroKicker": "Stories",
     "heroTitle": "Flights that shaped PIV",
-    "kicker": "Sky archives",
     "title": "Memorable flights from and to PIV",
     "empty": "Stories are coming soon.",
     "weglide": "See the track on WeGlide",
@@ -320,7 +317,6 @@
   "gallery": {
     "heroKicker": "In pictures",
     "heroTitle": "Gallery",
-    "kicker": "Club life",
     "title": "Club photos",
     "empty": "Photos will be available soon.",
     "open": "Enlarge the photo",
@@ -333,8 +329,6 @@
   "webcam": {
     "heroKicker": "Airfield view",
     "heroTitle": "Webcam",
-    "kicker": "On the field",
-    "title": "The club webcam",
     "alt": "View of the club airfield",
     "refresh": "Image refreshed every minute",
     "lastUpdate": "last updated at {time}",
@@ -346,8 +340,6 @@
   "links": {
     "heroKicker": "Resources",
     "heroTitle": "Useful links",
-    "kicker": "The connected pilot",
-    "title": "All useful links",
     "empty": "Links will be available soon.",
     "groups": {
       "institutions": "Institutions",
@@ -382,10 +374,8 @@
     "mapPopup": "The club airfield"
   },
   "legal": {
-    "kicker": "Legal information",
     "heroKicker": "Legal information",
     "heroTitle": "Legal notice",
-    "title": "Who we are, and how your data is handled",
     "intro": "The information below is provided in accordance with French law on trust in the digital economy (LCEN) and the General Data Protection Regulation (GDPR).",
     "editor": {
       "title": "Publisher",

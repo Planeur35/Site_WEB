@@ -178,8 +178,6 @@
   "gliders": {
     "heroKicker": "La flotte",
     "heroTitle": "Nos planeurs",
-    "sectionKicker": "Flotte du club",
-    "sectionTitle": "Chaque planeur, présenté un par un",
     "empty": "La flotte sera bientôt présentée ici.",
     "wingspan": "Envergure",
     "glideRatio": "Finesse",
@@ -309,7 +307,6 @@
   "stories": {
     "heroKicker": "Récits",
     "heroTitle": "Les vols qui ont marqué PIV",
-    "kicker": "Archives du ciel",
     "title": "Beaux vols au départ et à l’arrivée de PIV",
     "empty": "Les récits arrivent bientôt.",
     "weglide": "Voir le tracé sur WeGlide",
@@ -320,7 +317,6 @@
   "gallery": {
     "heroKicker": "En images",
     "heroTitle": "Galerie",
-    "kicker": "La vie du club",
     "title": "Photos du club",
     "empty": "Les photos seront bientôt disponibles.",
     "open": "Agrandir la photo",
@@ -333,8 +329,6 @@
   "webcam": {
     "heroKicker": "Vue de la plateforme",
     "heroTitle": "Webcam",
-    "kicker": "Sur le terrain",
-    "title": "L’image de la webcam du club",
     "alt": "Vue de la plateforme du club",
     "refresh": "Image actualisée toutes les minutes",
     "lastUpdate": "dernière mise à jour à {time}",
@@ -346,8 +340,6 @@
   "links": {
     "heroKicker": "Ressources",
     "heroTitle": "Liens pratiques",
-    "kicker": "Le pilote connecté",
-    "title": "Tous les liens utiles",
     "empty": "Les liens seront bientôt disponibles.",
     "groups": {
       "institutions": "Institutions",
@@ -382,10 +374,8 @@
     "mapPopup": "Le terrain du club"
   },
   "legal": {
-    "kicker": "Informations légales",
     "heroKicker": "Informations légales",
     "heroTitle": "Mentions légales",
-    "title": "Qui sommes-nous, et comment sont traitées vos données",
     "intro": "Les informations ci-dessous sont fournies conformément à la loi pour la confiance dans l’économie numérique (LCEN) et au règlement général sur la protection des données (RGPD).",
     "editor": {
       "title": "Éditeur du site",

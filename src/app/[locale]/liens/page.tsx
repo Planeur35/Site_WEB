@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { ArrowUpRight } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
 import SitePageHero from '@/components/ui/SitePageHero';
-import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
 import { siteSettingsQuery } from '@/lib/sanity/queries';
@@ -46,7 +46,7 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
   return (
     <>
       <SitePageHero page="links" kicker={t('heroKicker')} title={t('heroTitle')} />
-      <Section kicker={t('kicker')} title={t('title')}>
+      <Container className="pt-10 pb-16 lg:pt-14 lg:pb-28">
         {filled.length === 0 && <EmptyState seed="liens">{t('empty')}</EmptyState>}
         <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
           {filled.map((group) => (
@@ -80,7 +80,7 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
             </section>
           ))}
         </div>
-      </Section>
+      </Container>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import SanityPhoto from '@/components/ui/SanityPhoto';
@@ -14,7 +15,7 @@ interface NewsRowProps {
 }
 
 /**
- * One line of the news list: date, title, excerpt and a 4:3 photo on the right.
+ * One line of the news list: date, title, excerpt and a 4:3 photo on the right, when there is one.
  * On a phone the photo becomes a thumbnail and the excerpt hides.
  * Only the title is a link, so the text stays selectable.
  */
@@ -25,9 +26,16 @@ export default async function NewsRow({ article }: NewsRowProps) {
   const category = localize(article.category?.title, locale);
   const excerpt = localize(article.excerpt, locale);
   const href = { pathname: '/actualites/[slug]' as const, params: { slug: article.slug.current } };
+  const photo = Boolean(article.featuredImage?.asset);
 
   return (
-    <article className="grid grid-cols-[1fr_96px] gap-4 rounded-md bg-blanc p-3.5 sm:grid-cols-[1fr_200px] sm:gap-7 sm:rounded-none sm:border-t sm:border-horizon sm:bg-transparent sm:px-0 sm:py-7">
+    <article
+      className={clsx(
+        'grid gap-4 rounded-md bg-blanc p-3.5 sm:gap-7 sm:rounded-none sm:border-t sm:border-horizon sm:bg-transparent sm:px-0 sm:py-7',
+        // Without a photo the row is text only, rather than showing a placeholder
+        photo && 'grid-cols-[1fr_96px] sm:grid-cols-[1fr_200px]',
+      )}
+    >
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-3">
           <time dateTime={article.publishedAt} className="text-sm font-semibold text-nuit">
@@ -46,14 +54,16 @@ export default async function NewsRow({ article }: NewsRowProps) {
           <ShareButtons url={absoluteUrl(href, locale)} title={title} compact />
         </div>
       </div>
-      <SanityPhoto
-        image={article.featuredImage}
-        label={title}
-        className="aspect-square sm:aspect-[4/3]"
-        ratio={0.75}
-        sizes="(max-width: 640px) 96px, 200px"
-        thumbnail
-      />
+      {photo && (
+        <SanityPhoto
+          image={article.featuredImage}
+          label={title}
+          className="aspect-square sm:aspect-[4/3]"
+          ratio={0.75}
+          sizes="(max-width: 640px) 96px, 200px"
+          thumbnail
+        />
+      )}
     </article>
   );
 }

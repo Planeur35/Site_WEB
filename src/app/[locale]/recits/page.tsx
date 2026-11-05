@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
 import SitePageHero from '@/components/ui/SitePageHero';
-import Section from '@/components/ui/Section';
 import StoryCard from '@/components/ui/StoryCard';
+import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { allFlightStoriesQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { FlightStory, SiteSettings } from '@/lib/sanity/types';
@@ -30,12 +31,8 @@ export default async function StoriesPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <SitePageHero page="stories" kicker={t('heroKicker')} title={t('heroTitle')} />
-      <Section
-        kicker={t('kicker')}
-        title={t('title')}
-        action={settings?.weglideUrl ? { href: settings.weglideUrl, label: t('clubOnWeglide'), external: true } : undefined}
-      >
+      <SitePageHero page="stories" kicker={t('heroKicker')} title={t('heroTitle')} lead={t('title')} />
+      <Container className="pt-10 pb-16 lg:pt-14 lg:pb-28">
         {stories.length === 0 ? (
           <EmptyState seed="recits">{t('empty')}</EmptyState>
         ) : (
@@ -45,7 +42,14 @@ export default async function StoriesPage({ params }: { params: Promise<{ locale
             ))}
           </div>
         )}
-      </Section>
+        {settings?.weglideUrl && (
+          <p className="mt-12">
+            <TextLink href={settings.weglideUrl} external>
+              {t('clubOnWeglide')}
+            </TextLink>
+          </p>
+        )}
+      </Container>
     </>
   );
 }

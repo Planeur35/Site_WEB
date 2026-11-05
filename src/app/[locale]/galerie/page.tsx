@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
 import Gallery from '@/components/ui/Gallery';
 import SitePageHero from '@/components/ui/SitePageHero';
-import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { localize } from '@/lib/sanity/localize';
@@ -42,9 +42,9 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
   return (
     <>
       <SitePageHero page="gallery" kicker={t('heroKicker')} title={t('heroTitle')} />
-      <Section kicker={t('kicker')} title={t('title')}>
+      <Container className="pt-10 pb-16 lg:pt-14 lg:pb-28">
         {images.length > 0 ? <Gallery images={images} openLabel={t('open')} /> : <EmptyState seed="galerie">{t('empty')}</EmptyState>}
-      </Section>
+      </Container>
     </>
   );
 }
