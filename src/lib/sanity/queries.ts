@@ -32,7 +32,7 @@ export const allPartnersQuery = `*[_type == "partner" && defined(logo.asset)] | 
 
 export const allTariffsQuery = `*[_type == "tariff"]`;
 
-export const trialTariffsQuery = `*[_type == "tariff" && offer == "vol-initiation"]{ ageCategory, amount }`;
+export const trialTariffsQuery = `*[_type == "tariff" && offer == "vol-initiation"]{ ageCategory, amount, details }`;
 
 export const allClubPagesQuery = `*[_type == "clubPage"]`;
 

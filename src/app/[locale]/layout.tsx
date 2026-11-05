@@ -9,7 +9,7 @@ import Footer from "@/components/layout/Footer";
 import PartnersBand from "@/components/layout/PartnersBand";
 import ScrollToHash from "@/components/layout/ScrollToHash";
 import { getHiddenNavKeys } from "@/lib/emptyPages";
-import { formatAmount, getTrialPrices } from "@/lib/pricing";
+import { formatAmount, getTrialPrices, priceCondition } from "@/lib/pricing";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { allPartnersQuery } from "@/lib/sanity/queries";
 import type { Partner } from "@/lib/sanity/types";
@@ -78,11 +78,11 @@ export default async function LocaleLayout({
 
 /** "170 € · 130 € moins de 18 ans", or null when the prices are not in the Studio yet. */
 async function formatTrialPrice(locale: string): Promise<string | null> {
-  const { adult, young } = await getTrialPrices();
+  const { adult, young, youngCondition } = await getTrialPrices();
   if (adult == null) return null;
   const t = await getTranslations({ locale, namespace: "nav" });
   const format = (amount: number) => formatAmount(amount, locale);
   return young == null
     ? t("trialPriceSingle", { amount: format(adult) })
-    : t("trialPrice", { adult: format(adult), young: format(young) });
+    : t("trialPrice", { adult: format(adult), young: format(young), condition: priceCondition(youngCondition, locale) });
 }

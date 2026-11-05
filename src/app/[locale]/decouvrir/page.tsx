@@ -13,7 +13,7 @@ import Section from '@/components/ui/Section';
 import SitePageHero from '@/components/ui/SitePageHero';
 import StickyBookingBar from '@/components/ui/StickyBookingBar';
 import TextLink from '@/components/ui/TextLink';
-import { formatAmount } from '@/lib/pricing';
+import { formatAmount, priceCondition } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { isFrenchFallback, localize, nonEmpty } from '@/lib/sanity/localize';
 import { allTariffsQuery, discoverPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
@@ -95,7 +95,11 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
   const [adult, young] = prices;
   const barPrice = adult ? (
     young?.ageCategory === 'under18' ? (
-      tNav('trialPrice', { adult: formatAmount(adult.amount, locale), young: formatAmount(young.amount, locale) })
+      tNav('trialPrice', {
+        adult: formatAmount(adult.amount, locale),
+        young: formatAmount(young.amount, locale),
+        condition: priceCondition(young.details, locale),
+      })
     ) : (
       tNav('trialPriceSingle', { amount: formatAmount(adult.amount, locale) })
     )
@@ -125,6 +129,15 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
             >
               <dt className="text-[0.9375rem] text-texte">
                 {tariff.ageCategory ? tp(`ages.${tariff.ageCategory}`) : tp('offers.vol-initiation')}
+                {/* The tariff's condition, e.g. "si scolarisé en Ille-et-Vilaine" */}
+                {localize(tariff.details, locale) && (
+                  <span
+                    lang={isFrenchFallback(tariff.details, locale) ? 'fr' : undefined}
+                    className="mt-0.5 block text-sm leading-snug text-brume"
+                  >
+                    {localize(tariff.details, locale)}
+                  </span>
+                )}
               </dt>
               <dd className="font-display text-[2rem] leading-none font-semibold text-azur tabular-nums sm:text-[1.75rem]">
                 {tp('amount', { amount: tariff.amount })}

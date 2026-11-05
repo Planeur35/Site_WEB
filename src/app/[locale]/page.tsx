@@ -25,7 +25,7 @@ import TextLink from '@/components/ui/TextLink';
 import { aerodromeCoordinates, directionsUrl } from '@/lib/aerodrome';
 import { getHiddenNavKeys } from '@/lib/emptyPages';
 import { formatDate, startOfToday } from '@/lib/format';
-import { formatAmount, getTrialPrices } from '@/lib/pricing';
+import { formatAmount, getTrialPrices, priceCondition } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
 import { isFrenchFallback, localize } from '@/lib/sanity/localize';
@@ -94,13 +94,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   // Trial flight prices, from the `vol-initiation` tariffs: the lines are hidden without them
   const adult = prices.adult != null ? formatAmount(prices.adult, locale) : null;
   const young = prices.young != null ? formatAmount(prices.young, locale) : null;
+  const condition = priceCondition(prices.youngCondition, locale);
   const bold = (chunks: React.ReactNode) => <b className="font-semibold text-nuit">{chunks}</b>;
   const heroPrice = adult
     ? young
-      ? t.rich('heroPrice', { adult, young, b: bold })
+      ? t.rich('heroPrice', { adult, young, condition, b: bold })
       : t.rich('heroPriceSingle', { adult, b: bold })
     : null;
-  const cardPrice = adult ? (young ? t('cardTryPrice', { adult, young }) : t('cardTryPriceSingle', { adult })) : null;
+  const cardPrice = adult ? (young ? t('cardTryPrice', { adult, young, condition }) : t('cardTryPriceSingle', { adult })) : null;
 
   const stats = [
     { value: settings?.licensedPilots, label: t('statsPilots') },
