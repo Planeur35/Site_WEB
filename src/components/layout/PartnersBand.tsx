@@ -17,10 +17,10 @@ export default async function PartnersBand({ partners }: PartnersBandProps) {
     <HideOnPaths paths={['/association']}>
       <section aria-labelledby="partners-band" className="border-t border-horizon bg-blanc">
         <Container className="py-10 lg:py-12">
-          <h2 id="partners-band" className="text-[0.9375rem] font-semibold text-brume">
+          <h2 id="partners-band" className="text-center text-[0.9375rem] font-semibold text-brume">
             {t('bandTitle')}
           </h2>
-          <ul className="mt-6 grid grid-cols-3 items-center justify-items-center gap-x-6 gap-y-8 sm:flex sm:flex-wrap sm:justify-start sm:gap-x-12">
+          <ul className="mt-6 grid grid-cols-3 items-center justify-items-center gap-x-6 gap-y-8 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-12">
             {partners.map((partner) => (
               <li key={partner._id}>
                 <PartnerLogo partner={partner} linkLabel={t('visit', { name: partner.name })} />
