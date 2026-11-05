@@ -9,6 +9,7 @@ import Container from '@/components/ui/Container';
 import CountUp from '@/components/ui/CountUp';
 import HeroSlideshow, { type Slide } from '@/components/ui/HeroSlideshow';
 import Kicker from '@/components/ui/Kicker';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Map from '@/components/ui/Map';
 import NewsCard from '@/components/ui/NewsCard';
 import NewsRow from '@/components/ui/NewsRow';
@@ -22,9 +23,9 @@ import { formatDate, startOfToday } from '@/lib/format';
 import { formatAmount, getTrialPrices } from '@/lib/pricing';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
-import { localize } from '@/lib/sanity/localize';
-import { latestArticlesQuery, siteSettingsQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
-import type { Article, ClubEvent, SiteSettings } from '@/lib/sanity/types';
+import { isFrenchFallback, localize } from '@/lib/sanity/localize';
+import { handiGliderPhotoQuery, latestArticlesQuery, siteSettingsQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
+import type { Article, ClubEvent, SanityImage, SiteSettings } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
@@ -53,15 +54,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations('home');
   const tNav = await getTranslations('nav');
 
-  const [settings, articles, prices, events, hiddenNav] = await Promise.all([
+  const [settings, articles, prices, events, hiddenNav, handiPhoto] = await Promise.all([
     sanityFetch<SiteSettings | null>(siteSettingsQuery, null),
     sanityFetch<Article[]>(latestArticlesQuery, [], { limit: 3 }),
     getTrialPrices(),
     sanityFetch<ClubEvent[]>(upcomingEventsQuery, [], { since: startOfToday() }),
     getHiddenNavKeys(),
+    sanityFetch<SanityImage | null>(handiGliderPhotoQuery, null),
   ]);
   const nextEvent = events[0];
   const airfield = aerodromeCoordinates(settings);
+
+  // "Ouvert à tous": the Studio's text and photo, else a default text and the adapted glider's photo
+  const openText = localize(settings?.openToAllText, locale) ?? t('openToAllText');
+  const openTextFrench = isFrenchFallback(settings?.openToAllText, locale);
+  const openImage = settings?.openToAllImage?.asset ? settings.openToAllImage : handiPhoto?.asset ? handiPhoto : null;
 
   // Slides without a title or subtitle fall back to the club's name and tagline
   const defaultSubtitle = localize(settings?.tagline, locale) ?? t('heroSubtitle');
@@ -250,6 +257,38 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </Container>
+
+      {/* Access for people with disabilities: the adapted glider */}
+      <Section band kicker={t('openToAllKicker')} title={t('openToAllTitle')}>
+        <div className="flex flex-wrap items-start gap-x-[72px] gap-y-8">
+          {openImage && (
+            <SanityPhoto
+              image={openImage}
+              label="handiplaneur"
+              className="aspect-[3/2] min-w-0 flex-[1_1_480px]"
+              ratio={2 / 3}
+              sizes="(max-width: 1024px) 100vw, 600px"
+            />
+          )}
+          <div className={clsx('flex min-w-0 flex-col items-start', openImage ? 'flex-[1_1_380px]' : 'max-w-[760px]')}>
+            {openTextFrench && <FrenchOnlyNote className="mb-4" />}
+            <p
+              lang={openTextFrench ? 'fr' : undefined}
+              className="text-[1.0625rem] leading-[1.6] whitespace-pre-line text-texte lg:text-lg lg:leading-[1.65]"
+            >
+              {openText}
+            </p>
+            <div className="mt-6 flex w-full flex-wrap items-center gap-3">
+              <Button href="/contact" variant="secondary" className="w-full sm:w-auto">
+                {t('openToAllContact')}
+              </Button>
+              <TextLink href="/planeurs" className="px-2">
+                {t('openToAllGlider')}
+              </TextLink>
+            </div>
+          </div>
+        </div>
+      </Section>
 
       {/* Where the airfield is: the address, a route planner and the map */}
       <Section id="acces" kicker={t('findUsKicker')} title={t('findUsTitle')} sub={t('findUsText')}>

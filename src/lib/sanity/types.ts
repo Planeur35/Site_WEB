@@ -61,6 +61,8 @@ export interface SiteSettings {
   heroSlides?: HeroSlide[];
   homeCardImages?: { try?: SanityImage; learn?: SanityImage; join?: SanityImage };
   giftImage?: SanityImage;
+  openToAllText?: LocalizedText;
+  openToAllImage?: SanityImage;
   statsYear?: number;
   membersCount?: number;
   flightHours?: number;

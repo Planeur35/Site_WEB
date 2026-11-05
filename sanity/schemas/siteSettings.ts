@@ -96,6 +96,19 @@ export default defineType({
       ],
     }),
     photoField({ name: 'giftImage', title: 'Photo du bandeau « Offrez le ciel » (bons de vol)', required: false, group: 'home' }),
+    localizedText({
+      name: 'openToAllText',
+      title: 'Texte du bandeau « Ouvert à tous » (handiplaneur)',
+      description: 'Facultatif. Vide : un texte par défaut présente le handiplaneur.',
+      group: 'home',
+      rows: 3,
+    }),
+    photoField({
+      name: 'openToAllImage',
+      title: 'Photo du bandeau « Ouvert à tous »',
+      required: false,
+      group: 'home',
+    }),
 
     defineField({
       name: 'pageHeroes',

@@ -152,7 +152,12 @@
     "findUsText": "We fly from Saint-Sulpice-des-Landes airfield, in the south of Ille-et-Vilaine.",
     "findUsDirections": "Get directions",
     "findUsContact": "Write to us",
-    "findUsPopup": "Saint-Sulpice-des-Landes airfield"
+    "findUsPopup": "Saint-Sulpice-des-Landes airfield",
+    "openToAllKicker": "Open to everyone",
+    "openToAllTitle": "Fly, with or without a disability",
+    "openToAllText": "The association has a glider for pilots with disabilities: a two-seater with adapted controls that lets people with reduced mobility fly and learn to pilot.",
+    "openToAllContact": "Talk to us",
+    "openToAllGlider": "See our gliders"
   },
   "club": {
     "heroKicker": "The association",

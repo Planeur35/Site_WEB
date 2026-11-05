@@ -152,7 +152,12 @@
     "findUsText": "Nous volons depuis l’aérodrome de Saint-Sulpice-des-Landes, au sud de l’Ille-et-Vilaine.",
     "findUsDirections": "Calculer l’itinéraire",
     "findUsContact": "Nous écrire",
-    "findUsPopup": "L’aérodrome de Saint-Sulpice-des-Landes"
+    "findUsPopup": "L’aérodrome de Saint-Sulpice-des-Landes",
+    "openToAllKicker": "Ouvert à tous",
+    "openToAllTitle": "Voler, avec ou sans handicap",
+    "openToAllText": "L’association dispose d’un handiplaneur : un biplace équipé de commandes adaptées, qui permet aux personnes à mobilité réduite de voler et d’apprendre à piloter.",
+    "openToAllContact": "Nous en parler",
+    "openToAllGlider": "Voir nos planeurs"
   },
   "club": {
     "heroKicker": "L’association",

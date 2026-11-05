@@ -113,7 +113,7 @@ flowchart TB
 src/
   app/
     [locale]/                 # toutes les pages publiques, /fr et /en
-      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, bons de vol, Nous trouver (adresse, itinéraire, carte), accès membres
+      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, bons de vol, Ouvert à tous (handiplaneur), Nous trouver (adresse, itinéraire, carte), accès membres
       club/                   # sections du club (#presentation, #plateforme, #formation…) et histoire
       planeurs/  adherer/  decouvrir/
       actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
@@ -178,7 +178,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
-| Accueil `/` | Réglages du site : photos d'accueil (titre de chaque photo, sinon « Votre premier vol en planeur »), accroche, chiffres clés, photos des trois cartes, photo des bons de vol (sans photo, le bandeau s'affiche sans image) ; adresse et coordonnées du terrain pour « Nous trouver » ; tarifs « Vol d'initiation » ; 3 dernières Actualités ; prochain événement de l'Agenda dans « La vie du club » | 🟢 sous 60 s |
+| Accueil `/` | Réglages du site : photos d'accueil (titre de chaque photo, sinon « Votre premier vol en planeur »), accroche, chiffres clés, photos des trois cartes, photo des bons de vol (sans photo, le bandeau s'affiche sans image) ; texte et photo facultatifs du bandeau « Ouvert à tous » (sinon un texte par défaut et la photo du planeur de catégorie Handiplaneur, ou le texte seul) ; adresse et coordonnées du terrain pour « Nous trouver » ; tarifs « Vol d'initiation » ; 3 dernières Actualités ; prochain événement de l'Agenda dans « La vie du club » | 🟢 sous 60 s |
 | L’association `/association` (`/club` redirige) | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition ; numérotées 01, 02… dans l'ordre des sections remplies) et Histoire du club ; photo d'en-tête des Réglages, sinon la photo de la section Présentation ; « L’association en bref » lit l'adresse, le nombre de planeurs et de pilotes brevetés des Réglages ; le cursus de formation est dans `messages/*.json`, sauf si un « Schéma du cursus » est téléversé dans la section Formation | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` (titre « Rejoindre le club ») | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire ; tables de prix des fiches `tariff` (forfaits 20 h et illimité par âge, packs formation), affichées dès qu'un prix est saisi, « Sur demande » pour un prix manquant ; bouton « S'inscrire en ligne » dès que le lien d'inscription est saisi (Réglages du site → Contact et réseaux) | 🟢 sous 60 s |
