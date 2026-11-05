@@ -188,6 +188,18 @@ export interface SocialPosts {
   error?: string;
 }
 
+export type PartnerKind = 'federation' | 'public' | 'label' | 'sponsor';
+
+export interface Partner {
+  _id: string;
+  name: string;
+  logo: SanityImage;
+  url?: string;
+  kind?: PartnerKind;
+  role?: LocalizedString;
+  openToAll?: boolean;
+}
+
 export interface AircraftSpecs {
   wingspan?: string;
   glideRatio?: string;

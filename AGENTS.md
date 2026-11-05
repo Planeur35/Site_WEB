@@ -42,14 +42,14 @@ Local work uses the `dev` dataset (`.env.local`). Write test or sample content t
 src/app/[locale]/          one folder per page (French paths: association, planeurs, adherer, decouvrir, actualites, recits…)
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
-src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
+src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), PartnersBand (partners' logos above the footer), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
 src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, PriceTable, AgendaItem, Anecdote, Breadcrumb, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
 src/lib/sanity/            client, fetch (sanityFetch), queries (all GROQ), types, image (urlFor), imageLoader, localize
 src/lib/format.ts          dates in the club's time zone
 src/lib/metadata.ts        buildMetadata(): title, Open Graph, canonical, hreflang
 src/i18n/                  routing.ts (translated pathnames), navigation.ts, request.ts
 src/messages/fr.json, en.json   UI strings
-sanity/schemas/            content model: article, event, galleryImage, siteSettings, clubPage, clubHistory, aircraft, tariff, flightStory…
+sanity/schemas/            content model: article, event, galleryImage, siteSettings, clubPage, clubHistory, aircraft, tariff, flightStory, partner…
 sanity/schemas/fields.ts   localizedString/Text/Blocks and photoField helpers for new fields
 sanity/sanity.config.ts    Studio menu (French), singletons
 ```
@@ -75,6 +75,7 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 - Titles use `font-display` (Inter Tight) with the `text-display`/`text-h1`…`text-h4` scale; text uses Inter (`font-sans`). No `font-serif`, no uppercase letter-spaced labels: sentence case everywhere.
 - Corners: `rounded-xs` (2 px) tags and chips, `rounded-sm` (4 px) buttons and fields, `rounded-md` (6 px) photos and panels. Nothing larger, no pills. Shadows (`shadow-flottant`) only on what floats.
 - A missing photo or empty block shows the `FlightTrace` placeholder (pale sky + flight trace), never clip-art.
+- Partner logos (`PartnerLogo`) keep their own colours and proportions: funders' charters forbid recolouring or cropping them. They sit on white or `ciel`, never on the dark footer.
 - Long text from Sanity is styled by `.prose-piv` in `globals.css` (through `PortableText`). Add `.prose-piv-longread` for a long read in a centred 680 px column: photos break out of the column, and the first paragraph gets a drop cap.
 - Mobile first. Tap targets at least 44 px, visible keyboard focus, `alt` text on every image.
 

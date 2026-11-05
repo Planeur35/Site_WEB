@@ -6,8 +6,12 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import PartnersBand from "@/components/layout/PartnersBand";
 import { getHiddenNavKeys } from "@/lib/emptyPages";
 import { formatAmount, getTrialPrices } from "@/lib/pricing";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { allPartnersQuery } from "@/lib/sanity/queries";
+import type { Partner } from "@/lib/sanity/types";
 
 const interTight = Inter_Tight({
   subsets: ["latin", "latin-ext"],
@@ -50,7 +54,11 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const messages = await getMessages();
-  const [trialPrice, hiddenNav] = await Promise.all([formatTrialPrice(locale), getHiddenNavKeys()]);
+  const [trialPrice, hiddenNav, partners] = await Promise.all([
+    formatTrialPrice(locale),
+    getHiddenNavKeys(),
+    sanityFetch<Partner[]>(allPartnersQuery, []),
+  ]);
 
   return (
     <html lang={locale} className={`${interTight.variable} ${inter.variable}`}>
@@ -58,6 +66,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <Header trialPrice={trialPrice} hiddenNav={hiddenNav} />
           <main className="flex-1">{children}</main>
+          <PartnersBand partners={partners} />
           <Footer hiddenNav={hiddenNav} />
         </NextIntlClientProvider>
       </body>

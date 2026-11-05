@@ -447,5 +447,12 @@
     "writeToUs": "Nous écrire",
     "legal": "Mentions légales",
     "otherLanguage": "English version"
+  },
+  "partners": {
+    "bandTitle": "Ils nous soutiennent",
+    "sectionKicker": "Partenaires",
+    "sectionTitle": "Nos partenaires",
+    "sectionSub": "Fédérations, collectivités et labels qui accompagnent l’association.",
+    "visit": "Site de {name}"
   }
 }
