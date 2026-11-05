@@ -181,7 +181,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés, photos des trois cartes, photo des bons de vol ; tarifs « Vol d'initiation » ; 3 dernières Actualités | 🟢 sous 60 s |
 | Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition ; numérotées 01, 02… dans l'ordre des sections remplies) et Histoire du club ; photo d'en-tête des Réglages, sinon la photo de la section Présentation ; « Le club en bref » lit l'adresse, le nombre de planeurs et de pilotes brevetés des Réglages ; le cursus de formation est dans `messages/*.json`, sauf si un « Schéma du cursus » est téléversé dans la section Formation | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
-| Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
+| Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire ; tables de prix des fiches `tariff` (forfaits 20 h et illimité par âge, packs formation), affichées dès qu'un prix est saisi, « Sur demande » pour un prix manquant | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), « Bon à savoir » (âge, poids, durée, météo : chaque ligne s'affiche une fois remplie), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; liens de paiement et d'achat des bons des Réglages ; les quatre étapes du vol sont dans `messages/*.json` | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
 | Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
@@ -354,7 +354,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 
 | Chantier | Situation actuelle | Piste |
 |---|---|---|
-| Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Venez voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
+| Tarifs | Aucune fiche `tariff` saisie : la page Venez essayer n'affiche pas de prix, et les tables de prix de Venez voler ! restent masquées | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
 | Le club, histoire, récits | Les six sections du club sont remplies ; l'histoire et les récits sont vides | Écrire l'histoire du club et les récits dans le Studio ; faire relire le cursus de formation par un instructeur |

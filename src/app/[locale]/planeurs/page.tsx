@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { ChevronDown } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
-import SitePageHero from '@/components/ui/SitePageHero';
+import FlightTrace from '@/components/ui/FlightTrace';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import Section from '@/components/ui/Section';
-import Tag from '@/components/ui/Tag';
+import SitePageHero from '@/components/ui/SitePageHero';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
 import { allAircraftQuery } from '@/lib/sanity/queries';
@@ -44,55 +45,80 @@ export default async function GlidersPage({ params }: { params: Promise<{ locale
     <>
       <SitePageHero page="gliders" kicker={t('heroKicker')} title={t('heroTitle')} />
       <Section kicker={t('sectionKicker')} title={t('sectionTitle')}>
-        {sorted.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
-        <div className="border-t border-sky-900/15">
-          {sorted.map((a) => {
-            const specs = [
-              a.specs?.wingspan && { label: t('wingspan'), value: a.specs.wingspan },
-              a.specs?.glideRatio && { label: t('glideRatio'), value: a.specs.glideRatio },
-              a.manufacturer && { label: t('manufacturer'), value: a.manufacturer },
-            ].filter((s): s is { label: string; value: string } => Boolean(s));
-            const facts = [
-              a.specs?.seats && t('seats', { count: a.specs.seats }),
-              a.specs?.year && t('since', { year: a.specs.year }),
-              a.registration,
-            ].filter(Boolean);
-            return (
-              <article
-                key={a._id}
-                className="grid gap-8 border-b border-sky-900/15 px-2 py-8 transition-colors hover:bg-white/70 md:grid-cols-[240px_1fr]"
-              >
-                <SanityPhoto
-                  image={a.photo ? { ...a.photo, alt: a.photo.alt ?? a.name } : undefined}
-                  label={a.name}
-                  className="h-44"
-                  ratio={0.6}
-                  sizes="(max-width: 768px) 100vw, 240px"
-                />
-                <div className="flex flex-col justify-center">
-                  <div className="flex flex-wrap items-baseline gap-4">
-                    <h3 className="font-serif text-2xl text-sky-950">{a.name}</h3>
-                    {a.category && <Tag>{t(`categories.${a.category}`)}</Tag>}
-                  </div>
-                  {facts.length > 0 && <p className="mt-1 text-sm tracking-wide text-slate-600">{facts.join(' · ')}</p>}
-                  {a.description && (
-                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-700">{localize(a.description, locale)}</p>
+        {sorted.length === 0 ? (
+          <EmptyState seed="flotte">{t('empty')}</EmptyState>
+        ) : (
+          <ul className="grid items-start gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+            {sorted.map((a) => {
+              const meta = [
+                a.specs?.seats && t('seats', { count: a.specs.seats }),
+                a.specs?.wingspan && `${t('wingspan')} ${a.specs.wingspan}`,
+                a.specs?.glideRatio && `${t('glideRatio')} ${a.specs.glideRatio}`,
+              ].filter(Boolean);
+              const specs = [
+                a.manufacturer && { label: t('manufacturer'), value: a.manufacturer },
+                a.registration && { label: t('registration'), value: a.registration },
+                a.specs?.year && { label: t('year'), value: String(a.specs.year) },
+                a.specs?.maxWeight && { label: t('maxWeight'), value: a.specs.maxWeight },
+                a.instrumentation && { label: t('instrumentation'), value: a.instrumentation },
+              ].filter((s): s is { label: string; value: string } => Boolean(s));
+              const description = localize(a.description, locale);
+              return (
+                <li key={a._id} className="flex flex-col">
+                  {a.photo?.asset ? (
+                    <SanityPhoto
+                      image={{ ...a.photo, alt: a.photo.alt ?? a.name }}
+                      label={a.name}
+                      className="aspect-[4/3]"
+                      ratio={0.75}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+                    />
+                  ) : (
+                    // No photo: the contest letters on a tail fin, or the flight trace without them
+                    <FlightTrace seed={a.name} callsign={a.callsign || undefined} className="aspect-[4/3] rounded-md" />
                   )}
-                  {specs.length > 0 && (
-                    <dl className="mt-4 grid max-w-md gap-1 text-sm">
-                      {specs.map((s) => (
-                        <div key={s.label} className="flex justify-between gap-4 border-b border-sky-900/10 pb-1">
-                          <dt className="text-slate-600">{s.label}</dt>
-                          <dd className="font-medium text-sky-950">{s.value}</dd>
-                        </div>
+                  {a.category && (
+                    <p className="mt-4 text-sm font-semibold text-balise">{t(`categories.${a.category}`)}</p>
+                  )}
+                  <h3 className="mt-1.5 font-display text-[1.375rem] leading-[1.2] font-semibold text-azur">{a.name}</h3>
+                  {meta.length > 0 && (
+                    <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-texte tabular-nums">
+                      {meta.map((m) => (
+                        <span key={m as string}>{m}</span>
                       ))}
-                    </dl>
+                    </p>
                   )}
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                  {(description || specs.length > 0) && (
+                    <details className="group mt-3 border-t border-horizon">
+                      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-semibold text-altitude [&::-webkit-details-marker]:hidden">
+                        {t('details')}
+                        <ChevronDown
+                          size={18}
+                          strokeWidth={2}
+                          aria-hidden="true"
+                          className="shrink-0 transition-transform duration-150 ease-planeur group-open:rotate-180"
+                        />
+                      </summary>
+                      <div className="pb-2">
+                        {description && <p className="text-[0.9375rem] leading-[1.6] text-texte">{description}</p>}
+                        {specs.length > 0 && (
+                          <dl className="mt-3">
+                            {specs.map((s) => (
+                              <div key={s.label} className="flex justify-between gap-4 border-b border-horizon py-2 text-[0.9375rem] last:border-b-0">
+                                <dt className="text-brume">{s.label}</dt>
+                                <dd className="text-right font-medium text-nuit tabular-nums">{s.value}</dd>
+                              </div>
+                            ))}
+                          </dl>
+                        )}
+                      </div>
+                    </details>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </Section>
     </>
   );

@@ -192,7 +192,12 @@
       "monoplace-debut": "Beginner single-seater",
       "monoplace-perf": "Performance single-seater",
       "remorqueur": "Tow plane"
-    }
+    },
+    "registration": "Registration",
+    "year": "In service since",
+    "maxWeight": "Maximum weight",
+    "instrumentation": "Instruments",
+    "details": "Specifications"
   },
   "pricing": {
     "amount": "€{amount}",
@@ -208,7 +213,8 @@
       "over25": "25 and over",
       "under18": "Under 18",
       "adult": "Adult"
-    }
+    },
+    "onRequest": "On request"
   },
   "join": {
     "heroKicker": "Come and fly!",
@@ -224,7 +230,12 @@
     "howTitle": "How to join",
     "howEmpty": "Membership details will be published soon. Meanwhile, write to us.",
     "contactCta": "Write to us",
-    "tryCta": "Try first"
+    "tryCta": "Try first",
+    "packagesCaption": "Season packages",
+    "packagesOffer": "Package",
+    "packsCaption": "Learning to fly",
+    "packsOffer": "Pack",
+    "packsPrice": "Price"
   },
   "discover": {
     "heroKicker": "Trial flight",
