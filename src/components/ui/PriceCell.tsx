@@ -35,11 +35,12 @@ export default async function PriceCell({ cell, locale, caption, className, size
           <span className={size === 'md' ? 'text-2xl lg:text-[1.625rem]' : 'text-lg'}>
             {tPricing('amount', { amount: formatAmount(cell!.amount!, locale) })}
           </span>
-          {unit && <span className="ml-1 font-sans text-sm font-normal text-brume">{unit}</span>}
         </p>
       ) : (
         <p className="text-[0.9375rem] font-medium text-brume">{label ?? '–'}</p>
       )}
+      {/* Under the amount, so a unit never pushes its price out of line with the others */}
+      {hasAmount && unit && <span className="mt-1 text-[0.8125rem] leading-snug text-brume">{unit}</span>}
       {caption && <span className="mt-1 text-sm text-texte lg:hidden">{caption}</span>}
       {note && <PriceNote lang={isFrenchFallback(cell?.note, locale) ? 'fr' : undefined}>{note}</PriceNote>}
     </div>
