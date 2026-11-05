@@ -123,9 +123,10 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
       {prices.length > 0 && (
         <dl className="mb-6 grid grid-cols-2 gap-4 sm:block sm:divide-y sm:divide-horizon">
           {prices.map((tariff) => (
+            // Phones: price on top, label and note under it, so a note never shifts the prices
             <div
               key={tariff._id}
-              className="flex flex-col-reverse gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:py-3 sm:first:pt-0"
+              className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:py-3 sm:first:pt-0"
             >
               <dt className="text-[0.9375rem] text-texte">
                 {tariff.ageCategory ? tp(`ages.${tariff.ageCategory}`) : tp('offers.vol-initiation')}
@@ -136,7 +137,7 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
                   </PriceNote>
                 )}
               </dt>
-              <dd className="font-display text-[2rem] leading-none font-semibold text-azur tabular-nums sm:text-[1.75rem]">
+              <dd className="order-first font-display text-[2rem] leading-none font-semibold text-azur tabular-nums sm:order-none sm:text-[1.75rem]">
                 {tp('amount', { amount: tariff.amount })}
               </dd>
             </div>
