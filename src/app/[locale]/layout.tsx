@@ -9,7 +9,7 @@ import Footer from "@/components/layout/Footer";
 import PartnersBand from "@/components/layout/PartnersBand";
 import ScrollToHash from "@/components/layout/ScrollToHash";
 import { getHiddenNavKeys } from "@/lib/emptyPages";
-import { formatAmount, getTrialPrices, priceCondition } from "@/lib/pricing";
+import { formatAmount, getTrialPrices, priceCondition, type TrialPriceLine } from "@/lib/pricing";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { allPartnersQuery } from "@/lib/sanity/queries";
 import type { Partner } from "@/lib/sanity/types";
@@ -76,13 +76,17 @@ export default async function LocaleLayout({
   );
 }
 
-/** "170 € · 130 € moins de 18 ans", or null when the prices are not in the Studio yet. */
-async function formatTrialPrice(locale: string): Promise<string | null> {
+/** "170 € · 130 € moins de 18 ans" and the reduced price's condition, or null when the prices are not in the Studio yet. */
+async function formatTrialPrice(locale: string): Promise<TrialPriceLine | null> {
   const { adult, young, youngCondition } = await getTrialPrices();
   if (adult == null) return null;
   const t = await getTranslations({ locale, namespace: "nav" });
+  const tp = await getTranslations({ locale, namespace: "pricing" });
   const format = (amount: number) => formatAmount(amount, locale);
-  return young == null
-    ? t("trialPriceSingle", { amount: format(adult) })
-    : t("trialPrice", { adult: format(adult), young: format(young), condition: priceCondition(youngCondition, locale) });
+  if (young == null) return { line: t("trialPriceSingle", { amount: format(adult) }) };
+  const details = priceCondition(youngCondition, locale);
+  return {
+    line: t("trialPrice", { adult: format(adult), young: format(young) }),
+    note: details ? tp("condition", { age: tp("ages.under18"), details }) : undefined,
+  };
 }

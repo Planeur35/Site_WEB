@@ -11,6 +11,7 @@ import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
 import Section from '@/components/ui/Section';
 import SitePageHero from '@/components/ui/SitePageHero';
+import PriceNote from '@/components/ui/PriceNote';
 import StickyBookingBar from '@/components/ui/StickyBookingBar';
 import TextLink from '@/components/ui/TextLink';
 import { formatAmount, priceCondition } from '@/lib/pricing';
@@ -91,15 +92,14 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
 
   const voucherUrl = settings?.voucherUrl ?? paymentUrl;
 
-  // Short price line for the mobile booking bar
+  // Short price line for the mobile booking bar, and the reduced price's condition under it
   const [adult, young] = prices;
+  const youngCondition = young?.ageCategory === 'under18' ? priceCondition(young.details, locale) : undefined;
+  // In the bar the note follows "130 € moins de 18 ans" directly: the condition alone is enough
+  const barNote = youngCondition ?? null;
   const barPrice = adult ? (
     young?.ageCategory === 'under18' ? (
-      tNav('trialPrice', {
-        adult: formatAmount(adult.amount, locale),
-        young: formatAmount(young.amount, locale),
-        condition: priceCondition(young.details, locale),
-      })
+      tNav('trialPrice', { adult: formatAmount(adult.amount, locale), young: formatAmount(young.amount, locale) })
     ) : (
       tNav('trialPriceSingle', { amount: formatAmount(adult.amount, locale) })
     )
@@ -131,12 +131,9 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
                 {tariff.ageCategory ? tp(`ages.${tariff.ageCategory}`) : tp('offers.vol-initiation')}
                 {/* The tariff's condition, e.g. "si scolarisé en Ille-et-Vilaine" */}
                 {localize(tariff.details, locale) && (
-                  <span
-                    lang={isFrenchFallback(tariff.details, locale) ? 'fr' : undefined}
-                    className="mt-0.5 block text-sm leading-snug text-brume"
-                  >
+                  <PriceNote lang={isFrenchFallback(tariff.details, locale) ? 'fr' : undefined}>
                     {localize(tariff.details, locale)}
-                  </span>
+                  </PriceNote>
                 )}
               </dt>
               <dd className="font-display text-[2rem] leading-none font-semibold text-azur tabular-nums sm:text-[1.75rem]">
@@ -313,7 +310,12 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
         </div>
       </Container>
 
-      <StickyBookingBar panelId={PANEL_ID} price={<span className="font-semibold text-nuit">{barPrice}</span>}>
+      <StickyBookingBar panelId={PANEL_ID} price={
+          <>
+            <span className="font-semibold text-nuit">{barPrice}</span>
+            {barNote && <PriceNote>{barNote}</PriceNote>}
+          </>
+        }>
         {bookingButton('sm', t('stickyCta'))}
       </StickyBookingBar>
     </>

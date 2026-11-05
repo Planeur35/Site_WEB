@@ -35,7 +35,7 @@
     "groupPractical": "Pratique",
     "book": "Réserver",
     "bookTrial": "Réserver un vol d’initiation",
-    "trialPrice": "{adult} € · {young} € moins de 18 ans{condition}",
+    "trialPrice": "{adult} € · {young} € moins de 18 ans",
     "trialPriceSingle": "{amount} €",
     "language": "Langue",
     "partners": "Partenaires"
@@ -124,7 +124,7 @@
     "statsKm": "Kilomètres parcourus depuis la création de l’association",
     "heroKicker": "Planeurs d’Ille-et-Vilaine · Saint-Sulpice-des-Landes",
     "heroCta": "Réserver un vol d’initiation",
-    "heroPrice": "<b>{adult} €</b> · {young} € moins de 18 ans{condition}",
+    "heroPrice": "<b>{adult} €</b> · {young} € moins de 18 ans",
     "heroPriceSingle": "<b>{adult} €</b> le vol",
     "slidesLabel": "Photos de l’association",
     "slideCounter": "Photo {n} sur {total}",
@@ -135,7 +135,7 @@
     "statsLabel": "L’association en chiffres",
     "startKicker": "Par où commencer",
     "startTitle": "Du premier vol au premier brevet",
-    "cardTryPrice": "{adult} €, ou {young} € pour les moins de 18 ans{condition}.",
+    "cardTryPrice": "{adult} €, ou {young} € pour les moins de 18 ans.",
     "cardTryPriceSingle": "{adult} € le vol.",
     "cardTryCta": "Réserver un vol",
     "cardLearnCta": "La formation",
@@ -228,7 +228,8 @@
       "under18": "Moins de 18 ans",
       "adult": "Adulte"
     },
-    "onRequest": "Sur demande"
+    "onRequest": "Sur demande",
+    "condition": "{age} : {details}"
   },
   "join": {
     "heroKicker": "Venez voler !",

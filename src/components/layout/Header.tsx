@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { TrialPriceLine } from "@/lib/pricing";
 import Image from "next/image";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
@@ -15,7 +16,7 @@ import Container from "@/components/ui/Container";
 
 interface HeaderProps {
   /** Trial flight price line for the full menu, from the `vol-initiation` tariffs. */
-  trialPrice: string | null;
+  trialPrice: TrialPriceLine | null;
   /** Menu keys of the pages with no content yet. */
   hiddenNav: string[];
 }

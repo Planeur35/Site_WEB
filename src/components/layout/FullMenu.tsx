@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { TrialPriceLine } from "@/lib/pricing";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import clsx from "clsx";
@@ -10,12 +11,13 @@ import { Link, usePathname } from "@/i18n/navigation";
 import LanguageToggle from "@/components/layout/LanguageToggle";
 import { isCurrentPage, type NavGroup, type NavLink } from "@/components/layout/navItems";
 import Button from "@/components/ui/Button";
+import PriceNote from "@/components/ui/PriceNote";
 import Container from "@/components/ui/Container";
 
 interface FullMenuProps {
   onClose: () => void;
   /** Trial flight price line, from the `vol-initiation` tariffs; hidden when null. */
-  trialPrice: string | null;
+  trialPrice: TrialPriceLine | null;
   /** The four groups, without the pages that have no content yet. */
   groups: NavGroup[];
 }
@@ -141,7 +143,12 @@ export default function FullMenu({ onClose, trialPrice, groups }: FullMenuProps)
           <div className="mt-auto flex items-center gap-5 rounded-md bg-ciel px-6 py-5">
             <div className="flex flex-col gap-0.5">
               <span className="font-display text-lg font-semibold text-azur">{tPricing("offers.vol-initiation")}</span>
-              {trialPrice && <span className="text-sm text-texte">{trialPrice}</span>}
+              {trialPrice && (
+                <span className="text-sm text-texte">
+                  {trialPrice.line}
+                  {trialPrice.note && <PriceNote>{trialPrice.note}</PriceNote>}
+                </span>
+              )}
             </div>
             <Button href="/decouvrir" className="ml-auto">
               {t("book")}
@@ -196,7 +203,12 @@ export default function FullMenu({ onClose, trialPrice, groups }: FullMenuProps)
             <Button href="/decouvrir" size="lg" fullWidth>
               {t("bookTrial")}
             </Button>
-            {trialPrice && <p className="text-center text-sm text-texte">{trialPrice}</p>}
+            {trialPrice && (
+              <p className="text-center text-sm text-texte">
+                {trialPrice.line}
+                {trialPrice.note && <PriceNote>{trialPrice.note}</PriceNote>}
+              </p>
+            )}
             <div className="flex items-center justify-between text-[0.9375rem]">
               <LanguageToggle variant="names" />
               <Link

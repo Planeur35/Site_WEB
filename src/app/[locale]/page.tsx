@@ -14,6 +14,7 @@ import HeroSlideshow, { type Slide } from '@/components/ui/HeroSlideshow';
 import Kicker from '@/components/ui/Kicker';
 import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Map from '@/components/ui/Map';
+import PriceNote from '@/components/ui/PriceNote';
 import PartnerCards from '@/components/ui/PartnerCards';
 import PartnerLogo from '@/components/ui/PartnerLogo';
 import NewsCard from '@/components/ui/NewsCard';
@@ -94,14 +95,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   // Trial flight prices, from the `vol-initiation` tariffs: the lines are hidden without them
   const adult = prices.adult != null ? formatAmount(prices.adult, locale) : null;
   const young = prices.young != null ? formatAmount(prices.young, locale) : null;
-  const condition = priceCondition(prices.youngCondition, locale);
+  // The reduced price's condition, on its own small line under the prices
+  const conditionText = young ? priceCondition(prices.youngCondition, locale) : undefined;
+  const tPricing = await getTranslations('pricing');
+  const priceNote = conditionText ? tPricing('condition', { age: tPricing('ages.under18'), details: conditionText }) : null;
   const bold = (chunks: React.ReactNode) => <b className="font-semibold text-nuit">{chunks}</b>;
   const heroPrice = adult
     ? young
-      ? t.rich('heroPrice', { adult, young, condition, b: bold })
+      ? t.rich('heroPrice', { adult, young, b: bold })
       : t.rich('heroPriceSingle', { adult, b: bold })
     : null;
-  const cardPrice = adult ? (young ? t('cardTryPrice', { adult, young, condition }) : t('cardTryPriceSingle', { adult })) : null;
+  const cardPrice = adult ? (young ? t('cardTryPrice', { adult, young }) : t('cardTryPriceSingle', { adult })) : null;
 
   const stats = [
     { value: settings?.licensedPilots, label: t('statsPilots') },
@@ -127,6 +131,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       kicker: t('cardTryKicker'),
       title: t('cardTryTitle'),
       text: cardPrice ? `${t('cardTryText')} ${cardPrice}` : t('cardTryText'),
+      note: cardPrice ? priceNote : null,
       cta: t('cardTryCta'),
     },
     {
@@ -135,6 +140,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       kicker: t('cardLearnKicker'),
       title: t('cardLearnTitle'),
       text: t('cardLearnText'),
+      note: null,
       cta: t('cardLearnCta'),
     },
     {
@@ -143,6 +149,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       kicker: t('cardJoinKicker'),
       title: t('cardJoinTitle'),
       text: t('cardJoinText'),
+      note: null,
       cta: t('cardJoinCta'),
     },
   ];
@@ -158,7 +165,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <HeroSlideshow slides={slides} kicker={t('heroKicker')} cta={t('heroCta')} price={heroPrice} />
+      <HeroSlideshow
+        slides={slides}
+        kicker={t('heroKicker')}
+        cta={t('heroCta')}
+        price={
+          heroPrice && (
+            <>
+              {heroPrice}
+              {priceNote && <PriceNote>{priceNote}</PriceNote>}
+            </>
+          )
+        }
+      />
 
       {stats.length > 0 && (
         <section aria-label={t('statsLabel')}>
@@ -202,7 +221,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <h3 className="font-display text-2xl leading-[1.2] font-semibold text-azur lg:text-[1.75rem] lg:leading-[1.15]">
                     {card.title}
                   </h3>
-                  <p className="text-[1.0625rem] leading-[1.55] text-texte">{card.text}</p>
+                  <p className="text-[1.0625rem] leading-[1.55] text-texte">
+                    {card.text}
+                    {card.note && <PriceNote>{card.note}</PriceNote>}
+                  </p>
                   <span className="mt-1 inline-flex min-h-11 items-center gap-2 font-semibold text-altitude decoration-2 underline-offset-4 group-hover:underline">
                     {card.cta}
                     <ArrowRight

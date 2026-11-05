@@ -21,10 +21,15 @@ export async function getTrialPrices(): Promise<TrialPrices> {
   };
 }
 
-/** " (si scolarisé en Ille-et-Vilaine)", appended to the short price lines; empty without a condition. */
-export function priceCondition(details: LocalizedString | undefined, locale: string): string {
-  const text = localize(details, locale)?.trim();
-  return text ? ` (${text})` : '';
+/** The condition of a price in the page's language ("si scolarisé en Ille-et-Vilaine"), or undefined. */
+export function priceCondition(details: LocalizedString | undefined, locale: string): string | undefined {
+  return localize(details, locale)?.trim() || undefined;
+}
+
+/** A trial price line with the condition of the reduced price, shown on its own line as a PriceNote. */
+export interface TrialPriceLine {
+  line: string;
+  note?: string;
 }
 
 /** "170", "1 250": an amount for the price strings, which carry the € sign. */

@@ -35,7 +35,7 @@
     "groupPractical": "Practical",
     "book": "Book",
     "bookTrial": "Book a trial flight",
-    "trialPrice": "€{adult} · €{young} under 18{condition}",
+    "trialPrice": "€{adult} · €{young} under 18",
     "trialPriceSingle": "€{amount}",
     "language": "Language",
     "partners": "Partners"
@@ -124,7 +124,7 @@
     "statsKm": "Kilometres flown since the association was founded",
     "heroKicker": "Planeurs d’Ille-et-Vilaine · Saint-Sulpice-des-Landes",
     "heroCta": "Book a trial flight",
-    "heroPrice": "<b>€{adult}</b> · €{young} under 18{condition}",
+    "heroPrice": "<b>€{adult}</b> · €{young} under 18",
     "heroPriceSingle": "<b>€{adult}</b> per flight",
     "slidesLabel": "Photos of the association",
     "slideCounter": "Photo {n} of {total}",
@@ -135,7 +135,7 @@
     "statsLabel": "The association in figures",
     "startKicker": "Where to start",
     "startTitle": "From first flight to first licence",
-    "cardTryPrice": "€{adult}, or €{young} for under-18s{condition}.",
+    "cardTryPrice": "€{adult}, or €{young} for under-18s.",
     "cardTryPriceSingle": "€{adult} per flight.",
     "cardTryCta": "Book a flight",
     "cardLearnCta": "Training",
@@ -228,7 +228,8 @@
       "under18": "Under 18",
       "adult": "Adult"
     },
-    "onRequest": "On request"
+    "onRequest": "On request",
+    "condition": "{age}: {details}"
   },
   "join": {
     "heroKicker": "Come and fly!",
