@@ -1,10 +1,11 @@
 import { getTranslations } from 'next-intl/server';
+import PriceNote from '@/components/ui/PriceNote';
 import { formatAmount } from '@/lib/pricing';
 
 export interface PriceRow {
   key: string;
   name: string;
-  /** What the offer includes, under its name. */
+  /** What the offer includes or requires, under its name, as a PriceNote like every price condition. */
   details?: string;
   /** One price per column; a missing one reads "Sur demande". */
   prices: (number | undefined)[];
@@ -48,7 +49,7 @@ export default async function PriceTable({ caption, offerLabel, columns, rows, l
             <tr key={row.key} className="border-b border-horizon last:border-b-0">
               <th scope="row" className="py-[22px] text-left font-normal">
                 <span className="block font-display text-xl font-semibold text-azur">{row.name}</span>
-                {row.details && <span className="mt-1 block text-[0.9375rem] text-texte">{row.details}</span>}
+                {row.details && <PriceNote>{row.details}</PriceNote>}
               </th>
               {row.prices.map((amount, i) => (
                 <td
@@ -69,7 +70,7 @@ export default async function PriceTable({ caption, offerLabel, columns, rows, l
         {rows.map((row) => (
           <div key={row.key} className="border-b border-horizon py-5 last:border-b-0">
             <p className="font-display text-lg font-semibold text-azur">{row.name}</p>
-            {row.details && <p className="mt-1 text-[0.9375rem] text-texte">{row.details}</p>}
+            {row.details && <PriceNote>{row.details}</PriceNote>}
             <dl className="mt-3 grid grid-cols-2 gap-4">
               {columns.map((col, i) => (
                 <div key={col} className="flex flex-col-reverse gap-0.5">
