@@ -122,9 +122,13 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
                   {sectionIntro && <p className="mt-3 max-w-[640px] text-[1.0625rem] leading-[1.6] text-texte">{sectionIntro}</p>}
 
                   <div className="mt-7 rounded-md bg-ciel px-5 pb-2 lg:mt-9 lg:px-8">
-                    {/* Column headers, on wide screens only: on phones each price carries its own caption */}
+                    {/* Column headers, on wide screens only (on phones each price carries its own caption).
+                        They stick under the header (64 px, 80 px from xl) and the section menu (57 px) while
+                        the table scrolls, and leave with it. */}
                     {hasAges && (
-                      <div className={`hidden border-b border-horizon py-3.5 text-sm font-semibold text-brume ${PRICING_GRID}`}>
+                      <div
+                        className={`sticky top-[121px] z-20 hidden border-b border-horizon bg-ciel py-3.5 text-sm font-semibold text-brume xl:top-[137px] ${PRICING_GRID}`}
+                      >
                         <span>{t('service')}</span>
                         <span className="text-right">{ages[0]}</span>
                         <span className="text-right">{ages[1]}</span>
