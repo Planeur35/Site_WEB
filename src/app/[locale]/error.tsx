@@ -29,7 +29,7 @@ export default function ErrorPage({
           <p className="mt-4 text-texte">{t("description")}</p>
           {error.digest && <p className="mt-2 font-mono text-sm text-brume">{error.digest}</p>}
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button onClick={reset}>{t("tryAgain")}</Button>
+            <Button onClick={reset} mainCta>{t("tryAgain")}</Button>
             <Button href="/" variant="secondary">
               {tCommon("backToHome")}
             </Button>

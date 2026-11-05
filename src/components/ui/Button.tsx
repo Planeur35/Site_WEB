@@ -16,6 +16,11 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
   href?: LinkHref | string;
   external?: boolean;
   fullWidth?: boolean;
+  /**
+   * The page's own main action. While it is on screen, the header's orange
+   * "Venez essayer" turns to an outline, so there is one orange button at a time.
+   */
+  mainCta?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -38,6 +43,7 @@ export default function Button({
   href,
   external = false,
   fullWidth = false,
+  mainCta = false,
   className,
   children,
   ...rest
@@ -49,10 +55,11 @@ export default function Button({
     fullWidth && 'w-full',
     className,
   );
+  const marker = mainCta ? { 'data-main-cta': '' } : {};
 
   if (href && external) {
     return (
-      <a href={href as string} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a href={href as string} target="_blank" rel="noopener noreferrer" className={classes} {...marker}>
         {children}
         <ExternalLink size={18} strokeWidth={2} aria-hidden="true" />
       </a>
@@ -60,13 +67,13 @@ export default function Button({
   }
   if (href) {
     return (
-      <Link href={href as LinkHref} className={classes}>
+      <Link href={href as LinkHref} className={classes} {...marker}>
         {children}
       </Link>
     );
   }
   return (
-    <button className={classes} {...rest}>
+    <button className={classes} {...marker} {...rest}>
       {children}
     </button>
   );

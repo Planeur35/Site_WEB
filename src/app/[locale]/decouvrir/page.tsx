@@ -102,11 +102,11 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
 
   const bookingButton = (size: 'sm' | 'lg', label: string) =>
     paymentUrl ? (
-      <Button href={paymentUrl} external size={size} fullWidth={size === 'lg'}>
+      <Button href={paymentUrl} external size={size} fullWidth={size === 'lg'} mainCta>
         {label}
       </Button>
     ) : (
-      <Button href="/contact" size={size} fullWidth={size === 'lg'}>
+      <Button href="/contact" size={size} fullWidth={size === 'lg'} mainCta>
         {size === 'lg' ? t('contactCta') : label}
       </Button>
     );

@@ -19,7 +19,7 @@ export default function NotFound() {
           </h1>
           <p className="mt-4 text-texte">{t("notFoundDescription")}</p>
           <div className="mt-8">
-            <Button href="/">{tCommon("backToHome")}</Button>
+            <Button href="/" mainCta>{tCommon("backToHome")}</Button>
           </div>
         </div>
       </div>

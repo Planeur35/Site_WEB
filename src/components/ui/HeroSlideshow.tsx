@@ -102,7 +102,7 @@ export default function HeroSlideshow({ slides, kicker, cta, price }: HeroSlides
               )}
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-              <Button href="/decouvrir" size="lg" className="w-full sm:w-auto">
+              <Button href="/decouvrir" size="lg" mainCta className="w-full sm:w-auto">
                 {cta}
               </Button>
               {price && <p className="w-full text-center text-[0.9375rem] text-texte sm:w-auto sm:text-left">{price}</p>}

@@ -48,6 +48,21 @@ export default function Header({ trialPrice }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // A page's own main action on screen (hero button, form submit…) takes the orange
+  const [pageCtaVisible, setPageCtaVisible] = useState(false);
+  useEffect(() => {
+    const targets = document.querySelectorAll("[data-main-cta]");
+    setPageCtaVisible(false);
+    if (targets.length === 0) return;
+    const onScreen = new Map<Element, boolean>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) onScreen.set(entry.target, entry.isIntersecting);
+      setPageCtaVisible([...onScreen.values()].some(Boolean));
+    });
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
+
   const currentOf = (page: string) => (pathname === page ? "page" : isCurrentPage(pathname, page) ? "true" : undefined);
   const ctaCurrent = CTA ? currentOf(CTA.pathname) : undefined;
 
@@ -92,12 +107,13 @@ export default function Header({ trialPrice }: HeaderProps) {
             <LanguageToggle />
           </div>
           {CTA &&
-            (ctaCurrent ? (
-              // On the trial flight page, the button stays in place but is no longer the action
+            (ctaCurrent || pageCtaVisible ? (
+              // On the trial flight page, or while the page shows its own main action,
+              // the button stays in place as an outline: one orange button at a time
               <Link
                 href={CTA.href}
                 aria-current={ctaCurrent}
-                className="inline-flex h-11 items-center rounded-sm border-[1.5px] border-balise bg-blanc px-[18px] text-[0.9375rem] font-semibold whitespace-nowrap text-balise"
+                className="inline-flex h-11 items-center rounded-sm border-[1.5px] border-balise bg-blanc px-[18px] text-[0.9375rem] font-semibold whitespace-nowrap text-balise transition-colors duration-150 hover:bg-ciel"
               >
                 <span className="xl:hidden">{t("discoverShort")}</span>
                 <span className="hidden xl:inline">{t(CTA.key)}</span>

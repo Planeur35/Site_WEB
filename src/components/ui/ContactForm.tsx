@@ -134,7 +134,7 @@ export default function ContactForm() {
       </div>
 
       {/* Submit */}
-      <Button type="submit" className="w-full sm:w-auto" disabled={isPending}>
+      <Button type="submit" mainCta className="w-full sm:w-auto" disabled={isPending}>
         {isPending ? t('sending') : t('send')}
       </Button>
     </form>
