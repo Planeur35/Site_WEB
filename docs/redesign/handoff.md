@@ -1,4 +1,4 @@
-# Redesign handoff: "Ciel & balise"
+# Redesign handoff: "Ciel & marine"
 
 Implementation brief for Claude Code. It turns the redesign mockups into code, one pull request at a time.
 
@@ -31,11 +31,11 @@ All other rules in `AGENTS.md` still hold:
 
 White and pale sky blue carry the mood. Large photos lead each page. Titles use **Inter Tight** and text uses **Inter**: no serif, no small grey capitals.
 
-**Balise orange**, the anti-collision orange painted on glider wingtips, has one job: the main action on a screen (Réserver, Venez essayer). Show at most one orange button per viewport.
+**Marine blue** (token `balise`, deeper than the links) has one job: the main action on a screen (Réserver, Venez essayer), plus eyebrows. Show at most one filled button per viewport. The only warm note is **sable**, a soft sand used for the trace dot and nothing else. (The first version used an orange accent; the club found it too loud.)
 
 Corners are square-ish (2, 4 and 6 px). There are no shadows except on what floats, and very few boxes or rules.
 
-When a photo or content is missing, the block shows a pale sky with a thin **flight trace**: an approach, a thermal spiral, then a glide ending on an orange dot. It never shows clip-art.
+When a photo or content is missing, the block shows a pale sky with a thin **flight trace**: an approach, a thermal spiral, then a glide ending on a small sand-coloured dot. It never shows clip-art.
 
 ---
 
@@ -55,7 +55,7 @@ When a photo or content is missing, the block shows a pale sky with a thin **fli
 3. Set the body classes to `bg-blanc font-sans text-texte antialiased`.
 4. Rewrite the **Styling** section of `AGENTS.md` to describe this system:
    - tokens, and when to use each colour;
-   - Inter Tight / Inter, and the orange-only-for-the-main-action rule;
+   - Inter Tight / Inter, and the marine-only-for-the-main-action rule;
    - the 2/4/6 px radii;
    - placeholders via `FlightTrace`;
    - "no raw hex, no `font-serif`, no uppercase tracking labels";
@@ -76,7 +76,7 @@ Rebuild the shared UI components in `src/components/ui/` per **Reference › Com
 
 - `Button`;
 - `TextLink`, which becomes the arrow link;
-- `Kicker`, which becomes the orange eyebrow;
+- `Kicker`, which becomes the marine eyebrow;
 - `Section`;
 - `Tag`;
 - `EmptyState`;
@@ -102,10 +102,10 @@ Implement **Reference › Header**, **Full menu** and **Footer** in `src/compone
 
 **Done when:**
 
-- the header shows 4 text entries and the orange "Venez essayer" button from `xl`, and logo + Venez essayer + Menu below that;
+- the header shows 4 text entries and the filled "Venez essayer" button from `xl`, and logo + Venez essayer + Menu below that;
 - dropdowns open on hover, focus and click, and the keyboard works in them (Tab, Enter, Escape);
 - the full menu traps focus, closes on Escape and on navigation, and renders as 4 groups (desktop) or accordions (mobile);
-- the current page is marked with `aria-current="page"` and the orange underline;
+- the current page is marked with `aria-current="page"` and the marine underline;
 - the footer hides the legal-notice link until that page exists (known issue);
 - lint and build pass, and the result has been checked at 1440 and 375 px.
 
@@ -178,7 +178,7 @@ Paste this as the `@theme` block in `src/app/globals.css`:
   --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Colour: ciel & balise */
+  /* Colour: ciel & marine */
   --color-blanc: #ffffff;        /* page background */
   --color-ciel: #f1f6fb;         /* alternate band, panels, price tables */
   --color-horizon: #dcebf7;      /* hairlines on ciel, chips, progress track */
@@ -191,9 +191,9 @@ Paste this as the `@theme` block in `src/app/globals.css`:
   --color-brume: #5b6b7b;        /* secondary text (5.5:1 on white, 5.0:1 on ciel) */
   --color-nuage: #c9d6e3;        /* footer text on nuit */
   --color-givre: #9fb3c8;        /* footer fine print on nuit (8.2:1) */
-  --color-balise: #c2410c;       /* the one action button; white text 5.2:1 */
-  --color-balise-fonce: #9a3412; /* its hover/active */
-  --color-balise-vif: #f97316;   /* decoration only: trace dot, accents on nuit */
+  --color-balise: #1d5c96;       /* marine: the one action button, eyebrows; white text 7:1 */
+  --color-balise-fonce: #164a7a; /* its hover/active */
+  --color-balise-vif: #c9a77a;   /* sable: decoration only (trace dot); never text */
 
   /* Type scale (desktop values; mobile classes in the table below) */
   --text-display: 5.5rem;   --text-display--line-height: 1;    --text-display--letter-spacing: -0.035em;
@@ -271,7 +271,7 @@ Line length: at most about 68 characters, so `max-w-[680px]` on long text and `m
 - **Page background:** `bg-blanc`. Use `bg-ciel` for one alternate band per page at most two times in a row, and for panels.
 - **Headings:** `text-azur`. **Body:** `text-texte`. **Meta and dates:** `text-brume` (dates on cards are `text-nuit font-semibold`).
 - **Links:** `text-altitude font-semibold`, no underline at rest, underline on hover with `decoration-2 underline-offset-4`. Links inside `.prose-piv` keep an underline at rest.
-- **Orange (`balise`)** is used for:
+- **Marine (`balise`)** is used for:
   - the primary button;
   - eyebrows;
   - the active-page underline;
@@ -515,7 +515,7 @@ Empty state: a `bg-blanc` box with `inset 0 0 0 1px horizon` holding `news.agend
 - A 200 px-tall track holds one decorative SVG (`viewBox 0 0 1000 200`, `preserveAspectRatio="none"`):
   - a dashed takeoff segment `M0 196 L100 180`;
   - a solid rising line through `100,180 300,140 500,100 700,60 900,20` (`stroke-altitude`, 2 px, non-scaling);
-  - a dashed orange segment onward to `1000,6`.
+  - a dashed marine segment onward to `1000,6`.
 - Five absolutely-positioned dots at `left: calc(10%|30%|50%|70%|90% - 9px)`, `top: 171|131|91|51 px` and `9 px` for the last:
   - 18 px white with a 3 px `altitude` inset ring;
   - the last is 22 px `bg-balise` with a 6 px `balise/15` halo.
@@ -525,7 +525,7 @@ Empty state: a `bg-blanc` box with `inset 0 0 0 1px horizon` holding `news.agend
 
 - a 16 px dot;
 - a 2 px `altitude` line running down to the step below;
-- the last step's dot in orange.
+- the last step's dot in marine.
 
 Strings: `club.pathStep1…5Title/Text` (see Strings). If the training `clubPage.diagram` image is set, render it instead (an editor's choice wins).
 
@@ -550,8 +550,8 @@ Renders the final value in the server HTML. On first view, without reduced motio
 - Left: logo icon `next/image` (44×39, the existing `logo-icon.png`, `priority`) + "PIV" (`font-display font-bold text-lg text-azur`) + `common.clubName` (`text-[0.8125rem] font-medium text-brume`, hidden below `sm`).
 - Nav: 4 entries from `HEADER_NAV` except `discover`, each `h-11 px-3.5 text-base font-medium text-nuit`. The active one gets `font-semibold text-azur underline decoration-balise decoration-2 underline-offset-[10px]`. Entries with `children` show a 16 px `ChevronDown`.
 - Right:
-  - `LanguageToggle`, as two 44 px links "FR" and "EN"; the current one is `text-azur` with an orange underline, the other `text-brume`, with `lang="en"` on EN;
-  - `Button primary h-11` "Venez essayer". On `/decouvrir` it becomes `secondary`-styled orange outline (`border-balise text-balise`) with `aria-current="page"`;
+  - `LanguageToggle`, as two 44 px links "FR" and "EN"; the current one is `text-azur` with a marine underline, the other `text-brume`, with `lang="en"` on EN;
+  - `Button primary h-11` "Venez essayer". On `/decouvrir` it becomes `secondary`-styled marine outline (`border-balise text-balise`) with `aria-current="page"`;
   - the Menu button (44 px, `Menu` icon + "Menu" label from `sm`).
 
 **Below `xl`:** logo, then on the right "Essayer" (`nav.discoverShort`, primary `h-11`) and the Menu button. The language toggle moves into the full menu.

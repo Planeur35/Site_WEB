@@ -52,7 +52,7 @@ export default function Header({ trialPrice, hiddenNav }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // A page's own main action on screen (hero button, form submit…) takes the orange
+  // A page's own main action on screen (hero button, form submit…) takes the filled
   const [pageCtaVisible, setPageCtaVisible] = useState(false);
   useEffect(() => {
     const targets = document.querySelectorAll("[data-main-cta]");
@@ -114,7 +114,7 @@ export default function Header({ trialPrice, hiddenNav }: HeaderProps) {
           {CTA &&
             (ctaCurrent || pageCtaVisible ? (
               // On the trial flight page, or while the page shows its own main action,
-              // the button stays in place as an outline: one orange button at a time
+              // the button stays in place as an outline: one filled button at a time
               <Link
                 href={CTA.href}
                 aria-current={ctaCurrent}

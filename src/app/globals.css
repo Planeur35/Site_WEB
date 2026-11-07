@@ -5,7 +5,7 @@
   --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Colour: ciel & balise (see docs/redesign/handoff.md) */
+  /* Colour: ciel & marine (see docs/redesign/handoff.md) */
   --color-blanc: #ffffff;        /* page background */
   --color-ciel: #f1f6fb;         /* alternate band, panels, price tables */
   --color-horizon: #dcebf7;      /* hairlines on ciel, chips, progress track */
@@ -18,9 +18,9 @@
   --color-brume: #5b6b7b;        /* secondary text */
   --color-nuage: #c9d6e3;        /* footer text on nuit */
   --color-givre: #9fb3c8;        /* footer fine print on nuit */
-  --color-balise: #c2410c;       /* the one action button */
-  --color-balise-fonce: #9a3412; /* its hover/active */
-  --color-balise-vif: #f97316;   /* decoration only: trace dot, accents on nuit */
+  --color-balise: #1d5c96;       /* marine: the one action button, eyebrows */
+  --color-balise-fonce: #164a7a; /* its hover/active */
+  --color-balise-vif: #c9a77a;   /* sable: decoration only (trace dot), never text */
   --color-erreur: #b42318;       /* form errors only */
   --color-valide: #1f6f43;       /* form success only */
 
@@ -137,7 +137,7 @@ summary::-webkit-details-marker {
   list-style: decimal;
   padding-left: 1.25rem;
 }
-/* Pull quote: no border, large display type, orange guillemets */
+/* Pull quote: no border, large display type, marine guillemets */
 .prose-piv blockquote {
   margin: 1.5rem 0;
   font-family: var(--font-display);

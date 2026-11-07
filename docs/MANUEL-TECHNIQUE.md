@@ -208,7 +208,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 1. Créer `src/app/[locale]/<slug-fr>/page.tsx` sur le modèle d'une page existante : `setRequestLocale(locale)`, `generateMetadata` avec `buildMetadata()` et les clés `meta.<page>`, composants `PageHero` et `Section`.
 2. Déclarer la route et son slug anglais dans `src/i18n/routing.ts` → `pathnames`. Sans cette entrée, `Link` refuse le chemin au typage.
 3. Ajouter les libellés dans `fr.json` et `en.json`.
-4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau (quatre entrées et le bouton orange), puis dans `NAV_GROUPS` (Voler, Le club, Actualités, Pratique) pour le menu complet et le pied de page.
+4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau (quatre entrées et le bouton principal, bleu marine), puis dans `NAV_GROUPS` (Voler, Le club, Actualités, Pratique) pour le menu complet et le pied de page.
 5. Ajouter le chemin et sa priorité dans `src/app/sitemap.ts`. Si la page remplace une ancienne adresse, ajouter une redirection dans `next.config.ts`.
 
 ### Rendre un contenu éditable dans Sanity

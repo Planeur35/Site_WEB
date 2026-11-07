@@ -13,7 +13,7 @@ export interface NavLink {
 export interface NavItem extends NavLink {
   pathname: string;
   children?: NavLink[];
-  /** The orange call to action, shown as a button rather than a text entry. */
+  /** The marine call to action, shown as a button rather than a text entry. */
   cta?: true;
 }
 

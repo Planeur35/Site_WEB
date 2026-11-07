@@ -8,7 +8,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'onDark';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
-  /** `primary` (orange) is for the one main action on a screen. */
+  /** `primary` (marine) is for the one main action on a screen. */
   variant?: ButtonVariant;
   /** `sm` 44 px (header), `md` 48 px, `lg` 52 px (hero and price panel). */
   size?: ButtonSize;
@@ -17,8 +17,8 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
   external?: boolean;
   fullWidth?: boolean;
   /**
-   * The page's own main action. While it is on screen, the header's orange
-   * "Venez essayer" turns to an outline, so there is one orange button at a time.
+   * The page's own main action. While it is on screen, the header's filled
+   * "Venez essayer" turns to an outline, so there is one filled button at a time.
    */
   mainCta?: boolean;
   className?: string;
