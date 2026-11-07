@@ -7,6 +7,7 @@ const HERO_PAGES = [
   { name: 'gliders', title: 'Nos planeurs' },
   { name: 'join', title: 'Venez voler ! (tarifs)' },
   { name: 'discover', title: 'Venez essayer' },
+  { name: 'pricing', title: 'Tarifs' },
   { name: 'news', title: 'Actualités' },
   { name: 'stories', title: 'Récits de vols' },
   { name: 'gallery', title: 'Galerie' },
@@ -65,7 +66,8 @@ export default defineType({
     defineField({
       name: 'heroSlides',
       title: 'Photos d’accueil (3 ou 4)',
-      description: 'Elles défilent toutes les 6 secondes. Choisissez de belles photos de planeurs en vol.',
+      description:
+        'Elles défilent toutes les 7 secondes. Photo d’au moins 2400 px de large, de préférence un planeur en vol. Le titre (70 caractères max.) s’affiche en très grand au-dessus de la photo.',
       type: 'array',
       group: 'home',
       validation: (rule) => rule.max(4),
@@ -80,6 +82,33 @@ export default defineType({
           preview: { select: { title: 'title.fr', media: 'image' } },
         }),
       ],
+    }),
+
+    defineField({
+      name: 'homeCardImages',
+      title: 'Photos des trois cartes « Par où commencer »',
+      description: 'Format paysage. Sans photo, la carte affiche le dessin d’une trace de vol.',
+      type: 'object',
+      group: 'home',
+      fields: [
+        photoField({ name: 'try', title: 'Venez essayer', required: false }),
+        photoField({ name: 'learn', title: 'Apprendre à voler', required: false }),
+        photoField({ name: 'join', title: 'S’inscrire', required: false }),
+      ],
+    }),
+    photoField({ name: 'giftImage', title: 'Photo du bandeau « Offrez le ciel » (bons de vol)', required: false, group: 'home' }),
+    localizedText({
+      name: 'openToAllText',
+      title: 'Texte du bandeau « Ouvert à tous » (handiplaneur)',
+      description: 'Facultatif. Vide : un texte par défaut présente le handiplaneur.',
+      group: 'home',
+      rows: 3,
+    }),
+    photoField({
+      name: 'openToAllImage',
+      title: 'Photo du bandeau « Ouvert à tous »',
+      required: false,
+      group: 'home',
     }),
 
     defineField({
@@ -132,6 +161,21 @@ export default defineType({
       name: 'paymentUrl',
       title: 'Lien de la plateforme de paiement du club',
       description: 'Réservation et achat de bons de vol (particuliers et entreprises), par exemple HelloAsso.',
+      type: 'url',
+      group: 'contact',
+    }),
+    defineField({
+      name: 'voucherUrl',
+      title: 'Lien d’achat des bons de vol (facultatif)',
+      description: 'Si les bons cadeaux s’achètent sur une page différente. Sinon, le bouton « Acheter un bon » utilise le lien de paiement ci-dessus.',
+      type: 'url',
+      group: 'contact',
+    }),
+    defineField({
+      name: 'joinUrl',
+      title: 'Lien d’inscription en ligne (facultatif)',
+      description:
+        'Page où l’on adhère au club en ligne (GIVAV, HelloAsso…). Dès qu’il est saisi, un bouton « S’inscrire en ligne » apparaît sur la page Venez voler !',
       type: 'url',
       group: 'contact',
     }),

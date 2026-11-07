@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { absoluteUrl, buildMetadata } from '@/lib/metadata';
 import PortableText from '@/components/sanity/PortableText';
+import Breadcrumb from '@/components/ui/Breadcrumb';
+import Container from '@/components/ui/Container';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import SanityPhoto from '@/components/ui/SanityPhoto';
 import ShareButtons from '@/components/ui/ShareButtons';
 import Tag from '@/components/ui/Tag';
@@ -10,7 +13,7 @@ import TextLink from '@/components/ui/TextLink';
 import { formatDate } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
-import { localize } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import { allArticlesQuery, articleBySlugQuery } from '@/lib/sanity/queries';
 import type { Article } from '@/lib/sanity/types';
 
@@ -46,36 +49,52 @@ export default async function ArticlePage({ params }: PageProps) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('news');
+  const tNav = await getTranslations('nav');
 
   const article = await getArticle(slug);
   if (!article) notFound();
 
   const title = localize(article.title, locale) ?? '';
   const category = localize(article.category?.title, locale);
+  const excerpt = localize(article.excerpt, locale);
   const url = absoluteUrl({ pathname: '/actualites/[slug]', params: { slug } }, locale);
 
+  const french = [article.title, article.excerpt, article.body].some((field) => isFrenchFallback(field, locale));
+  const fr = french ? 'fr' : undefined;
+
   return (
-    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:px-8 md:py-24">
-      <TextLink href="/actualites">{t('allNews')}</TextLink>
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        <time dateTime={article.publishedAt} className="text-xs font-medium uppercase tracking-[0.25em] text-sky-800">
-          {formatDate(article.publishedAt, locale)}
-        </time>
-        {category && <Tag>{category}</Tag>}
-      </div>
-      <h1 className="mt-3 font-serif text-4xl leading-[1.1] tracking-tight text-sky-950 md:text-5xl">{title}</h1>
-      {article.featuredImage?.asset && (
-        <SanityPhoto
-          image={article.featuredImage}
-          className="mt-8 aspect-[3/2] w-full"
-          ratio={2 / 3}
-          sizes="(max-width: 768px) 100vw, 768px"
-          priority
-        />
-      )}
-      {article.excerpt && <p className="mt-8 font-serif text-xl leading-relaxed text-slate-800">{localize(article.excerpt, locale)}</p>}
-      <PortableText value={localize(article.body, locale)} className="mt-8" />
-      <ShareButtons url={url} title={title} className="mt-12 border-t border-sky-900/15 pt-6" />
+    <article className="pt-12 pb-20 lg:pt-16 lg:pb-32">
+      <Container>
+        <Breadcrumb trail={[{ href: '/actualites', label: tNav('news') }]} current={title} />
+        {/* Long read: centred header, wide photo, text in a 680 px column */}
+        <header className="mx-auto mt-10 flex max-w-[760px] flex-col lg:mt-14 lg:items-center lg:text-center">
+          <div className="flex flex-wrap items-center gap-3 lg:justify-center">
+            <time dateTime={article.publishedAt} className="text-sm font-semibold text-nuit">
+              {formatDate(article.publishedAt, locale)}
+            </time>
+            {category && <Tag>{category}</Tag>}
+          </div>
+          <h1 lang={fr} className="mt-4 font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[3.5rem] lg:leading-[1.03]">
+            {title}
+          </h1>
+          {excerpt && <p lang={fr} className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{excerpt}</p>}
+          {french && <FrenchOnlyNote className="mt-5" />}
+        </header>
+        {article.featuredImage?.asset && (
+          <SanityPhoto
+            image={article.featuredImage}
+            className="mx-auto mt-10 aspect-[3/2] max-w-[1040px] lg:mt-14"
+            ratio={2 / 3}
+            sizes="(max-width: 1100px) 100vw, 1040px"
+            priority
+          />
+        )}
+        <PortableText value={localize(article.body, locale)} className="prose-piv-longread mx-auto mt-10 max-w-[680px] lg:mt-16" lang={fr} />
+        <div className="mx-auto mt-12 flex max-w-[680px] flex-col items-start gap-6 border-t border-horizon pt-6">
+          <ShareButtons url={url} title={title} />
+          <TextLink href="/actualites">{t('allNews')}</TextLink>
+        </div>
+      </Container>
     </article>
   );
 }

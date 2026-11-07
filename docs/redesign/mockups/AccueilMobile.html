@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Accueil mobile — Planeurs d’Ille-et-Vilaine</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#1a68b0}a:hover{color:#0f3a64}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 5900px; display: flex; flex-direction: column; background: #ffffff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #0b1a2a">
+
+  <!-- Header -->
+  <header style="position: sticky; top: 0; z-index: 10; height: 64px; padding: 0 12px 0 20px; display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px)">
+    <a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0f3a64">
+      <img src="/logo-icon.png" alt="" style="width: 38px; height: 34px; object-fit: contain">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">PIV</span>
+    </a>
+    <a href="#" style="margin-left: auto; display: inline-flex; align-items: center; height: 44px; padding: 0 16px; background: #1d5c96; color: #ffffff; border-radius: 4px; font-weight: 600; font-size: 15px; text-decoration: none">Essayer</a>
+    <button type="button" aria-label="Ouvrir le menu complet" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 4px; color: #0f3a64; cursor: pointer">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+  </header>
+
+  <!-- Hero -->
+  <section aria-roledescription="carrousel" aria-label="Photos du club" style="padding: 28px 20px 0; display: flex; flex-direction: column">
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">Vol à voile · Saint-Sulpice-des-Landes</span>
+    <h1 style="margin: 14px 0 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 48px; line-height: 1.02; letter-spacing: -0.035em; color: #0f3a64">Le ciel breton, sans moteur.</h1>
+    <p style="margin: 18px 0 0; font-size: 19px; line-height: 1.5; color: #33465a">Le vol à voile en Bretagne, pour tous. Faites votre premier vol en biplace avec un instructeur du club.</p>
+    <a href="#" style="margin-top: 24px; display: flex; align-items: center; justify-content: center; height: 52px; background: #1d5c96; color: #ffffff; border-radius: 4px; font-weight: 600; font-size: 17px; text-decoration: none">Réserver un vol d’initiation</a>
+    <span style="margin-top: 12px; text-align: center; font-size: 15px; color: #33465a"><b style="font-weight: 600; color: #0b1a2a">170 €</b> · 130 € moins de 18 ans</span>
+    <figure style="margin: 28px 0 0; height: 420px; border-radius: 6px; overflow: hidden; background: #dcebf7">
+      <img src="/images/fleet/asg29.png" alt="Un planeur blanc en vol au-dessus de la campagne, ciel bleu" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block">
+    </figure>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #0f3a64; font-variant-numeric: tabular-nums">01 <span style="color: #5b6b7b; font-weight: 500">/ 04</span></span>
+        <div aria-hidden="true" style="display: flex; gap: 5px">
+          <span style="width: 32px; height: 3px; background: #dcebf7; border-radius: 2px; overflow: hidden; display: block"><span style="display: block; width: 62%; height: 100%; background: #1d5c96"></span></span>
+          <span style="width: 32px; height: 3px; background: #dcebf7; border-radius: 2px; display: block"></span>
+          <span style="width: 32px; height: 3px; background: #dcebf7; border-radius: 2px; display: block"></span>
+          <span style="width: 32px; height: 3px; background: #dcebf7; border-radius: 2px; display: block"></span>
+        </div>
+      </div>
+      <button type="button" aria-label="Mettre le diaporama en pause" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 4px; color: #0f3a64; cursor: pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"></path></svg></button>
+    </div>
+  </section>
+
+  <!-- Key figures -->
+  <section aria-label="Le club en chiffres" style="padding: 56px 20px 64px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #0f3a64">[N]</span>
+      <span style="font-size: 15px; line-height: 1.35; color: #33465a">Membres</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #0f3a64">[N]</span>
+      <span style="font-size: 15px; line-height: 1.35; color: #33465a">Heures de vol en 2025</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #0f3a64">13</span>
+      <span style="font-size: 15px; line-height: 1.35; color: #33465a">Planeurs au club</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: #0f3a64">[AAAA]</span>
+      <span style="font-size: 15px; line-height: 1.35; color: #33465a">Année de fondation</span>
+    </div>
+  </section>
+
+  <!-- Entry cards -->
+  <section style="padding: 0 20px 80px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">Par où commencer</span>
+      <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">Du premier vol au premier brevet</h2>
+    </div>
+    <a href="#" style="display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit">
+      <div style="aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: #dcebf7">
+        <img src="/images/fleet/duo-discus-cockpit.jpg" alt="Le poste avant d’un biplace, verrière ouverte" style="width: 100%; height: 100%; object-fit: cover; display: block">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">Premier contact</span>
+        <h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; color: #0f3a64">Venez essayer</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #33465a">Vols d’initiation ouverts à tous, sur réservation. 170 €, ou 130 € pour les moins de 18 ans.</p>
+        <span style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 16px; color: #1a68b0">Réserver un vol
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </div>
+    </a>
+    <a href="#" style="display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit">
+      <div style="aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: #dcebf7">
+        <img src="/images/fleet/dg500.png" alt="Un biplace blanc posé sur l’herbe, ciel bleu" style="width: 100%; height: 100%; object-fit: cover; display: block">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">École du club</span>
+        <h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; color: #0f3a64">Apprendre à voler</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #33465a">Le cursus de formation, du premier vol jusqu’aux badges.</p>
+        <span style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 16px; color: #1a68b0">La formation
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </div>
+    </a>
+    <a href="#" style="display: flex; flex-direction: column; gap: 16px; text-decoration: none; color: inherit">
+      <div style="aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: #dcebf7">
+        <img src="/images/fleet/asw28.jpg" alt="Un monoplace blanc devant le hangar du club" style="width: 100%; height: 100%; object-fit: cover; display: block">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">Rejoindre PIV</span>
+        <h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; color: #0f3a64">S’inscrire</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #33465a">Les tarifs et les modalités d’inscription.</p>
+        <span style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 16px; color: #1a68b0">Voir les forfaits
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </div>
+    </a>
+  </section>
+
+  <!-- Latest news: compact rows -->
+  <section style="background: #f1f6fb; padding: 64px 20px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">Journal</span>
+      <h2 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">Dernières nouvelles</h2>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <article style="display: flex; gap: 16px; align-items: flex-start; padding: 14px; background: #ffffff; border-radius: 6px">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0">
+          <time style="font-size: 14px; font-weight: 600; color: #5b6b7b">15 mars 2026</time>
+          <h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.25"><a href="#" style="color: #0f3a64; text-decoration: none">Ouverture de la saison 2026</a></h3>
+        </div>
+        <div style="width: 96px; height: 96px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: #dcebf7">
+          <img src="/images/fleet/duo-discus.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block">
+        </div>
+      </article>
+      <article style="display: flex; gap: 16px; align-items: flex-start; padding: 14px; background: #ffffff; border-radius: 6px">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0">
+          <time style="font-size: 14px; font-weight: 600; color: #5b6b7b">10 mars 2026</time>
+          <h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.25"><a href="#" style="color: #0f3a64; text-decoration: none">Résultats du championnat régional</a></h3>
+        </div>
+        <div style="width: 96px; height: 96px; flex-shrink: 0; border-radius: 4px; overflow: hidden; position: relative; background: linear-gradient(180deg, #d5e7f5 0%, #edf5fb 62%, #f7fafd 100%)">
+          <svg viewBox="40 40 300 240" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%" aria-hidden="true">
+            <path d="M30 240 L120 210 L131 207 L141 203 L149 198 L154 192 L155 186 L152 180 L146 175 L138 171 L129 169 L120 168 L112 168 L106 170 L103 172 L104 175 L109 177 L117 179 L127 179 L138 178 L149 175 L159 171 L167 166 L172 160 L173 154 L170 148 L164 143 L156 139 L147 137 L138 136 L130 136 L124 138 L121 140 L122 143 L127 145 L135 147 L145 147 L156 146 L167 143 L177 139 L185 134 L190 128 L191 122 L188 116 L182 111 L174 107 L165 105 L156 104 L148 104 L142 106 L139 108 L140 111 L145 113 L153 115 L163 115 L174 114 L185 111 L195 107 L203 102 L208 96 L209 90 L206 84 L200 79 L192 75 L183 73 L330 130" fill="none" stroke="#1a68b0" stroke-opacity="0.5" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+            <circle cx="330" cy="130" r="7" fill="#c9a77a"></circle>
+          </svg>
+        </div>
+      </article>
+      <article style="display: flex; gap: 16px; align-items: flex-start; padding: 14px; background: #ffffff; border-radius: 6px">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0">
+          <time style="font-size: 14px; font-weight: 600; color: #5b6b7b">5 mars 2026</time>
+          <h3 style="margin: 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.25"><a href="#" style="color: #0f3a64; text-decoration: none">Nouveau pack formation disponible</a></h3>
+        </div>
+        <div style="width: 96px; height: 96px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: #dcebf7">
+          <img src="/images/fleet/discus-b.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block">
+        </div>
+      </article>
+    </div>
+    <a href="#" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 16px; color: #1a68b0; text-decoration: none">Toutes les actualités et l’agenda
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+  </section>
+
+  <!-- Gift -->
+  <section style="padding: 72px 20px; display: flex; flex-direction: column; gap: 24px">
+    <div style="aspect-ratio: 3 / 2; border-radius: 6px; overflow: hidden; background: #dcebf7">
+      <img src="/images/fleet/ls7.jpeg" alt="Le saumon orange d’une aile de planeur au premier plan" style="width: 100%; height: 100%; object-fit: cover; display: block">
+    </div>
+    <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px; color: #1d5c96">Bons de vol</span>
+    <h2 style="margin: -12px 0 0; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; color: #0f3a64">Offrez le ciel</h2>
+    <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #33465a">Un anniversaire, un départ, un séminaire d’équipe : des bons de vol sont disponibles pour les particuliers comme pour les entreprises.</p>
+    <a href="#" style="display: flex; align-items: center; justify-content: center; height: 48px; background: #ffffff; color: #0f3a64; border: 1.5px solid #0f3a64; box-sizing: border-box; border-radius: 4px; font-weight: 600; font-size: 16px; text-decoration: none">Offrir un vol</a>
+  </section>
+
+  <!-- Members -->
+  <section aria-label="Pour les membres" style="padding: 0 20px 72px">
+    <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px 16px; background: #f1f6fb; border-radius: 6px">
+      <h2 style="margin: 0 0 4px; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 21px; color: #0f3a64">Sur le terrain aujourd’hui</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <a href="#" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; min-height: 88px; box-sizing: border-box; background: #ffffff; border-radius: 4px; text-decoration: none; color: #0f3a64; font-weight: 600; font-size: 15px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a68b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="4"></circle></svg>Webcam</a>
+        <a href="#" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; min-height: 88px; box-sizing: border-box; background: #ffffff; border-radius: 4px; text-decoration: none; color: #0f3a64; font-weight: 600; font-size: 15px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a68b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Agenda</a>
+        <a href="#" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; min-height: 88px; box-sizing: border-box; background: #ffffff; border-radius: 4px; text-decoration: none; color: #0f3a64; font-weight: 600; font-size: 15px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a68b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18c3-6 5-9 8-9s4 3 8-5"></path><circle cx="20" cy="4" r="1.5"></circle></svg>Récits de vols</a>
+        <a href="#" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; min-height: 88px; box-sizing: border-box; background: #ffffff; border-radius: 4px; text-decoration: none; color: #0f3a64; font-weight: 600; font-size: 15px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a68b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>Liens pratiques</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="margin-top: auto; background: #0b1a2a; color: #c9d6e3; padding: 56px 20px 32px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <img src="/logo-icon.png" alt="" style="width: 48px; height: 43px; object-fit: contain">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.2; color: #ffffff">Planeurs<br>d’Ille-et-Vilaine</span>
+      </div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6">Aérodrome de Saint-Sulpice-des-Landes<br>35390 Saint-Sulpice-des-Landes</p>
+      <p style="margin: 0; font-size: 15px; line-height: 1.8"><a href="#" style="color: #ffffff">contact@planeur35.org</a><br>[Téléphone du club]</p>
+      <a href="#" style="display: flex; align-items: center; justify-content: center; height: 48px; background: #ffffff; color: #0b1a2a; border-radius: 4px; font-weight: 600; font-size: 16px; text-decoration: none">Nous écrire</a>
+    </div>
+    <nav aria-label="Pied de page" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px">
+      <div style="display: flex; flex-direction: column">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 16px; color: #ffffff; margin-bottom: 4px">Voler</span>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Venez essayer</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Formation initiale</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">S’inscrire</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Nos planeurs</a>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 16px; color: #ffffff; margin-bottom: 4px">Le club</span>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Présentation</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Actualités</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Webcam</a>
+        <a href="#" style="min-height: 44px; display: flex; align-items: center; color: #c9d6e3; text-decoration: none; font-size: 15px">Contact</a>
+      </div>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 20px; border-top: 1px solid rgba(201, 214, 227, 0.18); font-size: 14px; color: #9fb3c8">
+      <span style="display: flex; gap: 20px"><a href="#" style="color: #9fb3c8">Facebook</a><a href="#" style="color: #9fb3c8">WeGlide</a><a href="#" lang="en" style="color: #9fb3c8">English</a></span>
+      <span>© Planeurs d’Ille-et-Vilaine · <a href="#" style="color: #9fb3c8">Mentions légales</a></span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

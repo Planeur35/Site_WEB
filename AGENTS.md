@@ -18,7 +18,7 @@ Read these when a task touches their topic, instead of guessing:
 - Next.js 15 App Router, React 19, TypeScript (`strict`), path alias `@/*` → `src/*`
 - Tailwind CSS 4; design tokens in `src/app/globals.css` (`@theme`)
 - next-intl 4 for routing and UI strings
-- Sanity v4, Studio embedded at `/studio`, project `8mup540n`, single dataset `production`
+- Sanity v4, Studio embedded at `/studio`, project `8mup540n`. Datasets: `production` (live site) and `dev` (local and Vercel previews), chosen by `NEXT_PUBLIC_SANITY_DATASET`
 - Hosted on Vercel: every push to `main` deploys to production; every branch gets a preview URL
 - Resend for the contact form, Leaflet + OpenStreetMap for the map
 
@@ -34,20 +34,22 @@ There is no test suite. A change is verified when `npm run lint` and `npm run bu
 
 Do not run anything in `scripts/` unless explicitly asked: they write to the production Sanity dataset and need `SANITY_WRITE_TOKEN`.
 
+Local work uses the `dev` dataset (`.env.local`). Write test or sample content to `dev` only, never to `production`; the Sanity CLI (`npx sanity`, configured by `sanity.cli.ts`) follows `.env.local`. Refreshing `dev` from production is in `docs/MANUEL-TECHNIQUE.md` ("Deux datasets").
+
 ## Where things are
 
 ```text
-src/app/[locale]/          one folder per page (French paths: club, planeurs, adherer, decouvrir, actualites, recits…)
+src/app/[locale]/          one folder per page (French paths: association, planeurs, adherer, tarifs, decouvrir, actualites, recits…)
 src/app/[locale]/contact/actions.ts   server action that sends the contact form through Resend
 src/app/studio/            embedded Sanity Studio
-src/components/layout/     Header (top bar + full menu), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
-src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
+src/components/layout/     Header (top bar), NavDropdown, FullMenu (full menu), PartnersBand (partners' logos above the footer), Footer, LanguageToggle, navItems.ts (menu entries, club anchors)
+src/components/ui/         PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, PriceTable, AgendaItem, Anecdote, Breadcrumb, NewsRow, Button, TextLink, Gallery, Map, ContactForm…
 src/lib/sanity/            client, fetch (sanityFetch), queries (all GROQ), types, image (urlFor), imageLoader, localize
 src/lib/format.ts          dates in the club's time zone
 src/lib/metadata.ts        buildMetadata(): title, Open Graph, canonical, hreflang
 src/i18n/                  routing.ts (translated pathnames), navigation.ts, request.ts
 src/messages/fr.json, en.json   UI strings
-sanity/schemas/            content model: article, event, galleryImage, siteSettings, clubPage, clubHistory, aircraft, tariff, flightStory…
+sanity/schemas/            content model: article, event, galleryImage, siteSettings, clubPage, clubHistory, aircraft, tariff, pricingPage (the season's full price list), flightStory, partner…
 sanity/schemas/fields.ts   localizedString/Text/Blocks and photoField helpers for new fields
 sanity/sanity.config.ts    Studio menu (French), singletons
 ```
@@ -67,21 +69,28 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 ### Styling
 
 - Tailwind utility classes only; no new CSS files. Use `clsx` for conditional classes.
-- The design comes from Georges's Site_WEB: sky palette tokens (`bg-ciel`, `bg-horizon`, `bg-nuit`, `text-azur`, `text-altitude`) plus Tailwind's `sky-*` and `slate-*`, serif titles (`font-serif`), small spaced capitals (`Kicker`), square corners. No raw hex colors.
-- Long text from Sanity is styled by `.prose-piv` in `globals.css` (through `PortableText`).
+- The design is "Ciel & marine", specified in `docs/redesign/handoff.md` (tokens, components, pages; mockups in `docs/redesign/mockups/`). That document wins over this summary.
+- Colours are tokens in `globals.css`: `blanc` page background, `ciel` alternate band and panels, `horizon` hairlines, `azur` headings, `texte` body, `brume` secondary text, `altitude` links and focus, `nuit` footer, `erreur` and `valide` for form messages only. No raw hex colours.
+- Marine blue `balise` is for the one main action on a screen (Réserver, Venez essayer: at most one filled button per viewport), plus eyebrows and the active-page underline. Never for body text or large areas. Give a page's own main button the `mainCta` prop: while it is on screen, the header's "Venez essayer" turns to an outline.
+- Titles use `font-display` (Inter Tight) with the `text-display`/`text-h1`…`text-h4` scale; text uses Inter (`font-sans`). No `font-serif`, no uppercase letter-spaced labels: sentence case everywhere.
+- Corners: `rounded-xs` (2 px) tags and chips, `rounded-sm` (4 px) buttons and fields, `rounded-md` (6 px) photos and panels. Nothing larger, no pills. Shadows (`shadow-flottant`) only on what floats.
+- A missing photo or empty block shows the `FlightTrace` placeholder (pale sky + flight trace), never clip-art.
+- Partner logos (`PartnerLogo`) keep their own colours and proportions: funders' charters forbid recolouring or cropping them. They sit on white or `ciel`, never on the dark footer.
+- Long text from Sanity is styled by `.prose-piv` in `globals.css` (through `PortableText`). Add `.prose-piv-longread` for a long read in a centred 680 px column: photos break out of the column, and the first paragraph gets a drop cap.
 - Mobile first. Tap targets at least 44 px, visible keyboard focus, `alt` text on every image.
 
 ### Internationalisation
 
 - Never hardcode UI text in components. Add the key to both `src/messages/fr.json` and `src/messages/en.json`; the two files must keep exactly the same keys.
+- Public copy says « association », never « club » (it sounds like a private club), « vol en planeur » rather than « vol à voile », and never the « PIV » acronym: write « Planeurs d’Ille-et-Vilaine ». Same in English (« association », « gliding »).
 - French copy uses proper accents (é, è, à, ç). Some existing strings lack them; fix those you touch.
-- Internal links: import `Link`, `redirect`, `useRouter` from `@/i18n/navigation`, never from `next/link`. Link to the French pathname (`/adherer`, or `{ pathname: '/club', hash: 'formation' }`); next-intl translates it.
-- A new page also needs: its pathname and English slug in `src/i18n/routing.ts`, an entry in `src/components/layout/navItems.ts` (used by the header, the full menu and the footer), and a line in `src/app/sitemap.ts`. When a page moves, add a redirect from the old path in `next.config.ts`.
+- Internal links: import `Link`, `redirect`, `useRouter` from `@/i18n/navigation`, never from `next/link`. Link to the French pathname (`/adherer`, or `{ pathname: '/association', hash: 'formation' }`); next-intl translates it.
+- A new page also needs: its pathname and English slug in `src/i18n/routing.ts`, an entry in `src/components/layout/navItems.ts` (used by the header, the full menu and the footer); if the page can be empty, add its key to `getHiddenNavKeys()` in `src/lib/emptyPages.ts` so the menus hide it until it has content, and a line in `src/app/sitemap.ts`. When a page moves, add a redirect from the old path in `next.config.ts`.
 
 ### Sanity
 
 - Changing the content model goes in this order: `sanity/schemas/<type>.ts` (`defineType`, `defineField`) → `sanity/schemas/index.ts` → `src/lib/sanity/types.ts` → query in `src/lib/sanity/queries.ts` → page.
-- Bilingual fields are objects `{ fr, en }`; build new ones with the helpers in `sanity/schemas/fields.ts` (French required where needed, English optional). Read them with `localize(field, locale)`, which falls back to French when `en` is empty.
+- Bilingual fields are objects `{ fr, en }`; build new ones with the helpers in `sanity/schemas/fields.ts` (French required where needed, English optional). Read them with `localize(field, locale)`, which falls back to French when `en` is empty. Where a long text can fall back, mark it with `isFrenchFallback()`: `lang="fr"` on the French block and a `FrenchOnlyNote` above it.
 - Read Sanity through `sanityFetch(query, fallback, params)` from `@/lib/sanity/fetch`: it returns the fallback when Sanity is empty or unreachable, so pages still render. Show an `EmptyState` when there is nothing yet.
 - Studio labels and descriptions are in French: editors are French-speaking volunteers. Values read by the site (`section`, `offer`, `ageCategory`, link `group`) must not be renamed.
 - Any page that reads Sanity must `export const revalidate = 60`. Without it the page is frozen at build time and Studio edits only appear after the next deploy.
@@ -90,7 +99,8 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 
 ### Security and data
 
-- Never commit, print or paste secrets. `.env.local` is gitignored. Variables: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `RESEND_API_KEY`, `CONTACT_EMAIL`; the same ones are set in Vercel.
+- Never commit, print or paste secrets. `.env.local` is gitignored. Variables: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `RESEND_API_KEY`, `CONTACT_EMAIL`; the same ones are set in Vercel. Production also has the news-sharing ones (`META_PAGE_ID`, `META_PAGE_TOKEN`, `META_IG_USER_ID`, `SANITY_WEBHOOK_SECRET`, `SANITY_WRITE_TOKEN`, `SITE_URL`, `SOCIAL_DRY_RUN`), described in `docs/MANUEL-TECHNIQUE.md` ("Publication des actualités").
+- `SANITY_WRITE_TOKEN` and the Meta tokens are read only by server code (`src/lib/sanity/writeClient.ts`, `src/lib/social.ts`, both `server-only`). Never expose them through a `NEXT_PUBLIC_` variable.
 - No personal data about club members (phone numbers, addresses, licence numbers) in the code.
 - Keep contact form validation in the server action, not only in the browser.
 
@@ -113,7 +123,7 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 Fix these only when the task is about them; otherwise mention them if they are relevant.
 
 - Prices, club pages, history, flight stories, agenda, key figures and useful links now come from Sanity and are still empty: the pages show "Bientôt ici" until they are entered in the Studio. Real trial flight prices: 170 € (adult) and 130 € (under 18).
-- The contact page map falls back to coordinates 47.885, -1.688 when `siteSettings.aerodromeCoordinates` is empty. Unconfirmed. The club page no longer shows a map: the club does not want to publish its exact location.
+- The production Studio still holds `aerodromeCoordinates` 47.885, -1.688, about 11 km north of the airfield. OpenStreetMap puts it at 47.7914, -1.6383 (the code's fallback, in `src/lib/aerodrome.ts`, and the value in `dev`): correct it in the Studio. The airfield is shown on the home page ("Nous trouver") and the contact page; the association page has no map.
 - `src/lib/email.ts` sends from `onboarding@resend.dev`, which only delivers to the Resend account owner until planeur35.org is verified in Resend.
 - WeGlide club ID: the seed uses 271, the old site links to 1221. Unconfirmed.
 - `scripts/seed-fleet.ts` and `scripts/upload-fleet-images.ts` hardcode the project ID.

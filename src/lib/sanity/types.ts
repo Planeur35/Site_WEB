@@ -59,6 +59,10 @@ export interface SiteSettings {
     lng: number;
   };
   heroSlides?: HeroSlide[];
+  homeCardImages?: { try?: SanityImage; learn?: SanityImage; join?: SanityImage };
+  giftImage?: SanityImage;
+  openToAllText?: LocalizedText;
+  openToAllImage?: SanityImage;
   statsYear?: number;
   membersCount?: number;
   flightHours?: number;
@@ -76,6 +80,8 @@ export interface SiteSettings {
   bookingText?: LocalizedText;
   pageHeroes?: Partial<Record<PageHeroKey, SanityImage>>;
   paymentUrl?: string;
+  voucherUrl?: string;
+  joinUrl?: string;
   usefulLinks?: UsefulLink[];
   legalName?: string;
   legalAddress?: string;
@@ -87,6 +93,7 @@ export interface SiteSettings {
 /** Pages whose header photo can be set in Studio → Réglages du site → Photos d’en-tête. */
 export type PageHeroKey =
   | 'club'
+  | 'pricing'
   | 'gliders'
   | 'join'
   | 'discover'
@@ -116,6 +123,10 @@ export interface FaqItem {
 export interface DiscoverPage {
   flights?: LocalizedRichText;
   booking?: LocalizedRichText;
+  practicalAge?: LocalizedText;
+  practicalWeight?: LocalizedText;
+  practicalDuration?: LocalizedText;
+  practicalWeather?: LocalizedText;
   faq?: FaqItem[];
 }
 
@@ -164,6 +175,84 @@ export interface Article {
   excerpt?: LocalizedText;
   body?: LocalizedRichText;
   seo?: SeoFields;
+  socialShare?: boolean;
+  socialText?: string;
+  socialRetry?: boolean;
+  socialPosts?: SocialPosts;
+}
+
+/** Written by /api/social/publish once the article is shared. */
+export interface SocialPosts {
+  startedAt?: string;
+  facebookPostId?: string;
+  instagramMediaId?: string;
+  error?: string;
+}
+
+/** One price of the season's price list: an amount, or a text such as « Non applicable ». */
+export interface PriceCellValue {
+  amount?: number;
+  label?: LocalizedString;
+  from?: boolean;
+  unit?: LocalizedString;
+  note?: LocalizedString;
+}
+
+export interface PricingItem {
+  _key: string;
+  name: LocalizedString;
+  group?: LocalizedString;
+  description?: LocalizedText;
+  includes?: LocalizedText;
+  excludes?: LocalizedText;
+  conditions?: LocalizedText;
+  mode: 'ages' | 'single' | 'options';
+  under25?: PriceCellValue;
+  over25?: PriceCellValue;
+  price?: PriceCellValue;
+  options?: { _key: string; label: LocalizedString; price?: PriceCellValue }[];
+}
+
+export interface PricingSection {
+  _key: string;
+  title: LocalizedString;
+  intro?: LocalizedText;
+  /** Age that splits the two price columns: 25 (default) or 18. */
+  ageSplit?: '25' | '18';
+  items?: PricingItem[];
+  conditions?: { _key: string; text: LocalizedText }[];
+}
+
+export interface PricingBudget {
+  _key: string;
+  title: LocalizedString;
+  age?: LocalizedString;
+  lines?: { _key: string; label: LocalizedString; amount: number }[];
+}
+
+/** The season's price list (Studio → Page « Tarifs »). */
+export interface PricingPage {
+  season?: string;
+  editionDate?: string;
+  intro?: LocalizedText;
+  ageRule?: LocalizedText;
+  documentUrl?: string;
+  sections?: PricingSection[];
+  budgetsIntro?: LocalizedText;
+  budgets?: PricingBudget[];
+  conditions?: { _key: string; text: LocalizedText }[];
+}
+
+export type PartnerKind = 'federation' | 'public' | 'label' | 'sponsor';
+
+export interface Partner {
+  _id: string;
+  name: string;
+  logo: SanityImage;
+  url?: string;
+  kind?: PartnerKind;
+  role?: LocalizedString;
+  openToAll?: boolean;
 }
 
 export interface AircraftSpecs {

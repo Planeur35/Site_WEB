@@ -1,135 +1,150 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { TrialPriceLine } from "@/lib/pricing";
 import Image from "next/image";
 import clsx from "clsx";
+import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import FullMenu from "@/components/layout/FullMenu";
 import LanguageToggle from "@/components/layout/LanguageToggle";
-import { FULL_NAV, HEADER_NAV } from "@/components/layout/navItems";
+import NavDropdown from "@/components/layout/NavDropdown";
+import { HEADER_NAV, isCurrentPage, visibleNav } from "@/components/layout/navItems";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 
-export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  // The logo is large at the top of a page and shrinks once the visitor scrolls, to keep the sticky bar slim.
-  const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+interface HeaderProps {
+  /** Trial flight price line for the full menu, from the `vol-initiation` tariffs. */
+  trialPrice: TrialPriceLine | null;
+  /** Menu keys of the pages with no content yet. */
+  hiddenNav: string[];
+}
+
+const CTA = HEADER_NAV.find((item) => item.cta);
+
+export default function Header({ trialPrice, hiddenNav }: HeaderProps) {
+  const { header, groups } = visibleNav(hiddenNav);
   const t = useTranslations("nav");
   const tc = useTranslations("common");
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  const isActive = (path: string) => pathname === path || pathname.startsWith(`${path}/`);
-
-  // Close the menu on navigation and with Escape
-  useEffect(() => setMenuOpen(false), [pathname]);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    menuButtonRef.current?.focus();
   }, []);
 
+  // Navigation closes the menu
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
+    if (menuOpen) setMenuOpen(false);
+  }
+
+  // The bar floats (shadow) once the page has scrolled
   useEffect(() => {
-    const onScroll = () => setScrolled((was) => (was ? window.scrollY > 20 : window.scrollY > 60));
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // A page's own main action on screen (hero button, form submit…) takes the filled
+  const [pageCtaVisible, setPageCtaVisible] = useState(false);
+  useEffect(() => {
+    const targets = document.querySelectorAll("[data-main-cta]");
+    setPageCtaVisible(false);
+    if (targets.length === 0) return;
+    const onScreen = new Map<Element, boolean>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) onScreen.set(entry.target, entry.isIntersecting);
+      setPageCtaVisible([...onScreen.values()].some(Boolean));
+    });
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const currentOf = (page: string) => (pathname === page ? "page" : isCurrentPage(pathname, page) ? "true" : undefined);
+  const ctaCurrent = CTA ? currentOf(CTA.pathname) : undefined;
+
   return (
-    <header className="sticky top-0 z-40 border-b border-sky-900/15 bg-ciel/90 backdrop-blur">
-      <div
-        className={clsx(
-          "mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 transition-[height] duration-200 sm:px-6 md:px-8",
-          scrolled ? "h-20" : "h-24 md:h-28",
-        )}
-      >
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo-icon.png"
-            alt=""
-            width={200}
-            height={178}
-            className={clsx("w-auto transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
-            priority
-          />
-          <span className="leading-tight">
-            <span className="block font-serif text-xl tracking-tight text-sky-950">PIV</span>
-            <span className="block text-[11px] uppercase tracking-[0.2em] text-sky-800 xl:whitespace-nowrap">{tc("clubName")}</span>
+    <header
+      className={clsx(
+        "sticky top-0 z-40 bg-blanc/92 backdrop-blur-md transition-shadow duration-150 ease-planeur",
+        scrolled && "shadow-flottant",
+      )}
+    >
+      <Container className="flex h-16 items-center gap-8 xl:h-20">
+        <Link href="/" className="flex shrink-0 items-center gap-3 rounded-sm">
+          <Image src="/logo-icon.png" alt="" width={400} height={351} className="h-8 w-auto xl:h-[39px]" priority />
+          {/* The association's name, never the "PIV" acronym: it means nothing to visitors */}
+          <span className="flex flex-col font-display text-[0.9375rem] leading-[1.15] font-bold text-azur xl:text-base">
+            <span>{tc("brandLine1")}</span>
+            <span>{tc("brandLine2")}</span>
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-7 xl:flex" aria-label={t("mainNav")}>
-          {HEADER_NAV.map((item) => (
-            <div key={item.key} className="group relative">
+        <nav aria-label={t("mainNav")} className="ml-3 hidden items-center gap-1 xl:flex">
+          {header.filter((item) => !item.cta).map((item) =>
+            item.children ? (
+              <NavDropdown key={item.key} item={item} current={currentOf(item.pathname)} numbered={item.key === "club"} />
+            ) : (
               <Link
+                key={item.key}
                 href={item.href}
+                aria-current={currentOf(item.pathname)}
                 className={clsx(
-                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.18em] transition",
-                  isActive(item.pathname)
-                    ? "border-sky-800 text-sky-950"
-                    : "border-transparent text-slate-600 hover:border-sky-400 hover:text-sky-950",
+                  "inline-flex h-11 items-center rounded-sm px-3.5 text-base whitespace-nowrap decoration-balise decoration-2 underline-offset-[10px] transition-colors duration-150",
+                  currentOf(item.pathname) ? "font-semibold text-azur underline" : "font-medium text-nuit hover:text-azur",
                 )}
               >
                 {t(item.key)}
-                {item.children && (
-                  <span className="text-[8px] text-sky-700 transition-transform group-hover:rotate-180" aria-hidden="true">
-                    ▾
-                  </span>
-                )}
               </Link>
-              {item.children && (
-                <div className="invisible absolute left-0 top-full z-50 translate-y-1 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                  <div className="min-w-52 border border-sky-900/15 bg-white py-2 shadow-[0_16px_40px_-16px_rgba(14,28,43,0.35)]">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.key}
-                        href={child.href}
-                        className="block whitespace-nowrap px-4 py-2 text-xs uppercase tracking-[0.15em] text-slate-600 transition-colors hover:bg-sky-50 hover:text-sky-950"
-                      >
-                        {t(child.key)}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+            ),
+          )}
         </nav>
 
-        <div className="flex items-center gap-1">
-          <LanguageToggle />
+        <div className="ml-auto flex items-center gap-2 xl:gap-3">
+          <div className="hidden xl:block">
+            <LanguageToggle />
+          </div>
+          {CTA &&
+            (ctaCurrent || pageCtaVisible ? (
+              // On the trial flight page, or while the page shows its own main action,
+              // the button stays in place as an outline: one filled button at a time
+              <Link
+                href={CTA.href}
+                aria-current={ctaCurrent}
+                className="inline-flex h-11 items-center rounded-sm border-[1.5px] border-balise bg-blanc px-[18px] text-[0.9375rem] font-semibold whitespace-nowrap text-balise transition-colors duration-150 hover:bg-ciel"
+              >
+                <span className="xl:hidden">{t("discoverShort")}</span>
+                <span className="hidden xl:inline">{t(CTA.key)}</span>
+              </Link>
+            ) : (
+              <Button href={CTA.href} size="sm" className="whitespace-nowrap">
+                <span className="xl:hidden">{t("discoverShort")}</span>
+                <span className="hidden xl:inline">{t(CTA.key)}</span>
+              </Button>
+            ))}
           <button
+            ref={menuButtonRef}
             type="button"
-            className="inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center text-sky-950"
             aria-expanded={menuOpen}
-            aria-controls="full-menu"
-            aria-label={t("menu")}
-            onClick={() => setMenuOpen((open) => !open)}
+            aria-controls={menuOpen ? "full-menu" : undefined}
+            aria-label={t("openMenu")}
+            onClick={() => setMenuOpen(true)}
+            className="inline-flex h-11 min-w-11 cursor-pointer items-center justify-center gap-2 rounded-sm px-2 text-[0.9375rem] font-semibold text-azur hover:bg-ciel sm:px-3"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-              <path d={menuOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
-            </svg>
+            <Menu size={22} strokeWidth={2} aria-hidden="true" />
+            <span className="hidden sm:inline">{t("menu")}</span>
           </button>
         </div>
-      </div>
+      </Container>
 
-      <nav id="full-menu" hidden={!menuOpen} className="border-t border-sky-900/15 bg-ciel" aria-label={t("fullNav")}>
-        <div className="mx-auto flex max-h-[calc(100vh-7rem)] max-w-5xl flex-col overflow-y-auto px-4 py-4 sm:px-6 md:px-8">
-          {FULL_NAV.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              onClick={() => setMenuOpen(false)}
-              className={clsx(
-                "border-b border-sky-900/10 py-3 text-xs font-medium uppercase tracking-[0.2em] last:border-0",
-                isActive(item.pathname) ? "text-sky-950" : "text-slate-600 hover:text-sky-950",
-              )}
-            >
-              {t(item.key)}
-            </Link>
-          ))}
-        </div>
-      </nav>
+      {menuOpen && <FullMenu onClose={closeMenu} trialPrice={trialPrice} groups={groups} />}
     </header>
   );
 }

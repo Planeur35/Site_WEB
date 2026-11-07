@@ -3,9 +3,5 @@ interface TagProps {
 }
 
 export default function Tag({ children }: TagProps) {
-  return (
-    <span className="border border-sky-500/40 px-2 py-0.5 text-xs uppercase tracking-[0.15em] text-sky-900">
-      {children}
-    </span>
-  );
+  return <span className="rounded-xs bg-horizon px-2 py-[3px] text-sm font-medium text-azur">{children}</span>;
 }

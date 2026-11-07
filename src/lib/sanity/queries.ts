@@ -24,7 +24,18 @@ export const upcomingEventsQuery = `*[_type == "event" && coalesce(endDate, star
 
 export const allAircraftQuery = `*[_type == "aircraft"] | order(category asc, sortOrder asc, name asc)`;
 
+/** The adapted glider's photo, for the home page's "Ouvert à tous" band. */
+export const handiGliderPhotoQuery = `*[_type == "aircraft" && category == "handiplaneur" && defined(photo.asset)][0].photo`;
+
+/** Partners with a logo, in display order. */
+export const allPartnersQuery = `*[_type == "partner" && defined(logo.asset)] | order(order asc, name asc) { _id, name, logo, url, kind, role, openToAll }`;
+
+/** The season's price list, with the PDF's address. */
+export const pricingPageQuery = `*[_type == "pricingPage"][0]{ ..., "documentUrl": document.asset->url }`;
+
 export const allTariffsQuery = `*[_type == "tariff"]`;
+
+export const trialTariffsQuery = `*[_type == "tariff" && offer == "vol-initiation"]{ ageCategory, amount, details }`;
 
 export const allClubPagesQuery = `*[_type == "clubPage"]`;
 

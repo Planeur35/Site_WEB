@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import Container from '@/components/ui/Container';
 import SitePageHero from '@/components/ui/SitePageHero';
-import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { siteSettingsQuery } from '@/lib/sanity/queries';
 import type { SiteSettings } from '@/lib/sanity/types';
@@ -27,9 +27,9 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
 
   return (
     <>
-      <SitePageHero page="legal" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
-      <Section kicker={t('kicker')} title={t('title')} sub={t('intro')}>
-        <div className="prose-piv max-w-3xl">
+      <SitePageHero page="legal" kicker={t('heroKicker')} title={t('heroTitle')} lead={t('intro')} />
+      <Container className="pt-10 pb-16 lg:pt-14 lg:pb-28">
+        <div className="prose-piv max-w-[680px]">
           <h3>{t('editor.title')}</h3>
           <p>{t('editor.text', { name })}</p>
           <ul>
@@ -90,7 +90,7 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
           <h3>{t('liability.title')}</h3>
           <p>{t('liability.text')}</p>
         </div>
-      </Section>
+      </Container>
     </>
   );
 }

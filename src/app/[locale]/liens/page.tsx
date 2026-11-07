@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
+import { ArrowUpRight } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
+import Container from '@/components/ui/Container';
 import EmptyState from '@/components/ui/EmptyState';
-import Kicker from '@/components/ui/Kicker';
 import SitePageHero from '@/components/ui/SitePageHero';
-import Section from '@/components/ui/Section';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
 import { siteSettingsQuery } from '@/lib/sanity/queries';
@@ -13,6 +13,15 @@ import type { LinkGroup, SiteSettings, UsefulLink } from '@/lib/sanity/types';
 export const revalidate = 60;
 
 const GROUPS: LinkGroup[] = ['institutions', 'flight-prep', 'weather', 'competitions', 'accommodation', 'community'];
+
+/** "meteofrance.com": the address without protocol or "www.", shown under each link. */
+function domain(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -36,31 +45,42 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <SitePageHero page="links" kicker={t('heroKicker')} title={t('heroTitle')} variant={3} />
-      <Section kicker={t('kicker')} title={t('title')}>
-        {filled.length === 0 && <EmptyState>{t('empty')}</EmptyState>}
-        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+      <SitePageHero page="links" kicker={t('heroKicker')} title={t('heroTitle')} />
+      <Container className="pt-10 pb-16 lg:pt-14 lg:pb-28">
+        {filled.length === 0 && <EmptyState seed="liens">{t('empty')}</EmptyState>}
+        <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
           {filled.map((group) => (
-            <div key={group.key} className="border-t border-sky-900/15 pt-6">
-              <Kicker>{t(`groups.${group.key}`)}</Kicker>
-              <ul className="mt-3 space-y-1">
+            <section key={group.key} className="min-w-0">
+              <h3 className="font-display text-lg font-semibold text-azur">{t(`groups.${group.key}`)}</h3>
+              <ul className="mt-3 border-t border-horizon">
                 {group.items.map((link) => (
-                  <li key={link._key}>
+                  <li key={link._key} className="border-b border-horizon">
                     <a
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center text-sm leading-relaxed text-sky-900 underline decoration-sky-300 underline-offset-4 hover:text-sky-700 hover:decoration-sky-700"
+                      className="group flex min-h-14 items-center justify-between gap-3 py-2"
                     >
-                      {localize(link.label, locale)} <span aria-hidden="true">&nbsp;↗</span>
+                      <span className="min-w-0">
+                        <span className="block leading-snug font-semibold text-azur decoration-2 underline-offset-4 group-hover:underline">
+                          {localize(link.label, locale)}
+                        </span>
+                        <span className="block truncate text-sm text-brume">{domain(link.url)}</span>
+                      </span>
+                      <ArrowUpRight
+                        size={18}
+                        strokeWidth={2}
+                        aria-hidden="true"
+                        className="shrink-0 text-altitude transition-transform duration-150 ease-planeur group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
           ))}
         </div>
-      </Section>
+      </Container>
     </>
   );
 }

@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Accueil",
-    "club": "Le club",
+    "club": "L’association",
     "gliders": "Nos planeurs",
     "join": "Venez voler !",
     "discover": "Venez essayer",
@@ -19,55 +19,75 @@
     "training": "Formation initiale",
     "campaign": "Perfectionnement",
     "competition": "Compétition",
-    "history": "Histoire du club",
+    "history": "Histoire de l’association",
     "menu": "Menu",
     "mainNav": "Navigation principale",
-    "fullNav": "Menu complet"
+    "fullNav": "Menu complet",
+    "breadcrumb": "Fil d’Ariane",
+    "discoverShort": "Essayer",
+    "openMenu": "Ouvrir le menu complet",
+    "close": "Fermer",
+    "closeMenu": "Fermer le menu",
+    "submenu": "Sous-menu {label}",
+    "groupFly": "Voler",
+    "groupClub": "L’association",
+    "groupNews": "Actualités",
+    "groupPractical": "Pratique",
+    "book": "Réserver",
+    "bookTrial": "Réserver un vol d’initiation",
+    "trialPrice": "{adult} € · {young} € moins de 18 ans",
+    "trialPriceSingle": "{amount} €",
+    "language": "Langue",
+    "partners": "Partenaires",
+    "pricing": "Tarifs"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
-    "brandKicker": "PIV · Planeurs d’Ille-et-Vilaine",
-    "discover": "Découvrir",
     "backToHome": "Retour à l’accueil",
     "loadingMap": "Chargement de la carte…",
-    "switchLanguageLabel": "Switch to English"
+    "languageFr": "Français",
+    "languageEn": "English",
+    "backToTop": "Haut de page",
+    "frenchOnly": "Ce texte n’existe qu’en français.",
+    "brandLine1": "Planeurs",
+    "brandLine2": "d’Ille-et-Vilaine"
   },
   "meta": {
     "home": {
-      "title": "PIV – Planeurs d’Ille-et-Vilaine, club de vol à voile",
-      "description": "PIV, Planeurs d’Ille-et-Vilaine : club de vol à voile. Planeurs, formation, vols d’initiation et actualités du club."
+      "title": "Planeurs d’Ille-et-Vilaine, association de vol en planeur",
+      "description": "Planeurs d’Ille-et-Vilaine, association de vol en planeur ouverte à tous : vols d’initiation, bons cadeaux, formation au pilotage, accès aux personnes en situation de handicap."
     },
     "club": {
-      "title": "Le club",
-      "description": "Le club PIV : présentation, la plateforme et sa zone de vol, la formation, le perfectionnement, la compétition et l’histoire du club."
+      "title": "L’association",
+      "description": "L’association Planeurs d’Ille-et-Vilaine : présentation, la plateforme et sa zone de vol, la formation, le perfectionnement, la compétition et son histoire."
     },
     "gliders": {
       "title": "Nos planeurs",
-      "description": "Les planeurs du club PIV, présentés un par un : biplaces de formation, monoplaces de performance."
+      "description": "Les planeurs de l’association, présentés un par un : biplaces de formation, monoplaces de performance."
     },
     "join": {
       "title": "Venez voler : tarifs et adhésion",
-      "description": "Les tarifs d’adhésion et de formation au club de vol à voile PIV."
+      "description": "Les tarifs d’adhésion et de formation au vol en planeur, à l’association Planeurs d’Ille-et-Vilaine."
     },
     "discover": {
       "title": "Venez essayer",
-      "description": "Le vol d’initiation en planeur avec un instructeur du club PIV : déroulement, tarif et réservation."
+      "description": "Le vol d’initiation en planeur avec un pilote de l’association : déroulement, tarif et réservation."
     },
     "news": {
       "title": "Actualités et agenda",
-      "description": "Les nouvelles du club PIV et les prochains événements."
+      "description": "Les nouvelles de l’association et les prochains événements."
     },
     "stories": {
       "title": "Récits de vols",
-      "description": "Les beaux vols au départ et à l’arrivée de PIV, avec leurs traces WeGlide."
+      "description": "Les beaux vols au départ et à l’arrivée de Saint-Sulpice-des-Landes, avec leurs traces WeGlide."
     },
     "gallery": {
       "title": "Galerie photos",
-      "description": "Les photos du club PIV : planeurs, paysages et vie du club."
+      "description": "Les photos de l’association : planeurs, paysages et vols."
     },
     "webcam": {
       "title": "Webcam",
-      "description": "L’image de la webcam du club PIV, actualisée toutes les minutes."
+      "description": "L’image de la webcam de l’aérodrome, actualisée toutes les minutes."
     },
     "links": {
       "title": "Liens pratiques",
@@ -75,48 +95,109 @@
     },
     "contact": {
       "title": "Contact",
-      "description": "Écrire au club de vol à voile PIV, Planeurs d’Ille-et-Vilaine."
+      "description": "Écrire à l’association Planeurs d’Ille-et-Vilaine et trouver l’aérodrome de Saint-Sulpice-des-Landes."
     },
     "legal": {
       "title": "Mentions légales",
       "description": "Informations légales sur l’éditeur et l’hébergeur du site, et traitement des données personnelles."
+    },
+    "pricing": {
+      "title": "Tarifs {season}",
+      "description": "Tous les tarifs de l’association : vol d’initiation, formation au pilotage, cotisation, forfaits d’heures de vol, décollages et hébergement des planeurs."
     }
   },
   "home": {
-    "heroTitle": "Planeurs d’Ille-et-Vilaine",
-    "heroSubtitle": "Le vol à voile en Bretagne, pour tous.",
-    "slideLabel": "Photo {n}",
+    "heroTitle": "Votre premier vol en planeur",
+    "heroSubtitle": "Le vol en planeur en Bretagne, pour tous.",
     "statsHours": "Heures de vol dans l’année",
     "statsHoursYear": "Heures de vol en {year}",
-    "statsGliders": "Planeurs au club",
+    "statsGliders": "Planeurs de l’association",
     "statsFounded": "Année de fondation",
     "cardTryKicker": "Premier contact",
     "cardTryTitle": "Venez essayer",
     "cardTryText": "Vols d’initiation ouverts à tous, sur réservation.",
-    "cardLearnKicker": "École du club",
+    "cardLearnKicker": "École de pilotage",
     "cardLearnTitle": "Apprendre à voler",
     "cardLearnText": "Le cursus de formation, du premier vol jusqu’aux badges.",
-    "cardJoinKicker": "Rejoindre PIV",
+    "cardJoinKicker": "Nous rejoindre",
     "cardJoinTitle": "S’inscrire",
     "cardJoinText": "Les tarifs et les modalités d’inscription.",
     "latestKicker": "Journal",
     "latestTitle": "Dernières nouvelles",
     "allNews": "Toutes les actualités et l’agenda",
     "statsPilots": "Pilotes brevetés",
-    "statsKm": "Kilomètres parcourus depuis la création du club"
+    "statsKm": "Kilomètres parcourus depuis la création de l’association",
+    "heroKicker": "Planeurs d’Ille-et-Vilaine · Saint-Sulpice-des-Landes",
+    "heroCta": "Réserver un vol d’initiation",
+    "heroPrice": "<b>{adult} €</b> · {young} € moins de 18 ans",
+    "heroPriceSingle": "<b>{adult} €</b> le vol",
+    "slidesLabel": "Photos de l’association",
+    "slideCounter": "Photo {n} sur {total}",
+    "slidePause": "Mettre le diaporama en pause",
+    "slidePlay": "Relancer le diaporama",
+    "slidePrev": "Photo précédente",
+    "slideNext": "Photo suivante",
+    "statsLabel": "L’association en chiffres",
+    "startKicker": "Par où commencer",
+    "startTitle": "Du premier vol au premier brevet",
+    "cardTryPrice": "{adult} €, ou {young} € pour les moins de 18 ans.",
+    "cardTryPriceSingle": "{adult} € le vol.",
+    "cardTryCta": "Réserver un vol",
+    "cardLearnCta": "La formation",
+    "cardJoinCta": "Voir les forfaits",
+    "giftKicker": "Bons de vol",
+    "giftTitle": "Offrez le ciel",
+    "giftText": "Un anniversaire, un départ, un séminaire d’équipe : des bons de vol sont disponibles pour les particuliers comme pour les entreprises.",
+    "giftCta": "Offrir un vol",
+    "giftCompanyCta": "Offre entreprises",
+    "membersTitle": "La vie de l’association",
+    "webcamLive": "en direct",
+    "nextEvent": "Prochain rendez-vous",
+    "findUsKicker": "Accès",
+    "findUsTitle": "Nous trouver",
+    "findUsText": "Nous volons depuis l’aérodrome de Saint-Sulpice-des-Landes, au sud de l’Ille-et-Vilaine.",
+    "findUsDirections": "Calculer l’itinéraire",
+    "findUsContact": "Nous écrire",
+    "findUsPopup": "L’aérodrome de Saint-Sulpice-des-Landes",
+    "openToAllKicker": "Ouvert à tous",
+    "openToAllTitle": "Voler, avec ou sans handicap",
+    "openToAllText": "L’association dispose d’un handiplaneur : un biplace équipé de commandes adaptées, qui permet aux personnes à mobilité réduite de voler et d’apprendre à piloter.",
+    "openToAllContact": "Nous en parler",
+    "openToAllGlider": "Voir nos planeurs"
   },
   "club": {
-    "heroKicker": "Le club",
+    "heroKicker": "L’association",
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Bientôt ici",
-    "empty": "Les pages du club arrivent.",
-    "anecdote": "Anecdote"
+    "empty": "Les pages de l’association arrivent.",
+    "anecdote": "Anecdote",
+    "heroLead": "Association de vol en planeur en Bretagne, sur l’aérodrome de Saint-Sulpice-des-Landes.",
+    "sectionNav": "Sections de la page",
+    "factsTitle": "L’association en bref",
+    "factsField": "Terrain",
+    "factsFleet": "Flotte",
+    "factsFleetText": "{count} planeurs, des biplaces école aux monoplaces de performance",
+    "factsPilots": "Pilotes",
+    "factsPilotsText": "{count} pilotes brevetés",
+    "factsSeeFleet": "Voir la flotte",
+    "trainingCta": "Faire un premier vol",
+    "pathTitle": "Le cursus, étape par étape",
+    "pathStepLabel": "Étape {n}",
+    "pathNext": "Et ensuite",
+    "pathStep1Title": "Vol d’initiation",
+    "pathStep1Text": "Un premier vol en biplace avec un pilote de l’association.",
+    "pathStep2Title": "Vols en double",
+    "pathStep2Text": "Décollage, virages, approche et atterrissage, avec l’instructeur.",
+    "pathStep3Title": "Le lâcher",
+    "pathStep3Text": "Votre premier vol seul à bord.",
+    "pathStep4Title": "La licence",
+    "pathStep4Text": "Théorie et examen pratique : la licence de pilote de planeur (SPL).",
+    "pathStep5Title": "Campagne et badges",
+    "pathStep5Text": "Les vols de distance, et les badges d’argent, d’or et diamants."
   },
   "gliders": {
     "heroKicker": "La flotte",
     "heroTitle": "Nos planeurs",
-    "sectionKicker": "Flotte du club",
-    "sectionTitle": "Chaque planeur, présenté un par un",
     "empty": "La flotte sera bientôt présentée ici.",
     "wingspan": "Envergure",
     "glideRatio": "Finesse",
@@ -130,7 +211,12 @@
       "monoplace-debut": "Monoplace débutant",
       "monoplace-perf": "Monoplace performance",
       "remorqueur": "Remorqueur"
-    }
+    },
+    "registration": "Immatriculation",
+    "year": "Mise en service",
+    "maxWeight": "Masse maximale",
+    "instrumentation": "Instruments",
+    "details": "Fiche technique"
   },
   "pricing": {
     "amount": "{amount} €",
@@ -146,15 +232,17 @@
       "over25": "Plus de 25 ans",
       "under18": "Moins de 18 ans",
       "adult": "Adulte"
-    }
+    },
+    "onRequest": "Sur demande",
+    "condition": "{age} : {details}"
   },
   "join": {
     "heroKicker": "Venez voler !",
-    "heroTitle": "Les tarifs",
+    "heroTitle": "Rejoindre l’association",
     "introKicker": "Tarifs",
     "introTitle": "Les tarifs de l’année",
     "tableOpen": "Ouvrir le tableau en grand",
-    "membershipTitle": "Adhésion au club (membres)",
+    "membershipTitle": "Adhésion à l’association (membres)",
     "trainingPackTitle": "Pack formation",
     "advancedPackTitle": "Pack complément de formation",
     "empty": "Les tarifs seront publiés prochainement. En attendant, écrivez-nous.",
@@ -162,16 +250,22 @@
     "howTitle": "Comment s’inscrire",
     "howEmpty": "Les modalités d’inscription seront publiées prochainement. En attendant, écrivez-nous.",
     "contactCta": "Nous écrire",
-    "tryCta": "Essayer d’abord"
+    "tryCta": "Essayer d’abord",
+    "packagesCaption": "Les forfaits de la saison",
+    "packagesOffer": "Forfait",
+    "packsCaption": "Se former au pilotage",
+    "packsOffer": "Pack",
+    "packsPrice": "Tarif",
+    "heroLead": "Adhésion, forfaits de vol et formation : tout ce qu’il faut pour voler toute la saison.",
+    "joinOnline": "S’inscrire en ligne"
   },
   "discover": {
-    "heroKicker": "Premier vol",
-    "heroTitle": "Venez essayer",
+    "heroKicker": "Vol d’initiation",
+    "heroTitle": "Offrez-vous le ciel",
     "kicker": "Découverte",
     "title": "Vols d’initiation",
     "descriptionKicker": "Le vol",
-    "defaultDescription": "Le vol d’initiation est le meilleur moyen de découvrir le vol en planeur : vous volez en biplace, accompagné d’un instructeur du club.",
-    "priceKicker": "Tarif",
+    "defaultDescription": "Le vol d’initiation est le meilleur moyen de découvrir le vol en planeur : vous volez en biplace, accompagné d’un pilote expérimenté de l’association.",
     "bookingKicker": "Réservation",
     "bookingTitle": "Réservation et paiement en ligne",
     "bookingText": "La réservation et le paiement se font en ligne. Des bons de vol sont disponibles pour les particuliers comme pour les entreprises.",
@@ -179,11 +273,45 @@
     "contactCta": "Nous écrire pour réserver",
     "questionCta": "Poser une question",
     "faqKicker": "FAQ",
-    "faqTitle": "Questions fréquentes"
+    "faqTitle": "Questions fréquentes",
+    "leavingSite": "Vous quittez planeur35.org pour la page de paiement de l’association.",
+    "stepsKicker": "Le vol",
+    "stepsTitle": "Comment se passe votre premier vol",
+    "step1Title": "Accueil et briefing",
+    "step1Text": "Après la partie administrative (la licence à la journée est comprise dans le bon), votre pilote vous présente le planeur, les consignes de sécurité et le déroulement du vol.",
+    "step2Title": "Le décollage",
+    "step2Text": "Le planeur décolle remorqué par l’ULM de l’association, puis se libère en altitude. À partir de là, plus de moteur : seulement le vent et le silence.",
+    "step3Title": "En vol",
+    "step3Text": "Vous êtes installé à l’avant, votre pilote à l’arrière. La durée du vol dépend de la météo du jour.",
+    "step4Title": "Atterrissage et débriefing",
+    "step4Text": "Retour au sol, quelques mots sur le vol, et toutes vos questions sur la suite.",
+    "practicalKicker": "Avant de venir",
+    "practicalTitle": "Bon à savoir",
+    "practicalAge": "Âge",
+    "practicalWeight": "Poids",
+    "practicalDuration": "Durée",
+    "practicalWeather": "Météo",
+    "practicalClothes": "Tenue",
+    "practicalClothesText": "Des vêtements confortables, des chaussures fermées, une casquette et des lunettes de soleil.",
+    "practicalAccess": "Accès",
+    "practicalMap": "Plan d’accès",
+    "vouchersKicker": "Bons de vol",
+    "vouchersTitle": "Un vol à offrir",
+    "voucherPersonTitle": "Pour un proche",
+    "voucherPersonText": "Un bon nominatif à offrir pour un anniversaire ou une fête.",
+    "voucherPersonCta": "Acheter un bon",
+    "voucherCompanyTitle": "Pour une entreprise",
+    "voucherCompanyText": "Cadeaux clients, comité d’entreprise, journée d’équipe : plusieurs bons ou une journée au terrain, sur devis.",
+    "voucherCompanyCta": "Demander un devis",
+    "nextTitle": "Et après le premier vol ?",
+    "nextText": "Découvrez comment se passe la formation, du premier vol jusqu’aux badges, et les forfaits pour voler toute la saison.",
+    "nextLearnCta": "Apprendre à voler",
+    "nextJoinCta": "Les forfaits",
+    "stickyCta": "Réserver"
   },
   "news": {
     "heroKicker": "Actualités",
-    "heroTitle": "Les nouvelles du club",
+    "heroTitle": "Les nouvelles de l’association",
     "listKicker": "Journal",
     "listTitle": "Dernières nouvelles",
     "empty": "Aucune actualité pour le moment.",
@@ -191,7 +319,8 @@
     "agendaKicker": "Agenda",
     "agendaTitle": "Événements à venir",
     "agendaEmpty": "Aucun événement à venir.",
-    "at": "à {time}"
+    "at": "à {time}",
+    "readMore": "Lire la suite"
   },
   "share": {
     "label": "Partager",
@@ -200,27 +329,30 @@
   },
   "stories": {
     "heroKicker": "Récits",
-    "heroTitle": "Les vols qui ont marqué PIV",
-    "kicker": "Archives du ciel",
-    "title": "Beaux vols au départ et à l’arrivée de PIV",
+    "heroTitle": "Les vols qui nous ont marqués",
+    "title": "Beaux vols au départ et à l’arrivée de Saint-Sulpice-des-Landes",
     "empty": "Les récits arrivent bientôt.",
     "weglide": "Voir le tracé sur WeGlide",
-    "clubOnWeglide": "Tous les vols du club sur WeGlide",
-    "all": "Tous les récits"
+    "clubOnWeglide": "Tous nos vols sur WeGlide",
+    "all": "Tous les récits",
+    "read": "Lire le récit"
   },
   "gallery": {
     "heroKicker": "En images",
     "heroTitle": "Galerie",
-    "kicker": "La vie du club",
-    "title": "Photos du club",
-    "empty": "Les photos seront bientôt disponibles."
+    "title": "Photos de l’association",
+    "empty": "Les photos seront bientôt disponibles.",
+    "open": "Agrandir la photo",
+    "previous": "Photo précédente",
+    "next": "Photo suivante",
+    "close": "Fermer",
+    "viewer": "Visionneuse de photos",
+    "photo": "Photo"
   },
   "webcam": {
     "heroKicker": "Vue de la plateforme",
     "heroTitle": "Webcam",
-    "kicker": "Sur le terrain",
-    "title": "L’image de la webcam du club",
-    "alt": "Vue de la plateforme du club",
+    "alt": "Vue de la plateforme de l’aérodrome",
     "refresh": "Image actualisée toutes les minutes",
     "lastUpdate": "dernière mise à jour à {time}",
     "justNow": "dernière mise à jour à l’instant",
@@ -231,8 +363,6 @@
   "links": {
     "heroKicker": "Ressources",
     "heroTitle": "Liens pratiques",
-    "kicker": "Le pilote connecté",
-    "title": "Tous les liens utiles",
     "empty": "Les liens seront bientôt disponibles.",
     "groups": {
       "institutions": "Institutions",
@@ -249,7 +379,7 @@
     "title": "Contactez-nous",
     "formKicker": "Nous écrire",
     "formTitle": "Une question ?",
-    "subtitle": "Envie de voler, de rejoindre le club ou simplement une question : écrivez-nous.",
+    "subtitle": "Envie de voler, de nous rejoindre ou simplement une question : écrivez-nous.",
     "name": "Nom",
     "email": "E-mail",
     "subject": "Sujet",
@@ -264,17 +394,16 @@
     "address": "Adresse",
     "findUsKicker": "Accès",
     "findUs": "Nous trouver",
-    "mapPopup": "Le terrain du club"
+    "mapPopup": "L’aérodrome de Saint-Sulpice-des-Landes",
+    "directions": "Calculer l’itinéraire"
   },
   "legal": {
-    "kicker": "Informations légales",
     "heroKicker": "Informations légales",
     "heroTitle": "Mentions légales",
-    "title": "Qui sommes-nous, et comment sont traitées vos données",
     "intro": "Les informations ci-dessous sont fournies conformément à la loi pour la confiance dans l’économie numérique (LCEN) et au règlement général sur la protection des données (RGPD).",
     "editor": {
       "title": "Éditeur du site",
-      "text": "Le site planeur35.org est édité par l’association {name}, club de vol à voile.",
+      "text": "Le site planeur35.org est édité par l’association {name}, association de vol en planeur.",
       "seat": "Siège social :",
       "id": "Numéro RNA ou SIRET :",
       "email": "E-mail :",
@@ -309,7 +438,7 @@
     },
     "liability": {
       "title": "Liens externes et responsabilité",
-      "text": "Le site contient des liens vers des sites tiers (fédérations, météo, WeGlide…) dont l’association n’est pas responsable. Les informations publiées (horaires, tarifs, disponibilités) peuvent évoluer : en cas de doute, contactez le club."
+      "text": "Le site contient des liens vers des sites tiers (fédérations, météo, WeGlide…) dont l’association n’est pas responsable. Les informations publiées (horaires, tarifs, disponibilités) peuvent évoluer : en cas de doute, contactez l’association."
     }
   },
   "error": {
@@ -322,8 +451,47 @@
   },
   "footer": {
     "navigation": "Navigation",
-    "contact": "Contact",
     "writeToUs": "Nous écrire",
-    "legal": "Mentions légales"
+    "legal": "Mentions légales",
+    "otherLanguage": "English version"
+  },
+  "partners": {
+    "bandTitle": "Ils nous soutiennent",
+    "sectionKicker": "Partenaires",
+    "sectionTitle": "Nos partenaires",
+    "sectionSub": "Fédérations, collectivités et labels qui accompagnent l’association.",
+    "visit": "Site de {name}"
+  },
+  "pricingPage": {
+    "heroKicker": "Tarifs",
+    "heroTitle": "Tarifs {season}",
+    "heroTitleNoSeason": "Tarifs",
+    "heroLead": "Toutes les formules de l’association, du premier vol au vol en autonomie.",
+    "edition": "Édition du {date}",
+    "download": "Télécharger la grille (PDF)",
+    "under25": "Moins de 25 ans",
+    "over25": "25 ans et plus",
+    "price": "Tarif",
+    "service": "Prestation",
+    "includes": "Comprend :",
+    "excludes": "Ne comprend pas :",
+    "from": "à partir de",
+    "sectionNav": "Sections de la page",
+    "budgetsKicker": "Exemples",
+    "budgetsTitle": "Budgets types",
+    "total": "Total",
+    "conditionsKicker": "À savoir",
+    "conditionsTitle": "Conditions générales",
+    "empty": "La grille tarifaire de la saison sera bientôt publiée. En attendant, écrivez-nous.",
+    "questions": "Une question sur les tarifs ?",
+    "contactCta": "Nous écrire",
+    "joinCta": "S’inscrire",
+    "seeAll": "Tous les tarifs {season}",
+    "ageRuleLabel": "Moins de 25 ans :",
+    "under18": "Moins de 18 ans",
+    "over18": "18 ans et plus",
+    "details": "Détails",
+    "conditions": "Conditions",
+    "seeInPricing": "Voir les tarifs {season}"
   }
 }

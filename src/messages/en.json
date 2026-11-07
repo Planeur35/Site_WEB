@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "club": "The club",
+    "club": "The association",
     "gliders": "Our gliders",
     "join": "Come and fly!",
     "discover": "Try gliding",
@@ -19,55 +19,75 @@
     "training": "Pilot training",
     "campaign": "Advanced training",
     "competition": "Competition",
-    "history": "Club history",
+    "history": "Our history",
     "menu": "Menu",
     "mainNav": "Main navigation",
-    "fullNav": "Full menu"
+    "fullNav": "Full menu",
+    "breadcrumb": "Breadcrumb",
+    "discoverShort": "Try it",
+    "openMenu": "Open the full menu",
+    "close": "Close",
+    "closeMenu": "Close the menu",
+    "submenu": "{label} submenu",
+    "groupFly": "Fly",
+    "groupClub": "The association",
+    "groupNews": "News",
+    "groupPractical": "Practical",
+    "book": "Book",
+    "bookTrial": "Book a trial flight",
+    "trialPrice": "€{adult} · €{young} under 18",
+    "trialPriceSingle": "€{amount}",
+    "language": "Language",
+    "partners": "Partners",
+    "pricing": "Prices"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
-    "brandKicker": "PIV · Planeurs d’Ille-et-Vilaine",
-    "discover": "Discover",
     "backToHome": "Back to home",
     "loadingMap": "Loading map…",
-    "switchLanguageLabel": "Passer en français"
+    "languageFr": "Français",
+    "languageEn": "English",
+    "backToTop": "Back to top",
+    "frenchOnly": "This section is only available in French.",
+    "brandLine1": "Planeurs",
+    "brandLine2": "d’Ille-et-Vilaine"
   },
   "meta": {
     "home": {
-      "title": "PIV – Planeurs d’Ille-et-Vilaine, gliding club",
-      "description": "PIV, Planeurs d’Ille-et-Vilaine: a gliding club in Brittany. Gliders, pilot training, trial flights and club news."
+      "title": "Planeurs d’Ille-et-Vilaine, a gliding association in Brittany",
+      "description": "Planeurs d’Ille-et-Vilaine, a gliding association open to everyone: trial flights, gift vouchers, pilot training, access for people with disabilities."
     },
     "club": {
-      "title": "The club",
-      "description": "The PIV club: who we are, the airfield and its flying area, training, advanced training, competition and club history."
+      "title": "The association",
+      "description": "The Planeurs d’Ille-et-Vilaine association: who we are, the airfield and its flying area, training, advanced training, competition and our history."
     },
     "gliders": {
       "title": "Our gliders",
-      "description": "The PIV club gliders, one by one: training two-seaters and performance single-seaters."
+      "description": "The association’s gliders, one by one: training two-seaters and performance single-seaters."
     },
     "join": {
       "title": "Come and fly: prices and membership",
-      "description": "Membership and training prices at the PIV gliding club."
+      "description": "Membership and training prices at the Planeurs d’Ille-et-Vilaine gliding association."
     },
     "discover": {
       "title": "Try gliding",
-      "description": "A trial glider flight with a PIV instructor: how it works, price and booking."
+      "description": "A trial glider flight with one of the association’s pilots: how it works, price and booking."
     },
     "news": {
       "title": "News and events",
-      "description": "News from the PIV club and upcoming events."
+      "description": "News from the association and upcoming events."
     },
     "stories": {
       "title": "Flight stories",
-      "description": "Memorable flights from and to PIV, with their WeGlide tracks."
+      "description": "Memorable flights from and to Saint-Sulpice-des-Landes, with their WeGlide tracks."
     },
     "gallery": {
       "title": "Photo gallery",
-      "description": "Photos of the PIV club: gliders, landscapes and club life."
+      "description": "Photos of the association: gliders, landscapes and flights."
     },
     "webcam": {
       "title": "Webcam",
-      "description": "The PIV club webcam, refreshed every minute."
+      "description": "The airfield webcam, refreshed every minute."
     },
     "links": {
       "title": "Useful links",
@@ -75,48 +95,109 @@
     },
     "contact": {
       "title": "Contact",
-      "description": "Write to the PIV gliding club, Planeurs d’Ille-et-Vilaine."
+      "description": "Write to the Planeurs d’Ille-et-Vilaine association and find Saint-Sulpice-des-Landes airfield."
     },
     "legal": {
       "title": "Legal notice",
       "description": "Legal information about the publisher and host of the website, and how personal data is handled."
+    },
+    "pricing": {
+      "title": "{season} prices",
+      "description": "All the association’s prices: trial flight, pilot training, membership, flying packages, launches and glider storage."
     }
   },
   "home": {
-    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "heroTitle": "Your first flight in a glider",
     "heroSubtitle": "Gliding in Brittany, open to everyone.",
-    "slideLabel": "Photo {n}",
     "statsHours": "Flight hours this year",
     "statsHoursYear": "Flight hours in {year}",
-    "statsGliders": "Club gliders",
+    "statsGliders": "Gliders",
     "statsFounded": "Founded",
     "cardTryKicker": "First contact",
     "cardTryTitle": "Try gliding",
     "cardTryText": "Trial flights open to everyone, by booking.",
-    "cardLearnKicker": "Club school",
+    "cardLearnKicker": "Flying school",
     "cardLearnTitle": "Learn to fly",
     "cardLearnText": "The training path, from your first flight to your badges.",
-    "cardJoinKicker": "Join PIV",
+    "cardJoinKicker": "Join us",
     "cardJoinTitle": "Join",
     "cardJoinText": "Prices and how to join.",
     "latestKicker": "Journal",
     "latestTitle": "Latest news",
     "allNews": "All news and events",
     "statsPilots": "Licensed pilots",
-    "statsKm": "Kilometres flown since the club was founded"
+    "statsKm": "Kilometres flown since the association was founded",
+    "heroKicker": "Planeurs d’Ille-et-Vilaine · Saint-Sulpice-des-Landes",
+    "heroCta": "Book a trial flight",
+    "heroPrice": "<b>€{adult}</b> · €{young} under 18",
+    "heroPriceSingle": "<b>€{adult}</b> per flight",
+    "slidesLabel": "Photos of the association",
+    "slideCounter": "Photo {n} of {total}",
+    "slidePause": "Pause the slideshow",
+    "slidePlay": "Play the slideshow",
+    "slidePrev": "Previous photo",
+    "slideNext": "Next photo",
+    "statsLabel": "The association in figures",
+    "startKicker": "Where to start",
+    "startTitle": "From first flight to first licence",
+    "cardTryPrice": "€{adult}, or €{young} for under-18s.",
+    "cardTryPriceSingle": "€{adult} per flight.",
+    "cardTryCta": "Book a flight",
+    "cardLearnCta": "Training",
+    "cardJoinCta": "See the packages",
+    "giftKicker": "Flight vouchers",
+    "giftTitle": "Give the sky",
+    "giftText": "A birthday, a farewell, a team day: flight vouchers are available for individuals and companies.",
+    "giftCta": "Give a flight",
+    "giftCompanyCta": "For companies",
+    "membersTitle": "Life at the airfield",
+    "webcamLive": "live",
+    "nextEvent": "Next event",
+    "findUsKicker": "Getting here",
+    "findUsTitle": "Find us",
+    "findUsText": "We fly from Saint-Sulpice-des-Landes airfield, in the south of Ille-et-Vilaine.",
+    "findUsDirections": "Get directions",
+    "findUsContact": "Write to us",
+    "findUsPopup": "Saint-Sulpice-des-Landes airfield",
+    "openToAllKicker": "Open to everyone",
+    "openToAllTitle": "Fly, with or without a disability",
+    "openToAllText": "The association has a glider for pilots with disabilities: a two-seater with adapted controls that lets people with reduced mobility fly and learn to pilot.",
+    "openToAllContact": "Talk to us",
+    "openToAllGlider": "See our gliders"
   },
   "club": {
-    "heroKicker": "The club",
+    "heroKicker": "The association",
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Coming soon",
-    "empty": "The club pages are on their way.",
-    "anecdote": "Anecdote"
+    "empty": "These pages are on their way.",
+    "anecdote": "Anecdote",
+    "heroLead": "A gliding association in Brittany, at Saint-Sulpice-des-Landes airfield.",
+    "sectionNav": "Page sections",
+    "factsTitle": "The association at a glance",
+    "factsField": "Airfield",
+    "factsFleet": "Fleet",
+    "factsFleetText": "{count} gliders, from two-seat trainers to performance single-seaters",
+    "factsPilots": "Pilots",
+    "factsPilotsText": "{count} licensed pilots",
+    "factsSeeFleet": "See the fleet",
+    "trainingCta": "Take a first flight",
+    "pathTitle": "The training path, step by step",
+    "pathStepLabel": "Step {n}",
+    "pathNext": "And then",
+    "pathStep1Title": "Trial flight",
+    "pathStep1Text": "A first flight in a two-seater with one of our pilots.",
+    "pathStep2Title": "Dual flights",
+    "pathStep2Text": "Take-off, turns, approach and landing, with the instructor.",
+    "pathStep3Title": "First solo",
+    "pathStep3Text": "Your first flight alone on board.",
+    "pathStep4Title": "The licence",
+    "pathStep4Text": "Theory and a flight test: the sailplane pilot licence (SPL).",
+    "pathStep5Title": "Cross-country and badges",
+    "pathStep5Text": "Distance flights, and the silver, gold and diamond badges."
   },
   "gliders": {
     "heroKicker": "The fleet",
     "heroTitle": "Our gliders",
-    "sectionKicker": "Club fleet",
-    "sectionTitle": "Every glider, one by one",
     "empty": "The fleet will be presented here soon.",
     "wingspan": "Wingspan",
     "glideRatio": "Glide ratio",
@@ -130,7 +211,12 @@
       "monoplace-debut": "Beginner single-seater",
       "monoplace-perf": "Performance single-seater",
       "remorqueur": "Tow plane"
-    }
+    },
+    "registration": "Registration",
+    "year": "In service since",
+    "maxWeight": "Maximum weight",
+    "instrumentation": "Instruments",
+    "details": "Specifications"
   },
   "pricing": {
     "amount": "€{amount}",
@@ -146,15 +232,17 @@
       "over25": "25 and over",
       "under18": "Under 18",
       "adult": "Adult"
-    }
+    },
+    "onRequest": "On request",
+    "condition": "{age}: {details}"
   },
   "join": {
     "heroKicker": "Come and fly!",
-    "heroTitle": "Prices",
+    "heroTitle": "Join the association",
     "introKicker": "Prices",
     "introTitle": "This year’s prices",
     "tableOpen": "Open the table full size",
-    "membershipTitle": "Club membership (members)",
+    "membershipTitle": "Association membership (members)",
     "trainingPackTitle": "Training pack",
     "advancedPackTitle": "Additional training pack",
     "empty": "Prices will be published soon. Meanwhile, write to us.",
@@ -162,16 +250,22 @@
     "howTitle": "How to join",
     "howEmpty": "Membership details will be published soon. Meanwhile, write to us.",
     "contactCta": "Write to us",
-    "tryCta": "Try first"
+    "tryCta": "Try first",
+    "packagesCaption": "Season packages",
+    "packagesOffer": "Package",
+    "packsCaption": "Learning to fly",
+    "packsOffer": "Pack",
+    "packsPrice": "Price",
+    "heroLead": "Membership, flying packages and training: everything you need to fly all season.",
+    "joinOnline": "Sign up online"
   },
   "discover": {
-    "heroKicker": "First flight",
-    "heroTitle": "Try gliding",
+    "heroKicker": "Trial flight",
+    "heroTitle": "Treat yourself to the sky",
     "kicker": "Discovery",
     "title": "Introductory flights",
     "descriptionKicker": "The flight",
-    "defaultDescription": "A trial flight is the best way to discover gliding: you fly in a two-seater with one of the club’s instructors.",
-    "priceKicker": "Price",
+    "defaultDescription": "A trial flight is the best way to discover gliding: you fly in a two-seater with one of the association’s experienced pilots.",
     "bookingKicker": "Booking",
     "bookingTitle": "Book and pay online",
     "bookingText": "Booking and payment are done online. Gift vouchers are available for individuals and companies.",
@@ -179,11 +273,45 @@
     "contactCta": "Write to us to book",
     "questionCta": "Ask a question",
     "faqKicker": "FAQ",
-    "faqTitle": "Frequently asked questions"
+    "faqTitle": "Frequently asked questions",
+    "leavingSite": "You will leave planeur35.org for the association’s payment page.",
+    "stepsKicker": "The flight",
+    "stepsTitle": "How your first flight goes",
+    "step1Title": "Welcome and briefing",
+    "step1Text": "After the paperwork (the day licence is included in the voucher), your pilot shows you the glider, the safety instructions and how the flight will go.",
+    "step2Title": "Take-off",
+    "step2Text": "The glider takes off towed by the association’s microlight, then releases at height. From there, no engine: just the wind and the silence.",
+    "step3Title": "In the air",
+    "step3Text": "You sit in the front, your pilot behind. How long you fly depends on the day’s weather.",
+    "step4Title": "Landing and debrief",
+    "step4Text": "Back on the ground, a few words about the flight, and all your questions about what comes next.",
+    "practicalKicker": "Before you come",
+    "practicalTitle": "Good to know",
+    "practicalAge": "Age",
+    "practicalWeight": "Weight",
+    "practicalDuration": "Duration",
+    "practicalWeather": "Weather",
+    "practicalClothes": "What to wear",
+    "practicalClothesText": "Comfortable clothes, closed shoes, a cap and sunglasses.",
+    "practicalAccess": "Getting here",
+    "practicalMap": "Map and directions",
+    "vouchersKicker": "Flight vouchers",
+    "vouchersTitle": "A flight to give",
+    "voucherPersonTitle": "For someone close",
+    "voucherPersonText": "A named voucher to give for a birthday or a celebration.",
+    "voucherPersonCta": "Buy a voucher",
+    "voucherCompanyTitle": "For a company",
+    "voucherCompanyText": "Client gifts, staff committees, team days: several vouchers or a day at the airfield, on quotation.",
+    "voucherCompanyCta": "Ask for a quote",
+    "nextTitle": "After the first flight?",
+    "nextText": "See how training works, from the first flight to the badges, and the packages to fly all season.",
+    "nextLearnCta": "Learn to fly",
+    "nextJoinCta": "Packages",
+    "stickyCta": "Book"
   },
   "news": {
     "heroKicker": "News",
-    "heroTitle": "News from the club",
+    "heroTitle": "News from the association",
     "listKicker": "Journal",
     "listTitle": "Latest news",
     "empty": "No news yet.",
@@ -191,7 +319,8 @@
     "agendaKicker": "Events",
     "agendaTitle": "Upcoming events",
     "agendaEmpty": "No upcoming events.",
-    "at": "at {time}"
+    "at": "at {time}",
+    "readMore": "Read more"
   },
   "share": {
     "label": "Share",
@@ -200,27 +329,30 @@
   },
   "stories": {
     "heroKicker": "Stories",
-    "heroTitle": "Flights that shaped PIV",
-    "kicker": "Sky archives",
-    "title": "Memorable flights from and to PIV",
+    "heroTitle": "Flights we remember",
+    "title": "Memorable flights from and to Saint-Sulpice-des-Landes",
     "empty": "Stories are coming soon.",
     "weglide": "See the track on WeGlide",
-    "clubOnWeglide": "All club flights on WeGlide",
-    "all": "All stories"
+    "clubOnWeglide": "All our flights on WeGlide",
+    "all": "All stories",
+    "read": "Read the story"
   },
   "gallery": {
     "heroKicker": "In pictures",
     "heroTitle": "Gallery",
-    "kicker": "Club life",
-    "title": "Club photos",
-    "empty": "Photos will be available soon."
+    "title": "Photos of the association",
+    "empty": "Photos will be available soon.",
+    "open": "Enlarge the photo",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "close": "Close",
+    "viewer": "Photo viewer",
+    "photo": "Photo"
   },
   "webcam": {
     "heroKicker": "Airfield view",
     "heroTitle": "Webcam",
-    "kicker": "On the field",
-    "title": "The club webcam",
-    "alt": "View of the club airfield",
+    "alt": "View of the airfield",
     "refresh": "Image refreshed every minute",
     "lastUpdate": "last updated at {time}",
     "justNow": "last updated just now",
@@ -231,8 +363,6 @@
   "links": {
     "heroKicker": "Resources",
     "heroTitle": "Useful links",
-    "kicker": "The connected pilot",
-    "title": "All useful links",
     "empty": "Links will be available soon.",
     "groups": {
       "institutions": "Institutions",
@@ -249,7 +379,7 @@
     "title": "Contact us",
     "formKicker": "Write to us",
     "formTitle": "A question?",
-    "subtitle": "Want to fly, join the club or just have a question? Write to us.",
+    "subtitle": "Want to fly, join us or just have a question? Write to us.",
     "name": "Name",
     "email": "Email",
     "subject": "Subject",
@@ -264,17 +394,16 @@
     "address": "Address",
     "findUsKicker": "Getting here",
     "findUs": "Find us",
-    "mapPopup": "The club airfield"
+    "mapPopup": "Saint-Sulpice-des-Landes airfield",
+    "directions": "Get directions"
   },
   "legal": {
-    "kicker": "Legal information",
     "heroKicker": "Legal information",
     "heroTitle": "Legal notice",
-    "title": "Who we are, and how your data is handled",
     "intro": "The information below is provided in accordance with French law on trust in the digital economy (LCEN) and the General Data Protection Regulation (GDPR).",
     "editor": {
       "title": "Publisher",
-      "text": "The website planeur35.org is published by the association {name}, a gliding club.",
+      "text": "The website planeur35.org is published by the association {name}, a gliding association.",
       "seat": "Registered office:",
       "id": "RNA or SIRET number:",
       "email": "Email:",
@@ -309,7 +438,7 @@
     },
     "liability": {
       "title": "External links and liability",
-      "text": "The website contains links to third-party sites (federations, weather, WeGlide…) for which the association is not responsible. Published information (opening times, prices, availability) may change: if in doubt, contact the club."
+      "text": "The website contains links to third-party sites (federations, weather, WeGlide…) for which the association is not responsible. Published information (opening times, prices, availability) may change: if in doubt, contact the association."
     }
   },
   "error": {
@@ -322,8 +451,47 @@
   },
   "footer": {
     "navigation": "Navigation",
-    "contact": "Contact",
     "writeToUs": "Write to us",
-    "legal": "Legal notice"
+    "legal": "Legal notice",
+    "otherLanguage": "Version française"
+  },
+  "partners": {
+    "bandTitle": "With the support of",
+    "sectionKicker": "Partners",
+    "sectionTitle": "Our partners",
+    "sectionSub": "Federations, local authorities and labels supporting the association.",
+    "visit": "{name} website"
+  },
+  "pricingPage": {
+    "heroKicker": "Prices",
+    "heroTitle": "{season} prices",
+    "heroTitleNoSeason": "Prices",
+    "heroLead": "Every option the association offers, from your first flight to flying on your own.",
+    "edition": "Published {date}",
+    "download": "Download the price list (PDF)",
+    "under25": "Under 25",
+    "over25": "25 and over",
+    "price": "Price",
+    "service": "Service",
+    "includes": "Includes:",
+    "excludes": "Does not include:",
+    "from": "from",
+    "sectionNav": "Page sections",
+    "budgetsKicker": "Examples",
+    "budgetsTitle": "Sample budgets",
+    "total": "Total",
+    "conditionsKicker": "Good to know",
+    "conditionsTitle": "General conditions",
+    "empty": "This season’s price list will be published soon. Meanwhile, write to us.",
+    "questions": "A question about prices?",
+    "contactCta": "Write to us",
+    "joinCta": "Join",
+    "seeAll": "All {season} prices",
+    "ageRuleLabel": "Under 25:",
+    "under18": "Under 18",
+    "over18": "18 and over",
+    "details": "Details",
+    "conditions": "Conditions",
+    "seeInPricing": "See the {season} prices"
   }
 }

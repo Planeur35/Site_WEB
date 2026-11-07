@@ -3,15 +3,18 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { absoluteUrl, buildMetadata } from '@/lib/metadata';
 import PortableText from '@/components/sanity/PortableText';
+import Anecdote from '@/components/ui/Anecdote';
+import Breadcrumb from '@/components/ui/Breadcrumb';
+import Container from '@/components/ui/Container';
+import FrenchOnlyNote from '@/components/ui/FrenchOnlyNote';
 import Kicker from '@/components/ui/Kicker';
-import PageHero from '@/components/ui/PageHero';
+import SanityPhoto from '@/components/ui/SanityPhoto';
 import ShareButtons from '@/components/ui/ShareButtons';
-import Tag from '@/components/ui/Tag';
 import TextLink from '@/components/ui/TextLink';
 import { formatMonthYear } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { urlFor } from '@/lib/sanity/image';
-import { localize } from '@/lib/sanity/localize';
+import { isFrenchFallback, localize } from '@/lib/sanity/localize';
 import { allFlightStoriesQuery, flightStoryBySlugQuery } from '@/lib/sanity/queries';
 import type { FlightStory } from '@/lib/sanity/types';
 
@@ -41,12 +44,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-/** A flight story, laid out like a magazine article (same spirit as the club history). */
+/** A flight story, laid out as a long read like the club history. */
 export default async function StoryPage({ params }: PageProps) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('stories');
-  const tClub = await getTranslations('club');
+  const tNav = await getTranslations('nav');
 
   const story = await getStory(slug);
   if (!story) notFound();
@@ -55,42 +58,53 @@ export default async function StoryPage({ params }: PageProps) {
   const intro = localize(story.excerpt, locale);
   const url = absoluteUrl({ pathname: '/recits/[slug]', params: { slug } }, locale);
 
+  const meta = [story.flightDate && formatMonthYear(story.flightDate, locale), story.aircraft].filter(Boolean).join(' · ');
+
+  const french = [story.title, story.excerpt, story.body].some((field) => isFrenchFallback(field, locale));
+  const fr = french ? 'fr' : undefined;
+
   return (
-    <>
-      <PageHero kicker={t('heroKicker')} title={title} variant={1} image={story.image} />
-      <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:px-8 md:py-24">
-        <TextLink href="/recits">{t('all')}</TextLink>
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          {story.flightDate && (
-            <span className="text-xs font-medium uppercase tracking-[0.25em] text-sky-800">
-              {formatMonthYear(story.flightDate, locale)}
-            </span>
-          )}
-          {story.aircraft && <Tag>{story.aircraft}</Tag>}
-        </div>
-        {intro && (
-          <p className="mt-6 font-serif text-xl leading-relaxed text-slate-800 first-letter:float-left first-letter:mr-3 first-letter:text-6xl first-letter:font-bold first-letter:text-sky-950">
-            {intro}
-          </p>
-        )}
-        <PortableText value={localize(story.body, locale)} className="mt-8" />
-        {story.anecdotes?.map((anecdote) => (
-          <aside key={anecdote._key} className="mt-8 border-l-2 border-sky-500 py-1 pl-6">
-            <Kicker>
-              {tClub('anecdote')} · {localize(anecdote.title, locale)}
-            </Kicker>
-            <p className="font-serif text-lg leading-relaxed text-slate-700">{localize(anecdote.text, locale)}</p>
-          </aside>
-        ))}
-        {story.weglideUrl && (
-          <p className="mt-10">
+    <article className="pt-12 pb-20 lg:pt-16 lg:pb-32">
+      <Container>
+        <Breadcrumb trail={[{ href: '/recits', label: tNav('stories') }]} current={title} />
+        {/* Long read, like the club history: centred header, wide photo, text in a 680 px column */}
+        <header className="mx-auto mt-10 flex max-w-[760px] flex-col lg:mt-14 lg:items-center lg:text-center">
+          <Kicker className="first-letter:uppercase">{meta || t('heroKicker')}</Kicker>
+          <h1 lang={fr} className="font-display text-[2.375rem] leading-[1.05] font-semibold tracking-titre text-balance text-azur lg:text-[3.5rem] lg:leading-[1.03]">
+            {title}
+          </h1>
+          {intro && <p lang={fr} className="mt-5 text-[1.1875rem] leading-[1.55] text-texte lg:text-[1.375rem]">{intro}</p>}
+          {french && <FrenchOnlyNote className="mt-5" />}
+        </header>
+        <SanityPhoto
+          image={story.image}
+          label={title}
+          className="mx-auto mt-10 aspect-[16/9] max-w-[1040px] lg:mt-14"
+          ratio={0.5625}
+          sizes="(max-width: 1100px) 100vw, 1040px"
+          priority
+        />
+        <PortableText value={localize(story.body, locale)} className="prose-piv-longread mx-auto mt-10 max-w-[680px] lg:mt-16" lang={fr} />
+        <div className="mx-auto mt-10 flex max-w-[680px] flex-col items-start gap-6">
+          {story.anecdotes?.map((anecdote) => (
+            <Anecdote
+              key={anecdote._key}
+              title={localize(anecdote.title, locale)}
+              text={localize(anecdote.text, locale)}
+              lang={isFrenchFallback(anecdote.text, locale) ? 'fr' : undefined}
+            />
+          ))}
+          {story.weglideUrl && (
             <TextLink href={story.weglideUrl} external>
               {t('weglide')}
             </TextLink>
-          </p>
-        )}
-        <ShareButtons url={url} title={title} className="mt-12 border-t border-sky-900/15 pt-6" />
-      </article>
-    </>
+          )}
+          <div className="flex w-full flex-col items-start gap-6 border-t border-horizon pt-6">
+            <ShareButtons url={url} title={title} />
+            <TextLink href="/recits">{t('all')}</TextLink>
+          </div>
+        </div>
+      </Container>
+    </article>
   );
 }

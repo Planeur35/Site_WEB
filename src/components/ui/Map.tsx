@@ -14,7 +14,7 @@ function MapLoading() {
   const t = useTranslations('common');
   return (
     <div className="flex h-[400px] w-full items-center justify-center bg-horizon">
-      <p className="text-sm text-slate-600">{t('loadingMap')}</p>
+      <p className="text-sm text-brume">{t('loadingMap')}</p>
     </div>
   );
 }

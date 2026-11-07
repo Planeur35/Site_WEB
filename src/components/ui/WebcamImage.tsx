@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 interface WebcamImageProps {
@@ -27,16 +28,16 @@ export default function WebcamImage({ url }: WebcamImageProps) {
   }, [url, locale]);
 
   return (
-    <div className="border border-sky-900/15 bg-white">
-      <div className="relative aspect-video bg-sky-100">
+    <div>
+      <div className="relative aspect-video overflow-hidden rounded-md bg-ciel">
         {failed ? (
-          <p className="absolute inset-0 flex items-center justify-center p-6 text-center text-sm text-slate-600">{t('unavailable')}</p>
+          <p className="absolute inset-0 flex items-center justify-center p-6 text-center text-texte">{t('unavailable')}</p>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element -- external image reloaded every minute, not optimisable
           <img src={src} alt={t('alt')} className="absolute inset-0 h-full w-full object-cover" onError={() => setFailed(true)} />
         )}
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-sky-900/15 px-4 py-3 text-xs text-slate-600 sm:px-6">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-[0.9375rem] text-brume">
         <span>
           {t('refresh')} · {updatedAt ? t('lastUpdate', { time: updatedAt }) : t('justNow')}
         </span>
@@ -44,9 +45,10 @@ export default function WebcamImage({ url }: WebcamImageProps) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center uppercase tracking-[0.2em] text-sky-800 underline decoration-sky-300 underline-offset-4"
+          className="inline-flex h-12 items-center gap-2.5 rounded-sm border-[1.5px] border-azur px-[22px] font-semibold text-azur transition-colors duration-150 ease-planeur hover:bg-ciel"
         >
-          {t('open')} <span aria-hidden="true">&nbsp;↗</span>
+          {t('open')}
+          <ExternalLink size={18} aria-hidden="true" />
         </a>
       </div>
     </div>

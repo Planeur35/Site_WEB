@@ -1,12 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  /* Sky palette, from the Site_WEB design */
-  --color-ciel: #f4f7fa;
-  --color-horizon: #eaf1f7;
-  --color-nuit: #0e1c2b;
-  --color-azur: #12304f;
-  --color-altitude: #3a7ca5;
+  /* Type: next/font exposes --font-inter-tight and --font-inter on <html> */
+  --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Colour: ciel & marine (see docs/redesign/handoff.md) */
+  --color-blanc: #ffffff;        /* page background */
+  --color-ciel: #f1f6fb;         /* alternate band, panels, price tables */
+  --color-horizon: #dcebf7;      /* hairlines on ciel, chips, progress track */
+  --color-zenith: #d5e7f5;       /* top of the placeholder sky */
+  --color-brise: #edf5fb;        /* middle of the placeholder sky */
+  --color-altitude: #1a68b0;     /* links, focus ring, icons */
+  --color-azur: #0f3a64;         /* headings */
+  --color-nuit: #0b1a2a;         /* strong text, footer and lightbox background */
+  --color-texte: #33465a;        /* body copy */
+  --color-brume: #5b6b7b;        /* secondary text */
+  --color-nuage: #c9d6e3;        /* footer text on nuit */
+  --color-givre: #9fb3c8;        /* footer fine print on nuit */
+  --color-balise: #1d5c96;       /* marine: the one action button, eyebrows */
+  --color-balise-fonce: #164a7a; /* its hover/active */
+  --color-balise-vif: #c9a77a;   /* sable: decoration only (trace dot), never text */
+  --color-erreur: #b42318;       /* form errors only */
+  --color-valide: #1f6f43;       /* form success only */
+
+  /* Type scale (desktop values) */
+  --text-display: 5.5rem;   --text-display--line-height: 1;    --text-display--letter-spacing: -0.035em;
+  --text-h1: 4.75rem;       --text-h1--line-height: 1;         --text-h1--letter-spacing: -0.035em;
+  --text-h2: 2.5rem;        --text-h2--line-height: 1.1;       --text-h2--letter-spacing: -0.02em;
+  --text-h3: 1.75rem;       --text-h3--line-height: 1.15;      --text-h3--letter-spacing: -0.015em;
+  --text-h4: 1.375rem;      --text-h4--line-height: 1.25;      --text-h4--letter-spacing: -0.01em;
+  --text-lead: 1.3125rem;   --text-lead--line-height: 1.55;
+  --text-body: 1.125rem;    --text-body--line-height: 1.65;
+
+  /* Tight tracking of the large titles, for their mobile sizes */
+  --tracking-titre: -0.035em;
+
+  /* Elevation: only what floats (scrolled header, dropdowns, full menu, map label) */
+  --shadow-flottant: 0 12px 32px -12px rgb(11 26 42 / 0.22), 0 0 0 1px rgb(11 26 42 / 0.05);
+
+  /* Motion */
+  --ease-planeur: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-montee: montee 600ms var(--ease-planeur) both;
+  @keyframes montee {
+    from { opacity: 0; translate: 0 12px; }
+    to   { opacity: 1; translate: 0 0; }
+  }
+  /* Hero progress bar: fills over one slide interval (duration set inline) */
+  --animate-jauge: jauge linear both;
+  @keyframes jauge {
+    from { scale: 0 1; }
+    to   { scale: 1 1; }
+  }
 }
 
 html {
@@ -14,11 +59,11 @@ html {
 }
 
 body {
-  background: var(--color-ciel);
+  background: var(--color-blanc);
 }
 
 :focus-visible {
-  outline: 2px solid #0369a1;
+  outline: 2px solid var(--color-altitude);
   outline-offset: 3px;
 }
 
@@ -42,35 +87,47 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-/* Rich text written in Sanity (paragraphs, headings, lists, quotes, photos) */
+/* Rich text written in Sanity (paragraphs, headings, lists, quotes, photos).
+   The caller sets the 680 px column. */
 .prose-piv {
+  font-size: 1.0625rem;
   line-height: 1.75;
-  color: var(--color-slate-700);
+  color: var(--color-texte);
+}
+@media (min-width: 64rem) {
+  .prose-piv {
+    font-size: 1.1875rem;
+  }
 }
 .prose-piv > * + * {
   margin-top: 1.1em;
 }
+.prose-piv h2,
+.prose-piv h3 {
+  margin-top: 1.6em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-azur);
+}
 .prose-piv h2 {
-  margin-top: 1.8em;
-  font-family: var(--font-serif);
   font-size: 1.75rem;
-  line-height: 1.2;
-  color: var(--color-sky-950);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 .prose-piv h3 {
-  margin-top: 1.5em;
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  color: var(--color-sky-950);
+  font-size: 1.375rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 .prose-piv a {
-  color: var(--color-sky-900);
+  color: var(--color-altitude);
   text-decoration: underline;
-  text-decoration-color: var(--color-sky-300);
+  text-decoration-color: var(--color-horizon);
+  text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
 }
 .prose-piv a:hover {
-  text-decoration-color: var(--color-sky-900);
+  text-decoration-color: var(--color-altitude);
 }
 .prose-piv ul {
   list-style: disc;
@@ -80,11 +137,28 @@ summary::-webkit-details-marker {
   list-style: decimal;
   padding-left: 1.25rem;
 }
+/* Pull quote: no border, large display type, marine guillemets */
 .prose-piv blockquote {
-  border-left: 2px solid var(--color-sky-500);
-  padding-left: 1.5rem;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5625rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-azur);
+}
+@media (min-width: 64rem) {
+  .prose-piv blockquote {
+    font-size: 2rem;
+  }
+}
+.prose-piv blockquote::before {
+  content: "« ";
+  color: var(--color-balise);
+}
+.prose-piv blockquote::after {
+  content: " »";
+  color: var(--color-balise);
 }
 .prose-piv figure {
   margin: 2rem 0;
@@ -92,9 +166,50 @@ summary::-webkit-details-marker {
 .prose-piv figure img {
   width: 100%;
   height: auto;
+  border-radius: 6px;
 }
 .prose-piv figcaption {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--color-slate-600);
+  max-width: 680px;
+  margin: 0.5rem auto 0;
+  font-size: 0.9375rem;
+  color: var(--color-brume);
+}
+
+/*
+ * Long read in a centred 680 px column (the club history; later articles and flight stories):
+ * photos break out of the column on large screens and run edge to edge on phones,
+ * and the first paragraph opens with a drop cap.
+ */
+@media (min-width: 64rem) {
+  .prose-piv-longread figure {
+    margin-inline: calc((680px - min(1040px, 100vw - 80px)) / 2);
+  }
+  .prose-piv-longread > p:first-of-type::first-letter {
+    float: left;
+    margin: 0.4rem 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: 4.75rem;
+    font-weight: 600;
+    line-height: 0.8;
+    color: var(--color-azur);
+  }
+}
+@media (max-width: 63.99rem) {
+  .prose-piv-longread figure {
+    margin-inline: -1.25rem;
+  }
+  .prose-piv-longread figure img {
+    border-radius: 0;
+  }
+  .prose-piv-longread figcaption {
+    padding-inline: 1.25rem;
+  }
+}
+@media (min-width: 40rem) and (max-width: 63.99rem) {
+  .prose-piv-longread figure {
+    margin-inline: -2rem;
+  }
+  .prose-piv-longread figcaption {
+    padding-inline: 2rem;
+  }
 }

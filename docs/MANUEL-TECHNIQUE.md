@@ -31,7 +31,7 @@ Site vitrine bilingue (français par défaut, anglais) dont l'objectif principal
 | **Production** | https://piv-sigma.vercel.app (le domaine planeur35.org n'est pas encore basculé) |
 | **Back-office** | https://piv-sigma.vercel.app/studio, connexion avec un compte Sanity invité sur le projet |
 | **Code** | https://github.com/Planeur35/Site_WEB (public, organisation du club), branche `main` |
-| **Sanity** | Projet `8mup540n`, dataset `production`, administration sur https://www.sanity.io/manage |
+| **Sanity** | Projet `8mup540n`, datasets `production` (site en ligne) et `dev` (local et previews), administration sur https://www.sanity.io/manage |
 | **Vercel** | Projet `piv`, déploiement automatique à chaque push sur `main` |
 | **Spécification** | [`docs/superpowers/specs/2026-03-28-planeur35-website-redesign-design.md`](superpowers/specs/2026-03-28-planeur35-website-redesign-design.md) |
 
@@ -43,7 +43,7 @@ Deux contraintes ont guidé les choix : le contenu doit pouvoir être modifié p
 |---|---|---|
 | **Next.js 15** (App Router, React 19, TypeScript) | Pages, routage, server actions, sitemap et métadonnées | Pages pré-générées rapides et bien référencées, hébergement natif sur Vercel. |
 | **Tailwind CSS 4** | Styles | Tokens de design centralisés dans `src/app/globals.css`, pas de feuilles CSS à maintenir à côté. |
-| **next-intl 4** | Bilingue FR/EN | `/fr` par défaut, `/en` avec des URLs traduites (`/en/the-club/fleet`). Les libellés d'interface sont dans `src/messages/*.json`. |
+| **next-intl 4** | Bilingue FR/EN | `/fr` par défaut, `/en` avec des URLs traduites (`/en/gliders`). Les libellés d'interface sont dans `src/messages/*.json`. |
 | **Sanity 4** | CMS headless + Studio embarqué sur `/studio` | Interface d'édition simple, gestion des médias, CDN d'images (redimensionnement, WebP) et offre gratuite. Les champs traduisibles sont des objets `{ fr, en }`. |
 | **Vercel** | Hébergement et intégration continue | Offre gratuite, build à chaque push sur `main`, URL de preview pour chaque branche. |
 | **Resend** | Envoi du formulaire de contact | API d'email minimale, offre gratuite, appelée depuis une server action. |
@@ -57,7 +57,7 @@ React est la bibliothèque JavaScript qui décrit l'interface. Next.js est const
 - **Des composants.** L'interface est découpée en briques réutilisables : `PageHero`, `Section`, `Button`, `Header`… Chaque brique est une fonction qui renvoie du balisage.
 - **JSX / TSX.** Ce balisage s'écrit en syntaxe proche du HTML, directement dans le TypeScript (fichiers `.tsx`). TypeScript signale les erreurs dès l'écriture.
 - **Props et état.** Un composant reçoit des paramètres (les *props*, par exemple `<PageHero title="…" />`). Il peut aussi garder un état local (`useState`), comme le menu mobile ouvert ou fermé.
-- **Composants serveur ou client.** Avec l'App Router, un composant tourne par défaut sur le serveur : il lit Sanity et n'envoie que du HTML. Ceux qui ont besoin d'interactivité commencent par `'use client'` : `Header`, `LanguageToggle`, `HeroSlideshow`, `ShareButtons`, `WebcamImage`, `ContactForm`, `Gallery`, `Lightbox`, `Map`.
+- **Composants serveur ou client.** Avec l'App Router, un composant tourne par défaut sur le serveur : il lit Sanity et n'envoie que du HTML. Ceux qui ont besoin d'interactivité commencent par `'use client'` : `Header`, `NavDropdown`, `FullMenu`, `LanguageToggle`, `HeroSlideshow`, `ShareButtons`, `WebcamImage`, `ContactForm`, `Gallery`, `Lightbox`, `Map`.
 - **Écosystème.** Les bibliothèques de la stack (icônes lucide, lightbox, carte Leaflet, rendu du texte riche Sanity) sont des composants React prêts à l'emploi.
 
 ### Next.js en deux mots
@@ -113,7 +113,7 @@ flowchart TB
 src/
   app/
     [locale]/                 # toutes les pages publiques, /fr et /en
-      page.tsx                # accueil : photos qui défilent, chiffres clés, dernières actualités
+      page.tsx                # accueil : photos qui défilent, chiffres clés, trois cartes, actualités, Nos partenaires, bons de vol, Ouvert à tous (handiplaneur), Nous trouver (adresse, itinéraire, carte), accès membres
       club/                   # sections du club (#presentation, #plateforme, #formation…) et histoire
       planeurs/  adherer/  decouvrir/
       actualites/  actualites/[slug]/   # actualités et agenda (#agenda)
@@ -124,9 +124,9 @@ src/
     studio/[[...tool]]/       # Sanity Studio embarqué
     sitemap.ts  robots.ts  globals.css
   components/
-    layout/                   # Header (bandeau + menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
-    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, SkyVisual, HeroSlideshow, NewsRow, Button…
-    sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv)
+    layout/                   # Header (bandeau), NavDropdown (menus déroulants), FullMenu (menu complet), Footer, LanguageToggle, navItems.ts (entrées des menus)
+    ui/                       # PageHero, SitePageHero, Section, Kicker, SanityPhoto, HeroSlideshow, SectionNav, TrainingPath, PriceTable, AgendaItem, Anecdote, Breadcrumb, NewsRow, Button…
+    sanity/PortableText.tsx   # rendu du texte riche (style .prose-piv ; ajouter .prose-piv-longread pour une lecture longue en colonne de 680 px)
   lib/
     sanity/                   # client, fetch (sanityFetch), queries (GROQ), types, image (urlFor), imageLoader, localize
     email.ts  metadata.ts     # Resend, buildMetadata (OG, hreflang, canonical)
@@ -157,7 +157,7 @@ Créer `.env.local` à la racine. Ce fichier est ignoré par git, et les mêmes 
 
 ```bash
 NEXT_PUBLIC_SANITY_PROJECT_ID=8mup540n
-NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_DATASET=dev   # jamais production en local, voir « Deux datasets »
 RESEND_API_KEY=re_...            # clé Resend du club
 CONTACT_EMAIL=...                # destinataire du formulaire (repli : contact@planeur35.org)
 ```
@@ -178,20 +178,22 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
-| Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
-| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire du club | 🟢 sous 60 s |
+| Accueil `/` | Réglages du site : photos d'accueil (titre de chaque photo, sinon « Votre premier vol en planeur »), accroche, chiffres clés, photos des trois cartes, photo des bons de vol (sans photo, le bandeau s'affiche sans image) ; texte et photo facultatifs du bandeau « Ouvert à tous » (sinon un texte par défaut et la photo du planeur de catégorie Handiplaneur, ou le texte seul) ; adresse et coordonnées du terrain pour « Nous trouver » ; tarifs « Vol d'initiation » ; 3 dernières Actualités ; prochain événement de l'Agenda dans « La vie du club » | 🟢 sous 60 s |
+| L’association `/association` (`/club` redirige) | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition ; numérotées 01, 02… dans l'ordre des sections remplies) et Histoire du club ; photo d'en-tête des Réglages, sinon la photo de la section Présentation ; « L’association en bref » lit l'adresse, le nombre de planeurs et de pilotes brevetés des Réglages ; le cursus de formation est dans `messages/*.json`, sauf si un « Schéma du cursus » est téléversé dans la section Formation | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
-| Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
-| Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; lien de paiement des Réglages | 🟢 sous 60 s |
-| Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
-| Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
-| Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
+| Venez voler ! `/adherer` (titre « Rejoindre le club ») | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire ; tables de prix des fiches `tariff` (forfaits 20 h et illimité par âge, packs formation), affichées dès qu'un prix est saisi, « Sur demande » pour un prix manquant ; bouton « S'inscrire en ligne » dès que le lien d'inscription est saisi (Réglages du site → Contact et réseaux) | 🟢 sous 60 s |
+| Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), « Bon à savoir » (âge, poids, durée, météo : chaque ligne s'affiche une fois remplie), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; liens de paiement et d'achat des bons des Réglages ; les quatre étapes du vol sont dans `messages/*.json` | 🟢 sous 60 s |
+| Actualités `/actualites` | Actualités (`article`) à gauche et Agenda (`event`) à droite, l'agenda reste visible au défilement ; les événements passés disparaissent seuls ; chaque actualité s'ouvre en lecture longue | 🟢 sous 60 s |
+| Récits `/recits` et `/recits/[slug]` | Récits de vols : 6 au plus, en cartes larges (photo ou tracé, date, planeur, titre, résumé, lien WeGlide), une lecture longue par récit (introduction, texte, photos, anecdotes, lien WeGlide), mise en page commune avec l'histoire du club et les actualités | 🟢 sous 60 s |
+| Galerie, Webcam, Liens | Galerie photos (en colonnes, chaque photo garde ses proportions ; légende sous la photo) ; adresse de la webcam et liens pratiques des Réglages (rangés par groupe, le nom du site s'affiche sous chaque lien) | 🟢 sous 60 s |
 | Contact, pied de page | Adresse, e-mail, téléphone et réseaux des Réglages ; envoi du formulaire via Resend | 🟢 sous 60 s |
+| Tarifs `/tarifs` (`/en/prices`) | Page « Tarifs » (singleton) : saison, date d’édition, règle du tarif moins de 25 ans, PDF facultatif, sections (prestations avec deux prix par âge, un prix unique ou plusieurs options ; regroupements « Illimité », « À l’heure »… ; comprend / ne comprend pas / conditions ; précisions sous les prix), budgets types (totaux calculés par le site), conditions générales. Mise à jour d’une saison : changer la saison, la date d’édition et les montants. Chaque section a pour adresse son titre (`/tarifs#j-apprends-a-piloter`) ; sur Venez voler, les liens « Voir les tarifs » d’Adhésion, Pack formation et Pack complément trouvent leur section par le nom de la prestation (« Cotisation annuelle », « Pack Formation », « Pack Complément… ») : garder ces débuts de noms. Sans section, la page affiche « Bientôt ici » et disparaît des menus. Les tarifs « Vol d’initiation » et ceux de Venez voler viennent toujours des documents « Tarifs » : à mettre à jour aussi | 🟢 sous 60 s |
+| Partenaires | Type « Partenaire » (nom, logo, lien, type, rôle, ordre) : bandeau « Ils nous soutiennent » au-dessus du pied de page sur toutes les pages sauf L’association ; cartes « Nos partenaires » (composant `PartnerCards`) sur l’accueil, entre « Par où commencer » et « Journal », et sur L’association (section aussi dans les menus de L’association et masquée tant qu’aucun partenaire n’est saisi) ; ceux marqués « Ouvert à tous » apparaissent aussi dans ce bandeau de l’accueil. Sans partenaire, rien ne s’affiche | 🟢 sous 60 s |
 | Mentions légales `/mentions-legales` | Réglages du site (groupe Mentions légales) pour l'identité (dont le numéro d'affiliation FFVP, facultatif) ; textes dans `src/messages/*.json` (espace `legal`) | 🟢 sous 60 s (identité), 🟠 au prochain déploiement (textes) |
 | Photo d'en-tête de chaque page | Réglages du site → Photos d'en-tête (une photo par page ; sans photo, le dessin du ciel s'affiche) | 🟢 sous 60 s |
-| Menus et libellés | `src/messages/fr.json` et `en.json`, entrées dans `src/components/layout/navItems.ts` | 🟠 au prochain déploiement |
+| Menus et libellés | `src/messages/fr.json` et `en.json`, entrées dans `src/components/layout/navItems.ts` ; les liens vers une page encore vide (webcam, galerie, récits, histoire du club, section du club absente) sont masqués des menus jusqu'à ce que le contenu existe (`src/lib/emptyPages.ts`) | 🟠 au prochain déploiement (libellés), 🟢 sous 60 s (liens masqués) |
 
-> **Champs bilingues.** Chaque texte a un champ Français et un champ English facultatif. Si l'anglais est vide, le site affiche le français sur `/en` (`localize()` dans `src/lib/sanity/localize.ts`).
+> **Champs bilingues.** Chaque texte a un champ Français et un champ English facultatif. Si l'anglais est vide, le site affiche le français sur `/en` (`localize()` dans `src/lib/sanity/localize.ts`), marqué `lang="fr"` et précédé de la mention « This section is only available in French » (`isFrenchFallback()` et `FrenchOnlyNote`).
 
 ## 7. Recettes de mise à jour
 
@@ -206,7 +208,7 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 1. Créer `src/app/[locale]/<slug-fr>/page.tsx` sur le modèle d'une page existante : `setRequestLocale(locale)`, `generateMetadata` avec `buildMetadata()` et les clés `meta.<page>`, composants `PageHero` et `Section`.
 2. Déclarer la route et son slug anglais dans `src/i18n/routing.ts` → `pathnames`. Sans cette entrée, `Link` refuse le chemin au typage.
 3. Ajouter les libellés dans `fr.json` et `en.json`.
-4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau, `FULL_NAV` pour le menu complet et le pied de page.
+4. Ajouter l'entrée dans `src/components/layout/navItems.ts` : `HEADER_NAV` pour le bandeau (quatre entrées et le bouton principal, bleu marine), puis dans `NAV_GROUPS` (Voler, Le club, Actualités, Pratique) pour le menu complet et le pied de page.
 5. Ajouter le chemin et sa priorité dans `src/app/sitemap.ts`. Si la page remplace une ancienne adresse, ajouter une redirection dans `next.config.ts`.
 
 ### Rendre un contenu éditable dans Sanity
@@ -250,17 +252,92 @@ SANITY_WRITE_TOKEN=sk... npx tsx scripts/upload-fleet-images.ts # photos de la f
 
 Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-fleet-images.ts`. Ne jamais coller un token dans une conversation ni dans un fichier suivi par git.
 
+### Deux datasets : `production` et `dev`
+
+| Dataset | Lu et modifié par |
+|---|---|
+| `production` | le site en ligne et son Studio (https://piv-sigma.vercel.app/studio) |
+| `dev` | `npm run dev` en local et les previews Vercel des branches, avec leur Studio |
+
+Le dataset vient d'une seule variable, `NEXT_PUBLIC_SANITY_DATASET` : `dev` dans `.env.local`. Dans Vercel, la variable vaut `production` pour Production et Development, et `dev` pour Preview. Une variable `NEXT_PUBLIC_` est figée au build : après l'avoir changée, redéployer.
+
+- **Les bénévoles saisissent toujours dans le Studio de production.** Ce qui est saisi dans `dev` ne passe jamais en ligne.
+- `dev` est une copie : elle vieillit. Pour la remettre à jour depuis la production (avec la CLI Sanity, connectée par `npx sanity login`, configurée par `sanity.cli.ts`) :
+
+  ```bash
+  npx sanity dataset export production /tmp/production.tar.gz
+  npx sanity dataset import /tmp/production.tar.gz dev --replace
+  rm /tmp/production.tar.gz
+  ```
+
+- **Studio d'une preview.** Le Studio n'accepte que les origines déclarées (CORS). Chaque branche a une adresse fixe, `https://piv-git-<branche>-hamidsefatis-projects.vercel.app` (les `/` du nom deviennent des `-`) : l'ajouter une fois par branche, sans joker.
+
+  ```bash
+  npx sanity cors add https://piv-git-feat-exemple-hamidsefatis-projects.vercel.app --credentials
+  ```
+
 ### Images
 
 - Images éditoriales : à téléverser dans Sanity. `next/image` passe par `src/lib/sanity/imageLoader.ts` : c'est le CDN de Sanity qui redimensionne, pas l'hébergeur (dont l'optimisation d'images est limitée en offre gratuite).
-- Images statiques du code : dans `public/` (logo `logo.png`, `logo-icon.png`, `favicon.png`).
+- Images statiques du code : dans `public/`. Les logos viennent des fichiers officiels de l'association (dossier Drive « Logo PIV ») :
+  - `logo-icon.png` (en-tête et menu) et `favicon.png` : le carré du logo seul, découpé dans `PIV-logo-1000-fondtransparent.png` ;
+  - `logo-blanc.png` (pied de page, fond sombre) : `PIV-logo-blanc-1000-fondtransparent.png` ;
+  - `logo.png` (image de partage par défaut) : `PIV-logo-1000-fondblanc.png`.
+
+  Attention : malgré son nom, `PIV-logo-2000-fondtransparent.png` a un fond blanc opaque, et les SVG s'affichent mal (police non incluse, texte coupé).
 - Toujours renseigner le champ `alt`, présent sur tous les schémas d'image.
+
+### Publication des actualités sur Facebook et Instagram
+
+**Côté rédacteur.** Dans un article, cocher « Publier sur Facebook et Instagram » avant de publier (texte du post facultatif : sinon le titre et le résumé en français). L'article part une seule fois : sur la page Facebook, avec la carte de lien vers l'article, et sur Instagram s'il a une photo (Instagram n'accepte pas les posts sans image). Le bloc « Partage sur les réseaux » de l'article indique ensuite la date, les identifiants des posts ou l'erreur.
+
+**Fonctionnement.**
+
+```mermaid
+flowchart LR
+    S[Studio : article publié, case cochée] -->|webhook signé| R[/api/social/publish]
+    R -->|1. réserve l'article, liée à sa révision| L[(Sanity)]
+    R -->|2. post + lien| F[Page Facebook]
+    R -->|2. image + légende| I[Instagram]
+    R -->|3. identifiants ou erreur| L
+```
+
+La route (`src/app/api/social/publish/route.ts`, composition et appels Meta dans `src/lib/social.ts`) vérifie la signature du webhook, ignore les brouillons et les articles non cochés, puis « réserve » l'article (`socialPosts.startedAt`) avant d'envoyer : un webhook rejoué ou en double ne peut pas publier deux fois.
+
+**Mise en place (une fois).**
+
+1. **Compte Meta de l'association** (pas un compte personnel) : créer une app de type « Business » sur developers.facebook.com, administrée par ce compte, qui doit aussi gérer la page Facebook.
+2. **Jeton de page** : avec l'Explorateur de l'API Graph, obtenir un jeton utilisateur avec `pages_manage_posts`, `pages_read_engagement` (et, quand Instagram existera, `instagram_basic`, `instagram_content_publish`), l'échanger contre un jeton longue durée, puis lire le jeton de la page (`/me/accounts`) : il n'expire pas. Il devient invalide si l'administrateur quitte la page ou change de mot de passe : refaire cette étape.
+3. **Instagram** (plus tard) : compte professionnel relié à la page Facebook ; son identifiant se lit avec `/{page-id}?fields=instagram_business_account`. Tant que `META_IG_USER_ID` est vide, seul Facebook est publié.
+4. **Variables Vercel** (Production uniquement, jamais dans le code) :
+
+   | Variable | Contenu |
+   |---|---|
+   | `META_PAGE_ID`, `META_PAGE_TOKEN` | identifiant et jeton de la page Facebook |
+   | `META_IG_USER_ID` | compte Instagram (facultatif) |
+   | `SANITY_WEBHOOK_SECRET` | secret partagé avec le webhook (chaîne aléatoire) |
+   | `SANITY_WRITE_TOKEN` | jeton Sanity « Editor », pour noter le résultat dans l'article |
+   | `SITE_URL` | adresse publique du site tant que planeur35.org pointe vers l'ancien site (ex. `https://piv-sigma.vercel.app`) ; sert aux liens des posts et aux balises canonical |
+   | `SOCIAL_DRY_RUN` | `1` pour composer les posts sans les envoyer (tests) |
+
+5. **Webhook Sanity** (sanity.io/manage → API → Webhooks) : URL `https://<site>/api/social/publish`, dataset `production`, déclencheurs création et mise à jour, brouillons non inclus, méthode POST, secret = `SANITY_WEBHOOK_SECRET`, filtre et projection :
+
+   ```text
+   _type == "article" && socialShare == true && (!defined(socialPosts.startedAt) || (socialRetry == true && defined(socialPosts.error)))
+   {_id}
+   ```
+
+   Pas de webhook sur `dev` : les essais ne publient jamais rien.
+
+**Après une erreur.** L'article reste marqué comme envoyé, pour éviter tout doublon, et une case « Réessayer le partage » apparaît. Corriger la cause (jeton expiré, image refusée…), cocher la case et publier : seuls les réseaux en échec sont relancés.
+
+**Tester en local.** Avec `SANITY_WEBHOOK_SECRET` et `SOCIAL_DRY_RUN=1` dans `.env.local`, un appel signé comme le fait Sanity renvoie le post composé sans rien envoyer.
 
 ## 8. Déployer
 
 1. Vérifier en local : `npm run dev` pour contrôler visuellement (FR, EN, largeur mobile), puis `npm run build` qui doit passer sans erreur.
 2. Committer et pousser sur `main`. Vercel lance le build et met la production à jour tout seul. **Pas de `vercel --prod` manuel.**
-3. Pour une modification à faire relire, pousser sur une branche : Vercel crée une URL de preview.
+3. Pour une modification à faire relire, pousser sur une branche : Vercel crée une URL de preview, qui lit le dataset `dev`. Les previews sont publiques (protection Vercel désactivée) : le lien peut être envoyé tel quel pour relecture.
 4. Contrôler le résultat sur https://piv-sigma.vercel.app.
 
 > **Variables d'environnement.** Une variable ajoutée à `.env.local` doit aussi être créée dans Vercel → Settings → Environment Variables. Elle ne s'applique qu'aux déploiements suivants.
@@ -272,7 +349,7 @@ Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-
 - 🟠 **Contenu : rubriques vides.** Tarifs, pages du club, histoire, récits, agenda, chiffres clés et liens pratiques sont à saisir dans le Studio ; d'ici là, les pages affichent « Bientôt ici ». Vrais prix du vol d'initiation : 170 € (adulte), 130 € (moins de 18 ans).
 - 🟠 **Légal : mentions légales à compléter.** La page `/mentions-legales` existe. Il reste à saisir dans le Studio (Réglages du site → Mentions légales) le nom officiel de l'association, le siège, le numéro RNA ou SIRET et le directeur de la publication, puis à faire relire le texte par le bureau.
 - 🟠 **Domaine : URLs canoniques déjà sur www.planeur35.org.** `sitemap.ts` et `metadata.ts` utilisent `https://www.planeur35.org` alors que le site tourne sur piv-sigma.vercel.app. C'est voulu pour la bascule, mais il faut s'en souvenir en testant le SEO.
-- 🔵 **Carte de la page Contact : coordonnées par défaut.** La carte n'est plus affichée sur la page Club (le club ne veut pas publier sa localisation précise). Sur la page Contact, sans `aerodromeCoordinates` dans les Réglages, elle se centre sur 47.885, -1.688. À vérifier, ou à retirer aussi.
+- 🟠 **Coordonnées du terrain à corriger dans le Studio.** Les Réglages de production indiquent 47.885, -1.688, à environ 11 km au nord du terrain. OpenStreetMap place l'aérodrome de Saint-Sulpice-des-Landes en 47.7914, -1.6383 : c'est la valeur de secours du code (`src/lib/aerodrome.ts`) et celle du dataset `dev`. À reporter dans Réglages du site → Coordonnées du terrain. Le terrain est montré sur l'accueil (« Nous trouver », avec un lien d'itinéraire) et sur la page Contact.
 - 🔵 **Qualité : README par défaut.** Le `README.md` est encore celui de create-next-app. Certains contenus saisis dans Sanity n'ont pas d'accents (accroche « Club de vol a voile en Bretagne »).
 
 ## 10. Ancien et nouveau site
@@ -354,10 +431,10 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 
 | Chantier | Situation actuelle | Piste |
 |---|---|---|
-| Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Venez voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
+| Tarifs | Aucune fiche `tariff` saisie : la page Venez essayer n'affiche pas de prix, et les tables de prix de Venez voler ! restent masquées | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
-| Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |
+| Le club, histoire, récits | Les six sections du club sont remplies ; l'histoire et les récits sont vides | Écrire l'histoire du club et les récits dans le Studio ; faire relire le cursus de formation par un instructeur |
 | Mentions légales          | Page créée ; identité de l'association à saisir dans le Studio | Compléter Réglages du site → Mentions légales, faire relire le texte |
 | Réglages du site | `webcamUrl` vide, téléphone factice « 06 XX XX XX XX » (seed) | Compléter `siteSettings` dans le Studio (webcam, téléphone, réseaux) |
 | Email de contact | Expéditeur de test Resend | Vérifier le domaine dans Resend |
