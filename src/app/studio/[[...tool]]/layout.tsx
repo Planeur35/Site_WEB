@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sanity Studio | PIV',
+  title: 'Sanity Studio | Planeurs d'Ille-et-Vilaine',
 };
 
 export default function StudioLayout({
