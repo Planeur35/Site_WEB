@@ -1,0 +1,385 @@
+{
+  "nav": {
+    "home": "Home",
+    "club": "The association",
+    "gliders": "Our gliders",
+    "join": "Come and fly!",
+    "discover": "Try gliding",
+    "news": "News",
+    "newsList": "Latest news",
+    "agenda": "Events",
+    "stories": "Flight stories",
+    "gallery": "Gallery",
+    "webcam": "Webcam",
+    "links": "Useful links",
+    "contact": "Contact",
+    "presentation": "About us",
+    "platform": "The airfield",
+    "activities": "Members’ life",
+    "training": "Pilot training",
+    "campaign": "Advanced training",
+    "competition": "Competition",
+    "history": "Association history",
+    "menu": "Menu",
+    "mainNav": "Main navigation",
+    "fullNav": "Full menu",
+    "pricing": "Prices"
+  },
+  "common": {
+    "clubName": "Planeurs d’Ille-et-Vilaine",
+    "brandKicker": "Planeurs d’Ille-et-Vilaine",
+    "discover": "Discover",
+    "backToHome": "Back to home",
+    "loadingMap": "Loading map…",
+    "switchLanguageLabel": "Passer en français"
+  },
+  "meta": {
+    "home": {
+      "title": "Planeurs d’Ille-et-Vilaine, gliding association",
+      "description": "Planeurs d’Ille-et-Vilaine: a gliding association in Brittany. Gliders, pilot training, trial flights and association news."
+    },
+    "club": {
+      "title": "The association",
+      "description": "The association: who we are, the airfield and its flying area, training, advanced training, competition and association history."
+    },
+    "gliders": {
+      "title": "Our gliders",
+      "description": "The association’s gliders, one by one: training two-seaters and performance single-seaters."
+    },
+    "join": {
+      "title": "Come and fly: join the association",
+      "description": "Join the Planeurs d’Ille-et-Vilaine gliding association: membership and training."
+    },
+    "discover": {
+      "title": "Try gliding",
+      "description": "A trial glider flight with an instructor of the association: how it works, price and booking."
+    },
+    "news": {
+      "title": "News and events",
+      "description": "News from the association and upcoming events."
+    },
+    "stories": {
+      "title": "Flight stories",
+      "description": "Memorable flights from and to the association’s airfield, with their WeGlide tracks."
+    },
+    "gallery": {
+      "title": "Photo gallery",
+      "description": "Photos of the association: gliders, landscapes and association life."
+    },
+    "webcam": {
+      "title": "Webcam",
+      "description": "The association’s webcam, refreshed every minute."
+    },
+    "links": {
+      "title": "Useful links",
+      "description": "Useful links for pilots: institutions, flight planning, weather, community."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Write to the Planeurs d’Ille-et-Vilaine gliding association."
+    },
+    "legal": {
+      "title": "Legal notice",
+      "description": "Legal information about the publisher and host of the website, and how personal data is handled."
+    },
+    "pricing": {
+      "title": "Prices",
+      "description": "All prices of the Planeurs d’Ille-et-Vilaine gliding association, with an example of the cost of a full season."
+    }
+  },
+  "home": {
+    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "heroSubtitle": "Gliding in Brittany, open to everyone.",
+    "slideLabel": "Photo {n}",
+    "statsHours": "Flight hours this year",
+    "statsHoursYear": "Flight hours in {year}",
+    "statsGliders": "Association gliders",
+    "statsFounded": "Founded",
+    "cardTryKicker": "First contact",
+    "cardTryTitle": "Try gliding",
+    "cardTryText": "Trial flights open to everyone, by booking.",
+    "cardLearnKicker": "Association school",
+    "cardLearnTitle": "Learn to fly",
+    "cardLearnText": "The training path, from your first flight to your badges.",
+    "cardJoinKicker": "Join the association",
+    "cardJoinTitle": "Join",
+    "cardJoinText": "Prices and how to join.",
+    "latestKicker": "Journal",
+    "latestTitle": "Latest news",
+    "allNews": "All news and events",
+    "statsPilots": "Licensed pilots",
+    "statsKm": "Kilometres flown since the association was founded"
+  },
+  "club": {
+    "heroKicker": "The association",
+    "heroTitle": "Planeurs d’Ille-et-Vilaine",
+    "emptyTitle": "Coming soon",
+    "empty": "The association pages are on their way.",
+    "anecdote": "Anecdote"
+  },
+  "gliders": {
+    "heroKicker": "The fleet",
+    "heroTitle": "Our gliders",
+    "sectionKicker": "Association fleet",
+    "sectionTitle": "Every glider, one by one",
+    "empty": "The fleet will be presented here soon.",
+    "wingspan": "Wingspan",
+    "glideRatio": "Glide ratio",
+    "manufacturer": "Manufacturer",
+    "seats": "{count, plural, one {# seat} other {# seats}}",
+    "since": "in service since {year}",
+    "categories": {
+      "biplace-ecole": "Training two-seater",
+      "biplace-perf": "Performance two-seater",
+      "handiplaneur": "Adapted glider",
+      "monoplace-debut": "Beginner single-seater",
+      "monoplace-perf": "Performance single-seater",
+      "remorqueur": "Tow plane"
+    }
+  },
+  "pricing": {
+    "amount": "€{amount}",
+    "offers": {
+      "forfait-20h": "20-hour package",
+      "forfait-illimite": "Unlimited package",
+      "pack-formation": "Training pack",
+      "pack-complement-formation": "Additional training pack",
+      "vol-initiation": "Trial flight",
+      "cotisation": "Annual membership fee",
+      "participation-annuelle": "Annual contribution to running costs",
+      "participation-journaliere": "Daily contribution to running costs",
+      "elicense-ffvp": "FFVP e-licence and insurance (annual)",
+      "heures-10h": "10 additional hours",
+      "heure-monoplace": "Single-seater flight hour",
+      "heure-biplace": "Two-seater flight hour"
+    },
+    "ages": {
+      "under25": "Under 25",
+      "over25": "25 and over",
+      "under18": "Under 18",
+      "adult": "Adult"
+    },
+    "units": {
+      "cotisation": "per year",
+      "participation-annuelle": "per year",
+      "participation-journaliere": "per flying day",
+      "elicense-ffvp": "per year",
+      "forfait-illimite": "per season",
+      "forfait-20h": "20 flight hours",
+      "heures-10h": "10 flight hours",
+      "heure-monoplace": "per flight hour",
+      "heure-biplace": "per flight hour"
+    }
+  },
+  "pricingPage": {
+    "heroKicker": "Prices",
+    "heroTitle": "Prices",
+    "allKicker": "Price list",
+    "allTitle": "All prices",
+    "columnOffer": "Offer",
+    "allAges": "all ages",
+    "groups": {
+      "membership": "Membership and licence",
+      "flight": "Flying packages",
+      "hourly": "Pay per hour",
+      "training": "Training"
+    },
+    "initiationTitle": "Trial flight",
+    "initiationAdult": "Adult",
+    "initiationReduced": "Under 18, at school in Ille-et-Vilaine",
+    "exampleKicker": "Examples",
+    "exampleTitle": "Cost of a full season",
+    "exampleSub": "Examples of what a season costs depending on each person’s choices, calculated from the prices above.",
+    "columnItem": "Item",
+    "quantity": "× {count}",
+    "total": "Season total",
+    "unavailable": "Not available",
+    "empty": "Prices will be published soon. Meanwhile, write to us.",
+    "cta": "Join the association"
+  },
+  "join": {
+    "heroKicker": "Come and fly!",
+    "heroTitle": "Join the association",
+    "introKicker": "Membership",
+    "introTitle": "Join the association",
+    "membershipTitle": "Association membership (members)",
+    "trainingPackTitle": "Training pack",
+    "advancedPackTitle": "Additional training pack",
+    "empty": "Information on joining the association will be published soon. Meanwhile, write to us.",
+    "howKicker": "How to join",
+    "howTitle": "How to join",
+    "howEmpty": "Membership details will be published soon. Meanwhile, write to us.",
+    "contactCta": "Write to us",
+    "tryCta": "Try first",
+    "pricingLink": "See the prices"
+  },
+  "discover": {
+    "heroKicker": "First flight",
+    "heroTitle": "Try gliding",
+    "kicker": "Discovery",
+    "title": "Introductory flights",
+    "descriptionKicker": "The flight",
+    "defaultDescription": "A trial flight is the best way to discover gliding: you fly in a two-seater with one of the association’s instructors.",
+    "priceKicker": "Price",
+    "bookingKicker": "Booking",
+    "bookingTitle": "Book and pay online",
+    "bookingText": "Booking and payment are done online. Gift vouchers are available for individuals and companies.",
+    "bookingCta": "Book and pay online",
+    "contactCta": "Write to us to book",
+    "questionCta": "Ask a question",
+    "faqKicker": "FAQ",
+    "faqTitle": "Frequently asked questions"
+  },
+  "news": {
+    "heroKicker": "News",
+    "heroTitle": "News from the association",
+    "listKicker": "Journal",
+    "listTitle": "Latest news",
+    "empty": "No news yet.",
+    "allNews": "All news",
+    "agendaKicker": "Events",
+    "agendaTitle": "Upcoming events",
+    "agendaEmpty": "No upcoming events.",
+    "at": "at {time}",
+    "partnersKicker": "They support us",
+    "partnersTitle": "Our partners"
+  },
+  "share": {
+    "label": "Share",
+    "copy": "Copy link",
+    "copied": "Link copied"
+  },
+  "stories": {
+    "heroKicker": "Stories",
+    "heroTitle": "Flights that shaped the association",
+    "kicker": "Sky archives",
+    "title": "Memorable flights from and to Planeurs d’Ille-et-Vilaine",
+    "empty": "Stories are coming soon.",
+    "weglide": "See the track on WeGlide",
+    "clubOnWeglide": "All the association’s flights on WeGlide",
+    "all": "All stories"
+  },
+  "gallery": {
+    "heroKicker": "In pictures",
+    "heroTitle": "Gallery",
+    "kicker": "Association life",
+    "title": "Association photos",
+    "empty": "Photos will be available soon."
+  },
+  "webcam": {
+    "heroKicker": "Airfield view",
+    "heroTitle": "Webcam",
+    "kicker": "On the field",
+    "title": "The association webcam",
+    "alt": "View of the association airfield",
+    "refresh": "Image refreshed every minute",
+    "lastUpdate": "last updated at {time}",
+    "justNow": "last updated just now",
+    "open": "Open the image",
+    "empty": "The webcam will be available soon.",
+    "unavailable": "The webcam image is temporarily unavailable."
+  },
+  "links": {
+    "heroKicker": "Resources",
+    "heroTitle": "Useful links",
+    "kicker": "The connected pilot",
+    "title": "All useful links",
+    "empty": "Links will be available soon.",
+    "groups": {
+      "institutions": "Institutions",
+      "flight-prep": "Flight planning",
+      "weather": "Weather and conditions",
+      "competitions": "Competitions",
+      "accommodation": "Accommodation",
+      "community": "Community",
+      "other": "Other"
+    }
+  },
+  "contact": {
+    "heroKicker": "Contact",
+    "title": "Contact us",
+    "formKicker": "Write to us",
+    "formTitle": "A question?",
+    "subtitle": "Want to fly, join the association or just have a question? Write to us.",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending…",
+    "success": "Message sent, thank you! We will reply soon.",
+    "error": "Something went wrong. Please try again.",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "phone": "Phone",
+    "address": "Address",
+    "findUsKicker": "Getting here",
+    "findUs": "Find us",
+    "mapPopup": "The association airfield"
+  },
+  "legal": {
+    "kicker": "Legal information",
+    "heroKicker": "Legal information",
+    "heroTitle": "Legal notice",
+    "title": "Who we are, and how your data is handled",
+    "intro": "The information below is provided in accordance with French law on trust in the digital economy (LCEN) and the General Data Protection Regulation (GDPR).",
+    "editor": {
+      "title": "Publisher",
+      "text": "The website planeur35.org is published by the association {name}.",
+      "seat": "Registered office:",
+      "id": "RNA or SIRET number:",
+      "email": "Email:",
+      "phone": "Phone:",
+      "director": "Publication director:",
+      "affiliation": "Affiliation:",
+      "ffvp": "French Gliding Federation (FFVP)",
+      "ffvpNumber": "no. {number}"
+    },
+    "hosting": {
+      "title": "Hosting",
+      "site": "The website is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, United States.",
+      "content": "The website’s texts and images are stored by Sanity, which also delivers the images."
+    },
+    "ip": {
+      "title": "Intellectual property",
+      "text": "The texts, photographs, logos and other content of this website belong to the association or are used with their authors’ permission. Any reproduction without prior authorisation is prohibited."
+    },
+    "data": {
+      "title": "Personal data",
+      "form": "The contact form collects your name, email address, subject and message. This information is used only to answer your request and is not used for commercial purposes.",
+      "recipient": "The message is sent by the email service Resend to the association’s mailbox.",
+      "technical": "Like any website, the host records technical connection data (IP address, date and page viewed) to keep the site secure and working properly.",
+      "retention": "Messages are kept for as long as needed to handle your request.",
+      "rights": "You can ask for access to, correction or deletion of your data by writing to the email address given above. You also have the right to lodge a complaint with the CNIL, the French data protection authority:",
+      "cnil": "cnil.fr"
+    },
+    "cookies": {
+      "title": "Cookies and third-party services",
+      "text": "The website uses no advertising cookies and no audience measurement tools. A technical cookie may remember the language you chose; it is not used for tracking.",
+      "map": "The airfield map loads its map tiles from OpenStreetMap: your IP address is then sent to that service."
+    },
+    "liability": {
+      "title": "External links and liability",
+      "text": "The website contains links to third-party sites (federations, weather, WeGlide…) for which the association is not responsible. Published information (opening times, prices, availability) may change: if in doubt, contact the association."
+    }
+  },
+  "error": {
+    "kicker": "Error",
+    "title": "Something went wrong",
+    "description": "Sorry, an unexpected error occurred.",
+    "tryAgain": "Try again",
+    "notFound": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist or has moved."
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "writeToUs": "Write to us",
+    "legal": "Legal notice"
+  },
+  "header": {
+    "bookCta": "Book a trial flight",
+    "priceReduced": "{price} for under-18s at school in Ille-et-Vilaine",
+    "priceReducedShort": "{price} for under-18s"
+  }
+}
