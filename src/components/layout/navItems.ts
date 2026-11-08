@@ -45,8 +45,12 @@ export const HEADER_NAV: NavItem[] = [
 ];
 
 /** Full menu (burger button and footer). */
+const HEADER_ENTRIES: NavItem[] = HEADER_NAV.map(({ key, href, pathname }) => ({ key, href, pathname }));
+
 export const FULL_NAV: NavItem[] = [
-  ...HEADER_NAV.map(({ key, href, pathname }) => ({ key, href, pathname })),
+  ...HEADER_ENTRIES.slice(0, 4),
+  { key: 'pricing', href: '/tarifs', pathname: '/tarifs' },
+  ...HEADER_ENTRIES.slice(4),
   { key: 'stories', href: '/recits', pathname: '/recits' },
   { key: 'gallery', href: '/galerie', pathname: '/galerie' },
   { key: 'webcam', href: '/webcam', pathname: '/webcam' },

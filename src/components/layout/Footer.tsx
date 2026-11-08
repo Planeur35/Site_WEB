@@ -28,7 +28,7 @@ export default async function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <Image src="/logo-icon.png" alt="" width={50} height={44} className="h-11 w-auto" />
-            <span className="font-serif text-lg text-white">PIV, {tc("clubName")}</span>
+            <span className="font-serif font-normal text-lg text-white">{tc("clubName")}</span>
           </div>
           {tagline && <p className="mt-4 text-sm leading-relaxed">{tagline}</p>}
         </div>
@@ -83,7 +83,7 @@ export default async function Footer() {
       </div>
       <div className="border-t border-white/10 py-3 text-xs uppercase tracking-[0.25em] text-sky-300/80">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-6 px-4 sm:px-6 md:px-8">
-          <span>© {new Date().getFullYear()} PIV · planeur35.org</span>
+          <span>© {new Date().getFullYear()} {tc("clubName")} · planeur35.org</span>
           <Link
             href="/mentions-legales"
             className="inline-flex min-h-11 items-center underline decoration-sky-300/50 underline-offset-4 hover:text-white"

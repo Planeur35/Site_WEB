@@ -3,9 +3,10 @@ import { localizedBlocks, localizedString, localizedText, photoField } from './f
 
 // Keys of `pageHeroes` are read by the site (`PageHeroKey` in types.ts): do not rename them.
 const HERO_PAGES = [
-  { name: 'club', title: 'Le club' },
+  { name: 'club', title: 'L’association' },
   { name: 'gliders', title: 'Nos planeurs' },
-  { name: 'join', title: 'Venez voler ! (tarifs)' },
+  { name: 'join', title: 'Venez voler !' },
+  { name: 'pricing', title: 'Tarifs' },
   { name: 'discover', title: 'Venez essayer' },
   { name: 'news', title: 'Actualités' },
   { name: 'stories', title: 'Récits de vols' },
@@ -47,14 +48,14 @@ export default defineType({
   fields: [
     defineField({
       name: 'clubName',
-      title: 'Nom du club',
+      title: 'Nom de l’association',
       type: 'string',
       group: 'home',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'tagline',
-      title: 'Phrase d’accroche du club',
+      title: 'Phrase d’accroche de l’association',
       type: 'object',
       group: 'home',
       fields: [
@@ -101,7 +102,7 @@ export default defineType({
     defineField({ name: 'foundedYear', title: 'Année de fondation', type: 'number', group: 'stats' }),
     defineField({
       name: 'kmFlown',
-      title: 'Kilomètres parcourus depuis la création du club',
+      title: 'Kilomètres parcourus depuis la création de l’association',
       type: 'number',
       group: 'stats',
       validation: (rule) => rule.min(0),
@@ -121,16 +122,16 @@ export default defineType({
     localizedText({ name: 'bookingText', title: '(Ancien) Venez essayer : réservation et paiement en ligne', description: LEGACY_DISCOVER, rows: 6, group: 'legacy' }),
     localizedBlocks({ name: 'pricingIntro', title: '(Ancien) Texte explicatif', description: LEGACY_JOIN, group: 'legacy' }),
     { ...photoField({ name: 'pricingTable', title: '(Ancien) Tableau récapitulatif des tarifs (image)', required: false, group: 'legacy' }), description: LEGACY_JOIN },
-    localizedBlocks({ name: 'pricingMembership', title: '(Ancien) Adhésion au club (membres)', description: LEGACY_JOIN, group: 'legacy' }),
+    localizedBlocks({ name: 'pricingMembership', title: '(Ancien) Adhésion à l’association (membres)', description: LEGACY_JOIN, group: 'legacy' }),
     localizedBlocks({ name: 'pricingTraining', title: '(Ancien) Pack formation', description: LEGACY_JOIN, group: 'legacy' }),
     localizedBlocks({ name: 'pricingAdvanced', title: '(Ancien) Pack complément de formation', description: LEGACY_JOIN, group: 'legacy' }),
 
-    defineField({ name: 'contactEmail', title: 'Adresse e-mail du club', type: 'string', group: 'contact' }),
-    defineField({ name: 'contactPhone', title: 'Téléphone du club', type: 'string', group: 'contact' }),
+    defineField({ name: 'contactEmail', title: 'Adresse e-mail de l’association', type: 'string', group: 'contact' }),
+    defineField({ name: 'contactPhone', title: 'Téléphone de l’association', type: 'string', group: 'contact' }),
     defineField({ name: 'address', title: 'Adresse du terrain', type: 'text', rows: 3, group: 'contact' }),
     defineField({
       name: 'paymentUrl',
-      title: 'Lien de la plateforme de paiement du club',
+      title: 'Lien de la plateforme de paiement de l’association',
       description: 'Réservation et achat de bons de vol (particuliers et entreprises), par exemple HelloAsso.',
       type: 'url',
       group: 'contact',
@@ -175,7 +176,7 @@ export default defineType({
     }),
     defineField({
       name: 'weglideUrl',
-      title: 'Page WeGlide du club',
+      title: 'Page WeGlide de l’association',
       type: 'url',
       group: 'links',
     }),

@@ -9,10 +9,10 @@ export async function sendContactEmail(data: {
   message: string;
 }) {
   return resend.emails.send({
-    from: 'Site PIV <onboarding@resend.dev>',
+    from: 'Planeurs d\'Ille-et-Vilaine <onboarding@resend.dev>',
     to: process.env.CONTACT_EMAIL || 'contact@planeur35.org',
     replyTo: data.email,
-    subject: `[Contact PIV] ${data.subject}`,
+    subject: `[Contact Planeurs d'Ille-et-Vilaine] ${data.subject}`,
     text: `Nom: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
   });
 }

@@ -6,8 +6,8 @@ export const routing = defineRouting({
   pathnames: {
     "/": "/",
     "/club": {
-      fr: "/club",
-      en: "/the-club",
+      fr: "/association",
+      en: "/the-association",
     },
     "/planeurs": {
       fr: "/planeurs",
@@ -45,6 +45,10 @@ export const routing = defineRouting({
     "/liens": {
       fr: "/liens",
       en: "/links",
+    },
+    "/tarifs": {
+      fr: "/tarifs",
+      en: "/prices",
     },
     "/contact": "/contact",
     "/mentions-legales": {

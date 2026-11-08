@@ -28,7 +28,7 @@ export default async function NewsRow({ article }: NewsRowProps) {
           </time>
           {category && <Tag>{category}</Tag>}
         </div>
-        <h3 className="mt-2 font-serif text-xl leading-snug text-sky-950">{localize(article.title, locale)}</h3>
+        <h3 className="mt-2 font-serif font-normal text-xl leading-snug text-sky-950">{localize(article.title, locale)}</h3>
         {article.excerpt && (
           <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate-600">{localize(article.excerpt, locale)}</p>
         )}

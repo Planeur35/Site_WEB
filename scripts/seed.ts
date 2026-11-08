@@ -96,8 +96,8 @@ function siteSettingsDoc() {
     _type: 'siteSettings',
     clubName: "Planeurs d'Ille-et-Vilaine",
     tagline: {
-      fr: 'Club de vol a voile en Bretagne',
-      en: 'Soaring club in Brittany',
+      fr: 'Association de vol a voile en Bretagne',
+      en: 'Soaring association in Brittany',
     },
     contactEmail: 'contact@planeur35.org',
     contactPhone: '06 XX XX XX XX',
@@ -127,7 +127,7 @@ function categoryDocs() {
     {
       _id: CATEGORY_IDS.vieClub,
       _type: 'category',
-      title: { fr: 'Vie du club', en: 'Club life' },
+      title: { fr: 'Vie de l’association', en: 'Association life' },
       slug: { _type: 'slug', current: 'vie-du-club' },
     },
     {
@@ -355,7 +355,7 @@ function articleDocs() {
       },
       slug: { _type: 'slug', current: 'ouverture-de-la-saison-2026' },
       publishedAt: '2026-03-15T10:00:00Z',
-      author: 'PIV',
+      author: "Planeurs d'Ille-et-Vilaine",
       category: { _type: 'reference', _ref: CATEGORY_IDS.vieClub },
       excerpt: {
         fr: "La saison de vol a voile 2026 est officiellement ouverte ! Retrouvez-nous a l'aerodrome de Saint-Sulpice-des-Landes pour profiter des premieres ascendances de printemps.",
@@ -369,7 +369,7 @@ function articleDocs() {
             'art1-fr-spn1',
           ),
           block(
-            "Les inscriptions pour les nouveaux eleves sont ouvertes. Que vous soyez debutant ou pilote confirme, le club vous accueille tous les week-ends et jours feries a partir du mois de mars.",
+            "Les inscriptions pour les nouveaux eleves sont ouvertes. Que vous soyez debutant ou pilote confirme, l'association vous accueille tous les week-ends et jours feries a partir du mois de mars.",
             'art1-fr-blk2',
             'art1-fr-spn2',
           ),
@@ -386,7 +386,7 @@ function articleDocs() {
             'art1-en-spn1',
           ),
           block(
-            'Registrations for new students are open. Whether you are a beginner or an experienced pilot, the club welcomes you every weekend and public holiday from March onwards.',
+            'Registrations for new students are open. Whether you are a beginner or an experienced pilot, the association welcomes you every weekend and public holiday from March onwards.',
             'art1-en-blk2',
             'art1-en-spn2',
           ),
@@ -406,7 +406,7 @@ function articleDocs() {
       },
       slug: { _type: 'slug', current: 'resultats-du-championnat-regional' },
       publishedAt: '2026-03-10T14:00:00Z',
-      author: 'PIV',
+      author: "Planeurs d'Ille-et-Vilaine",
       category: { _type: 'reference', _ref: CATEGORY_IDS.competition },
       excerpt: {
         fr: "Nos pilotes ont brille lors du championnat regional de vol a voile. Decouvrez les resultats et les moments forts de cette edition.",
@@ -415,7 +415,7 @@ function articleDocs() {
       body: {
         fr: [
           block(
-            "Le championnat regional de vol a voile s'est tenu la semaine derniere dans d'excellentes conditions meteo. Les pilotes du PIV ont represente le club avec brio.",
+            "Le championnat regional de vol a voile s'est tenu la semaine derniere dans d'excellentes conditions meteo. Les pilotes de l'association ont represente ses couleurs avec brio.",
             'art2-fr-blk1',
             'art2-fr-spn1',
           ),
@@ -432,7 +432,7 @@ function articleDocs() {
         ],
         en: [
           block(
-            'The regional soaring championship took place last week in excellent weather conditions. PIV pilots represented the club brilliantly.',
+            'The regional soaring championship took place last week in excellent weather conditions. The association’s pilots represented it brilliantly.',
             'art2-en-blk1',
             'art2-en-spn1',
           ),
@@ -457,16 +457,16 @@ function articleDocs() {
       },
       slug: { _type: 'slug', current: 'nouveau-pack-formation-disponible' },
       publishedAt: '2026-03-05T09:00:00Z',
-      author: 'PIV',
+      author: "Planeurs d'Ille-et-Vilaine",
       category: { _type: 'reference', _ref: CATEGORY_IDS.formation },
       excerpt: {
-        fr: "Le club propose un nouveau pack formation pour la saison 2026. Un tarif attractif pour decouvrir le vol a voile et progresser jusqu'au brevet.",
-        en: 'The club offers a new training package for the 2026 season. An attractive rate to discover soaring and progress to your licence.',
+        fr: "L'association propose un nouveau pack formation pour la saison 2026. Un tarif attractif pour decouvrir le vol a voile et progresser jusqu'au brevet.",
+        en: 'The association offers a new training package for the 2026 season. An attractive rate to discover soaring and progress to your licence.',
       },
       body: {
         fr: [
           block(
-            "Pour la saison 2026, le PIV lance un nouveau pack formation tout compris. Ce forfait inclut l'adhesion au club, les cours theoriques, et un nombre de vols en biplace avec instructeur.",
+            "Pour la saison 2026, l'association lance un nouveau pack formation tout compris. Ce forfait inclut l'adhesion a l'association, les cours theoriques, et un nombre de vols en biplace avec instructeur.",
             'art3-fr-blk1',
             'art3-fr-spn1',
           ),
@@ -476,14 +476,14 @@ function articleDocs() {
             'art3-fr-spn2',
           ),
           block(
-            "Renseignements et inscriptions aupres du secretariat du club ou par email. Places limitees, ne tardez pas !",
+            "Renseignements et inscriptions aupres du secretariat de l'association ou par email. Places limitees, ne tardez pas !",
             'art3-fr-blk3',
             'art3-fr-spn3',
           ),
         ],
         en: [
           block(
-            'For the 2026 season, PIV is launching a new all-inclusive training package. This plan includes club membership, theory lessons, and a number of dual flights with an instructor.',
+            'For the 2026 season, the association is launching a new all-inclusive training package. This plan includes association membership, theory lessons, and a number of dual flights with an instructor.',
             'art3-en-blk1',
             'art3-en-spn1',
           ),
@@ -493,7 +493,7 @@ function articleDocs() {
             'art3-en-spn2',
           ),
           block(
-            'Enquiries and registration at the club office or by email. Places are limited, so do not delay!',
+            'Enquiries and registration at the association office or by email. Places are limited, so do not delay!',
             'art3-en-blk3',
             'art3-en-spn3',
           ),
@@ -513,7 +513,7 @@ async function main() {
   const aircraft = aircraftDocs();
   const articles = articleDocs();
 
-  console.log('=== PIV Sanity Seed Script ===');
+  console.log('=== Sanity Seed Script ===');
   console.log(`Project:  ${PROJECT_ID}`);
   console.log(`Dataset:  ${DATASET}`);
   console.log('');

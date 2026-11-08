@@ -6,7 +6,7 @@ import { localizedBlocks, localizedString, localizedText, photoField } from './f
  * Values of `section` are read by the site: do not rename them.
  */
 const SECTIONS = [
-  { title: 'Présentation du club', value: 'presentation' },
+  { title: 'Présentation de l’association', value: 'presentation' },
   { title: 'La plateforme (terrain et zone de vol)', value: 'platform' },
   { title: 'Activité des membres', value: 'activities' },
   { title: 'Formation initiale', value: 'training' },
@@ -18,7 +18,7 @@ type ClubPageDoc = { _id: string; section?: string };
 
 export default defineType({
   name: 'clubPage',
-  title: 'Page du club',
+  title: 'Page de l’association',
   type: 'document',
   fields: [
     defineField({

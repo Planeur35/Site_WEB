@@ -37,7 +37,7 @@ export default function StoryCard({ story, locale, wide = false, className }: St
         )}
         {story.aircraft && <Tag>{story.aircraft}</Tag>}
       </div>
-      <h3 className="mt-2 font-serif text-xl leading-snug text-sky-950 group-hover:underline group-hover:decoration-sky-400 group-hover:underline-offset-4">
+      <h3 className="mt-2 font-serif font-normal text-xl leading-snug text-sky-950 group-hover:underline group-hover:decoration-sky-400 group-hover:underline-offset-4">
         {title}
       </h3>
     </Link>

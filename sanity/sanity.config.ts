@@ -4,7 +4,7 @@ import type { StructureBuilder } from 'sanity/structure';
 import { schemas } from './schemas';
 
 // Documents that exist only once
-const singletonTypes = new Set(['siteSettings', 'clubHistory', 'joinPage', 'discoverPage']);
+const singletonTypes = new Set(['siteSettings', 'clubHistory', 'joinPage', 'discoverPage', 'pricingPage']);
 
 const singletonListItem = (
   S: StructureBuilder,
@@ -18,7 +18,7 @@ const singletonListItem = (
 
 export default defineConfig({
   name: 'piv-studio',
-  title: "PIV - Planeurs d'Ille-et-Vilaine",
+  title: "Planeurs d'Ille-et-Vilaine",
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
@@ -37,13 +37,15 @@ export default defineConfig({
             S.documentTypeListItem('galleryImage').title('Galerie photos'),
             S.divider(),
             // Pages managed by administrators
-            S.documentTypeListItem('clubPage').title('Pages du club'),
-            singletonListItem(S, 'clubHistory', 'Histoire du club'),
+            S.documentTypeListItem('clubPage').title('Pages de l’association'),
+            singletonListItem(S, 'clubHistory', 'Histoire de l’association'),
             singletonListItem(S, 'joinPage', 'Page « Venez voler ! »'),
             singletonListItem(S, 'discoverPage', 'Page « Venez essayer »'),
+            singletonListItem(S, 'pricingPage', 'Page « Tarifs »'),
             S.documentTypeListItem('aircraft').title('Nos planeurs'),
-            S.documentTypeListItem('tariff').title('Tarifs'),
+            S.documentTypeListItem('tariff').title('Tarifs (montants)'),
             S.documentTypeListItem('flightStory').title('Récits de vols'),
+            S.documentTypeListItem('partner').title('Partenaires'),
             S.divider(),
             singletonListItem(S, 'siteSettings', 'Réglages du site'),
             S.documentTypeListItem('category').title('Rubriques des actualités'),

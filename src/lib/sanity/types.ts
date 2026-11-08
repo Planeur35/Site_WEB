@@ -90,6 +90,7 @@ export type PageHeroKey =
   | 'gliders'
   | 'join'
   | 'discover'
+  | 'pricing'
   | 'news'
   | 'stories'
   | 'gallery'
@@ -212,8 +213,15 @@ export interface ClubEvent {
 }
 
 export type TariffOffer =
+  | 'cotisation'
+  | 'participation-annuelle'
+  | 'participation-journaliere'
+  | 'elicense-ffvp'
   | 'forfait-20h'
   | 'forfait-illimite'
+  | 'heures-10h'
+  | 'heure-monoplace'
+  | 'heure-biplace'
   | 'pack-formation'
   | 'pack-complement-formation'
   | 'vol-initiation';
@@ -227,6 +235,33 @@ export interface Tariff {
   ageCategory?: AgeCategory;
   amount: number;
   details?: LocalizedString;
+}
+
+export interface Partner {
+  _id: string;
+  name: string;
+  logo?: SanityImage;
+  url?: string;
+  sortOrder?: number;
+}
+
+export interface PricingScenarioLine {
+  _key: string;
+  offer: TariffOffer;
+  quantity?: number;
+}
+
+export interface PricingScenario {
+  _key: string;
+  name?: LocalizedString;
+  description?: LocalizedText;
+  lines?: PricingScenarioLine[];
+}
+
+export interface PricingPage {
+  intro?: LocalizedRichText;
+  scenarios?: PricingScenario[];
+  notes?: LocalizedRichText;
 }
 
 export type ClubSection = 'presentation' | 'platform' | 'activities' | 'training' | 'campaign' | 'competition';
