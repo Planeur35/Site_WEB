@@ -1,0 +1,52 @@
+# Runs the same checks as Vercel's build, but with logs anyone can read on the pull request
+# (Vercel only shows its build logs to members of its team).
+name: Vérification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# A new push on the same branch cancels the run still in progress.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, types et build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Public values (they ship in the site's pages): no secret is needed to build.
+      NEXT_PUBLIC_SANITY_PROJECT_ID: 8mup540n
+      NEXT_PUBLIC_SANITY_DATASET: production
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v5
+
+      # Also registers the tsc and ESLint problem matchers: errors show up on the faulty line in "Files changed".
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dépendances
+        id: install
+        run: npm ci --no-audit --no-fund
+
+      # The next steps run even if an earlier one failed, so a single run lists every error.
+      - name: Lint (ESLint)
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run lint
+
+      - name: Types (TypeScript)
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npx tsc --noEmit --pretty false
+
+      - name: Build (comme Vercel)
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run build
