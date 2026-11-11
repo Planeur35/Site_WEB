@@ -73,7 +73,7 @@ export default async function ArticlePage({ params }: PageProps) {
           priority
         />
       )}
-      {article.excerpt && <p className="mt-8 font-serif text-xl leading-relaxed text-slate-800">{localize(article.excerpt, locale)}</p>}
+      {article.excerpt && <p className="mt-8 font-serif font-normal text-xl leading-relaxed text-slate-800">{localize(article.excerpt, locale)}</p>}
       <PortableText value={localize(article.body, locale)} className="mt-8" />
       <ShareButtons url={url} title={title} className="mt-12 border-t border-sky-900/15 pt-6" />
     </article>

@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Accueil",
-    "club": "Le club",
+    "club": "L’association",
     "gliders": "Nos planeurs",
     "join": "Venez voler !",
     "discover": "Venez essayer",
@@ -19,14 +19,15 @@
     "training": "Formation initiale",
     "campaign": "Perfectionnement",
     "competition": "Compétition",
-    "history": "Histoire du club",
+    "history": "Histoire de l’association",
     "menu": "Menu",
     "mainNav": "Navigation principale",
-    "fullNav": "Menu complet"
+    "fullNav": "Menu complet",
+    "pricing": "Les tarifs"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
-    "brandKicker": "PIV · Planeurs d’Ille-et-Vilaine",
+    "brandKicker": "Planeurs d’Ille-et-Vilaine",
     "discover": "Découvrir",
     "backToHome": "Retour à l’accueil",
     "loadingMap": "Chargement de la carte…",
@@ -34,40 +35,40 @@
   },
   "meta": {
     "home": {
-      "title": "PIV – Planeurs d’Ille-et-Vilaine, club de vol à voile",
-      "description": "PIV, Planeurs d’Ille-et-Vilaine : club de vol à voile. Planeurs, formation, vols d’initiation et actualités du club."
+      "title": "Planeurs d’Ille-et-Vilaine, association de vol à voile",
+      "description": "Planeurs d’Ille-et-Vilaine : association de vol à voile. Planeurs, formation, vols d’initiation et actualités de l’association."
     },
     "club": {
-      "title": "Le club",
-      "description": "Le club PIV : présentation, la plateforme et sa zone de vol, la formation, le perfectionnement, la compétition et l’histoire du club."
+      "title": "L’association",
+      "description": "L’association : présentation, la plateforme et sa zone de vol, la formation, le perfectionnement, la compétition et l’histoire de l’association."
     },
     "gliders": {
       "title": "Nos planeurs",
-      "description": "Les planeurs du club PIV, présentés un par un : biplaces de formation, monoplaces de performance."
+      "description": "Les planeurs de l’association, présentés un par un : biplaces de formation, monoplaces de performance."
     },
     "join": {
-      "title": "Venez voler : tarifs et adhésion",
-      "description": "Les tarifs d’adhésion et de formation au club de vol à voile PIV."
+      "title": "Venez voler : rejoindre l’association",
+      "description": "Rejoindre l’association de vol à voile Planeurs d’Ille-et-Vilaine : adhésion et formation."
     },
     "discover": {
       "title": "Venez essayer",
-      "description": "Le vol d’initiation en planeur avec un instructeur du club PIV : déroulement, tarif et réservation."
+      "description": "Le vol d’initiation en planeur avec un instructeur de l’association : déroulement, tarif et réservation."
     },
     "news": {
       "title": "Actualités et agenda",
-      "description": "Les nouvelles du club PIV et les prochains événements."
+      "description": "Les nouvelles de l’association et les prochains événements."
     },
     "stories": {
       "title": "Récits de vols",
-      "description": "Les beaux vols au départ et à l’arrivée de PIV, avec leurs traces WeGlide."
+      "description": "Les beaux vols au départ et à l’arrivée de l’association, avec leurs traces WeGlide."
     },
     "gallery": {
       "title": "Galerie photos",
-      "description": "Les photos du club PIV : planeurs, paysages et vie du club."
+      "description": "Les photos de l’association : planeurs, paysages et vie de l’association."
     },
     "webcam": {
       "title": "Webcam",
-      "description": "L’image de la webcam du club PIV, actualisée toutes les minutes."
+      "description": "L’image de la webcam de l’association, actualisée toutes les minutes."
     },
     "links": {
       "title": "Liens pratiques",
@@ -75,11 +76,15 @@
     },
     "contact": {
       "title": "Contact",
-      "description": "Écrire au club de vol à voile PIV, Planeurs d’Ille-et-Vilaine."
+      "description": "Écrire à l’association de vol à voile Planeurs d’Ille-et-Vilaine."
     },
     "legal": {
       "title": "Mentions légales",
       "description": "Informations légales sur l’éditeur et l’hébergeur du site, et traitement des données personnelles."
+    },
+    "pricing": {
+      "title": "Les tarifs",
+      "description": "Tous les tarifs de l’association de vol à voile Planeurs d’Ille-et-Vilaine, avec un exemple de coût d’une saison complète."
     }
   },
   "home": {
@@ -88,34 +93,34 @@
     "slideLabel": "Photo {n}",
     "statsHours": "Heures de vol dans l’année",
     "statsHoursYear": "Heures de vol en {year}",
-    "statsGliders": "Planeurs au club",
+    "statsGliders": "Planeurs de l’association",
     "statsFounded": "Année de fondation",
     "cardTryKicker": "Premier contact",
     "cardTryTitle": "Venez essayer",
     "cardTryText": "Vols d’initiation ouverts à tous, sur réservation.",
-    "cardLearnKicker": "École du club",
+    "cardLearnKicker": "École de l’association",
     "cardLearnTitle": "Apprendre à voler",
     "cardLearnText": "Le cursus de formation, du premier vol jusqu’aux badges.",
-    "cardJoinKicker": "Rejoindre PIV",
+    "cardJoinKicker": "Rejoindre l’association",
     "cardJoinTitle": "S’inscrire",
     "cardJoinText": "Les tarifs et les modalités d’inscription.",
     "latestKicker": "Journal",
     "latestTitle": "Dernières nouvelles",
     "allNews": "Toutes les actualités et l’agenda",
     "statsPilots": "Pilotes brevetés",
-    "statsKm": "Kilomètres parcourus depuis la création du club"
+    "statsKm": "Kilomètres parcourus depuis la création de l’association"
   },
   "club": {
-    "heroKicker": "Le club",
+    "heroKicker": "L’association",
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Bientôt ici",
-    "empty": "Les pages du club arrivent.",
+    "empty": "Les pages de l’association arrivent.",
     "anecdote": "Anecdote"
   },
   "gliders": {
     "heroKicker": "La flotte",
     "heroTitle": "Nos planeurs",
-    "sectionKicker": "Flotte du club",
+    "sectionKicker": "Flotte de l’association",
     "sectionTitle": "Chaque planeur, présenté un par un",
     "empty": "La flotte sera bientôt présentée ici.",
     "wingspan": "Envergure",
@@ -139,30 +144,74 @@
       "forfait-illimite": "Forfait illimité",
       "pack-formation": "Pack formation",
       "pack-complement-formation": "Pack complément de formation",
-      "vol-initiation": "Vol d’initiation"
+      "vol-initiation": "Vol d’initiation",
+      "cotisation": "Cotisation annuelle",
+      "participation-annuelle": "Participation annuelle aux frais de fonctionnement",
+      "participation-journaliere": "Participation journalière aux frais de fonctionnement",
+      "elicense-ffvp": "E-licence assurance FFVP (annuelle)",
+      "heures-10h": "10 heures supplémentaires",
+      "heure-monoplace": "Heure de vol en monoplace",
+      "heure-biplace": "Heure de vol en biplace"
     },
     "ages": {
       "under25": "Moins de 25 ans",
       "over25": "Plus de 25 ans",
       "under18": "Moins de 18 ans",
       "adult": "Adulte"
+    },
+    "units": {
+      "cotisation": "par an",
+      "participation-annuelle": "par an",
+      "participation-journaliere": "par jour de vol",
+      "elicense-ffvp": "par an",
+      "forfait-illimite": "par saison",
+      "forfait-20h": "20 heures de vol",
+      "heures-10h": "10 heures de vol",
+      "heure-monoplace": "par heure de vol",
+      "heure-biplace": "par heure de vol"
     }
   },
-  "join": {
-    "heroKicker": "Venez voler !",
+  "pricingPage": {
+    "heroKicker": "Tarifs",
     "heroTitle": "Les tarifs",
-    "introKicker": "Tarifs",
-    "introTitle": "Les tarifs de l’année",
-    "tableOpen": "Ouvrir le tableau en grand",
-    "membershipTitle": "Adhésion au club (membres)",
+    "allKicker": "Grille tarifaire",
+    "allTitle": "Tous les tarifs",
+    "columnOffer": "Offre",
+    "allAges": "tous âges",
+    "groups": {
+      "membership": "Adhésion et licence",
+      "flight": "Forfaits de vol",
+      "hourly": "Vol à l’heure",
+      "training": "Formation"
+    },
+    "initiationTitle": "Vol d’initiation",
+    "initiationAdult": "Adulte",
+    "initiationReduced": "Moins de 18 ans scolarisés en Ille-et-Vilaine",
+    "exampleKicker": "Exemples",
+    "exampleTitle": "Coût d’une saison complète",
+    "exampleSub": "Exemples de prix de revient d’une saison selon les choix de chacun, calculés à partir des tarifs ci-dessus.",
+    "columnItem": "Poste",
+    "quantity": "× {count}",
+    "total": "Total de la saison",
+    "unavailable": "Non renseigné",
+    "empty": "Les tarifs seront publiés prochainement. En attendant, écrivez-nous.",
+    "cta": "Rejoindre l’association"
+  },
+  "join": {
+    "heroKicker": "Venez voler !",
+    "heroTitle": "Rejoindre l’association",
+    "introKicker": "Adhésion",
+    "introTitle": "Rejoindre l’association",
+    "membershipTitle": "Adhésion à l’association (membres)",
     "trainingPackTitle": "Pack formation",
     "advancedPackTitle": "Pack complément de formation",
-    "empty": "Les tarifs seront publiés prochainement. En attendant, écrivez-nous.",
+    "empty": "Les informations pour rejoindre l’association seront publiées prochainement. En attendant, écrivez-nous.",
     "howKicker": "Modalités",
     "howTitle": "Comment s’inscrire",
     "howEmpty": "Les modalités d’inscription seront publiées prochainement. En attendant, écrivez-nous.",
     "contactCta": "Nous écrire",
-    "tryCta": "Essayer d’abord"
+    "tryCta": "Essayer d’abord",
+    "pricingLink": "Voir les tarifs"
   },
   "discover": {
     "heroKicker": "Premier vol",
@@ -170,7 +219,7 @@
     "kicker": "Découverte",
     "title": "Vols d’initiation",
     "descriptionKicker": "Le vol",
-    "defaultDescription": "Le vol d’initiation est le meilleur moyen de découvrir le vol en planeur : vous volez en biplace, accompagné d’un instructeur du club.",
+    "defaultDescription": "Le vol d’initiation est le meilleur moyen de découvrir le vol en planeur : vous volez en biplace, accompagné d’un instructeur de l’association.",
     "priceKicker": "Tarif",
     "bookingKicker": "Réservation",
     "bookingTitle": "Réservation et paiement en ligne",
@@ -183,7 +232,7 @@
   },
   "news": {
     "heroKicker": "Actualités",
-    "heroTitle": "Les nouvelles du club",
+    "heroTitle": "Les nouvelles de l’association",
     "listKicker": "Journal",
     "listTitle": "Dernières nouvelles",
     "empty": "Aucune actualité pour le moment.",
@@ -191,7 +240,9 @@
     "agendaKicker": "Agenda",
     "agendaTitle": "Événements à venir",
     "agendaEmpty": "Aucun événement à venir.",
-    "at": "à {time}"
+    "at": "à {time}",
+    "partnersKicker": "Ils nous soutiennent",
+    "partnersTitle": "Nos partenaires"
   },
   "share": {
     "label": "Partager",
@@ -200,27 +251,27 @@
   },
   "stories": {
     "heroKicker": "Récits",
-    "heroTitle": "Les vols qui ont marqué PIV",
+    "heroTitle": "Les vols qui ont marqué l’association",
     "kicker": "Archives du ciel",
-    "title": "Beaux vols au départ et à l’arrivée de PIV",
+    "title": "Beaux vols au départ et à l’arrivée de Planeurs d’Ille-et-Vilaine",
     "empty": "Les récits arrivent bientôt.",
     "weglide": "Voir le tracé sur WeGlide",
-    "clubOnWeglide": "Tous les vols du club sur WeGlide",
+    "clubOnWeglide": "Tous les vols de l’association sur WeGlide",
     "all": "Tous les récits"
   },
   "gallery": {
     "heroKicker": "En images",
     "heroTitle": "Galerie",
-    "kicker": "La vie du club",
-    "title": "Photos du club",
+    "kicker": "La vie de l’association",
+    "title": "Photos de l’association",
     "empty": "Les photos seront bientôt disponibles."
   },
   "webcam": {
     "heroKicker": "Vue de la plateforme",
     "heroTitle": "Webcam",
     "kicker": "Sur le terrain",
-    "title": "L’image de la webcam du club",
-    "alt": "Vue de la plateforme du club",
+    "title": "L’image de la webcam de l’association",
+    "alt": "Vue de la plateforme de l’association",
     "refresh": "Image actualisée toutes les minutes",
     "lastUpdate": "dernière mise à jour à {time}",
     "justNow": "dernière mise à jour à l’instant",
@@ -249,7 +300,7 @@
     "title": "Contactez-nous",
     "formKicker": "Nous écrire",
     "formTitle": "Une question ?",
-    "subtitle": "Envie de voler, de rejoindre le club ou simplement une question : écrivez-nous.",
+    "subtitle": "Envie de voler, de rejoindre l’association ou simplement une question : écrivez-nous.",
     "name": "Nom",
     "email": "E-mail",
     "subject": "Sujet",
@@ -264,7 +315,7 @@
     "address": "Adresse",
     "findUsKicker": "Accès",
     "findUs": "Nous trouver",
-    "mapPopup": "Le terrain du club"
+    "mapPopup": "Le terrain de l’association"
   },
   "legal": {
     "kicker": "Informations légales",
@@ -274,7 +325,7 @@
     "intro": "Les informations ci-dessous sont fournies conformément à la loi pour la confiance dans l’économie numérique (LCEN) et au règlement général sur la protection des données (RGPD).",
     "editor": {
       "title": "Éditeur du site",
-      "text": "Le site planeur35.org est édité par l’association {name}, club de vol à voile.",
+      "text": "Le site planeur35.org est édité par l’association {name}.",
       "seat": "Siège social :",
       "id": "Numéro RNA ou SIRET :",
       "email": "E-mail :",
@@ -309,7 +360,7 @@
     },
     "liability": {
       "title": "Liens externes et responsabilité",
-      "text": "Le site contient des liens vers des sites tiers (fédérations, météo, WeGlide…) dont l’association n’est pas responsable. Les informations publiées (horaires, tarifs, disponibilités) peuvent évoluer : en cas de doute, contactez le club."
+      "text": "Le site contient des liens vers des sites tiers (fédérations, météo, WeGlide…) dont l’association n’est pas responsable. Les informations publiées (horaires, tarifs, disponibilités) peuvent évoluer : en cas de doute, contactez l’association."
     }
   },
   "error": {
@@ -325,5 +376,10 @@
     "contact": "Contact",
     "writeToUs": "Nous écrire",
     "legal": "Mentions légales"
+  },
+  "header": {
+    "bookCta": "Réserver un vol d’initiation",
+    "priceReduced": "{price} pour les moins de 18 ans scolarisés en Ille-et-Vilaine",
+    "priceReducedShort": "{price} pour les moins de 18 ans"
   }
 }

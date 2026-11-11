@@ -69,7 +69,7 @@ export default async function StoryPage({ params }: PageProps) {
           {story.aircraft && <Tag>{story.aircraft}</Tag>}
         </div>
         {intro && (
-          <p className="mt-6 font-serif text-xl leading-relaxed text-slate-800 first-letter:float-left first-letter:mr-3 first-letter:text-6xl first-letter:font-bold first-letter:text-sky-950">
+          <p className="mt-6 font-serif font-normal text-xl leading-relaxed text-slate-800 first-letter:float-left first-letter:mr-3 first-letter:text-6xl first-letter:font-bold first-letter:text-sky-950">
             {intro}
           </p>
         )}
@@ -79,7 +79,7 @@ export default async function StoryPage({ params }: PageProps) {
             <Kicker>
               {tClub('anecdote')} · {localize(anecdote.title, locale)}
             </Kicker>
-            <p className="font-serif text-lg leading-relaxed text-slate-700">{localize(anecdote.text, locale)}</p>
+            <p className="font-serif font-normal text-lg leading-relaxed text-slate-700">{localize(anecdote.text, locale)}</p>
           </aside>
         ))}
         {story.weglideUrl && (

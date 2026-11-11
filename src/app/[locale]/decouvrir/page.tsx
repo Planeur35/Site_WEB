@@ -115,7 +115,7 @@ export default async function DiscoverPage({ params }: { params: Promise<{ local
           <div className="max-w-3xl border-t border-sky-900/15">
             {faq.map((item) => (
               <details key={item.key} className="group border-b border-sky-900/15">
-                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-5 font-serif text-lg leading-snug text-sky-950 [&::-webkit-details-marker]:hidden">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-5 font-serif font-normal text-lg leading-snug text-sky-950 [&::-webkit-details-marker]:hidden">
                   <span>{item.question}</span>
                   <span className="text-sm text-sky-700 transition-transform group-open:rotate-180" aria-hidden="true">
                     ▾

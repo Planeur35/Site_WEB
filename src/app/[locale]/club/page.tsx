@@ -57,7 +57,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
           <Section key={section} id={CLUB_ANCHORS[section]} kicker={tNav(section)} title={localize(page.title, locale) ?? tNav(section)}>
             <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start">
               <div>
-                {intro && <p className="mb-6 font-serif text-xl leading-relaxed text-slate-800">{intro}</p>}
+                {intro && <p className="mb-6 font-serif font-normal text-xl leading-relaxed text-slate-800">{intro}</p>}
                 <PortableText value={localize(page.body, locale)} />
               </div>
               <SanityPhoto
@@ -86,7 +86,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
         <Section id={CLUB_ANCHORS.history} kicker={tNav('history')} title={localize(history.title, locale) ?? tNav('history')}>
           <div className="max-w-3xl">
             {localize(history.intro, locale) && (
-              <p className="font-serif text-xl leading-relaxed text-slate-800 first-letter:float-left first-letter:mr-3 first-letter:text-6xl first-letter:font-bold first-letter:text-sky-950">
+              <p className="font-serif font-normal text-xl leading-relaxed text-slate-800 first-letter:float-left first-letter:mr-3 first-letter:text-6xl first-letter:font-bold first-letter:text-sky-950">
                 {localize(history.intro, locale)}
               </p>
             )}
@@ -96,7 +96,7 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
                 <Kicker>
                   {t('anecdote')} · {localize(a.title, locale)}
                 </Kicker>
-                <p className="font-serif text-lg leading-relaxed text-slate-700">{localize(a.text, locale)}</p>
+                <p className="font-serif font-normal text-lg leading-relaxed text-slate-700">{localize(a.text, locale)}</p>
               </aside>
             ))}
           </div>

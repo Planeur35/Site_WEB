@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import clsx from 'clsx';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { buildMetadata } from '@/lib/metadata';
 import PortableText from '@/components/sanity/PortableText';
@@ -10,7 +8,6 @@ import SitePageHero from '@/components/ui/SitePageHero';
 import Section from '@/components/ui/Section';
 import TextLink from '@/components/ui/TextLink';
 import { sanityFetch } from '@/lib/sanity/fetch';
-import { imageDimensions, urlFor } from '@/lib/sanity/image';
 import { localize, nonEmpty } from '@/lib/sanity/localize';
 import { joinPageQuery, siteSettingsQuery } from '@/lib/sanity/queries';
 import type { JoinPage, SiteSettings } from '@/lib/sanity/types';
@@ -36,7 +33,6 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   // The text comes from the page document (Studio → Page « Venez voler ! »).
   // The old fields of the site settings are used only while the new ones are empty.
   const intro = nonEmpty(localize(page?.intro, locale)) ?? nonEmpty(localize(settings?.pricingIntro, locale));
-  const table = page?.table?.asset ? page.table : settings?.pricingTable;
   const how = nonEmpty(localize(page?.how, locale));
   const howPlain = localize(settings?.joinText, locale);
 
@@ -60,32 +56,19 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body }] : []));
 
   const hasIntro = !!intro;
-  const isEmpty = !hasIntro && !table?.asset && parts.length === 0;
+  const isEmpty = !hasIntro && parts.length === 0;
 
   return (
     <>
       <SitePageHero page="join" kicker={t('heroKicker')} title={t('heroTitle')} variant={2} />
 
-      {(hasIntro || table?.asset || isEmpty) && (
-        <Section id="tarifs" kicker={t('introKicker')} title={t('introTitle')}>
+      {(hasIntro || isEmpty) && (
+        <Section id="rejoindre" kicker={t('introKicker')} title={t('introTitle')}>
           {isEmpty && <EmptyState>{t('empty')}</EmptyState>}
           {hasIntro && <PortableText value={intro} className="max-w-3xl" />}
-          {table?.asset && (
-            <figure className={clsx('border border-sky-900/10 bg-white p-3 md:p-6', hasIntro && 'mt-10')}>
-              <Image
-                src={urlFor(table).width(2400).url()}
-                alt={table.alt ?? ''}
-                {...imageDimensions(table.asset._ref)}
-                sizes="(max-width: 1024px) 100vw, 960px"
-                className="h-auto w-full"
-              />
-              <figcaption className="mt-4">
-                <TextLink href={urlFor(table).url()} external>
-                  {t('tableOpen')}
-                </TextLink>
-              </figcaption>
-            </figure>
-          )}
+          <p className="mt-8">
+            <TextLink href="/tarifs">{t('pricingLink')}</TextLink>
+          </p>
         </Section>
       )}
 
