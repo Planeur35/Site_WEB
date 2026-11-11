@@ -722,6 +722,7 @@ Ou sur GitHub : un bandeau jaune propose **Compare & pull request**. Dans la des
 #### 9. La relecture
 
 - Vercel ajoute un commentaire avec un **lien d'aperçu** : le site avec votre modification, sans toucher au site en ligne.
+- En bas de la PR, la vérification **« Vérification / Lint, types et build »** refait les mêmes contrôles que Vercel, en 2 à 3 minutes. Coche verte : tout s'emboîte. Croix rouge : cliquez sur **Details** pour lire le message d'erreur (les journaux de Vercel ne sont visibles que par les membres de son équipe, ceux-ci par tout le monde). Les erreurs de code sont aussi signalées sur la ligne fautive, dans l'onglet **Files changed**. Corrigez, puis poussez sur la même branche : la vérification repart toute seule.
 - Les relecteurs commentent ligne par ligne. Pour corriger, modifiez, committez et faites `git push` sur la même branche : la PR et l'aperçu se mettent à jour tout seuls.
 
 #### 10. La fusion et le ménage
@@ -1008,7 +1009,7 @@ Bien pour un texte, une traduction, un message d'erreur ou une question de Git. 
 
 ##### Sans rien installer : l'éditeur de GitHub
 
-Pour corriger un mot ou un prix : ouvrez le fichier sur [github.com/Planeur35/Site_WEB](https://github.com/Planeur35/Site_WEB), cliquez sur l'icône **crayon** (*Edit this file*), modifiez, puis **Commit changes…** → **Create a new branch for this commit and start a pull request** → **Propose changes**. Vous obtenez une branche et une Pull Request en une fois. Impossible de tester en local avant d'envoyer : à réserver aux toutes petites modifications.
+Pour corriger un mot ou un prix : ouvrez le fichier sur [github.com/Planeur35/Site_WEB](https://github.com/Planeur35/Site_WEB), cliquez sur l'icône **crayon** (*Edit this file*), modifiez, puis **Commit changes…** → **Create a new branch for this commit and start a pull request** → **Propose changes**. Vous obtenez une branche et une Pull Request en une fois. Impossible de tester en local avant d'envoyer : à réserver aux toutes petites modifications, et attendez la coche verte de la vérification dans la Pull Request avant de demander une relecture.
 
 #### Avec un abonnement : Claude Code
 
