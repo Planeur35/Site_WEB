@@ -8,6 +8,7 @@ export default function LanguageToggle() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
+  if (!params) return null;
   const locale = useLocale();
   const t = useTranslations("common");
 
