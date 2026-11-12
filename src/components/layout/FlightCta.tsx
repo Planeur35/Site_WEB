@@ -9,55 +9,39 @@ export interface InitiationPrices {
 
 interface FlightCtaProps {
   prices: InitiationPrices;
-  /** Phone layout: full-width button, price inside, smaller note. */
-  compact?: boolean;
-  /** Hide the secondary note (used once the page is scrolled on phones). */
-  hideNote?: boolean;
   className?: string;
 }
 
-/** Orange button to the « Venez essayer » page, with the trial flight prices next to it. */
-export default function FlightCta({ prices, compact = false, hideNote = false, className }: FlightCtaProps) {
+/**
+ * Small orange button to the « Venez essayer » page, placed to the right of the menu button.
+ * The trial flight prices sit in the button itself (second line, from the `sm` breakpoint up).
+ */
+export default function FlightCta({ prices, className }: FlightCtaProps) {
   const t = useTranslations("header");
   const tp = useTranslations("pricing");
   const adult = prices.adult != null ? tp("amount", { amount: prices.adult }) : null;
   const reduced = prices.reduced != null ? tp("amount", { amount: prices.reduced }) : null;
 
-  const button = (
-    <Link
-      href="/decouvrir"
-      className={clsx(
-        "inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-md px-5 py-2.5 text-sm font-semibold text-white",
-        "bg-linear-to-b from-orange-700 to-red-700 ring-1 ring-inset ring-white/25",
-        // Raised look: a darker edge below, pressed down on click
-        "shadow-[0_4px_0_0_#7f1d1d,0_10px_18px_-8px_rgba(127,29,29,0.7)]",
-        "transition hover:-translate-y-px hover:brightness-110 active:translate-y-[3px] active:shadow-[0_1px_0_0_#7f1d1d]",
-        compact && "w-full",
-      )}
-    >
-      {t("bookCta")}
-      {compact && adult && <span className="ml-2 border-l border-white/40 pl-2">{adult}</span>}
-    </Link>
-  );
-
-  if (compact) {
-    return (
-      <div className={className}>
-        {button}
-        {reduced && !hideNote && <p className="mt-2 text-xs leading-snug text-slate-700">{t("priceReduced", { price: reduced })}</p>}
-      </div>
-    );
-  }
+  // Second line: « 170 € · 130 € moins de 18 ans »
+  const priceLine = [adult, reduced ? t("priceReducedShort", { price: reduced }) : null].filter(Boolean).join(" · ");
+  // Full wording for screen readers and the tooltip, including the condition for the reduced price
+  const fullLabel = [t("bookCta"), adult, reduced ? t("priceReduced", { price: reduced }) : null].filter(Boolean).join(" – ");
 
   return (
-    <div className={clsx("items-center gap-4", className)}>
-      {button}
-      {(adult || reduced) && (
-        <div className="leading-tight">
-          {adult && <p className="font-serif font-normal text-2xl text-sky-950">{adult}</p>}
-          {reduced && <p className="mt-0.5 max-w-[15rem] text-xs leading-snug text-slate-700">{t("priceReduced", { price: reduced })}</p>}
-        </div>
+    <Link
+      href="/decouvrir"
+      aria-label={fullLabel}
+      title={fullLabel}
+      className={clsx(
+        "inline-flex min-h-11 max-w-[7.5rem] shrink-0 flex-col items-center justify-center rounded-md px-3 py-1.5 text-center leading-tight text-sky-950 sm:max-w-none",
+        "bg-orange-400 ring-1 ring-inset ring-orange-600/30",
+        // Light relief: a darker edge below, pressed down on click
+        "shadow-[0_2px_0_0_#c2410c] transition hover:bg-orange-300 active:translate-y-px active:shadow-none",
+        className,
       )}
-    </div>
+    >
+      <span className="text-xs font-semibold sm:whitespace-nowrap">{t("bookCta")}</span>
+      {priceLine && <span className="hidden text-[11px] font-medium sm:block">{priceLine}</span>}
+    </Link>
   );
 }

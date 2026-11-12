@@ -1,3 +1,4 @@
+import { withEnglishStatus } from './translationStatus';
 import { defineField, defineType } from 'sanity';
 import { localizedBlocks, localizedString, localizedText, photoField } from './fields';
 
@@ -56,10 +57,10 @@ export default defineType({
     },
   ],
   preview: {
-    select: { title: 'title.fr', section: 'section', media: 'mainImage' },
-    prepare: ({ title, section, media }) => ({
+    select: { title: 'title.fr', titleEn: 'title.en', section: 'section', media: 'mainImage' },
+    prepare: ({ title, titleEn, section, media }) => ({
       title,
-      subtitle: SECTIONS.find((s) => s.value === section)?.title,
+      subtitle: withEnglishStatus(SECTIONS.find((s) => s.value === section)?.title, title, titleEn),
       media,
     }),
   },

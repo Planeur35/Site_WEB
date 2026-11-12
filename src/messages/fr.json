@@ -115,7 +115,9 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Bientôt ici",
     "empty": "Les pages de l’association arrivent.",
-    "anecdote": "Anecdote"
+    "anecdote": "Anecdote",
+    "partnersKicker": "Ils nous soutiennent",
+    "partnersTitle": "Nos partenaires"
   },
   "gliders": {
     "heroKicker": "La flotte",
@@ -240,9 +242,7 @@
     "agendaKicker": "Agenda",
     "agendaTitle": "Événements à venir",
     "agendaEmpty": "Aucun événement à venir.",
-    "at": "à {time}",
-    "partnersKicker": "Ils nous soutiennent",
-    "partnersTitle": "Nos partenaires"
+    "at": "à {time}"
   },
   "share": {
     "label": "Partager",
@@ -380,6 +380,6 @@
   "header": {
     "bookCta": "Réserver un vol d’initiation",
     "priceReduced": "{price} pour les moins de 18 ans scolarisés en Ille-et-Vilaine",
-    "priceReducedShort": "{price} pour les moins de 18 ans"
+    "priceReducedShort": "{price} moins de 18 ans"
   }
 }

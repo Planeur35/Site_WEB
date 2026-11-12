@@ -4,13 +4,12 @@ import { buildMetadata } from '@/lib/metadata';
 import EmptyState from '@/components/ui/EmptyState';
 import Kicker from '@/components/ui/Kicker';
 import NewsRow from '@/components/ui/NewsRow';
-import PartnersPanel from '@/components/ui/PartnersPanel';
 import SitePageHero from '@/components/ui/SitePageHero';
 import { formatDayNumber, formatMonthShort, formatTime, formatWeekday, startOfToday } from '@/lib/format';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize } from '@/lib/sanity/localize';
-import { allArticlesQuery, allPartnersQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
-import type { Article, ClubEvent, Partner } from '@/lib/sanity/types';
+import { allArticlesQuery, upcomingEventsQuery } from '@/lib/sanity/queries';
+import type { Article, ClubEvent } from '@/lib/sanity/types';
 
 // Also drops past events from the agenda without a rebuild
 export const revalidate = 60;
@@ -26,17 +25,16 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations('news');
 
-  const [articles, events, partners] = await Promise.all([
+  const [articles, events] = await Promise.all([
     sanityFetch<Article[]>(allArticlesQuery, []),
     sanityFetch<ClubEvent[]>(upcomingEventsQuery, [], { since: startOfToday() }),
-    sanityFetch<Partner[]>(allPartnersQuery, []),
   ]);
 
   return (
     <>
       <SitePageHero page="news" kicker={t('heroKicker')} title={t('heroTitle')} variant={0} />
 
-      {/* News feed on the left; agenda and partners in a side band on the right (below the feed on phones) */}
+      {/* News feed on the left; agenda in a side band on the right (below the feed on phones) */}
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:px-8 md:py-24 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
         <section id="news" aria-labelledby="news-title" className="scroll-mt-40">
           <Kicker>{t('listKicker')}</Kicker>
@@ -89,7 +87,6 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
             </ul>
           </section>
 
-          <PartnersPanel partners={partners} kicker={t('partnersKicker')} title={t('partnersTitle')} />
         </aside>
       </div>
     </>

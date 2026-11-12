@@ -10,7 +10,7 @@ import FlightCta, { type InitiationPrices } from "@/components/layout/FlightCta"
 import { FULL_NAV, HEADER_NAV } from "@/components/layout/navItems";
 
 interface HeaderProps {
-  /** Trial flight prices, shown next to the booking button. */
+  /** Trial flight prices, shown in the booking button. */
   initiation: InitiationPrices;
 }
 
@@ -41,62 +41,41 @@ export default function Header({ initiation }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // The name of the association on two lines next to the logo: « Planeurs » / « d’Ille-et-Vilaine »
+  const [nameFirst, ...nameRest] = tc("clubName").split(" ");
+
   return (
     <header className="sticky top-0 z-40 border-b border-sky-900/15 bg-ciel/90 backdrop-blur">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
-        {/* Row 1: logo and name, booking button with prices, language, menu */}
-        <div
-          className={clsx(
-            "flex items-center justify-between gap-4 transition-[height] duration-200",
-            scrolled ? "h-16" : "h-24 md:h-28",
-          )}
-        >
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo-icon.png"
-              alt=""
-              width={200}
-              height={178}
-              className={clsx("w-auto transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
-              priority
-            />
-            <span className="hidden whitespace-nowrap font-serif font-normal text-lg leading-tight text-sky-950 lg:block">
-              {tc("clubName")}
-            </span>
-            <span className="sr-only lg:hidden">{tc("clubName")}</span>
-          </Link>
+      <div
+        className={clsx(
+          "mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-200 sm:px-6 md:px-8",
+          scrolled ? "h-20" : "h-24 md:h-28",
+        )}
+      >
+        <Link href="/" className="flex shrink-0 items-center gap-3">
+          <Image
+            src="/logo-icon.png"
+            alt=""
+            width={200}
+            height={178}
+            className={clsx("w-auto transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
+            priority
+          />
+          <span className="hidden font-serif font-normal text-lg leading-tight text-sky-950 lg:block">
+            <span className="block">{nameFirst}</span>
+            <span className="block whitespace-nowrap">{nameRest.join(" ")}</span>
+          </span>
+          <span className="sr-only lg:hidden">{tc("clubName")}</span>
+        </Link>
 
-          <div className="flex items-center gap-4">
-            <FlightCta prices={initiation} className="hidden md:flex" />
-            <div className="flex items-center gap-1">
-              <LanguageToggle />
-              <button
-                type="button"
-                className="inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center text-sky-950"
-                aria-expanded={menuOpen}
-                aria-controls="full-menu"
-                aria-label={t("menu")}
-                onClick={() => setMenuOpen((open) => !open)}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                  <path d={menuOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Phones: the booking button gets its own full-width row */}
-        <FlightCta prices={initiation} compact hideNote={scrolled} className="pb-3 md:hidden" />
-
-        {/* Row 2 (wide screens): main navigation */}
-        <nav className="hidden h-11 items-center gap-7 border-t border-sky-900/10 xl:flex" aria-label={t("mainNav")}>
+        {/* Main navigation: only when there is room for it next to the buttons (1400 px and up) */}
+        <nav className="ml-auto hidden items-center gap-4 min-[1400px]:flex" aria-label={t("mainNav")}>
           {HEADER_NAV.map((item) => (
             <div key={item.key} className="group relative">
               <Link
                 href={item.href}
                 className={clsx(
-                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.18em] transition",
+                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.08em] transition",
                   isActive(item.pathname)
                     ? "border-sky-800 text-sky-950"
                     : "border-transparent text-slate-600 hover:border-sky-400 hover:text-sky-950",
@@ -127,10 +106,28 @@ export default function Header({ initiation }: HeaderProps) {
             </div>
           ))}
         </nav>
+
+        {/* Language, menu, then the booking button on the far right */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          <LanguageToggle />
+          <button
+            type="button"
+            className="inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center text-sky-950"
+            aria-expanded={menuOpen}
+            aria-controls="full-menu"
+            aria-label={t("menu")}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <path d={menuOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
+            </svg>
+          </button>
+          <FlightCta prices={initiation} className="ml-1 sm:ml-2" />
+        </div>
       </div>
 
       <nav id="full-menu" hidden={!menuOpen} className="border-t border-sky-900/15 bg-ciel" aria-label={t("fullNav")}>
-        <div className="mx-auto flex max-h-[calc(100vh-9rem)] max-w-5xl flex-col overflow-y-auto px-4 py-4 sm:px-6 md:px-8">
+        <div className="mx-auto flex max-h-[calc(100vh-7rem)] max-w-5xl flex-col overflow-y-auto px-4 py-4 sm:px-6 md:px-8">
           {FULL_NAV.map((item) => (
             <Link
               key={item.key}

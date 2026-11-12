@@ -1,3 +1,4 @@
+import { withEnglishStatus } from './translationStatus';
 import { defineField, defineType } from 'sanity';
 import { localizedString, localizedText, photoField } from './fields';
 
@@ -33,10 +34,10 @@ export default defineType({
     { title: 'Date de début', name: 'startAsc', by: [{ field: 'startDate', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'title.fr', date: 'startDate', media: 'image' },
-    prepare: ({ title, date, media }) => ({
+    select: { title: 'title.fr', titleEn: 'title.en', date: 'startDate', media: 'image' },
+    prepare: ({ title, titleEn, date, media }) => ({
       title,
-      subtitle: date ? new Date(date).toLocaleDateString('fr-FR') : 'Sans date',
+      subtitle: withEnglishStatus(date ? new Date(date).toLocaleDateString('fr-FR') : 'Sans date', title, titleEn),
       media,
     }),
   },

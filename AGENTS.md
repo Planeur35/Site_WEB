@@ -62,6 +62,8 @@ sanity/sanity.config.ts    Studio menu (French), singletons
 - No serif font on the site: `font-serif` is kept as a class name but `--font-serif` (globals.css) is the system sans-serif stack. Short texts add `font-normal` (titles are light, weight 300).
 - The acronym « PIV » and the word « club » are not shown to visitors: use « Planeurs d’Ille-et-Vilaine » (`common.clubName`) and « association ». Technical names (`clubPage`, `/club` key) stay.
 - The French and English URL of the association page is `/association` and `/the-association`; the internal key stays `/club`.
+- The header is a single slim row: logo, name, main navigation (only from 1400 px: `min-[1400px]`), language, menu button, then the small orange `FlightCta` booking button on the far right. Below 1400 px the full menu replaces the main navigation.
+- Studio list entries show « ⚠ Version anglaise à faire » when the English title is missing (`sanity/schemas/translationStatus.ts`).
 - Page headers use `SitePageHero` with the page's `PageHeroKey`, so the header photo comes from Studio (Réglages du site → Photos d’en-tête). A new page also needs its key in `PageHeroKey` (`src/lib/sanity/types.ts`) and in `HERO_PAGES` (`sanity/schemas/siteSettings.ts`).
 - Leaflet must stay behind `next/dynamic` with `ssr: false` (`Map.tsx` loads `MapInner.tsx`).
 - Use `next/image` (or `SanityPhoto` for a Sanity photo that fills a frame). Build Sanity image URLs with `urlFor()` from `@/lib/sanity/image`. `imageLoader.ts` lets Sanity's CDN resize images instead of the host.

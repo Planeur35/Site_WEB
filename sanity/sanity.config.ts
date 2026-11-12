@@ -41,9 +41,19 @@ export default defineConfig({
             singletonListItem(S, 'clubHistory', 'Histoire de l’association'),
             singletonListItem(S, 'joinPage', 'Page « Venez voler ! »'),
             singletonListItem(S, 'discoverPage', 'Page « Venez essayer »'),
-            singletonListItem(S, 'pricingPage', 'Page « Tarifs »'),
             S.documentTypeListItem('aircraft').title('Nos planeurs'),
-            S.documentTypeListItem('tariff').title('Tarifs (montants)'),
+            // One entry « Tarifs » holding the two sides of the pricing: the texts and examples, and the amounts
+            S.listItem()
+              .title('Tarifs')
+              .id('tarifs')
+              .child(
+                S.list()
+                  .title('Tarifs')
+                  .items([
+                    singletonListItem(S, 'pricingPage', 'Textes et exemples de saison'),
+                    S.documentTypeListItem('tariff').title('Montants (lignes de prix)'),
+                  ]),
+              ),
             S.documentTypeListItem('flightStory').title('Récits de vols'),
             S.documentTypeListItem('partner').title('Partenaires'),
             S.divider(),

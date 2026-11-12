@@ -115,7 +115,9 @@
     "heroTitle": "Planeurs d’Ille-et-Vilaine",
     "emptyTitle": "Coming soon",
     "empty": "The association pages are on their way.",
-    "anecdote": "Anecdote"
+    "anecdote": "Anecdote",
+    "partnersKicker": "They support us",
+    "partnersTitle": "Our partners"
   },
   "gliders": {
     "heroKicker": "The fleet",
@@ -240,9 +242,7 @@
     "agendaKicker": "Events",
     "agendaTitle": "Upcoming events",
     "agendaEmpty": "No upcoming events.",
-    "at": "at {time}",
-    "partnersKicker": "They support us",
-    "partnersTitle": "Our partners"
+    "at": "at {time}"
   },
   "share": {
     "label": "Share",
@@ -380,6 +380,6 @@
   "header": {
     "bookCta": "Book a trial flight",
     "priceReduced": "{price} for under-18s at school in Ille-et-Vilaine",
-    "priceReducedShort": "{price} for under-18s"
+    "priceReducedShort": "{price} under 18"
   }
 }

@@ -183,9 +183,9 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : introduction « Rejoindre l'association », sous-parties Adhésion à l'association, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; lien de paiement des Réglages | 🟢 sous 60 s |
-| Tarifs `/tarifs` (menu sandwich) | Document « Page « Tarifs » » (type `pricingPage`) : introduction et exemples de coût d'une saison ; la grille et les totaux viennent des fiches `tariff` (offres de la saison, moins de 25 ans / plus de 25 ans) | 🟢 sous 60 s |
-| Partenaires (bandeau de `/actualites`) | Type `partner` : nom, logo, site, ordre | 🟢 sous 60 s |
-| Bouton « Réserver un vol d'initiation » (en-tête) | Prix des fiches `tariff` « vol d'initiation » (adulte, moins de 18 ans) ; renvoie vers `/decouvrir` | 🟢 sous 60 s |
+| Tarifs `/tarifs` (menu sandwich) | Document « Textes et exemples de saison » (type `pricingPage`, dans l'entrée Tarifs du Studio) : introduction et exemples de coût d'une saison ; la grille et les totaux viennent des fiches `tariff` (offres de la saison, moins de 25 ans / plus de 25 ans) | 🟢 sous 60 s |
+| Partenaires (panneau latéral de `/association`) | Type `partner` : nom, logo, site, ordre ; le nom s'affiche sous chaque logo | 🟢 sous 60 s |
+| Bouton orange « Réserver un vol d'initiation » (en-tête, à droite du menu) | Prix des fiches `tariff` « vol d'initiation » (adulte, moins de 18 ans), affichés dans le bouton dès 640 px de large ; renvoie vers `/decouvrir` | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
 | Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |

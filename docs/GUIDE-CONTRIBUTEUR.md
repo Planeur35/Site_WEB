@@ -218,10 +218,10 @@ Tout s'affiche en ligne **moins d'une minute** après **Publish**.
 | Histoire de l'association | L'association, partie « Histoire », au format magazine avec encarts d'anecdotes |
 | Nos planeurs | Nos planeurs |
 | Page « Venez voler ! » | Venez voler ! (rejoindre l'association : introduction, adhésion, packs de formation, comment s'inscrire) |
-| Page « Tarifs » | Tarifs (introduction, exemples de coût d'une saison) |
+| Tarifs, « Textes et exemples de saison » | Tarifs (introduction, exemples de coût d'une saison) |
 | Page « Venez essayer » | Venez essayer (vols d'initiation, réservation et paiement en ligne, questions fréquentes) |
-| Tarifs (montants) | Tarifs (grille), Venez essayer (prix du vol d'initiation), bouton de l'en-tête |
-| Partenaires | Actualités, bandeau de droite (logos des partenaires) |
+| Tarifs, « Montants (lignes de prix) » | Tarifs (grille), Venez essayer (prix du vol d'initiation), bouton de l'en-tête |
+| Partenaires | L'association, panneau de droite (logos et noms des partenaires) |
 | Récits de vols | Récits de vols |
 | Réglages du site | Photos d'accueil et accroche, chiffres clés, coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
 
@@ -287,9 +287,9 @@ Document **Page « Venez essayer »**, dans la colonne de gauche. Les textes se 
 
 #### Pas à pas : saisir les tarifs (montants)
 
-Une fiche **Tarifs (montants)** = une ligne de prix. Elles alimentent la page **Tarifs**, le prix du vol d'initiation et le bouton de réservation de l'en-tête.
+Une fiche de **Montants (lignes de prix)** = une ligne de prix. Elles alimentent la page **Tarifs**, le prix du vol d'initiation et le bouton de réservation de l'en-tête.
 
-1. **Tarifs (montants)** → **+**. **Offre** : cotisation annuelle, participation annuelle ou journalière aux frais de fonctionnement, e-licence assurance FFVP, forfait illimité, forfait 20 h, 10 heures supplémentaires, heure de vol en monoplace ou en biplace, pack formation, pack complément de formation, vol d'initiation.
+1. **Tarifs** → **Montants (lignes de prix)** → **+**. **Offre** : cotisation annuelle, participation annuelle ou journalière aux frais de fonctionnement, e-licence assurance FFVP, forfait illimité, forfait 20 h, 10 heures supplémentaires, heure de vol en monoplace ou en biplace, pack formation, pack complément de formation, vol d'initiation.
 2. **Catégorie d'âge** : pour les offres de la saison, **moins de 25 ans** ou **plus de 25 ans** : une fiche par catégorie. Laissez vide si le prix est le même pour tous. Pour le vol d'initiation : **moins de 18 ans** ou **adulte** (par exemple 170 € adulte, 130 € moins de 18 ans scolarisés en Ille-et-Vilaine).
 3. **Montant (€)**, puis **Précisions** si besoin.
 4. **Publish**. Le Studio refuse un doublon (même offre, même âge).
@@ -298,7 +298,7 @@ Le prix adulte et le prix « moins de 18 ans » du vol d'initiation apparaissent
 
 #### Pas à pas : la page « Tarifs »
 
-Document **Page « Tarifs »**, dans la colonne de gauche :
+Dans la colonne de gauche, l'entrée **Tarifs** s'ouvre sur deux listes : **Textes et exemples de saison** (cette page) et **Montants (lignes de prix)**. Ouvrez **Textes et exemples de saison** :
 
 1. **Texte d'introduction** : affiché au-dessus de la grille des tarifs.
 2. **Exemples de coût d'une saison** : **Add item**, puis un nom (par exemple « Pilote occasionnel »), une description facultative et les **postes de dépenses** : choisissez le poste (cotisation, participation journalière, e-licence, heures de vol…) et sa **quantité** (12 jours de vol, 8 heures…). Le site calcule le total pour les moins de 25 ans et pour les plus de 25 ans, à partir des montants saisis. Si un montant manque pour une catégorie, le total indique « Non renseigné ».
@@ -309,7 +309,7 @@ La grille « Tous les tarifs » se construit toute seule à partir des fiches **
 
 #### Pas à pas : les partenaires
 
-**Partenaires** → **+** : le **nom**, le **logo** (fond transparent ou blanc, 600 pixels de large ou plus), le **site web** (facultatif : le logo devient un lien) et l'**ordre d'affichage**. Ils apparaissent dans le bandeau de droite de la page Actualités, sous l'agenda. Tant qu'un logo manque, le nom s'affiche à la place.
+**Partenaires** → **+** : le **nom**, le **logo** (fond transparent ou blanc, 600 pixels de large ou plus), le **site web** (facultatif : le logo devient un lien) et l'**ordre d'affichage**. Ils apparaissent dans un **panneau à droite de la page L'association** (il reste visible quand on fait défiler la page, sur les écrans de 1280 pixels ou plus ; en dessous, il passe en bas de page), avec le nom de l'organisme sous chaque logo. Tant qu'un logo manque, seul le nom s'affiche.
 
 #### Pas à pas : rédiger les pages de l'association
 
@@ -1104,3 +1104,7 @@ Sur les anciennes versions de PowerShell, `&&` n'existe pas : tapez les deux com
 ---
 
 *Une question, un blocage : contactez Hamid. Ce guide accompagne le manuel technique du site du PIV.*
+
+#### Repérer ce qui n'est pas encore traduit en anglais
+
+Dans les listes du Studio (Actualités, Agenda, Pages de l'association, Récits de vols, Galerie photos), une entrée dont le titre français existe mais pas le titre anglais affiche **⚠ Version anglaise à faire** sous son titre. Ouvrez-la et remplissez l'onglet **English** de chaque champ. Tant qu'un champ n'a pas de version anglaise, le site anglais affiche le texte français.

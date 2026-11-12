@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 
-/** A partner shown with its logo in the side band of the news page. */
+/** A partner shown with its logo and name at the end of the « L’association » page. */
 export default defineType({
   name: 'partner',
   title: 'Partenaire',
