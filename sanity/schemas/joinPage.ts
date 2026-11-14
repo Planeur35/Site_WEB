@@ -1,7 +1,7 @@
 import { defineType } from 'sanity';
 import { localizedBlocks, photoField } from './fields';
 
-/** Page « Venez voler ! » (tarifs, adhésion, formation): a single document, written like a club page. */
+/** Page « Venez voler ! » (tarifs, adhésion, formation): a single document, written like an association page. */
 export default defineType({
   name: 'joinPage',
   title: 'Page « Venez voler ! »',
@@ -10,16 +10,18 @@ export default defineType({
     localizedBlocks({
       name: 'intro',
       title: 'Texte explicatif',
-      description: 'Texte d’introduction en haut de la page, au-dessus du tableau des tarifs.',
+      description: 'Texte d’introduction en haut de la page « Rejoindre l’association ».',
     }),
     {
-      ...photoField({ name: 'table', title: 'Tableau récapitulatif des tarifs (image)', required: false }),
+      // No longer shown: the prices now have their own page. Hidden, the stored image is kept.
+      ...photoField({ name: 'table', title: '(Ancien) Tableau récapitulatif des tarifs (image)', required: false }),
+      hidden: true,
       description:
         'L’image du tableau de tous les tarifs de l’année, à remplacer chaque année. Elle peut être grande : le visiteur peut l’ouvrir en plein écran. De préférence nette, de 2000 pixels de large ou plus (JPG ou PNG). Dans « Description de la photo », résumez en une phrase ce que contient le tableau.',
     },
     localizedBlocks({
       name: 'membership',
-      title: 'Adhésion au club (membres)',
+      title: 'Adhésion à l’association (membres)',
       description: 'Première sous-partie : cotisation, forfaits, conditions d’adhésion.',
     }),
     localizedBlocks({

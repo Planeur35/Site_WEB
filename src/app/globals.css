@@ -7,10 +7,21 @@
   --color-nuit: #0e1c2b;
   --color-azur: #12304f;
   --color-altitude: #3a7ca5;
+
+  /* No serif font on the site: the historical `font-serif` class now uses the system sans-serif font. */
+  --font-serif: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@layer base {
+  /* Titles use the light weight of the system font; short texts add `font-normal` */
+  .font-serif {
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
 }
 
 body {

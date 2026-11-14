@@ -1,4 +1,4 @@
-# Site des Planeurs d'Ille-et-Vilaine (PIV)
+# Site des Planeurs d'Ille-et-Vilaine
 
 🧭 **Nouveau sur le projet ? Guide contributeur (modifier le contenu, Git, première Pull Request) : [docs/GUIDE-CONTRIBUTEUR.md](docs/GUIDE-CONTRIBUTEUR.md)**
 

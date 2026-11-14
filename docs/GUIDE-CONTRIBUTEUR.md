@@ -127,7 +127,7 @@ Un navigateur et un compte Sanity suffisent. Ni Git, ni terminal, ni Pull Reques
 | Articles | **Actualités** | Titre, image mise en avant (*Featured Image*), extrait (*Excerpt*), contenu (*Body*). |
 | Catégories | **Rubriques des actualités** | Une rubrique est un document à part : créez-la avant de l'utiliser dans une actualité. |
 | Événements (extension d'agenda) | **Agenda** | Titre, début, fin, lieu. Un événement passé disparaît seul du site. |
-| Pages | **Pages du club**, **Histoire du club**, **Récits de vols** | Chaque page du site lit son propre type de contenu : on remplit, le site met en page. |
+| Pages | **Pages de l'association**, **Histoire de l'association**, **Récits de vols** | Chaque page du site lit son propre type de contenu : on remplit, le site met en page. |
 | Types de contenu personnalisés, champs ACF | **Nos planeurs**, **Tarifs**, **Galerie photos** | Des formulaires sur mesure, aux champs fixés par le code. |
 | Réglages › Général, Personnaliser | **Réglages du site** | Un document unique : photos d'accueil, chiffres clés, coordonnées, lien de paiement, webcam, liens pratiques. |
 | Médiathèque | Dans chaque champ image | Pas de page « Médias » séparée. Une image déjà envoyée se réutilise avec **Select** dans le champ image. |
@@ -159,7 +159,7 @@ Un navigateur et un compte Sanity suffisent. Ni Git, ni terminal, ni Pull Reques
 
 L'écran se lit de gauche à droite, en colonnes. Chaque clic ouvre une nouvelle colonne à droite. Le menu est en français ; à l'intérieur de certains formulaires plus anciens (Actualités, Nos planeurs, Galerie photos), les noms de champs sont encore en anglais.
 
-- **1. Contenu** : en haut, ce que l'on publie souvent (*Actualités*, *Agenda*, *Galerie photos*) ; au milieu, les pages (*Pages du club*, *Histoire du club*, *Page « Venez voler ! »*, *Page « Venez essayer »*, *Nos planeurs*, *Tarifs*, *Récits de vols*) ; en bas, *Réglages du site*. L'équivalent du menu de gauche de `/wp-admin`.
+- **1. Contenu** : en haut, ce que l'on publie souvent (*Actualités*, *Agenda*, *Galerie photos*) ; au milieu, les pages (*Pages de l'association*, *Histoire de l'association*, *Page « Venez voler ! »*, *Page « Venez essayer »*, *Nos planeurs*, *Tarifs*, *Récits de vols*) ; en bas, *Réglages du site*. L'équivalent du menu de gauche de `/wp-admin`.
 - **2. La liste** : Les documents du type choisi. En haut : le bouton **+** pour en créer un, et un menu pour trier.
 - **3. Le formulaire** : Les champs du document sélectionné. En bas, la barre d'actions : l'état du document, le bouton vert **Publish** et, à côté, un menu pour **Unpublish**, **Duplicate**, **Discard changes** et **Delete**.
 
@@ -214,12 +214,14 @@ Tout s'affiche en ligne **moins d'une minute** après **Publish**.
 | Actualités (et Rubriques) | Actualités, et « Dernières nouvelles » sur l'accueil |
 | Agenda | Actualités, partie « Événements à venir » |
 | Galerie photos | Galerie |
-| Pages du club | Le club : une section par page (présentation, plateforme, activité, formation, perfectionnement, compétition) |
-| Histoire du club | Le club, partie « Histoire », au format magazine avec encarts d'anecdotes |
+| Pages de l'association | L'association : une section par page (présentation, plateforme, activité, formation, perfectionnement, compétition) |
+| Histoire de l'association | L'association, partie « Histoire », au format magazine avec encarts d'anecdotes |
 | Nos planeurs | Nos planeurs |
-| Page « Venez voler ! » | Venez voler ! (texte explicatif, image du tableau des tarifs, adhésion, packs de formation, comment s'inscrire) |
+| Page « Venez voler ! » | Venez voler ! (rejoindre l'association : introduction, adhésion, packs de formation, comment s'inscrire) |
+| Tarifs, « Textes et exemples de saison » | Tarifs (introduction, exemples de coût d'une saison) |
 | Page « Venez essayer » | Venez essayer (vols d'initiation, réservation et paiement en ligne, questions fréquentes) |
-| Tarifs | Venez essayer (prix du vol d'initiation) ; les autres tarifs sont dans l'image de la page Venez voler ! |
+| Tarifs, « Montants (lignes de prix) » | Tarifs (grille), Venez essayer (prix du vol d'initiation), bouton de l'en-tête |
+| Partenaires | L'association, panneau de droite (logos et noms des partenaires) |
 | Récits de vols | Récits de vols |
 | Réglages du site | Photos d'accueil et accroche, chiffres clés, coordonnées (contact et pied de page), lien de paiement, webcam, liens pratiques |
 
@@ -265,15 +267,14 @@ Une rubrique encore vide affiche « Bientôt ici » sur le site.
 5. **Sort Order** : sa position dans sa catégorie, le plus petit d'abord.
 6. **Publish**.
 
-#### Pas à pas : la page « Venez voler ! » (tarifs)
+#### Pas à pas : la page « Venez voler ! » (rejoindre l'association)
 
-Cette page a son propre document, au même niveau que les pages du club : **Page « Venez voler ! »**, dans la colonne de gauche.
+Cette page a son propre document, au même niveau que les pages de l'association : **Page « Venez voler ! »**, dans la colonne de gauche. Elle présente l'adhésion ; les tarifs sont sur la page **Tarifs**.
 
-1. **Texte explicatif** : l'introduction, en haut de la page.
-2. **Tableau récapitulatif des tarifs (image)** : l'image du tableau de tous les tarifs de l'année, à remplacer chaque année. Elle peut être grande, le visiteur l'ouvre en plein écran. Dans « Description de la photo », résumez en une phrase ce que contient le tableau.
-3. Les trois sous-parties, dans cet ordre : **Adhésion au club (membres)**, **Pack formation** et **Pack complément de formation**. Une sous-partie sans texte n'est pas affichée.
-4. **Comment s'inscrire** : le texte en bas de la page.
-5. **Publish**.
+1. **Texte explicatif** : l'introduction, en haut de la page (titre « Rejoindre l'association »).
+2. Les trois sous-parties, dans cet ordre : **Adhésion à l'association (membres)**, **Pack formation** et **Pack complément de formation**. Une sous-partie sans texte n'est pas affichée.
+3. **Comment s'inscrire** : le texte en bas de la page.
+4. **Publish**.
 
 #### Pas à pas : la page « Venez essayer »
 
@@ -284,29 +285,46 @@ Document **Page « Venez essayer »**, dans la colonne de gauche. Les textes se 
 3. **Questions fréquentes** : **Add item**, une question et sa réponse. On peut glisser les questions pour les ordonner. La section n'apparaît que s'il y a au moins une question avec sa réponse.
 4. **Publish**.
 
-#### Pas à pas : saisir le prix du vol d'initiation
+#### Pas à pas : saisir les tarifs (montants)
 
-Une fiche **Tarifs** = une ligne de prix. Seule l'offre « vol d'initiation » est affichée (page Venez essayer) : les autres prix sont dans le tableau de la page Venez voler !.
+Une fiche de **Montants (lignes de prix)** = une ligne de prix. Elles alimentent la page **Tarifs**, le prix du vol d'initiation et le bouton de réservation de l'en-tête.
 
-1. **Tarifs** → **+**. **Offre** : vol d'initiation (les autres offres existent encore dans la liste, mais ne sont plus affichées).
-2. **Catégorie d'âge** : pour les forfaits, moins ou plus de 25 ans ; pour le vol d'initiation, moins de 18 ans ou adulte. Une fiche par catégorie (par exemple deux fiches pour le vol d'initiation : 170 € adulte, 130 € moins de 18 ans).
-3. **Montant (€)**, puis **Précisions** si besoin (« par an », « 20 minutes de vol »).
+1. **Tarifs** → **Montants (lignes de prix)** → **+**. **Offre** : cotisation annuelle, participation annuelle ou journalière aux frais de fonctionnement, e-licence assurance FFVP, forfait illimité, forfait 20 h, 10 heures supplémentaires, heure de vol en monoplace ou en biplace, pack formation, pack complément de formation, vol d'initiation.
+2. **Catégorie d'âge** : pour les offres de la saison, **moins de 25 ans** ou **plus de 25 ans** : une fiche par catégorie. Laissez vide si le prix est le même pour tous. Pour le vol d'initiation : **moins de 18 ans** ou **adulte** (par exemple 170 € adulte, 130 € moins de 18 ans scolarisés en Ille-et-Vilaine).
+3. **Montant (€)**, puis **Précisions** si besoin.
 4. **Publish**. Le Studio refuse un doublon (même offre, même âge).
 
-#### Pas à pas : rédiger les pages du club
+Le prix adulte et le prix « moins de 18 ans » du vol d'initiation apparaissent à côté du bouton orange « Réserver un vol d'initiation » de l'en-tête.
 
-1. **Pages du club** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, perfectionnement ou compétition. Une seule page par section.
+#### Pas à pas : la page « Tarifs »
+
+Dans la colonne de gauche, l'entrée **Tarifs** s'ouvre sur deux listes : **Textes et exemples de saison** (cette page) et **Montants (lignes de prix)**. Ouvrez **Textes et exemples de saison** :
+
+1. **Texte d'introduction** : affiché au-dessus de la grille des tarifs.
+2. **Exemples de coût d'une saison** : **Add item**, puis un nom (par exemple « Pilote occasionnel »), une description facultative et les **postes de dépenses** : choisissez le poste (cotisation, participation journalière, e-licence, heures de vol…) et sa **quantité** (12 jours de vol, 8 heures…). Le site calcule le total pour les moins de 25 ans et pour les plus de 25 ans, à partir des montants saisis. Si un montant manque pour une catégorie, le total indique « Non renseigné ».
+3. **Notes sous les tableaux** (facultatif).
+4. **Publish**.
+
+La grille « Tous les tarifs » se construit toute seule à partir des fiches **Tarifs (montants)**.
+
+#### Pas à pas : les partenaires
+
+**Partenaires** → **+** : le **nom**, le **logo** (fond transparent ou blanc, 600 pixels de large ou plus), le **site web** (facultatif : le logo devient un lien) et l'**ordre d'affichage**. Ils apparaissent dans un **panneau à droite de la page L'association** (il reste visible quand on fait défiler la page, sur les écrans de 1280 pixels ou plus ; en dessous, il passe en bas de page), avec le nom de l'organisme sous chaque logo. Tant qu'un logo manque, seul le nom s'affiche.
+
+#### Pas à pas : rédiger les pages de l'association
+
+1. **Pages de l'association** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, perfectionnement ou compétition. Une seule page par section.
 2. **Titre de la section**, **Introduction** (2 ou 3 phrases), **Photo principale**, **Texte** (avec des *Titres de section* pour les sous-parties). Pour la formation, un **Schéma du cursus** peut être ajouté en image.
 3. **Publish**. Les sections apparaissent sur la page Le club dans l'ordre du menu.
 
-L'**Histoire du club** (document unique) se remplit de la même façon, avec en plus des **encarts d'anecdotes**. Chaque **Récit de vol** est une page de type magazine : titre, **adresse de la page** (bouton *Generate*), date du vol, planeur, photo, introduction, récit (avec photos insérées dans le texte), encarts d'anecdotes et lien WeGlide. La page Récits de vols en propose **6 au maximum** (les plus récents), chacun dans une case avec sa photo et son titre ; les cases se répartissent selon leur nombre. Jamais de nom de pilote ou d'élève.
+L'**Histoire de l'association** (document unique) se remplit de la même façon, avec en plus des **encarts d'anecdotes**. Chaque **Récit de vol** est une page de type magazine : titre, **adresse de la page** (bouton *Generate*), date du vol, planeur, photo, introduction, récit (avec photos insérées dans le texte), encarts d'anecdotes et lien WeGlide. La page Récits de vols en propose **6 au maximum** (les plus récents), chacun dans une case avec sa photo et son titre ; les cases se répartissent selon leur nombre. Jamais de nom de pilote ou d'élève.
 
 #### Pas à pas : réglages du site
 
 **Réglages du site**, en bas de la colonne de gauche, est un document unique, comme la page Réglages de WordPress : on ne peut ni en créer un deuxième, ni le supprimer. Ses onglets :
 
 - **Page d'accueil** : nom du club, accroche, 3 ou 4 photos d'accueil qui défilent, avec un titre chacune.
-- **Photos d'en-tête** : une grande photo par page (Le club, Nos planeurs, Venez voler !, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
+- **Photos d'en-tête** : une grande photo par page (L'association, Nos planeurs, Venez voler !, Tarifs, Venez essayer…), à la place du dessin du ciel. Format paysage, au moins 2000 pixels de large.
 - **Chiffres clés** : pilotes brevetés, heures de vol, kilomètres parcourus depuis la création du club, planeurs, année de fondation (à mettre à jour une fois par an). Le nombre de membres n'est plus affiché.
 - **Anciens textes (à déplacer)** : les textes saisis avant la création des documents « Page « Venez voler ! » » et « Page « Venez essayer » ». Le site ne les reprend que tant que le champ correspondant de la nouvelle page est vide : recopiez-les dans la nouvelle page.
 - **Contact et réseaux** : e-mail, téléphone et adresse du club (page Contact et pied de page), lien de paiement (réservation des vols d'initiation et bons cadeaux), réseaux sociaux, adresse de l'image de la webcam, coordonnées du terrain pour la carte.
@@ -1086,3 +1104,7 @@ Sur les anciennes versions de PowerShell, `&&` n'existe pas : tapez les deux com
 ---
 
 *Une question, un blocage : contactez Hamid. Ce guide accompagne le manuel technique du site du PIV.*
+
+#### Repérer ce qui n'est pas encore traduit en anglais
+
+Dans les listes du Studio (Actualités, Agenda, Pages de l'association, Récits de vols, Galerie photos), une entrée dont le titre français existe mais pas le titre anglais affiche **⚠ Version anglaise à faire** sous son titre. Ouvrez-la et remplissez l'onglet **English** de chaque champ. Tant qu'un champ n'a pas de version anglaise, le site anglais affiche le texte français.

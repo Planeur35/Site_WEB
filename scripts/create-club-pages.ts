@@ -23,7 +23,7 @@ const client = createClient({
 });
 
 const sections = [
-  { section: 'presentation', fr: 'Présentation du club', en: 'About the club' },
+  { section: 'presentation', fr: 'Présentation de l’association', en: 'About the association' },
   { section: 'platform', fr: 'La plateforme', en: 'The airfield' },
   { section: 'activities', fr: 'Activité des membres', en: 'Members’ life' },
   { section: 'training', fr: 'Formation initiale', en: 'Pilot training' },
@@ -54,18 +54,18 @@ async function main() {
 
   const history = await client.fetch<number>('count(*[_id in ["clubHistory", "drafts.clubHistory"]])');
   if (history > 0) {
-    console.log('- Histoire du club : existe déjà, ignorée');
+    console.log('- Histoire de l’association : existe déjà, ignorée');
   } else {
     tx.createIfNotExists({
       _id: 'drafts.clubHistory',
       _type: 'clubHistory',
-      title: { fr: 'Histoire du club', en: 'Club history' },
+      title: { fr: 'Histoire de l’association', en: 'Association history' },
     });
-    console.log('+ Histoire du club');
+    console.log('+ Histoire de l’association');
   }
 
   await tx.commit();
-  console.log('Brouillons créés. Ouvrez /studio → Pages du club pour les remplir, puis Publish.');
+  console.log('Brouillons créés. Ouvrez /studio → Pages de l’association pour les remplir, puis Publish.');
 }
 
 main().catch((err) => {

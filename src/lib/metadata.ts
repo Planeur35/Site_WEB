@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getPathname } from '@/i18n/navigation';
 
-const SITE_NAME = "PIV, Planeurs d'Ille-et-Vilaine";
+const SITE_NAME = "Planeurs d'Ille-et-Vilaine";
 const BASE_URL = 'https://www.planeur35.org';
 
 type Href = Parameters<typeof getPathname>[0]['href'];

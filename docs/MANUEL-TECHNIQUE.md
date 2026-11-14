@@ -179,10 +179,13 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
-| Le club `/club` | Pages du club (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire du club | 🟢 sous 60 s |
+| L'association `/association` | Pages de l'association (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire de l'association | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
-| Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : texte explicatif, image du tableau des tarifs de l'année, sous-parties Adhésion au club, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
+| Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : introduction « Rejoindre l'association », sous-parties Adhésion à l'association, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; lien de paiement des Réglages | 🟢 sous 60 s |
+| Tarifs `/tarifs` (menu sandwich) | Document « Textes et exemples de saison » (type `pricingPage`, dans l'entrée Tarifs du Studio) : introduction et exemples de coût d'une saison ; la grille et les totaux viennent des fiches `tariff` (offres de la saison, moins de 25 ans / plus de 25 ans) | 🟢 sous 60 s |
+| Partenaires (panneau latéral de `/association`) | Type `partner` : nom, logo, site, ordre ; le nom s'affiche sous chaque logo | 🟢 sous 60 s |
+| Bouton orange « Réserver un vol d'initiation » (en-tête, à droite du menu) | Prix des fiches `tariff` « vol d'initiation » (adulte, moins de 18 ans), affichés dans le bouton dès 640 px de large ; renvoie vers `/decouvrir` | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
 | Récits `/recits` et `/recits/[slug]` | Récits de vols : grille de 6 au plus (photo et titre), une page de type magazine par récit (introduction, texte, photos, anecdotes, lien WeGlide) | 🟢 sous 60 s |
 | Galerie, Webcam, Liens | Galerie photos ; adresse de la webcam et liens pratiques des Réglages | 🟢 sous 60 s |
@@ -354,7 +357,7 @@ Analyse de planeur35.org faite le 11/10/2026 à partir de ce que le site expose 
 
 | Chantier | Situation actuelle | Piste |
 |---|---|---|
-| Tarifs | Seule l'offre « Vol d'initiation » du type `tariff` est affichée (page Venez essayer) ; le reste est dans l'image de la page Venez voler ! | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
+| Tarifs | Types de lignes `tariff` étendus (cotisation, participations, e-licence, forfaits, heures, packs, vol d'initiation) ; la page `/tarifs` les affiche | Saisir le prix du vol d'initiation (170 € / 130 €) et le tableau des tarifs de l'année dans le Studio |
 | Actualités | 3 articles fictifs du seed | Supprimer les fictifs, publier de vrais articles depuis le Studio |
 | Galerie, photos d'accueil | Vides | Téléverser de nouvelles photos (celles de l'ancien site sont écartées) |
 | Le club, histoire, récits | Types prêts, rien de saisi | Reprendre les textes réels du club dans le Studio |

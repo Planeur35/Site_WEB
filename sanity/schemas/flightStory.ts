@@ -1,3 +1,4 @@
+import { withEnglishStatus } from './translationStatus';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { localizedBlocks, localizedString, localizedText, photoField } from './fields';
 
@@ -66,10 +67,10 @@ export default defineType({
     { title: 'Date du vol', name: 'flightDateDesc', by: [{ field: 'flightDate', direction: 'desc' }] },
   ],
   preview: {
-    select: { title: 'title.fr', date: 'flightDate', media: 'image' },
-    prepare: ({ title, date, media }) => ({
+    select: { title: 'title.fr', titleEn: 'title.en', date: 'flightDate', media: 'image' },
+    prepare: ({ title, titleEn, date, media }) => ({
       title,
-      subtitle: date ? new Date(date).toLocaleDateString('fr-FR') : undefined,
+      subtitle: withEnglishStatus(date ? new Date(date).toLocaleDateString('fr-FR') : undefined, title, titleEn),
       media,
     }),
   },

@@ -6,9 +6,15 @@ import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageToggle from "@/components/layout/LanguageToggle";
+import FlightCta, { type InitiationPrices } from "@/components/layout/FlightCta";
 import { FULL_NAV, HEADER_NAV } from "@/components/layout/navItems";
 
-export default function Header() {
+interface HeaderProps {
+  /** Trial flight prices, shown in the booking button. */
+  initiation: InitiationPrices;
+}
+
+export default function Header({ initiation }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   // The logo is large at the top of a page and shrinks once the visitor scrolls, to keep the sticky bar slim.
   const [scrolled, setScrolled] = useState(false);
@@ -35,15 +41,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // The name of the association on two lines next to the logo: « Planeurs » / « d’Ille-et-Vilaine »
+  const [nameFirst, ...nameRest] = tc("clubName").split(" ");
+
   return (
     <header className="sticky top-0 z-40 border-b border-sky-900/15 bg-ciel/90 backdrop-blur">
       <div
         className={clsx(
-          "mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 transition-[height] duration-200 sm:px-6 md:px-8",
+          "mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-200 sm:px-6 md:px-8",
           scrolled ? "h-20" : "h-24 md:h-28",
         )}
       >
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
           <Image
             src="/logo-icon.png"
             alt=""
@@ -52,19 +61,21 @@ export default function Header() {
             className={clsx("w-auto transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
             priority
           />
-          <span className="leading-tight">
-            <span className="block font-serif text-xl tracking-tight text-sky-950">PIV</span>
-            <span className="block text-[11px] uppercase tracking-[0.2em] text-sky-800 xl:whitespace-nowrap">{tc("clubName")}</span>
+          <span className="hidden font-serif font-normal text-lg leading-tight text-sky-950 lg:block">
+            <span className="block">{nameFirst}</span>
+            <span className="block whitespace-nowrap">{nameRest.join(" ")}</span>
           </span>
+          <span className="sr-only lg:hidden">{tc("clubName")}</span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-7 xl:flex" aria-label={t("mainNav")}>
+        {/* Main navigation: only when there is room for it next to the buttons (1400 px and up) */}
+        <nav className="ml-auto hidden items-center gap-4 min-[1400px]:flex" aria-label={t("mainNav")}>
           {HEADER_NAV.map((item) => (
             <div key={item.key} className="group relative">
               <Link
                 href={item.href}
                 className={clsx(
-                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.18em] transition",
+                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.08em] transition",
                   isActive(item.pathname)
                     ? "border-sky-800 text-sky-950"
                     : "border-transparent text-slate-600 hover:border-sky-400 hover:text-sky-950",
@@ -96,7 +107,8 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-1">
+        {/* Language, menu, then the booking button on the far right */}
+        <div className="flex items-center gap-1 sm:gap-2">
           <LanguageToggle />
           <button
             type="button"
@@ -110,6 +122,7 @@ export default function Header() {
               <path d={menuOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
             </svg>
           </button>
+          <FlightCta prices={initiation} className="ml-1 sm:ml-2" />
         </div>
       </div>
 

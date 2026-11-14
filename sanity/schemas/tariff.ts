@@ -6,8 +6,15 @@ import { localizedString } from './fields';
  * Values of `offer` and `ageCategory` are read by the site: do not rename them.
  */
 export const OFFERS = [
-  { title: 'Forfait 20h', value: 'forfait-20h' },
+  { title: 'Cotisation annuelle', value: 'cotisation' },
+  { title: 'Participation annuelle aux frais de fonctionnement', value: 'participation-annuelle' },
+  { title: 'Participation journalière aux frais de fonctionnement', value: 'participation-journaliere' },
+  { title: 'E-licence assurance FFVP (annuelle)', value: 'elicense-ffvp' },
   { title: 'Forfait illimité', value: 'forfait-illimite' },
+  { title: 'Forfait 20h', value: 'forfait-20h' },
+  { title: '10 heures supplémentaires', value: 'heures-10h' },
+  { title: 'Heure de vol en monoplace', value: 'heure-monoplace' },
+  { title: 'Heure de vol en biplace', value: 'heure-biplace' },
   { title: 'Pack formation', value: 'pack-formation' },
   { title: 'Pack complément de formation', value: 'pack-complement-formation' },
   { title: 'Vol d’initiation', value: 'vol-initiation' },
@@ -27,6 +34,22 @@ const AGES: Record<string, { title: string; value: string }[]> = {
     { title: 'Adulte', value: 'adult' },
   ],
 };
+
+// Offers priced for « moins de 25 ans » and « plus de 25 ans ». For these, leaving the age empty means « same price at any age ».
+const SEASON_AGES = [
+  { title: 'Moins de 25 ans', value: 'under25' },
+  { title: 'Plus de 25 ans', value: 'over25' },
+];
+const OPTIONAL_AGE = new Set([
+  'cotisation',
+  'participation-annuelle',
+  'participation-journaliere',
+  'elicense-ffvp',
+  'heures-10h',
+  'heure-monoplace',
+  'heure-biplace',
+]);
+for (const offer of OPTIONAL_AGE) AGES[offer] = SEASON_AGES;
 
 type TariffDoc = { _id: string; offer?: string; ageCategory?: string };
 
@@ -58,7 +81,8 @@ export default defineType({
     defineField({
       name: 'ageCategory',
       title: 'Catégorie d’âge',
-      description: 'Forfaits : moins ou plus de 25 ans. Vol d’initiation : moins de 18 ans ou adulte.',
+      description:
+        'Moins ou plus de 25 ans pour les offres de la saison (laissez vide si le prix est le même pour tous). Forfaits : choix obligatoire. Vol d’initiation : moins de 18 ans ou adulte.',
       type: 'string',
       options: {
         list: [...AGES['forfait-20h'], ...AGES['vol-initiation']],
@@ -70,7 +94,7 @@ export default defineType({
           const offer = (context.document as TariffDoc | undefined)?.offer ?? '';
           const allowed = AGES[offer];
           if (!allowed) return true;
-          if (!value) return 'Choisissez une catégorie d’âge.';
+          if (!value) return OPTIONAL_AGE.has(offer) ? true : 'Choisissez une catégorie d’âge.';
           return allowed.some((a) => a.value === value) ? true : 'Catégorie non prévue pour cette offre.';
         }),
     }),

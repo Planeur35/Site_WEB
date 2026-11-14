@@ -206,7 +206,7 @@ const fleet = [
 ];
 
 async function main() {
-  console.log('=== PIV Fleet Seed ===\n');
+  console.log('=== Fleet Seed ===\n');
 
   // Delete existing aircraft
   console.log('Deleting old aircraft...');

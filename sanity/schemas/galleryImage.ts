@@ -1,3 +1,4 @@
+import { withEnglishStatus } from './translationStatus';
 import { defineType, defineField } from 'sanity';
 
 export default defineType({
@@ -48,13 +49,14 @@ export default defineType({
   preview: {
     select: {
       title: 'caption.fr',
+      titleEn: 'caption.en',
       media: 'image',
       date: 'date',
     },
-    prepare({ title, media, date }) {
+    prepare({ title, titleEn, media, date }) {
       return {
         title: title || 'Untitled',
-        subtitle: date,
+        subtitle: withEnglishStatus(date, title, titleEn),
         media,
       };
     },

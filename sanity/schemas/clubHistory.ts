@@ -1,10 +1,10 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { localizedBlocks, localizedString, localizedText } from './fields';
 
-/** "Histoire du club", magazine format: a single document. */
+/** "Histoire de l’association", magazine format: a single document. */
 export default defineType({
   name: 'clubHistory',
-  title: 'Histoire du club',
+  title: 'Histoire de l’association',
   type: 'document',
   fields: [
     localizedString({ name: 'title', title: 'Titre' }),
@@ -30,5 +30,5 @@ export default defineType({
       ],
     }),
   ],
-  preview: { prepare: () => ({ title: 'Histoire du club' }) },
+  preview: { prepare: () => ({ title: 'Histoire de l’association' }) },
 });

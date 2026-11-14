@@ -1,5 +1,9 @@
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]`;
 
+export const allPartnersQuery = `*[_type == "partner"] | order(sortOrder asc, name asc)`;
+
+export const pricingPageQuery = `*[_type == "pricingPage"][0]`;
+
 export const joinPageQuery = `*[_type == "joinPage"][0]`;
 
 export const discoverPageQuery = `*[_type == "discoverPage"][0]`;
@@ -25,6 +29,8 @@ export const upcomingEventsQuery = `*[_type == "event" && coalesce(endDate, star
 export const allAircraftQuery = `*[_type == "aircraft"] | order(category asc, sortOrder asc, name asc)`;
 
 export const allTariffsQuery = `*[_type == "tariff"]`;
+
+export const initiationTariffsQuery = `*[_type == "tariff" && offer == "vol-initiation"]`;
 
 export const allClubPagesQuery = `*[_type == "clubPage"]`;
 

@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { localizedBlocks, localizedString } from './fields';
 
-/** Page « Venez essayer »: a single document, written like a club page. */
+/** Page « Venez essayer »: a single document, written like an association page. */
 export default defineType({
   name: 'discoverPage',
   title: 'Page « Venez essayer »',
