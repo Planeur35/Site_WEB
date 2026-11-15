@@ -20,36 +20,16 @@ export const OFFERS = [
   { title: 'Vol d’initiation', value: 'vol-initiation' },
 ];
 
-const AGES: Record<string, { title: string; value: string }[]> = {
-  'forfait-20h': [
-    { title: 'Moins de 25 ans', value: 'under25' },
-    { title: 'Plus de 25 ans', value: 'over25' },
-  ],
-  'forfait-illimite': [
-    { title: 'Moins de 25 ans', value: 'under25' },
-    { title: 'Plus de 25 ans', value: 'over25' },
-  ],
-  'vol-initiation': [
-    { title: 'Moins de 18 ans', value: 'under18' },
-    { title: 'Adulte', value: 'adult' },
-  ],
-};
+const UNDER25 = { title: 'Moins de 25 ans', value: 'under25' };
+const OVER25 = { title: 'Plus de 25 ans', value: 'over25' };
+const UNDER18 = { title: 'Moins de 18 ans', value: 'under18' };
+const ADULT = { title: 'Adulte', value: 'adult' };
+const ALL_AGES = { title: 'Tous âges', value: 'all' };
 
-// Offers priced for « moins de 25 ans » and « plus de 25 ans ». For these, leaving the age empty means « same price at any age ».
-const SEASON_AGES = [
-  { title: 'Moins de 25 ans', value: 'under25' },
-  { title: 'Plus de 25 ans', value: 'over25' },
-];
-const OPTIONAL_AGE = new Set([
-  'cotisation',
-  'participation-annuelle',
-  'participation-journaliere',
-  'elicense-ffvp',
-  'heures-10h',
-  'heure-monoplace',
-  'heure-biplace',
-]);
-for (const offer of OPTIONAL_AGE) AGES[offer] = SEASON_AGES;
+/** Age categories allowed for each offer. The trial flight uses 18 years, everything else 25 years. */
+const AGES: Record<string, { title: string; value: string }[]> = Object.fromEntries(
+  OFFERS.map((offer) => [offer.value, offer.value === 'vol-initiation' ? [UNDER18, ADULT, ALL_AGES] : [UNDER25, OVER25, ALL_AGES]]),
+);
 
 type TariffDoc = { _id: string; offer?: string; ageCategory?: string };
 
@@ -82,19 +62,20 @@ export default defineType({
       name: 'ageCategory',
       title: 'Catégorie d’âge',
       description:
-        'Moins ou plus de 25 ans pour les offres de la saison (laissez vide si le prix est le même pour tous). Forfaits : choix obligatoire. Vol d’initiation : moins de 18 ans ou adulte.',
+        'Toujours à choisir. Moins ou plus de 25 ans pour les offres de la saison, moins de 18 ans ou adulte pour le vol d’initiation. « Tous âges » si le prix est le même pour tout le monde.',
       type: 'string',
       options: {
-        list: [...AGES['forfait-20h'], ...AGES['vol-initiation']],
+        list: [UNDER25, OVER25, UNDER18, ADULT, ALL_AGES],
         layout: 'radio',
       },
-      hidden: ({ document }) => !AGES[(document as TariffDoc | undefined)?.offer ?? ''],
+      // Shown as soon as an offer is chosen
+      hidden: ({ document }) => !(document as TariffDoc | undefined)?.offer,
       validation: (rule) =>
         rule.custom((value, context) => {
           const offer = (context.document as TariffDoc | undefined)?.offer ?? '';
           const allowed = AGES[offer];
+          if (!value) return 'Choisissez une catégorie d’âge.';
           if (!allowed) return true;
-          if (!value) return OPTIONAL_AGE.has(offer) ? true : 'Choisissez une catégorie d’âge.';
           return allowed.some((a) => a.value === value) ? true : 'Catégorie non prévue pour cette offre.';
         }),
     }),
@@ -109,6 +90,17 @@ export default defineType({
       title: 'Précisions (facultatif)',
       description: 'Par exemple : « par an », « 5 vols », « 20 minutes de vol ».',
     }),
+    defineField({
+      name: 'sortOrder',
+      title: 'Ordre d’affichage',
+      description:
+        '1 = affiché en premier, dans sa rubrique de la grille des tarifs. Donnez le même numéro aux lignes d’une même offre (par exemple moins de 25 ans et plus de 25 ans). La liste du Studio suit cet ordre.',
+      type: 'number',
+      initialValue: 100,
+    }),
+  ],
+  orderings: [
+    { title: 'Ordre d’affichage', name: 'sortOrder', by: [{ field: 'sortOrder', direction: 'asc' }, { field: 'offer', direction: 'asc' }] },
   ],
   preview: {
     select: { offer: 'offer', age: 'ageCategory', amount: 'amount' },

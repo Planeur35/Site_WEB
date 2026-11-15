@@ -38,10 +38,11 @@ export default async function ClubPage({ params }: { params: Promise<{ locale: s
     sanityFetch<Partner[]>(allPartnersQuery, []),
   ]);
 
-  const sections = SECTION_ORDER.flatMap((section) => {
+  // Usual order, unless a page has an « Ordre d’affichage » in the Studio (smaller number = earlier)
+  const sections = SECTION_ORDER.flatMap((section, index) => {
     const page = pages.find((p) => p.section === section);
-    return page ? [{ section, page }] : [];
-  });
+    return page ? [{ section, page, order: page.sortOrder ?? (index + 1) * 10 }] : [];
+  }).sort((a, b) => a.order - b.order);
 
   return (
     <>

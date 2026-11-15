@@ -27,7 +27,10 @@ export default async function Footer() {
       <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-3 md:px-8">
         <div>
           <div className="flex items-center gap-3">
-            <Image src="/logo-icon.png" alt="" width={50} height={44} className="h-11 w-auto" />
+            {/* The official logo has a white background: it sits on a white tile on the dark footer */}
+            <span className="inline-flex shrink-0 rounded-md bg-white p-1.5">
+              <Image src="/logo.png" alt="" width={697} height={756} className="h-20 w-auto" />
+            </span>
             <span className="font-serif font-normal text-lg text-white">{tc("clubName")}</span>
           </div>
           {tagline && <p className="mt-4 text-sm leading-relaxed">{tagline}</p>}

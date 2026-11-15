@@ -290,9 +290,10 @@ Document **Page « Venez essayer »**, dans la colonne de gauche. Les textes se 
 Une fiche de **Montants (lignes de prix)** = une ligne de prix. Elles alimentent la page **Tarifs**, le prix du vol d'initiation et le bouton de réservation de l'en-tête.
 
 1. **Tarifs** → **Montants (lignes de prix)** → **+**. **Offre** : cotisation annuelle, participation annuelle ou journalière aux frais de fonctionnement, e-licence assurance FFVP, forfait illimité, forfait 20 h, 10 heures supplémentaires, heure de vol en monoplace ou en biplace, pack formation, pack complément de formation, vol d'initiation.
-2. **Catégorie d'âge** : pour les offres de la saison, **moins de 25 ans** ou **plus de 25 ans** : une fiche par catégorie. Laissez vide si le prix est le même pour tous. Pour le vol d'initiation : **moins de 18 ans** ou **adulte** (par exemple 170 € adulte, 130 € moins de 18 ans scolarisés en Ille-et-Vilaine).
+2. **Catégorie d'âge** : toujours à choisir. Pour les offres de la saison : **moins de 25 ans** ou **plus de 25 ans** (une fiche par catégorie) ; pour le vol d'initiation : **moins de 18 ans** ou **adulte** (par exemple 170 € adulte, 130 € moins de 18 ans scolarisés en Ille-et-Vilaine). **Tous âges** si le prix est le même pour tout le monde : une seule fiche suffit.
 3. **Montant (€)**, puis **Précisions** si besoin.
-4. **Publish**. Le Studio refuse un doublon (même offre, même âge).
+4. **Ordre d'affichage** : 1 = en premier dans sa rubrique de la grille. Donnez le même numéro aux fiches d'une même offre (moins de 25 ans et plus de 25 ans). La liste du Studio suit cet ordre. Sans numéro particulier, l'ordre habituel s'applique.
+5. **Publish**. Le Studio refuse un doublon (même offre, même âge).
 
 Le prix adulte et le prix « moins de 18 ans » du vol d'initiation apparaissent à côté du bouton orange « Réserver un vol d'initiation » de l'en-tête.
 
@@ -313,7 +314,7 @@ La grille « Tous les tarifs » se construit toute seule à partir des fiches **
 
 #### Pas à pas : rédiger les pages de l'association
 
-1. **Pages de l'association** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, perfectionnement ou compétition. Une seule page par section.
+1. **Pages de l'association** → **+**. **Section** : présentation, plateforme, activité des membres, formation initiale, perfectionnement ou compétition. Une seule page par section. Pour **changer l'ordre des rubriques**, renseignez **Ordre d'affichage** : le plus petit numéro passe en premier (1 pour la mettre en tête, 25 pour la glisser entre la deuxième et la troisième rubrique habituelles). Sans numéro, l'ordre habituel s'applique ; l'histoire de l'association reste en fin de page.
 2. **Titre de la section**, **Introduction** (2 ou 3 phrases), **Photo principale**, **Texte** (avec des *Titres de section* pour les sous-parties). Pour la formation, un **Schéma du cursus** peut être ajouté en image.
 3. **Publish**. Les sections apparaissent sur la page Le club dans l'ordre du menu.
 

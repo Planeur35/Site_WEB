@@ -159,7 +159,8 @@
       "under25": "Moins de 25 ans",
       "over25": "Plus de 25 ans",
       "under18": "Moins de 18 ans",
-      "adult": "Adulte"
+      "adult": "Adulte",
+      "all": "Tous âges"
     },
     "units": {
       "cotisation": "par an",

@@ -226,7 +226,7 @@ export type TariffOffer =
   | 'pack-complement-formation'
   | 'vol-initiation';
 
-export type AgeCategory = 'under25' | 'over25' | 'under18' | 'adult';
+export type AgeCategory = 'under25' | 'over25' | 'under18' | 'adult' | 'all';
 
 export interface Tariff {
   _id: string;
@@ -235,6 +235,7 @@ export interface Tariff {
   ageCategory?: AgeCategory;
   amount: number;
   details?: LocalizedString;
+  sortOrder?: number;
 }
 
 export interface Partner {
@@ -275,6 +276,7 @@ export interface ClubPage {
   mainImage?: SanityImage;
   body?: LocalizedRichText;
   diagram?: SanityImage;
+  sortOrder?: number;
 }
 
 export interface Anecdote {
