@@ -55,7 +55,15 @@ export default defineType({
       ...photoField({ name: 'diagram', title: 'Schéma du cursus (facultatif)', required: false }),
       hidden: ({ document }: { document?: ClubPageDoc }) => document?.section !== 'training',
     },
+    defineField({
+      name: 'sortOrder',
+      title: 'Ordre d’affichage',
+      description:
+        '1 = affichée en premier. Laissez vide pour l’ordre habituel : présentation, plateforme, activité des membres, formation, perfectionnement, compétition. Pour déplacer une page, donnez-lui un numéro (par exemple 1 pour la mettre en tête, 25 pour la glisser entre deux pages habituelles). L’histoire de l’association reste en fin de page.',
+      type: 'number',
+    }),
   ],
+  orderings: [{ title: 'Ordre d’affichage', name: 'sortOrder', by: [{ field: 'sortOrder', direction: 'asc' }] }],
   preview: {
     select: { title: 'title.fr', titleEn: 'title.en', section: 'section', media: 'mainImage' },
     prepare: ({ title, titleEn, section, media }) => ({

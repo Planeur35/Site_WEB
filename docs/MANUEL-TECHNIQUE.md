@@ -179,11 +179,11 @@ Depuis la reprise du design de Site_WEB (octobre 2026), le contenu des pages vie
 | Page | Source du contenu (menu du Studio) | Visible en ligne |
 |---|---|---|
 | Accueil `/` | Réglages du site : photos d'accueil, accroche, chiffres clés ; 3 dernières Actualités | 🟢 sous 60 s |
-| L'association `/association` | Pages de l'association (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire de l'association | 🟢 sous 60 s |
+| L'association `/association` | Pages de l'association (une par section : présentation, plateforme, activité, formation, perfectionnement, compétition) et Histoire de l'association; ordre des rubriques : champ `sortOrder` de chaque page (vide = ordre habituel) | 🟢 sous 60 s |
 | Nos planeurs `/planeurs` | Nos planeurs (`aircraft`), triés par catégorie puis ordre | 🟢 sous 60 s |
 | Venez voler ! `/adherer` | Document « Page « Venez voler ! » » (type `joinPage`) : introduction « Rejoindre l'association », sous-parties Adhésion à l'association, Pack formation et Pack complément de formation, comment s'inscrire | 🟢 sous 60 s |
 | Venez essayer `/decouvrir` | Document « Page « Venez essayer » » (type `discoverPage`) : vols d'initiation, réservation et paiement en ligne (textes enrichis), questions fréquentes ; prix de la fiche `tariff` « Vol d'initiation » ; lien de paiement des Réglages | 🟢 sous 60 s |
-| Tarifs `/tarifs` (menu sandwich) | Document « Textes et exemples de saison » (type `pricingPage`, dans l'entrée Tarifs du Studio) : introduction et exemples de coût d'une saison ; la grille et les totaux viennent des fiches `tariff` (offres de la saison, moins de 25 ans / plus de 25 ans) | 🟢 sous 60 s |
+| Tarifs `/tarifs` (menu sandwich) | Document « Textes et exemples de saison » (type `pricingPage`, dans l'entrée Tarifs du Studio) : introduction et exemples de coût d'une saison ; la grille et les totaux viennent des fiches `tariff` (offres de la saison ; catégorie d'âge obligatoire : moins de 25 ans, plus de 25 ans ou tous âges ; ordre d'affichage par `sortOrder`) | 🟢 sous 60 s |
 | Partenaires (panneau latéral de `/association`) | Type `partner` : nom, logo, site, ordre ; le nom s'affiche sous chaque logo | 🟢 sous 60 s |
 | Bouton orange « Réserver un vol d'initiation » (en-tête, à droite du menu) | Prix des fiches `tariff` « vol d'initiation » (adulte, moins de 18 ans), affichés dans le bouton dès 640 px de large ; renvoie vers `/decouvrir` | 🟢 sous 60 s |
 | Actualités `/actualites` | Actualités (`article`) et Agenda (`event`) ; les événements passés disparaissent seuls | 🟢 sous 60 s |
@@ -256,7 +256,7 @@ Le `projectId` et le dataset sont codés en dur dans `seed-fleet.ts` et `upload-
 ### Images
 
 - Images éditoriales : à téléverser dans Sanity. `next/image` passe par `src/lib/sanity/imageLoader.ts` : c'est le CDN de Sanity qui redimensionne, pas l'hébergeur (dont l'optimisation d'images est limitée en offre gratuite).
-- Images statiques du code : dans `public/` (logo `logo.png`, `logo-icon.png`, `favicon.png`).
+- Images statiques du code : dans `public/` (logo officiel `logo.png`, utilisé tel quel, sans retouche ; `favicon.png`).
 - Toujours renseigner le champ `alt`, présent sur tous les schémas d'image.
 
 ## 8. Déployer

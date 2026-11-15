@@ -54,28 +54,29 @@ export default function Header({ initiation }: HeaderProps) {
       >
         <Link href="/" className="flex shrink-0 items-center gap-3">
           <Image
-            src="/logo-icon.png"
+            src="/logo.png"
             alt=""
-            width={200}
-            height={178}
-            className={clsx("w-auto transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
+            width={697}
+            height={756}
+            // The official logo has a white background: multiply lets the header colour show through it
+            className={clsx("w-auto mix-blend-multiply transition-[height] duration-200", scrolled ? "h-11" : "h-14 md:h-[88px]")}
             priority
           />
-          <span className="hidden font-serif font-normal text-lg leading-tight text-sky-950 lg:block">
+          <span className="hidden font-serif font-normal text-base leading-tight text-sky-950 lg:block">
             <span className="block">{nameFirst}</span>
             <span className="block whitespace-nowrap">{nameRest.join(" ")}</span>
           </span>
           <span className="sr-only lg:hidden">{tc("clubName")}</span>
         </Link>
 
-        {/* Main navigation: only when there is room for it next to the buttons (1400 px and up) */}
-        <nav className="ml-auto hidden items-center gap-4 min-[1400px]:flex" aria-label={t("mainNav")}>
+        {/* Main navigation: from 1280 px (14-inch laptops); below that the menu button does the job */}
+        <nav className="ml-auto hidden items-center gap-3.5 xl:flex" aria-label={t("mainNav")}>
           {HEADER_NAV.map((item) => (
             <div key={item.key} className="group relative">
               <Link
                 href={item.href}
                 className={clsx(
-                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.08em] transition",
+                  "inline-flex items-center gap-1 whitespace-nowrap border-b-2 pb-1 text-xs font-medium uppercase tracking-[0.05em] transition",
                   isActive(item.pathname)
                     ? "border-sky-800 text-sky-950"
                     : "border-transparent text-slate-600 hover:border-sky-400 hover:text-sky-950",

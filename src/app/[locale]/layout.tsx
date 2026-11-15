@@ -35,7 +35,7 @@ export default async function LocaleLayout({
   // Trial flight prices, shown next to the booking button in the header
   const tariffs = await sanityFetch<Tariff[]>(initiationTariffsQuery, []);
   const initiation = {
-    adult: tariffs.find((tariff) => tariff.ageCategory === "adult")?.amount,
+    adult: (tariffs.find((tariff) => tariff.ageCategory === "adult") ?? tariffs.find((tariff) => tariff.ageCategory === "all"))?.amount,
     reduced: tariffs.find((tariff) => tariff.ageCategory === "under18")?.amount,
   };
 

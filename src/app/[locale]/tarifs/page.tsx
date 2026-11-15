@@ -37,12 +37,21 @@ const UNIT_OFFERS: TariffOffer[] = [
   'heure-biplace',
 ];
 
-/** The price of an offer for an age group: the line for that age, else the line without age (same price for everyone). */
+/**
+ * The price of an offer for an age group: the line for that age, else the « all ages » line.
+ * Lines saved before the age became compulsory (no age at all) count as « all ages » too.
+ */
 function priceFor(tariffs: Tariff[], offer: TariffOffer, age: SeasonAge): Tariff | undefined {
   return (
     tariffs.find((tariff) => tariff.offer === offer && tariff.ageCategory === age) ??
-    tariffs.find((tariff) => tariff.offer === offer && !tariff.ageCategory)
+    tariffs.find((tariff) => tariff.offer === offer && (tariff.ageCategory === 'all' || !tariff.ageCategory))
   );
+}
+
+/** Display order of an offer: the smallest « order » among its lines (lines without one keep the usual order). */
+function orderOf(tariffs: Tariff[], offer: TariffOffer): number {
+  const orders = tariffs.filter((tariff) => tariff.offer === offer).map((tariff) => tariff.sortOrder ?? 1000);
+  return orders.length > 0 ? Math.min(...orders) : 1000;
 }
 
 const round = (value: number) => Math.round(value * 100) / 100;
@@ -71,14 +80,23 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
   // ---- Table 1: every price ----
   const groups = GROUPS.map((group) => ({
     key: group.key,
-    rows: group.offers.flatMap((offer) => {
-      const prices = COLUMNS.map((age) => priceFor(tariffs, offer, age));
-      return prices[0] || prices[1] ? [{ offer, prices }] : [];
-    }),
+    rows: group.offers
+      .flatMap((offer, position) => {
+        const prices = COLUMNS.map((age) => priceFor(tariffs, offer, age));
+        return prices[0] || prices[1] ? [{ offer, prices, order: orderOf(tariffs, offer), position }] : [];
+      })
+      // Studio « Ordre d’affichage » first, then the usual order
+      .sort((a, b) => a.order - b.order || a.position - b.position),
   })).filter((group) => group.rows.length > 0);
 
-  const initiationAdult = tariffs.find((tariff) => tariff.offer === 'vol-initiation' && tariff.ageCategory === 'adult');
-  const initiationReduced = tariffs.find((tariff) => tariff.offer === 'vol-initiation' && tariff.ageCategory === 'under18');
+  const initiationPrices = [
+    { key: 'adult', label: t('initiationAdult') },
+    { key: 'under18', label: t('initiationReduced') },
+    { key: 'all', label: tp('ages.all') },
+  ].flatMap(({ key, label }) => {
+    const tariff = tariffs.find((x) => x.offer === 'vol-initiation' && x.ageCategory === key);
+    return tariff ? [{ key, label, amount: tariff.amount }] : [];
+  });
 
   // ---- Table 2: examples of the cost of a season ----
   const scenarios = (page?.scenarios ?? []).flatMap((scenario) => {
@@ -168,22 +186,16 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
           </div>
         )}
 
-        {(initiationAdult || initiationReduced) && (
+        {initiationPrices.length > 0 && (
           <div className="mt-10 border border-sky-900/10 bg-white p-6 md:p-8">
             <h3 className="font-serif text-2xl text-sky-950">{t('initiationTitle')}</h3>
             <dl className="mt-4 grid gap-6 sm:grid-cols-2">
-              {initiationAdult && (
-                <div>
-                  <dt className="text-sm text-slate-600">{t('initiationAdult')}</dt>
-                  <dd className="font-serif text-3xl text-sky-950">{money(initiationAdult.amount)}</dd>
+              {initiationPrices.map((price) => (
+                <div key={price.key}>
+                  <dt className="text-sm text-slate-600">{price.label}</dt>
+                  <dd className="font-serif text-3xl text-sky-950">{money(price.amount)}</dd>
                 </div>
-              )}
-              {initiationReduced && (
-                <div>
-                  <dt className="text-sm text-slate-600">{t('initiationReduced')}</dt>
-                  <dd className="font-serif text-3xl text-sky-950">{money(initiationReduced.amount)}</dd>
-                </div>
-              )}
+              ))}
             </dl>
             <div className="mt-6">
               <Button href="/decouvrir">{th('bookCta')}</Button>
