@@ -194,7 +194,7 @@ export default defineType({
     defineField({
       name: 'legalName',
       title: 'Nom officiel de l’association',
-      description: 'Tel qu’il figure dans les statuts. Affiché sur la page « Mentions légales ».',
+      description: 'Affichée dans les liens pratiques (rubrique Communauté) et sous les récits de vols.',
       type: 'string',
       group: 'legal',
     }),

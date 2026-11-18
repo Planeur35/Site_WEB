@@ -36,23 +36,11 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
   const how = nonEmpty(localize(page?.how, locale));
   const howPlain = localize(settings?.joinText, locale);
 
-  // The three sub-parts, in this order. A sub-part without text is not shown.
+  // The three headings, in this order (same names and anchors as on the « Tarifs » page). One without text is not shown.
   const parts = [
-    {
-      id: 'cotisation',
-      title: t('membershipTitle'),
-      body: nonEmpty(localize(page?.membership, locale)) ?? nonEmpty(localize(settings?.pricingMembership, locale)),
-    },
-    {
-      id: 'pack-formation',
-      title: t('trainingPackTitle'),
-      body: nonEmpty(localize(page?.training, locale)) ?? nonEmpty(localize(settings?.pricingTraining, locale)),
-    },
-    {
-      id: 'pack-complement',
-      title: t('advancedPackTitle'),
-      body: nonEmpty(localize(page?.advanced, locale)) ?? nonEmpty(localize(settings?.pricingAdvanced, locale)),
-    },
+    { id: 'je-decouvre', title: t('discoverTitle'), body: nonEmpty(localize(page?.discover, locale)) },
+    { id: 'japprends', title: t('learnTitle'), body: nonEmpty(localize(page?.learn, locale)) },
+    { id: 'je-suis-brevete', title: t('licensedTitle'), body: nonEmpty(localize(page?.licensed, locale)) },
   ].flatMap((part) => (part.body ? [{ id: part.id, title: part.title, body: part.body }] : []));
 
   const hasIntro = !!intro;
@@ -75,10 +63,13 @@ export default async function JoinPage({ params }: { params: Promise<{ locale: s
       {parts.map((part) => (
         <Section key={part.id} id={part.id} title={part.title}>
           <PortableText value={part.body} className="max-w-3xl" />
+          <p className="mt-6">
+            <TextLink href={{ pathname: '/tarifs', hash: part.id }}>{t('pricingLink')}</TextLink>
+          </p>
         </Section>
       ))}
 
-      <Section kicker={t('howKicker')} title={t('howTitle')}>
+      <Section id="inscription" kicker={t('howKicker')} title={t('howTitle')}>
         {how ? (
           <PortableText value={how} className="max-w-2xl" />
         ) : howPlain ? (

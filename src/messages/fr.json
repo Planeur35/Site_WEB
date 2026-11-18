@@ -4,7 +4,7 @@
     "club": "L’association",
     "gliders": "Nos planeurs",
     "join": "Venez voler !",
-    "discover": "Venez essayer",
+    "discover": "Venez essayer !",
     "news": "Actualités",
     "newsList": "Les news",
     "agenda": "Agenda",
@@ -23,7 +23,15 @@
     "menu": "Menu",
     "mainNav": "Navigation principale",
     "fullNav": "Menu complet",
-    "pricing": "Les tarifs"
+    "pricing": "Les tarifs",
+    "disability": "Handicap",
+    "joinDiscover": "Je découvre",
+    "joinLearn": "J’apprends à piloter",
+    "joinLicensed": "Je suis breveté ou activité à la carte",
+    "joinHow": "Comment s’inscrire",
+    "tryFlights": "Vols d’initiation",
+    "tryBooking": "Réservation et paiement en ligne",
+    "tryFaq": "Questions fréquentes"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -153,7 +161,9 @@
       "elicense-ffvp": "E-licence assurance FFVP (annuelle)",
       "heures-10h": "10 heures supplémentaires",
       "heure-monoplace": "Heure de vol en monoplace",
-      "heure-biplace": "Heure de vol en biplace"
+      "heure-biplace": "Heure de vol en biplace",
+      "treuillee": "Treuillée",
+      "remorque": "Remorqué"
     },
     "ages": {
       "under25": "Moins de 25 ans",
@@ -171,7 +181,9 @@
       "forfait-20h": "20 heures de vol",
       "heures-10h": "10 heures de vol",
       "heure-monoplace": "par heure de vol",
-      "heure-biplace": "par heure de vol"
+      "heure-biplace": "par heure de vol",
+      "treuillee": "par treuillée",
+      "remorque": "par remorqué"
     }
   },
   "pricingPage": {
@@ -182,10 +194,9 @@
     "columnOffer": "Offre",
     "allAges": "tous âges",
     "groups": {
-      "membership": "Adhésion et licence",
-      "flight": "Forfaits de vol",
-      "hourly": "Vol à l’heure",
-      "training": "Formation"
+      "discover": "Je découvre",
+      "learn": "J’apprends à piloter",
+      "licensed": "Je suis breveté ou activité à la carte"
     },
     "initiationTitle": "Vol d’initiation",
     "initiationAdult": "Adulte",
@@ -205,16 +216,16 @@
     "heroTitle": "Rejoindre l’association",
     "introKicker": "Adhésion",
     "introTitle": "Rejoindre l’association",
-    "membershipTitle": "Adhésion à l’association (membres)",
-    "trainingPackTitle": "Pack formation",
-    "advancedPackTitle": "Pack complément de formation",
     "empty": "Les informations pour rejoindre l’association seront publiées prochainement. En attendant, écrivez-nous.",
     "howKicker": "Modalités",
     "howTitle": "Comment s’inscrire",
     "howEmpty": "Les modalités d’inscription seront publiées prochainement. En attendant, écrivez-nous.",
     "contactCta": "Nous écrire",
     "tryCta": "Essayer d’abord",
-    "pricingLink": "Voir les tarifs"
+    "pricingLink": "Voir les tarifs",
+    "discoverTitle": "Je découvre",
+    "learnTitle": "J’apprends à piloter",
+    "licensedTitle": "Je suis breveté ou activité à la carte"
   },
   "discover": {
     "heroKicker": "Premier vol",
@@ -294,7 +305,8 @@
       "accommodation": "Hébergements",
       "community": "Communauté",
       "other": "Autres"
-    }
+    },
+    "weglide": "Les vols de l’association sur WeGlide"
   },
   "contact": {
     "heroKicker": "Contact",
@@ -379,8 +391,6 @@
     "legal": "Mentions légales"
   },
   "header": {
-    "bookCta": "Réserver un vol d’initiation",
-    "priceReduced": "{price} pour les moins de 18 ans scolarisés en Ille-et-Vilaine",
-    "priceReducedShort": "{price} moins de 18 ans"
+    "bookCta": "Réserver un vol d’initiation"
   }
 }

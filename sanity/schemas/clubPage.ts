@@ -13,6 +13,7 @@ const SECTIONS = [
   { title: 'Formation initiale', value: 'training' },
   { title: 'Perfectionnement', value: 'campaign' },
   { title: 'Compétition', value: 'competition' },
+  { title: 'Handicap', value: 'disability' },
 ];
 
 type ClubPageDoc = { _id: string; section?: string };

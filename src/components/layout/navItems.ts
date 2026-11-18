@@ -19,6 +19,7 @@ export const CLUB_ANCHORS = {
   training: 'formation',
   campaign: 'perfectionnement',
   competition: 'competition',
+  disability: 'handicap',
   history: 'histoire',
 } as const;
 
@@ -31,8 +32,27 @@ export const HEADER_NAV: NavItem[] = [
     children: Object.entries(CLUB_ANCHORS).map(([key, hash]) => ({ key, href: { pathname: '/club', hash } })),
   },
   { key: 'gliders', href: '/planeurs', pathname: '/planeurs' },
-  { key: 'join', href: '/adherer', pathname: '/adherer' },
-  { key: 'discover', href: '/decouvrir', pathname: '/decouvrir' },
+  {
+    key: 'join',
+    href: '/adherer',
+    pathname: '/adherer',
+    children: [
+      { key: 'joinDiscover', href: { pathname: '/adherer', hash: 'je-decouvre' } },
+      { key: 'joinLearn', href: { pathname: '/adherer', hash: 'japprends' } },
+      { key: 'joinLicensed', href: { pathname: '/adherer', hash: 'je-suis-brevete' } },
+      { key: 'joinHow', href: { pathname: '/adherer', hash: 'inscription' } },
+    ],
+  },
+  {
+    key: 'discover',
+    href: '/decouvrir',
+    pathname: '/decouvrir',
+    children: [
+      { key: 'tryFlights', href: { pathname: '/decouvrir', hash: 'vols-initiation' } },
+      { key: 'tryBooking', href: { pathname: '/decouvrir', hash: 'reservation' } },
+      { key: 'tryFaq', href: { pathname: '/decouvrir', hash: 'faq' } },
+    ],
+  },
   {
     key: 'news',
     href: '/actualites',

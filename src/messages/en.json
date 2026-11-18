@@ -4,7 +4,7 @@
     "club": "The association",
     "gliders": "Our gliders",
     "join": "Come and fly!",
-    "discover": "Try gliding",
+    "discover": "Try gliding!",
     "news": "News",
     "newsList": "Latest news",
     "agenda": "Events",
@@ -23,7 +23,15 @@
     "menu": "Menu",
     "mainNav": "Main navigation",
     "fullNav": "Full menu",
-    "pricing": "Prices"
+    "pricing": "Prices",
+    "disability": "Disability",
+    "joinDiscover": "I’m discovering gliding",
+    "joinLearn": "I’m learning to fly",
+    "joinLicensed": "I’m licensed, or pay as I go",
+    "joinHow": "How to join",
+    "tryFlights": "Trial flights",
+    "tryBooking": "Book and pay online",
+    "tryFaq": "Frequently asked questions"
   },
   "common": {
     "clubName": "Planeurs d’Ille-et-Vilaine",
@@ -153,7 +161,9 @@
       "elicense-ffvp": "FFVP e-licence and insurance (annual)",
       "heures-10h": "10 additional hours",
       "heure-monoplace": "Single-seater flight hour",
-      "heure-biplace": "Two-seater flight hour"
+      "heure-biplace": "Two-seater flight hour",
+      "treuillee": "Winch launch",
+      "remorque": "Aerotow"
     },
     "ages": {
       "under25": "Under 25",
@@ -171,7 +181,9 @@
       "forfait-20h": "20 flight hours",
       "heures-10h": "10 flight hours",
       "heure-monoplace": "per flight hour",
-      "heure-biplace": "per flight hour"
+      "heure-biplace": "per flight hour",
+      "treuillee": "per winch launch",
+      "remorque": "per aerotow"
     }
   },
   "pricingPage": {
@@ -182,10 +194,9 @@
     "columnOffer": "Offer",
     "allAges": "all ages",
     "groups": {
-      "membership": "Membership and licence",
-      "flight": "Flying packages",
-      "hourly": "Pay per hour",
-      "training": "Training"
+      "discover": "I’m discovering gliding",
+      "learn": "I’m learning to fly",
+      "licensed": "I’m licensed, or pay as I go"
     },
     "initiationTitle": "Trial flight",
     "initiationAdult": "Adult",
@@ -205,16 +216,16 @@
     "heroTitle": "Join the association",
     "introKicker": "Membership",
     "introTitle": "Join the association",
-    "membershipTitle": "Association membership (members)",
-    "trainingPackTitle": "Training pack",
-    "advancedPackTitle": "Additional training pack",
     "empty": "Information on joining the association will be published soon. Meanwhile, write to us.",
     "howKicker": "How to join",
     "howTitle": "How to join",
     "howEmpty": "Membership details will be published soon. Meanwhile, write to us.",
     "contactCta": "Write to us",
     "tryCta": "Try first",
-    "pricingLink": "See the prices"
+    "pricingLink": "See the prices",
+    "discoverTitle": "I’m discovering gliding",
+    "learnTitle": "I’m learning to fly",
+    "licensedTitle": "I’m licensed, or pay as I go"
   },
   "discover": {
     "heroKicker": "First flight",
@@ -294,7 +305,8 @@
       "accommodation": "Accommodation",
       "community": "Community",
       "other": "Other"
-    }
+    },
+    "weglide": "The association’s flights on WeGlide"
   },
   "contact": {
     "heroKicker": "Contact",
@@ -379,8 +391,6 @@
     "legal": "Legal notice"
   },
   "header": {
-    "bookCta": "Book a trial flight",
-    "priceReduced": "{price} for under-18s at school in Ille-et-Vilaine",
-    "priceReducedShort": "{price} under 18"
+    "bookCta": "Book a trial flight"
   }
 }

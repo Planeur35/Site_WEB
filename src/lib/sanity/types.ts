@@ -222,9 +222,14 @@ export type TariffOffer =
   | 'heures-10h'
   | 'heure-monoplace'
   | 'heure-biplace'
+  | 'treuillee'
+  | 'remorque'
   | 'pack-formation'
   | 'pack-complement-formation'
   | 'vol-initiation';
+
+/** Headings of the price list (« Je découvre », « J’apprends à piloter », « Je suis breveté ou activité à la carte »). */
+export type PriceGroup = 'discover' | 'learn' | 'licensed';
 
 export type AgeCategory = 'under25' | 'over25' | 'under18' | 'adult' | 'all';
 
@@ -233,6 +238,8 @@ export interface Tariff {
   _type: 'tariff';
   offer: TariffOffer;
   ageCategory?: AgeCategory;
+  /** Heading chosen in the Studio; empty = the usual heading of the offer. */
+  group?: PriceGroup;
   amount: number;
   details?: LocalizedString;
   sortOrder?: number;
@@ -265,7 +272,7 @@ export interface PricingPage {
   notes?: LocalizedRichText;
 }
 
-export type ClubSection = 'presentation' | 'platform' | 'activities' | 'training' | 'campaign' | 'competition';
+export type ClubSection = 'presentation' | 'platform' | 'activities' | 'training' | 'campaign' | 'competition' | 'disability';
 
 export interface ClubPage {
   _id: string;

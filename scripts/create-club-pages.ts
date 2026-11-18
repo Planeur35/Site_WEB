@@ -29,6 +29,7 @@ const sections = [
   { section: 'training', fr: 'Formation initiale', en: 'Pilot training' },
   { section: 'campaign', fr: 'Perfectionnement', en: 'Advanced training' },
   { section: 'competition', fr: 'Compétition', en: 'Competition' },
+  { section: 'disability', fr: 'Handicap', en: 'Disability' },
 ];
 
 async function main() {

@@ -6,15 +6,10 @@ import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageToggle from "@/components/layout/LanguageToggle";
-import FlightCta, { type InitiationPrices } from "@/components/layout/FlightCta";
+import FlightCta from "@/components/layout/FlightCta";
 import { FULL_NAV, HEADER_NAV } from "@/components/layout/navItems";
 
-interface HeaderProps {
-  /** Trial flight prices, shown in the booking button. */
-  initiation: InitiationPrices;
-}
-
-export default function Header({ initiation }: HeaderProps) {
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   // The logo is large at the top of a page and shrinks once the visitor scrolls, to keep the sticky bar slim.
   const [scrolled, setScrolled] = useState(false);
@@ -123,7 +118,7 @@ export default function Header({ initiation }: HeaderProps) {
               <path d={menuOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
             </svg>
           </button>
-          <FlightCta prices={initiation} className="ml-1 sm:ml-2" />
+          <FlightCta className="ml-1 sm:ml-2" />
         </div>
       </div>
 

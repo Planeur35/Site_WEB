@@ -1,44 +1,59 @@
 import { defineType } from 'sanity';
 import { localizedBlocks, photoField } from './fields';
 
-/** Page « Venez voler ! » (tarifs, adhésion, formation): a single document, written like an association page. */
+const LEGACY =
+  'Ancienne rubrique, qui n’est plus affichée. Recopiez son texte dans « Je découvre », « J’apprends à piloter » ou « Je suis breveté ou activité à la carte », puis videz ce champ.';
+
+/** Page « Venez voler ! » (rejoindre l’association): a single document, written like an association page. */
 export default defineType({
   name: 'joinPage',
   title: 'Page « Venez voler ! »',
   type: 'document',
+  groups: [
+    { name: 'page', title: 'Page', default: true },
+    { name: 'legacy', title: 'Anciennes rubriques (à déplacer)' },
+  ],
   fields: [
     localizedBlocks({
       name: 'intro',
       title: 'Texte explicatif',
       description: 'Texte d’introduction en haut de la page « Rejoindre l’association ».',
-    }),
-    {
-      // No longer shown: the prices now have their own page. Hidden, the stored image is kept.
-      ...photoField({ name: 'table', title: '(Ancien) Tableau récapitulatif des tarifs (image)', required: false }),
-      hidden: true,
-      description:
-        'L’image du tableau de tous les tarifs de l’année, à remplacer chaque année. Elle peut être grande : le visiteur peut l’ouvrir en plein écran. De préférence nette, de 2000 pixels de large ou plus (JPG ou PNG). Dans « Description de la photo », résumez en une phrase ce que contient le tableau.',
-    },
-    localizedBlocks({
-      name: 'membership',
-      title: 'Adhésion à l’association (membres)',
-      description: 'Première sous-partie : cotisation, forfaits, conditions d’adhésion.',
+      group: 'page',
     }),
     localizedBlocks({
-      name: 'training',
-      title: 'Pack formation',
-      description: 'Deuxième sous-partie : ce que comprend le pack formation.',
+      name: 'discover',
+      title: 'Je découvre',
+      description: 'Première rubrique : pour celles et ceux qui découvrent le vol en planeur (vol d’initiation, premiers contacts).',
+      group: 'page',
     }),
     localizedBlocks({
-      name: 'advanced',
-      title: 'Pack complément de formation',
-      description: 'Troisième sous-partie : ce que comprend le pack complément de formation.',
+      name: 'learn',
+      title: 'J’apprends à piloter',
+      description: 'Deuxième rubrique : la formation, de l’adhésion au brevet.',
+      group: 'page',
+    }),
+    localizedBlocks({
+      name: 'licensed',
+      title: 'Je suis breveté ou activité à la carte',
+      description: 'Troisième rubrique : pilotes brevetés, et vols à la carte sans formation.',
+      group: 'page',
     }),
     localizedBlocks({
       name: 'how',
       title: 'Comment s’inscrire',
       description: 'En bas de la page : lieu, modalités d’inscription, pièces à fournir…',
+      group: 'page',
     }),
+
+    // Old sub-parts: no longer shown, kept so that their text can be copied
+    localizedBlocks({ name: 'membership', title: '(Ancien) Adhésion à l’association (membres)', description: LEGACY, group: 'legacy' }),
+    localizedBlocks({ name: 'training', title: '(Ancien) Pack formation', description: LEGACY, group: 'legacy' }),
+    localizedBlocks({ name: 'advanced', title: '(Ancien) Pack complément de formation', description: LEGACY, group: 'legacy' }),
+    {
+      // No longer shown: the prices have their own page. Hidden, the stored image is kept.
+      ...photoField({ name: 'table', title: '(Ancien) Tableau récapitulatif des tarifs (image)', required: false, group: 'legacy' }),
+      hidden: true,
+    },
   ],
   preview: { prepare: () => ({ title: 'Page « Venez voler ! »' }) },
 });
