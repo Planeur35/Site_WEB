@@ -177,6 +177,7 @@ export default defineType({
     defineField({
       name: 'weglideUrl',
       title: 'Page WeGlide de l’association',
+      description: 'Affichée dans les liens pratiques (rubrique Communauté) et sous les récits de vols.',
       type: 'url',
       group: 'links',
     }),
@@ -194,7 +195,7 @@ export default defineType({
     defineField({
       name: 'legalName',
       title: 'Nom officiel de l’association',
-      description: 'Affichée dans les liens pratiques (rubrique Communauté) et sous les récits de vols.',
+      description: 'Tel qu’il figure dans les statuts. Affiché sur la page « Mentions légales ».',
       type: 'string',
       group: 'legal',
     }),

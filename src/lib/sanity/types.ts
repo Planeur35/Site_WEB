@@ -105,6 +105,10 @@ export interface JoinPage {
   membership?: LocalizedRichText;
   training?: LocalizedRichText;
   advanced?: LocalizedRichText;
+  /** « Je découvre », « J’apprends à piloter », « Je suis breveté ou activité à la carte » */
+  discover?: LocalizedRichText;
+  learn?: LocalizedRichText;
+  licensed?: LocalizedRichText;
   how?: LocalizedRichText;
 }
 
