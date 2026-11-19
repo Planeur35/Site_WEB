@@ -30,7 +30,7 @@ npm run lint    # ESLint (next/core-web-vitals + next/typescript)
 npm run build   # production build, the same one Vercel runs
 ```
 
-There is no test suite. A change is verified when `npm run lint` and `npm run build` pass and the affected pages look right in `npm run dev` at `/fr` and `/en`, on desktop and at ~375 px wide.
+There is no test suite. GitHub Actions (`.github/workflows/ci.yml`) runs lint, `tsc --noEmit` and the build on every pull request and on `main`, with logs anyone can read. A change is verified when `npm run lint` and `npm run build` pass and the affected pages look right in `npm run dev` at `/fr` and `/en`, on desktop and at ~375 px wide.
 
 Do not run anything in `scripts/` unless explicitly asked: they write to the production Sanity dataset and need `SANITY_WRITE_TOKEN`.
 
