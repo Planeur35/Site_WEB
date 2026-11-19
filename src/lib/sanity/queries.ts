@@ -30,8 +30,6 @@ export const allAircraftQuery = `*[_type == "aircraft"] | order(category asc, so
 
 export const allTariffsQuery = `*[_type == "tariff"]`;
 
-export const initiationTariffsQuery = `*[_type == "tariff" && offer == "vol-initiation"]`;
-
 export const allClubPagesQuery = `*[_type == "clubPage"]`;
 
 export const clubHistoryQuery = `*[_type == "clubHistory"][0]`;

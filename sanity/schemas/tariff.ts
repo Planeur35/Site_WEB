@@ -15,6 +15,8 @@ export const OFFERS = [
   { title: '10 heures supplémentaires', value: 'heures-10h' },
   { title: 'Heure de vol en monoplace', value: 'heure-monoplace' },
   { title: 'Heure de vol en biplace', value: 'heure-biplace' },
+  { title: 'Treuillée', value: 'treuillee' },
+  { title: 'Remorqué', value: 'remorque' },
   { title: 'Pack formation', value: 'pack-formation' },
   { title: 'Pack complément de formation', value: 'pack-complement-formation' },
   { title: 'Vol d’initiation', value: 'vol-initiation' },
@@ -31,7 +33,14 @@ const AGES: Record<string, { title: string; value: string }[]> = Object.fromEntr
   OFFERS.map((offer) => [offer.value, offer.value === 'vol-initiation' ? [UNDER18, ADULT, ALL_AGES] : [UNDER25, OVER25, ALL_AGES]]),
 );
 
-type TariffDoc = { _id: string; offer?: string; ageCategory?: string };
+// Headings of the price list on the site. Values are read by the site: do not rename them.
+const GROUPS = [
+  { title: 'Je découvre', value: 'discover' },
+  { title: 'J’apprends à piloter', value: 'learn' },
+  { title: 'Je suis breveté ou activité à la carte', value: 'licensed' },
+];
+
+type TariffDoc = { _id: string; offer?: string; ageCategory?: string; group?: string };
 
 export default defineType({
   name: 'tariff',
@@ -52,8 +61,8 @@ export default defineType({
           const count = await context
             .getClient({ apiVersion: '2024-01-01' })
             .fetch<number>(
-              'count(*[_type == "tariff" && offer == $offer && ageCategory == $age && !(_id in [$id, "drafts." + $id])])',
-              { offer: doc.offer, age: doc.ageCategory ?? null, id },
+              'count(*[_type == "tariff" && offer == $offer && ageCategory == $age && group == $group && !(_id in [$id, "drafts." + $id])])',
+              { offer: doc.offer, age: doc.ageCategory ?? null, group: doc.group ?? null, id },
             );
           return count > 0 ? 'Ce tarif existe déjà.' : true;
         }),
@@ -78,6 +87,14 @@ export default defineType({
           if (!allowed) return true;
           return allowed.some((a) => a.value === value) ? true : 'Catégorie non prévue pour cette offre.';
         }),
+    }),
+    defineField({
+      name: 'group',
+      title: 'Rubrique de la page Tarifs (facultatif)',
+      description:
+        'Laissez vide pour la rubrique habituelle de l’offre : vol d’initiation dans « Je découvre », packs de formation dans « J’apprends à piloter », tout le reste dans « Je suis breveté ou activité à la carte ». Choisissez une rubrique pour placer la ligne ailleurs (on peut aussi créer la même ligne dans deux rubriques).',
+      type: 'string',
+      options: { list: GROUPS },
     }),
     defineField({
       name: 'amount',

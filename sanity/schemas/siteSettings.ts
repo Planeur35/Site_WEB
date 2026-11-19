@@ -177,6 +177,7 @@ export default defineType({
     defineField({
       name: 'weglideUrl',
       title: 'Page WeGlide de l’association',
+      description: 'Affichée dans les liens pratiques (rubrique Communauté) et sous les récits de vols.',
       type: 'url',
       group: 'links',
     }),

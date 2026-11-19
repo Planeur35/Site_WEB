@@ -9,20 +9,44 @@ import SitePageHero from '@/components/ui/SitePageHero';
 import { sanityFetch } from '@/lib/sanity/fetch';
 import { localize, nonEmpty } from '@/lib/sanity/localize';
 import { allTariffsQuery, pricingPageQuery } from '@/lib/sanity/queries';
-import type { PricingPage, Tariff, TariffOffer } from '@/lib/sanity/types';
+import type { PriceGroup, PricingPage, Tariff, TariffOffer } from '@/lib/sanity/types';
 
 export const revalidate = 60;
 
 type SeasonAge = 'under25' | 'over25';
 const COLUMNS: SeasonAge[] = ['under25', 'over25'];
 
-/** The rows of the price list, by group and in this order. A row with no price at all is not shown. */
-const GROUPS: { key: string; offers: TariffOffer[] }[] = [
-  { key: 'membership', offers: ['cotisation', 'participation-annuelle', 'participation-journaliere', 'elicense-ffvp'] },
-  { key: 'flight', offers: ['forfait-illimite', 'forfait-20h', 'heures-10h'] },
-  { key: 'hourly', offers: ['heure-monoplace', 'heure-biplace'] },
-  { key: 'training', offers: ['pack-formation', 'pack-complement-formation'] },
+/** The three headings of the price list, with the anchor used by the menus and the « Venez voler ! » page. */
+const GROUP_ORDER: { key: PriceGroup; anchor: string }[] = [
+  { key: 'discover', anchor: 'je-decouvre' },
+  { key: 'learn', anchor: 'japprends' },
+  { key: 'licensed', anchor: 'je-suis-brevete' },
 ];
+
+/** Usual order of the offers inside a heading (the trial flight has its own block). */
+const OFFER_ORDER: TariffOffer[] = [
+  'cotisation',
+  'participation-annuelle',
+  'participation-journaliere',
+  'elicense-ffvp',
+  'forfait-illimite',
+  'forfait-20h',
+  'heures-10h',
+  'heure-monoplace',
+  'heure-biplace',
+  'treuillee',
+  'remorque',
+  'pack-formation',
+  'pack-complement-formation',
+];
+
+/** Usual heading of each offer, unless the line itself names one in the Studio (« Rubrique de la page Tarifs »). */
+const DEFAULT_GROUP: Partial<Record<TariffOffer, PriceGroup>> = {
+  'vol-initiation': 'discover',
+  'pack-formation': 'learn',
+  'pack-complement-formation': 'learn',
+};
+const groupOf = (tariff: Tariff): PriceGroup => tariff.group ?? DEFAULT_GROUP[tariff.offer] ?? 'licensed';
 
 /** Offers that have a unit in the messages (`pricing.units.<offer>`). */
 const UNIT_OFFERS: TariffOffer[] = [
@@ -35,6 +59,8 @@ const UNIT_OFFERS: TariffOffer[] = [
   'heures-10h',
   'heure-monoplace',
   'heure-biplace',
+  'treuillee',
+  'remorque',
 ];
 
 /**
@@ -77,26 +103,25 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
   const intro = nonEmpty(localize(page?.intro, locale));
   const notes = nonEmpty(localize(page?.notes, locale));
 
-  // ---- Table 1: every price ----
-  const groups = GROUPS.map((group) => ({
-    key: group.key,
-    rows: group.offers
-      .flatMap((offer, position) => {
-        const prices = COLUMNS.map((age) => priceFor(tariffs, offer, age));
-        return prices[0] || prices[1] ? [{ offer, prices, order: orderOf(tariffs, offer), position }] : [];
-      })
+  // ---- Price list: « Je découvre », « J’apprends à piloter », « Je suis breveté ou activité à la carte » ----
+  const groups = GROUP_ORDER.map(({ key, anchor }) => {
+    const inGroup = tariffs.filter((tariff) => groupOf(tariff) === key);
+    const rows = OFFER_ORDER.flatMap((offer, position) => {
+      const prices = COLUMNS.map((age) => priceFor(inGroup, offer, age));
+      return prices[0] || prices[1] ? [{ offer, prices, order: orderOf(inGroup, offer), position }] : [];
+    })
       // Studio « Ordre d’affichage » first, then the usual order
-      .sort((a, b) => a.order - b.order || a.position - b.position),
-  })).filter((group) => group.rows.length > 0);
-
-  const initiationPrices = [
-    { key: 'adult', label: t('initiationAdult') },
-    { key: 'under18', label: t('initiationReduced') },
-    { key: 'all', label: tp('ages.all') },
-  ].flatMap(({ key, label }) => {
-    const tariff = tariffs.find((x) => x.offer === 'vol-initiation' && x.ageCategory === key);
-    return tariff ? [{ key, label, amount: tariff.amount }] : [];
-  });
+      .sort((a, b) => a.order - b.order || a.position - b.position);
+    const initiation = [
+      { age: 'adult', label: t('initiationAdult') },
+      { age: 'under18', label: t('initiationReduced') },
+      { age: 'all', label: tp('ages.all') },
+    ].flatMap(({ age, label }) => {
+      const tariff = inGroup.find((x) => x.offer === 'vol-initiation' && x.ageCategory === age);
+      return tariff ? [{ age, label, amount: tariff.amount }] : [];
+    });
+    return { key, anchor, rows, initiation };
+  }).filter((group) => group.rows.length > 0 || group.initiation.length > 0);
 
   // ---- Table 2: examples of the cost of a season ----
   const scenarios = (page?.scenarios ?? []).flatMap((scenario) => {
@@ -134,74 +159,78 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
         {isEmpty && <EmptyState>{t('empty')}</EmptyState>}
         {intro && <PortableText value={intro} className="mb-10 max-w-3xl" />}
 
-        {groups.length > 0 && (
-          <div className="overflow-x-auto border border-sky-900/10 bg-white">
-            <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
-              <caption className="sr-only">{t('allTitle')}</caption>
-              <thead>
-                <tr className="border-b border-sky-900/15 bg-horizon/60">
-                  <th scope="col" className={headCell}>
-                    {t('columnOffer')}
-                  </th>
-                  {COLUMNS.map((age) => (
-                    <th key={age} scope="col" className={headCell}>
-                      {tp(`ages.${age}`)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {groups.map((group) => (
-                  <GroupRows key={group.key} title={t(`groups.${group.key}`)}>
-                    {group.rows.map(({ offer, prices }) => {
-                      const shared = prices[0] !== undefined && prices[0] === prices[1];
-                      const unit = UNIT_OFFERS.includes(offer) ? tp(`units.${offer}`) : null;
-                      return (
-                        <tr key={offer} className="border-b border-sky-900/10 last:border-0">
-                          <th scope="row" className="px-4 py-3 font-medium text-slate-800">
-                            {tp(`offers.${offer}`)}
-                            {unit && <span className="block text-xs font-normal text-slate-600">{unit}</span>}
-                          </th>
-                          {shared ? (
-                            <td colSpan={2} className="px-4 py-3 tabular-nums">
-                              <span className="font-medium text-sky-950">{money(prices[0]?.amount)}</span>{' '}
-                              <span className="text-xs text-slate-600">({t('allAges')})</span>
-                              <Details tariff={prices[0]} locale={locale} />
-                            </td>
-                          ) : (
-                            prices.map((price, index) => (
-                              <td key={COLUMNS[index]} className="px-4 py-3 tabular-nums">
-                                <span className="font-medium text-sky-950">{money(price?.amount)}</span>
-                                <Details tariff={price} locale={locale} />
-                              </td>
-                            ))
-                          )}
-                        </tr>
-                      );
-                    })}
-                  </GroupRows>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <div className="space-y-14">
+          {groups.map((group) => (
+            <div key={group.key} id={group.anchor} className="scroll-mt-40">
+              <h3 className="font-serif text-2xl text-sky-950 md:text-3xl">{t(`groups.${group.key}`)}</h3>
 
-        {initiationPrices.length > 0 && (
-          <div className="mt-10 border border-sky-900/10 bg-white p-6 md:p-8">
-            <h3 className="font-serif text-2xl text-sky-950">{t('initiationTitle')}</h3>
-            <dl className="mt-4 grid gap-6 sm:grid-cols-2">
-              {initiationPrices.map((price) => (
-                <div key={price.key}>
-                  <dt className="text-sm text-slate-600">{price.label}</dt>
-                  <dd className="font-serif text-3xl text-sky-950">{money(price.amount)}</dd>
+              {group.rows.length > 0 && (
+                <div className="mt-5 overflow-x-auto border border-sky-900/10 bg-white">
+                  <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+                    <caption className="sr-only">{t(`groups.${group.key}`)}</caption>
+                    <thead>
+                      <tr className="border-b border-sky-900/15 bg-horizon/60">
+                        <th scope="col" className={headCell}>
+                          {t('columnOffer')}
+                        </th>
+                        {COLUMNS.map((age) => (
+                          <th key={age} scope="col" className={headCell}>
+                            {tp(`ages.${age}`)}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.rows.map(({ offer, prices }) => {
+                        const shared = prices[0] !== undefined && prices[0] === prices[1];
+                        const unit = UNIT_OFFERS.includes(offer) ? tp(`units.${offer}`) : null;
+                        return (
+                          <tr key={offer} className="border-b border-sky-900/10 last:border-0">
+                            <th scope="row" className="px-4 py-3 font-medium text-slate-800">
+                              {tp(`offers.${offer}`)}
+                              {unit && <span className="block text-xs font-normal text-slate-600">{unit}</span>}
+                            </th>
+                            {shared ? (
+                              <td colSpan={2} className="px-4 py-3 tabular-nums">
+                                <span className="font-medium text-sky-950">{money(prices[0]?.amount)}</span>{' '}
+                                <span className="text-xs text-slate-600">({t('allAges')})</span>
+                                <Details tariff={prices[0]} locale={locale} />
+                              </td>
+                            ) : (
+                              prices.map((price, index) => (
+                                <td key={COLUMNS[index]} className="px-4 py-3 tabular-nums">
+                                  <span className="font-medium text-sky-950">{money(price?.amount)}</span>
+                                  <Details tariff={price} locale={locale} />
+                                </td>
+                              ))
+                            )}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
-              ))}
-            </dl>
-            <div className="mt-6">
-              <Button href="/decouvrir">{th('bookCta')}</Button>
+              )}
+
+              {group.initiation.length > 0 && (
+                <div className="mt-5 border border-sky-900/10 bg-white p-6 md:p-8">
+                  <h4 className="font-serif text-xl text-sky-950">{t('initiationTitle')}</h4>
+                  <dl className="mt-4 grid gap-6 sm:grid-cols-2">
+                    {group.initiation.map((price) => (
+                      <div key={price.age}>
+                        <dt className="text-sm text-slate-600">{price.label}</dt>
+                        <dd className="font-serif text-3xl text-sky-950">{money(price.amount)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <div className="mt-6">
+                    <Button href="/decouvrir">{th('bookCta')}</Button>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </Section>
 
       {scenarios.length > 0 && (
@@ -266,20 +295,6 @@ export default async function PricingPageRoute({ params }: { params: Promise<{ l
           </div>
         </Section>
       )}
-    </>
-  );
-}
-
-/** A group heading row followed by its rows. */
-function GroupRows({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <>
-      <tr className="border-b border-sky-900/10 bg-ciel">
-        <th scope="colgroup" colSpan={3} className="px-4 py-2 text-left text-xs font-medium uppercase tracking-[0.18em] text-slate-600">
-          {title}
-        </th>
-      </tr>
-      {children}
     </>
   );
 }

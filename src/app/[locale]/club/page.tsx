@@ -18,7 +18,7 @@ import type { ClubHistory, ClubPage, ClubSection, Partner } from '@/lib/sanity/t
 
 export const revalidate = 60;
 
-const SECTION_ORDER: ClubSection[] = ['presentation', 'platform', 'activities', 'training', 'campaign', 'competition'];
+const SECTION_ORDER: ClubSection[] = ['presentation', 'platform', 'activities', 'training', 'campaign', 'competition', 'disability'];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

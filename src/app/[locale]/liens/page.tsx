@@ -26,7 +26,13 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
   const t = await getTranslations('links');
   const settings = await sanityFetch<SiteSettings | null>(siteSettingsQuery, null);
 
-  const links = settings?.usefulLinks ?? [];
+  // The association's WeGlide page (Réglages du site) is listed with the community links, unless it is already there
+  const usefulLinks = settings?.usefulLinks ?? [];
+  const weglideLink: UsefulLink[] =
+    settings?.weglideUrl && !usefulLinks.some((link) => link.url === settings.weglideUrl)
+      ? [{ _key: 'association-weglide', label: { fr: t('weglide'), en: t('weglide') }, url: settings.weglideUrl, group: 'community' }]
+      : [];
+  const links = [...usefulLinks, ...weglideLink];
   const groups: { key: string; items: UsefulLink[] }[] = GROUPS.map((key) => ({
     key,
     items: links.filter((l) => l.group === key),

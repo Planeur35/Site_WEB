@@ -214,7 +214,7 @@ Tout s'affiche en ligne **moins d'une minute** après **Publish**.
 | Actualités (et Rubriques) | Actualités, et « Dernières nouvelles » sur l'accueil |
 | Agenda | Actualités, partie « Événements à venir » |
 | Galerie photos | Galerie |
-| Pages de l'association | L'association : une section par page (présentation, plateforme, activité, formation, perfectionnement, compétition) |
+| Pages de l'association | L'association : une section par page (présentation, plateforme, activité, formation, perfectionnement, compétition, handicap) |
 | Histoire de l'association | L'association, partie « Histoire », au format magazine avec encarts d'anecdotes |
 | Nos planeurs | Nos planeurs |
 | Page « Venez voler ! » | Venez voler ! (rejoindre l'association : introduction, adhésion, packs de formation, comment s'inscrire) |
@@ -269,12 +269,14 @@ Une rubrique encore vide affiche « Bientôt ici » sur le site.
 
 #### Pas à pas : la page « Venez voler ! » (rejoindre l'association)
 
-Cette page a son propre document, au même niveau que les pages de l'association : **Page « Venez voler ! »**, dans la colonne de gauche. Elle présente l'adhésion ; les tarifs sont sur la page **Tarifs**.
+Cette page a son propre document, au même niveau que les pages de l'association : **Page « Venez voler ! »**, dans la colonne de gauche. Elle présente trois rubriques ; les montants sont sur la page **Tarifs**, où l'on retrouve les mêmes rubriques.
 
 1. **Texte explicatif** : l'introduction, en haut de la page (titre « Rejoindre l'association »).
-2. Les trois sous-parties, dans cet ordre : **Adhésion à l'association (membres)**, **Pack formation** et **Pack complément de formation**. Une sous-partie sans texte n'est pas affichée.
+2. Les trois rubriques, dans cet ordre : **Je découvre**, **J'apprends à piloter** et **Je suis breveté ou activité à la carte**. Une rubrique sans texte n'est pas affichée. Chacune renvoie vers la rubrique correspondante de la page Tarifs.
 3. **Comment s'inscrire** : le texte en bas de la page.
 4. **Publish**.
+
+L'onglet **Anciennes rubriques (à déplacer)** garde les textes des anciennes sous-parties (adhésion, pack formation, pack complément) : recopiez-les dans les nouvelles rubriques si besoin. Ils ne sont plus affichés.
 
 #### Pas à pas : la page « Venez essayer »
 
@@ -289,11 +291,12 @@ Document **Page « Venez essayer »**, dans la colonne de gauche. Les textes se 
 
 Une fiche de **Montants (lignes de prix)** = une ligne de prix. Elles alimentent la page **Tarifs**, le prix du vol d'initiation et le bouton de réservation de l'en-tête.
 
-1. **Tarifs** → **Montants (lignes de prix)** → **+**. **Offre** : cotisation annuelle, participation annuelle ou journalière aux frais de fonctionnement, e-licence assurance FFVP, forfait illimité, forfait 20 h, 10 heures supplémentaires, heure de vol en monoplace ou en biplace, pack formation, pack complément de formation, vol d'initiation.
+1. **Tarifs** → **Montants (lignes de prix)** → **+**. **Offre** : cotisation annuelle, participation annuelle ou journalière aux frais de fonctionnement, e-licence assurance FFVP, forfait illimité, forfait 20 h, 10 heures supplémentaires, heure de vol en monoplace ou en biplace, **treuillée**, **remorqué**, pack formation, pack complément de formation, vol d'initiation.
 2. **Catégorie d'âge** : toujours à choisir. Pour les offres de la saison : **moins de 25 ans** ou **plus de 25 ans** (une fiche par catégorie) ; pour le vol d'initiation : **moins de 18 ans** ou **adulte** (par exemple 170 € adulte, 130 € moins de 18 ans scolarisés en Ille-et-Vilaine). **Tous âges** si le prix est le même pour tout le monde : une seule fiche suffit.
 3. **Montant (€)**, puis **Précisions** si besoin.
-4. **Ordre d'affichage** : 1 = en premier dans sa rubrique de la grille. Donnez le même numéro aux fiches d'une même offre (moins de 25 ans et plus de 25 ans). La liste du Studio suit cet ordre. Sans numéro particulier, l'ordre habituel s'applique.
-5. **Publish**. Le Studio refuse un doublon (même offre, même âge).
+4. **Rubrique de la page Tarifs** (facultatif) : laissez vide pour la rubrique habituelle (vol d'initiation dans « Je découvre », packs de formation dans « J'apprends à piloter », tout le reste dans « Je suis breveté ou activité à la carte »). Choisissez-en une pour placer la ligne ailleurs, ou créez la même ligne dans deux rubriques.
+5. **Ordre d'affichage** : 1 = en premier dans sa rubrique de la grille. Donnez le même numéro aux fiches d'une même offre (moins de 25 ans et plus de 25 ans). La liste du Studio suit cet ordre. Sans numéro particulier, l'ordre habituel s'applique.
+6. **Publish**. Le Studio refuse un doublon (même offre, même âge, même rubrique).
 
 Le prix adulte et le prix « moins de 18 ans » du vol d'initiation apparaissent à côté du bouton orange « Réserver un vol d'initiation » de l'en-tête.
 
@@ -1110,3 +1113,7 @@ Sur les anciennes versions de PowerShell, `&&` n'existe pas : tapez les deux com
 #### Repérer ce qui n'est pas encore traduit en anglais
 
 Dans les listes du Studio (Actualités, Agenda, Pages de l'association, Récits de vols, Galerie photos), une entrée dont le titre français existe mais pas le titre anglais affiche **⚠ Version anglaise à faire** sous son titre. Ouvrez-la et remplissez l'onglet **English** de chaque champ. Tant qu'un champ n'a pas de version anglaise, le site anglais affiche le texte français.
+
+#### Lien WeGlide de l'association
+
+Le lien saisi dans **Réglages du site** (champ « Page WeGlide de l'association ») s'affiche dans les **liens pratiques**, rubrique Communauté, et sous les récits de vols.
